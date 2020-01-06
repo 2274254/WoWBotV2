@@ -167,8 +167,8 @@ HRESULT __fastcall HkPresentD11(IDXGISwapChain* pSwapChain, UINT syncInterval, U
 
 		GameLoop();
 		
-		ImGui::GetOverlayDrawList()->AddText(ImVec2(10, 10), 0xFF0000FF, "HELLO WORLD");
-		ImGui::GetOverlayDrawList()->AddLine(ImVec2(10, 10), ImVec2(300, 10), 0xFF0000FF);
+		//ImGui::GetOverlayDrawList()->AddText(ImVec2(10, 10), 0xFF0000FF, "HELLO WORLD");
+		//ImGui::GetOverlayDrawList()->AddLine(ImVec2(10, 10), ImVec2(300, 10), 0xFF0000FF);
 
 		const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
 		if ((currentState >> 4) & 1)
@@ -223,9 +223,9 @@ HRESULT __fastcall HkPresentD11(IDXGISwapChain* pSwapChain, UINT syncInterval, U
 
 		bool open = true;
 
-		ImGui::Begin("Hello, world!", &open);
+		/*ImGui::Begin("Hello, world!", &open);
 		ImGui::Text("This is some useful text.");
-		ImGui::End();
+		ImGui::End();*/
 
 		ImGui::EndFrame();
 

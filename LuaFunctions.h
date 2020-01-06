@@ -220,39 +220,65 @@ int32_t CalculatePath(uintptr_t* l)
     {
         if (LuaIsNumber(l, 1) && LuaIsNumber(l, 2) && LuaIsNumber(l, 3) && LuaIsNumber(l, 4))
         {
-            auto player = GetLocalPlayer();
+            const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
+            if ((currentState >> 4) & 1)
+            {
+                auto player = GetLocalPlayer();
 
-            Navigation* navigation = Navigation::GetInstance();
+                Navigation* navigation = Navigation::GetInstance();
 
-            Vector3 start = Vector3(player->pos.x, player->pos.y, player->pos.z);
-            Vector3 end = Vector3(LuaToNumber(l, 1), LuaToNumber(l, 2), LuaToNumber(l, 3));
+                Vector3 start = Vector3(player->pos.x, player->pos.y, player->pos.z);
+                Vector3 end = Vector3(LuaToNumber(l, 1), LuaToNumber(l, 2), LuaToNumber(l, 3));
 
-            //XYZ start = XYZ(-8949.95f, -132.493f, 83.5312f);
-            //XYZ end = XYZ(-9046.507f, -45.71962f, 88.33186f);
+                //XYZ start = XYZ(-8949.95f, -132.493f, 83.5312f);
+                //XYZ end = XYZ(-9046.507f, -45.71962f, 88.33186f);
 
-            int instanceId = LuaToNumber(l, 4);
-            Navigation::GetInstance()->Initialize(instanceId);
+                int instanceId = LuaToNumber(l, 4);
+                Navigation::GetInstance()->Initialize(instanceId);
 
+                if (Drawings::Waypoints)
+                {
+                    Navigation::GetInstance()->FreePathArr(Drawings::Waypoints);
+                }
+                Drawings::CurrentWaypoint = 0;
+                Drawings::Waypoints = Navigation::GetInstance()->CalculatePath(instanceId, start, end, false, &Drawings::WaypointsLenght, false);
+                LuaCreateTable(l, Drawings::WaypointsLenght, 0);
+                for (int i = 0; i < Drawings::WaypointsLenght; i++)
+                {
+                    LuaCreateTable(l, 3, 0);
+                    LuaPushNumber(l, Drawings::Waypoints[i].x);
+                    LuaRawSeti(l, -2, 1);
+                    LuaPushNumber(l, Drawings::Waypoints[i].y);
+                    LuaRawSeti(l, -2, 2);
+                    LuaPushNumber(l, Drawings::Waypoints[i].z);
+                    LuaRawSeti(l, -2, 3);
+                    LuaRawSeti(l, -2, i + 1);
+                }
+                return 1;
+            }
+            else
+            {
+                if (Drawings::Waypoints)
+                {
+                    Navigation::GetInstance()->FreePathArr(Drawings::Waypoints);
+                }
+                Drawings::Waypoints = new Vector3[0];
+                Drawings::WaypointsLenght = 0;
+                LuaCreateTable(l, Drawings::WaypointsLenght, 0);
+                return 1;
+            }
+        }
+        else
+        {
             if (Drawings::Waypoints)
             {
                 Navigation::GetInstance()->FreePathArr(Drawings::Waypoints);
             }
-            Drawings::CurrentWaypoint = 0;
-            Drawings::Waypoints = Navigation::GetInstance()->CalculatePath(instanceId, start, end, false, &Drawings::WaypointsLenght, false);
+            Drawings::Waypoints = new Vector3[0];
+            Drawings::WaypointsLenght = 0;
             LuaCreateTable(l, Drawings::WaypointsLenght, 0);
-            for (int i = 0; i < Drawings::WaypointsLenght; i++)
-            {
-                LuaCreateTable(l, 3, 0);
-                LuaPushNumber(l, Drawings::Waypoints[i].x);
-                LuaRawSeti(l, -2, 1);
-                LuaPushNumber(l, Drawings::Waypoints[i].y);
-                LuaRawSeti(l, -2, 2);
-                LuaPushNumber(l, Drawings::Waypoints[i].z);
-                LuaRawSeti(l, -2, 3);
-                LuaRawSeti(l, -2, i + 1);
-            }
             return 1;
-        }        
+        }
     }
     return 0;
 }
