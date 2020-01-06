@@ -101,10 +101,6 @@ inline void LuaRawSeti(uintptr_t* l, const int32_t narr, const int32_t nrec)
     reinterpret_cast<void(__fastcall*)(uintptr_t*, int32_t, int32_t)>(Offsets::Base + Offsets::lua_rawseti)(l, narr, nrec);
 }
 
-
-//do u know how to make a clua function? nope ;P do u know how lua stack works lol not at all i barely coded lua
-//fuck
-
 //Leave me those in case im lost :D
 
 //the first param will be sent by wow when u call this function and its the lua_state pointer aka stack basically
@@ -122,9 +118,13 @@ int32_t Unlock(uintptr_t* l) //ok so ur return value here is how many returns ur
         //if we have 1 arg then its pos on stack is 1
         if (LuaIsString(l, 1))
         {
-            //if we are here the 1 arg on the stack is a string now we need to convert it to a string type for lua > c++
-            auto s = LuaToString(l, 1);
-            Execute(s);
+            const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
+            if ((currentState >> 4) & 1)
+            {
+                //if we are here the 1 arg on the stack is a string now we need to convert it to a string type for lua > c++
+                auto s = LuaToString(l, 1);
+                Execute(s);
+            }
             return 0;
         }
         LuaError(l, "Invalid Argument: string expected.");
@@ -145,19 +145,29 @@ int32_t GetUnitPosition(uintptr_t* l)
     {
         if (LuaIsString(l, 1))
         {
-            auto unitId = LuaToString(l, 1);
-            auto unit = GetUnitById(unitId);
-            if (unit == nullptr)
+            const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
+            if ((currentState >> 4) & 1)
             {
-                LuaPushNumber(l, 0);
-                LuaPushNumber(l, 0);
-                LuaPushNumber(l, 0);
+                auto unitId = LuaToString(l, 1);
+                auto unit = GetUnitById(unitId);
+                if (unit == nullptr)
+                {
+                    LuaPushNumber(l, 0);
+                    LuaPushNumber(l, 0);
+                    LuaPushNumber(l, 0);
+                }
+                else
+                {
+                    LuaPushNumber(l, unit->pos.y);
+                    LuaPushNumber(l, unit->pos.x);
+                    LuaPushNumber(l, unit->pos.z);
+                }
             }
             else
             {
-                LuaPushNumber(l, unit->pos.y);
-                LuaPushNumber(l, unit->pos.x);
-                LuaPushNumber(l, unit->pos.z);
+                LuaPushNumber(l, 0);
+                LuaPushNumber(l, 0);
+                LuaPushNumber(l, 0);
             }
             return 3;
         }
@@ -179,12 +189,19 @@ int32_t IsFacingTarget(uintptr_t* l)
         auto target = GetTarget();
         if (target == nullptr)
         {
+            const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
+            if ((currentState >> 4) & 1)
+            {
+                auto Object1Facing = player->fAngle;
 
-            auto Object1Facing = player->fAngle;
-
-            auto Angle = ((player->pos.x - target->pos.x) * std::cos(-Object1Facing)) - ((player->pos.y - target->pos.y) * std::sin(-Object1Facing));
-            bool isFacing = Angle < 0;
-            LuaPushBoolean(l, isFacing);
+                auto Angle = ((player->pos.x - target->pos.x) * std::cos(-Object1Facing)) - ((player->pos.y - target->pos.y) * std::sin(-Object1Facing));
+                bool isFacing = Angle < 0;
+                LuaPushBoolean(l, isFacing);
+            }
+            else
+            {
+                LuaPushBoolean(l, true);
+            }
         }
         else
         {
@@ -235,10 +252,9 @@ int32_t CalculatePath(uintptr_t* l)
                 LuaRawSeti(l, -2, i + 1);
             }
             return 1;
-        }
-        return 0;
+        }        
     }
-    //
+    return 0;
 }
 
 int32_t NextPoint(uintptr_t* l)
@@ -248,9 +264,8 @@ int32_t NextPoint(uintptr_t* l)
     {
         Drawings::CurrentWaypoint++;
         if (Drawings::CurrentWaypoint == Drawings::WaypointsLenght) Drawings::CurrentWaypoint = Drawings::WaypointsLenght - 1;
-        return 0;
     }
-    //
+    return 0;
 }
 
 int32_t GoToPoint(uintptr_t* l)
@@ -260,14 +275,16 @@ int32_t GoToPoint(uintptr_t* l)
     {
         if (LuaIsNumber(l, 1) && LuaIsNumber(l, 2) && LuaIsNumber(l, 3))
         {
-            auto player = GetLocalPlayer();
-            Vector3 point = Vector3(LuaToNumber(l, 1), LuaToNumber(l, 2), LuaToNumber(l, 3));
-            reinterpret_cast<void(__fastcall*)(WoWObject*, Vector3*)>(Offsets::Base + Offsets::TerrainClick)(player, &point);//same shit XD
-            return 0;
+            const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
+            if ((currentState >> 4) & 1)
+            {
+                auto player = GetLocalPlayer();
+                Vector3 point = Vector3(LuaToNumber(l, 1), LuaToNumber(l, 2), LuaToNumber(l, 3));
+                reinterpret_cast<void(__fastcall*)(WoWObject*, Vector3*)>(Offsets::Base + Offsets::TerrainClick)(player, &point);//same shit XD
+            }
         }
-        return 0;
     }
-    //
+    return 0;
 }
 
 int32_t WorldToScreen(uintptr_t* l)
@@ -344,6 +361,18 @@ int32_t GetPlayerAngle(uintptr_t* l)
     return 0;
 }
 
+int32_t IsInGame(uintptr_t* l)
+{
+    auto numArgs = LuaGetTop(l);
+    if (numArgs == 0)
+    {
+        const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
+        LuaPushBoolean(l, (currentState >> 4) & 1);
+        return 1;
+    }
+    return 0;
+}
+
 inline std::map<const char*, int64_t> FunctionsMap
 {
     {"Unlock", reinterpret_cast<int64_t>(Unlock)},
@@ -355,5 +384,6 @@ inline std::map<const char*, int64_t> FunctionsMap
     {"DrawLine3D", reinterpret_cast<int64_t>(DrawLine3D)},
     {"GetCorpsePosition", reinterpret_cast<int64_t>(GetCorpsePosition)},
     {"GetPlayerAngle", reinterpret_cast<int64_t>(GetPlayerAngle)},
-    {"NextPoint", reinterpret_cast<int64_t>(NextPoint)}
+    {"NextPoint", reinterpret_cast<int64_t>(NextPoint)},
+    {"IsInGame", reinterpret_cast<int64_t>(IsInGame)}
 };
