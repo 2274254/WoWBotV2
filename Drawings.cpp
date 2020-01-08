@@ -3,6 +3,7 @@
 #include "Offsets.h"
 
 #include <D3DX11.h>
+#include <DirectXMath.h>
 
 ID3D11Device* Drawings::pDevice = nullptr;
 ID3D11DeviceContext* Drawings::pDeviceContext = nullptr;
@@ -54,6 +55,42 @@ BigVector2 Drawings::WorldToScreen(Vector3 unitPosition)
 	}
 
 	return screenPos;
+}
+
+bool Drawings::WorldToScreen(Vector3 worldPos, Vector2* output)
+{
+	CameraBase* pCameraBase = *reinterpret_cast<CameraBase**>(Offsets::Base + Offsets::CameraBase);
+
+	D3D11_VIEWPORT Viewport;	
+	DirectX::XMMATRIX Proj, View;
+
+	ImGuiIO& io = ImGui::GetIO();
+	
+	//Get Projection Matrix
+	float fAspect = ((float)io.DisplaySize.x) / io.DisplaySize.y;	
+	Proj = DirectX::XMMatrixPerspectiveFovRH(pCameraBase->camera_ptr->fov * 0.6, fAspect, 1.0f, 10000.0f);
+
+	//Get View Matrix
+	DirectX::XMFLOAT3 vEyePt(pCameraBase->camera_ptr->pos.x, pCameraBase->camera_ptr->pos.y, pCameraBase->camera_ptr->pos.z);
+	DirectX::XMFLOAT3 vLookatPt(pCameraBase->camera_ptr->pos.x + pCameraBase->camera_ptr->mat.M11, pCameraBase->camera_ptr->pos.y + pCameraBase->camera_ptr->mat.M12, pCameraBase->camera_ptr->pos.z + pCameraBase->camera_ptr->mat.M13);
+	DirectX::XMFLOAT3 vUpVec(0.0f, 0.0f, 1.0f);
+	View = DirectX::XMMatrixLookAtRH(DirectX::XMLoadFloat3(&vEyePt), DirectX::XMLoadFloat3(&vLookatPt), DirectX::XMLoadFloat3(&vUpVec));
+
+	//Get Viewport
+	UINT vps = 1;
+	Drawings::pDeviceContext->RSGetViewports(&vps, &Viewport);
+	
+	//Project our position
+	auto inPos = DirectX::XMFLOAT3(worldPos.x, worldPos.y, worldPos.z);
+	auto outVect = DirectX::XMVector3Project(DirectX::XMLoadFloat3(&inPos), Viewport.TopLeftX, Viewport.TopLeftY, Viewport.Width, Viewport.Height, Viewport.MinDepth, Viewport.MaxDepth, Proj, View, DirectX::XMMatrixIdentity());
+	
+	DirectX::XMFLOAT3 out;
+	XMStoreFloat3(&out, outVect);
+
+	output->x = out.x;
+	output->y = out.y;
+
+	return ( out.z < 1.f );
 }
 
 void Drawings::DrawLine(Vector2 from, Vector2 to)

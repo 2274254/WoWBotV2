@@ -320,12 +320,18 @@ int32_t WorldToScreen(uintptr_t* l)
     {
         if (LuaIsNumber(l, 1) && LuaIsNumber(l, 2) && LuaIsNumber(l, 3))
         {
-            Vector3 point = Vector3(LuaToNumber(l, 1), LuaToNumber(l, 2), LuaToNumber(l, 3));
-            auto screenPos = Drawings::WorldToScreen(point);
-
-            LuaPushNumber(l, screenPos.x);
-            LuaPushNumber(l, screenPos.y);
-
+            Vector2 screenLoc;
+            if (Drawings::WorldToScreen(Vector3(LuaToNumber(l, 1), LuaToNumber(l, 2), LuaToNumber(l, 3)), &screenLoc))
+            {
+                LuaPushNumber(l, screenLoc.x);
+                LuaPushNumber(l, screenLoc.y);
+            }
+            else
+            {
+                LuaPushNumber(l, screenLoc.x);
+                LuaPushNumber(l, screenLoc.y);
+            }
+            //auto screenPos = Drawings::WorldToScreen(point);
             return 2;
         }
         return 0;

@@ -203,7 +203,7 @@
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;USE_STANDARD_MALLOC;PREPARED_SLN;_WINDOWS;_WIN32;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release";DT_POLYREF64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\Navigation\Detour\Include;..\Navigation\g3dlite\Include;..\Navigation\Utilities;C:\WOW\NavTest\Navigation\imgui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Navigation\Detour\Include;..\Navigation\g3dlite\Include;..\Navigation\Utilities;C:\WOW\NavTest\Navigation\imgui;D:\WOWTEST\Navigation\DirectXMath-master\Inc</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeaderFile>

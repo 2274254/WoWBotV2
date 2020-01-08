@@ -12,6 +12,8 @@ struct Matrix3x3
     float M31; //g
     float M32; //h
     float M33; //i
+    Matrix3x3()
+        : M11(0), M12(0), M13(0), M21(0), M22(0), M23(0), M31(0), M32(0), M33(0) {}
     Matrix3x3(const float _00, const float _01, const float _02, const float _10, const float _11, const float _12, const float _20, const float _21, const float _22)
         : M11(_00), M12(_02), M13(_02), M21(_10), M22(_12), M23(_12), M31(_20), M32(_21), M33(_22) {}
 

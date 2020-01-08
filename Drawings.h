@@ -53,6 +53,7 @@ public:
 	static int CurrentWaypoint;
 	
 	static BigVector2 WorldToScreen(Vector3 unitPosition);
+	static bool WorldToScreen(Vector3 unitPosition, Vector2* out);
 	static void DrawLine(Vector2 from, Vector2 to);
 	static void DrawLine(Vector3 from, Vector3 to);
 };

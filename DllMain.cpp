@@ -8,6 +8,7 @@
 #include "Drawings.h"
 #include "imgui_impl_dx11.h"
 #include "imgui_impl_win32.h"
+#include "Camera.h"
 
 /*
 extern "C"
@@ -186,7 +187,13 @@ HRESULT __fastcall HkPresentD11(IDXGISwapChain* pSwapChain, UINT syncInterval, U
 				//Add other points...
 				for (int i = Drawings::CurrentWaypoint; i < Drawings::WaypointsLenght; i++)
 				{
-					auto screenLoc = Drawings::WorldToScreen(Vector3(Drawings::Waypoints[i].x, Drawings::Waypoints[i].y, Drawings::Waypoints[i].z));
+					Vector2 screenLoc;
+					if (Drawings::WorldToScreen(Vector3(Drawings::Waypoints[i].x, Drawings::Waypoints[i].y, Drawings::Waypoints[i].z), &screenLoc))
+					{
+						points[pointsCount] = ImVec2(screenLoc.x, screenLoc.y);
+						pointsCount++;
+					}
+					/*auto screenLoc = Drawings::WorldToScreen(Vector3(Drawings::Waypoints[i].x, Drawings::Waypoints[i].y, Drawings::Waypoints[i].z));
 					if (screenLoc.x != 0 || screenLoc.y != 0)
 					{
 						if (i != Drawings::WaypointsLenght - 1)
@@ -208,7 +215,7 @@ HRESULT __fastcall HkPresentD11(IDXGISwapChain* pSwapChain, UINT syncInterval, U
 								pointsCount++;
 							}
 						}
-					}
+					}*/
 				}
 
 				if (pointsCount > 1)
@@ -333,7 +340,10 @@ DWORD __stdcall Initialize(LPVOID param)
 	freopen_s(&f2, "CONOUT$", "wb", stderr);
 	freopen_s(&f3, "CONIN$", "rb", stdin);
 
-	std::cout << std::hex << *reinterpret_cast<uintptr_t*>(Offsets::Base + Offsets::CameraBase);
+	std::cout << std::hex << reinterpret_cast<uintptr_t*>(GetLocalPlayer());
+	
+	CameraBase* pCameraBase = *reinterpret_cast<CameraBase**>(Offsets::Base + Offsets::CameraBase);
+	std::cout << "CameraInfo:" << std::hex << reinterpret_cast<uintptr_t*>(pCameraBase->camera_ptr);
 
 	//attempt to hook dxd11
 
