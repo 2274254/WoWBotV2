@@ -9,11 +9,24 @@ namespace Agony
 	public ref class Game
 	{
 	public:
+		static property bool IsInGame
+		{
+			bool get()
+			{
+				return Native::Game::IsInGame();
+			}
+		}
+
 		static property String^ GameVersion
 		{
 			String^ get()
 			{
-				return gcnew System::String(Native::Game::GetGameVersion().c_str());
+				char* gameVersion = Native::Game::GetGameVersion();
+				if (gameVersion != nullptr)
+				{
+					return gcnew System::String(Native::Game::GetGameVersion());
+				}
+				return "Unknown";
 			}
 		}
 	};

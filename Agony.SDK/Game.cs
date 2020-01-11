@@ -8,6 +8,7 @@ namespace Agony.SDK
 {
     public class Game
     {
+        public static bool IsInGame { get { return Agony.Game.IsInGame; } }
         public static string GameVersion { get { return Agony.Game.GameVersion; } }
     }
 }

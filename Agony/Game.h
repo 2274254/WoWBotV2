@@ -9,7 +9,8 @@ namespace Agony
 		class DLLEXPORT Game
 		{
 		public:
-			static std::string GetGameVersion();
+			static bool IsInGame();
+			static char* GetGameVersion();
 		};
 	}
 }

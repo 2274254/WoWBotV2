@@ -8,8 +8,8 @@ namespace Offsets
 	//WoW Lua
 	inline uintptr_t InvalidFunctionPtr = 0x28291D0; //48 8b 05 ? ? ? ? 48 85 d2 74
 	inline uintptr_t FrameScriptRegister = 0x5394C0;
-	inline uintptr_t FrameScriptExecute = 0x5384F0;
-	inline uintptr_t FrameScriptGetText = 0x0;
+	inline uintptr_t FrameScriptExecute = 0x539570;//32978
+	inline uintptr_t FrameScriptGetText = 0x53D3F0;//32978
 	//Lua
 	inline uintptr_t GetTop = 0x2003C0;
 	inline uintptr_t IsNumber = 0x200670;
@@ -23,9 +23,9 @@ namespace Offsets
 	inline uintptr_t Error = 0x1904770; //LuaL_error
 
 	//Game:
-	inline uintptr_t GameVersion = 0x206FEFC;
+	inline uintptr_t GameVersion = 0x207FF2C;//32978
 	inline uintptr_t GetBaseFromToken = 0x15D7CC0;
-	inline uintptr_t InGame = 0x292F7B4;
+	inline uintptr_t InGame = 0x29387A4;//32978
 	inline uintptr_t TerrainClick = 0xD11760;
 	inline uintptr_t CameraBase = 0x2930758;
 	inline uintptr_t CorpseBase = 0x267CA48;
