@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Detour\Source\DetourAlloc.cpp">
+      <Filter>Source Files\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Detour\Source\DetourCommon.cpp">
+      <Filter>Source Files\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Detour\Source\DetourNavMesh.cpp">
+      <Filter>Source Files\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Detour\Source\DetourNavMeshBuilder.cpp">
+      <Filter>Source Files\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Detour\Source\DetourNavMeshQuery.cpp">
+      <Filter>Source Files\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="Detour\Source\DetourNode.cpp">
+      <Filter>Source Files\Detour</Filter>
+    </ClCompile>
+    <ClCompile Include="kiero.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_widgets.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_dx11.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_win32.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_demo.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="PathFinder.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveMap.cpp">
+      <Filter>Source Files\Pathfinding</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="kiero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MinHook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Offsets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WoWObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FW1FontWrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFinder.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveMap.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveMapSharedDefines.h">
+      <Filter>Header Files\Pathfinding</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{725d0dbc-db66-419e-a198-bf8346871410}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{464c4924-20b6-4a8a-bd2f-dad2726d9d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Detour">
+      <UniqueIdentifier>{26259110-d136-46dd-ab41-03f084c7fdb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imgui">
+      <UniqueIdentifier>{5e47544f-f78b-4623-9743-eecedd4425dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pathfinding">
+      <UniqueIdentifier>{f864afe7-a5a2-4485-85fb-5940cbcc9227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pathfinding">
+      <UniqueIdentifier>{7f951a8a-1774-4d66-a8ab-a4992de9e7c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
