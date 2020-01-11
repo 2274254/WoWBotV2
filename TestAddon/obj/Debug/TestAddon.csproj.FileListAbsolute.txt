@@ -1,0 +1,12 @@
+D:\AgonyWoW\TestAddon\bin\Debug\TestAddon.dll
+D:\AgonyWoW\TestAddon\bin\Debug\TestAddon.pdb
+D:\AgonyWoW\TestAddon\bin\Debug\Agony.SDK.dll
+D:\AgonyWoW\TestAddon\bin\Debug\Agony.Wrapper.dll
+D:\AgonyWoW\TestAddon\bin\Debug\Agony.SDK.pdb
+D:\AgonyWoW\TestAddon\bin\Debug\Agony.Wrapper.pdb
+D:\AgonyWoW\TestAddon\obj\Debug\TestAddon.csprojAssemblyReference.cache
+D:\AgonyWoW\TestAddon\obj\Debug\TestAddon.csproj.CopyComplete
+D:\AgonyWoW\TestAddon\obj\Debug\TestAddon.pdb
+D:\AgonyWoW\x64\Debug\TestAddon.pdb
+D:\AgonyWoW\x64\Debug\TestAddon.exe
+D:\AgonyWoW\TestAddon\obj\Debug\TestAddon.exe

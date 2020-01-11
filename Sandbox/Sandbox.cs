@@ -24,6 +24,7 @@ namespace Sandbox
         /// </summary>
         static Sandbox()
         {
+            CLRByPasser.ByPass();
             AppDomain.CurrentDomain.ProcessExit += DomainOnProcessExit;
             AppDomain.CurrentDomain.AssemblyResolve += SandboxDomain.DomainOnAssemblyResolve;
             AppDomain.CurrentDomain.UnhandledException += delegate(object sender, UnhandledExceptionEventArgs args)
@@ -110,11 +111,12 @@ namespace Sandbox
                 //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.dll", new string[1]);
                 //LoadLibrary("7339047cb10f6e86");
 
-                Logs.Log("Loading Agony.SDK");
+                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.Wrapper.dll", new string[1]);
+
                 //LoadLibrary("6b574a82b1ea937e");
                 SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.SDK.dll", new string[1]);
 
-                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Libraries\\Test.dll", new string[1]);
+                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\TestAddon.exe", new string[1]);
 
                 /*var addons = ServiceFactory.CreateProxy<ILoaderService>().GetAssemblyList((int) 0);
                 Logs.Log("Loading {0} Addon{1}", addons.Count, addons.Count < 1 || addons.Count > 1 ? "s" : "");

@@ -1,0 +1,10 @@
+D:\AgonyWoW\Agony.SDK\bin\Debug\Agony.SDK.dll
+D:\AgonyWoW\Agony.SDK\bin\Debug\Agony.SDK.pdb
+D:\AgonyWoW\Agony.SDK\bin\Debug\Agony.Wrapper.dll
+D:\AgonyWoW\Agony.SDK\bin\Debug\Agony.Wrapper.pdb
+D:\AgonyWoW\Agony.SDK\obj\Debug\Agony.SDK.csprojAssemblyReference.cache
+D:\AgonyWoW\Agony.SDK\obj\Debug\Agony.SDK.csproj.CopyComplete
+D:\AgonyWoW\Agony.SDK\obj\Debug\Agony.SDK.dll
+D:\AgonyWoW\Agony.SDK\obj\Debug\Agony.SDK.pdb
+D:\AgonyWoW\x64\Debug\Agony.SDK.dll
+D:\AgonyWoW\x64\Debug\Agony.SDK.pdb

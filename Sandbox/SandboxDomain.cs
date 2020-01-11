@@ -301,7 +301,6 @@ namespace Sandbox
                     {
                         LoadedAddons.Add(assemblyName.Name);
                     }
-                    Console.WriteLine("Loaded addon: " + assemblyName.Name);
                     return true;
                 }
             }
@@ -328,7 +327,6 @@ namespace Sandbox
                                 InitSDKBootstrap(assembly);
                             }
                         }
-                        Console.WriteLine("Loaded: " + assemblyName.Name);
                         return true;
                     }
                     catch (Exception e)
@@ -343,7 +341,6 @@ namespace Sandbox
                 Logs.Log("Sandbox: Failed to load addon");
                 Logs.Log(e.ToString());
             }
-
             return false;
         }
 
