@@ -111,6 +111,7 @@ namespace Agony.SDK
                 Logger.Info("SDK Bootstrap fully loaded!");
                 Logger.Info("----------------------------------");
             };
+            Logger.Info("After we added our event");
         }
 
         internal static void TryLoad(Action action, string message)

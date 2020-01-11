@@ -31,18 +31,21 @@ namespace Agony.SDK.Events
             //Game.OnTick += OnTick;
 
             //TODO: FIX THIS:
-            Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(async () =>
             {
-                Thread.Sleep(100);
-                IsLoadingComplete = true;
-                CallLoadingComplete();
+                while(true)
+                {
+                    await Task.Delay(100);
+                    IsLoadingComplete = true;
+                    CallLoadingComplete();
+                }
             });
         }
 
         internal static void OnTick(EventArgs args)
         {
             // OnLoadingComplete
-            if(Game.IsInGame)
+            if(true)//if(Game.IsInGame)
             {
                 IsLoadingComplete = true;
                 CallLoadingComplete();
