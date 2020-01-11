@@ -1,0 +1,6 @@
+D:\AgonyWoW\StrongNameKeyParser\bin\Debug\StrongNameKeyParser.exe.config
+D:\AgonyWoW\StrongNameKeyParser\bin\Debug\StrongNameKeyParser.exe
+D:\AgonyWoW\StrongNameKeyParser\bin\Debug\StrongNameKeyParser.pdb
+D:\AgonyWoW\StrongNameKeyParser\obj\Debug\StrongNameKeyParser.csprojAssemblyReference.cache
+D:\AgonyWoW\StrongNameKeyParser\obj\Debug\StrongNameKeyParser.exe
+D:\AgonyWoW\StrongNameKeyParser\obj\Debug\StrongNameKeyParser.pdb

@@ -55,6 +55,9 @@
     <ClCompile Include="MoveMap.cpp">
       <Filter>Source Files\Pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="kiero.h">
@@ -102,6 +105,12 @@
     <ClInclude Include="MoveMapSharedDefines.h">
       <Filter>Header Files\Pathfinding</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -121,6 +130,12 @@
     </Filter>
     <Filter Include="Source Files\Pathfinding">
       <UniqueIdentifier>{7f951a8a-1774-4d66-a8ab-a4992de9e7c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{139b5a99-8657-4885-8d22-c0f8d1c1d219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{514533cd-0684-46b2-ac70-629d2d86c615}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -239,8 +239,14 @@
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="Macros.h" />
     <ClInclude Include="MoveMap.h" />
     <ClInclude Include="MoveMapSharedDefines.h" />
     <ClInclude Include="Navigation.h" />
@@ -278,6 +284,7 @@
       <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExceptionHandling>
       <ExceptionHandling Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExceptionHandling>
     </ClCompile>
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="MoveMap.cpp" />
     <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="PathFinder.cpp" />

@@ -1,0 +1,12 @@
+D:\AgonyWoW\LoaderV1\obj\Debug\LoaderV1.csprojAssemblyReference.cache
+D:\AgonyWoW\LoaderV1\bin\Debug\LoaderV1.exe.config
+D:\AgonyWoW\LoaderV1\bin\Debug\LoaderV1.exe
+D:\AgonyWoW\LoaderV1\bin\Debug\LoaderV1.pdb
+D:\AgonyWoW\LoaderV1\bin\Debug\Agony.SDK.dll
+D:\AgonyWoW\LoaderV1\bin\Debug\Agony.SDK.pdb
+D:\AgonyWoW\LoaderV1\obj\Debug\LoaderV1.csproj.CopyComplete
+D:\AgonyWoW\LoaderV1\obj\Debug\LoaderV1.exe
+D:\AgonyWoW\LoaderV1\obj\Debug\LoaderV1.pdb
+D:\AgonyWoW\x64\Debug\LoaderV1.exe.config
+D:\AgonyWoW\x64\Debug\LoaderV1.exe
+D:\AgonyWoW\x64\Debug\LoaderV1.pdb

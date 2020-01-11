@@ -14,7 +14,7 @@ namespace Sandbox
         public static void Subscribe()
         {
             AppDomain.CurrentDomain.AssemblyResolve += SandboxDomain.DomainOnAssemblyResolve;
-            Game.OnWndProc += Game_OnWndProc;
+            //Game.OnWndProc += Game_OnWndProc;
         }
 
         /// <summary>
@@ -23,9 +23,9 @@ namespace Sandbox
         /// <param name="args">
         ///     <see cref="WndEventArgs" />
         /// </param>
-        internal static void Game_OnWndProc(WndEventArgs args)
+        /*internal static void Game_OnWndProc(WndEventArgs args)
         {
-            if (args.Msg == 0x0101 /*WM_KEYUP*/)
+            if (args.Msg == 0x0101 /*WM_KEYUP* /)
             {
                 if (args.WParam == SandboxConfig.ReloadKey)
                 {
@@ -42,6 +42,6 @@ namespace Sandbox
                     Sandbox.Unload();
                 }
             }
-        }
+        }*/
     }
 }

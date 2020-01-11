@@ -166,9 +166,7 @@ namespace Sandbox
         private static void InitSDKBootstrap(Assembly sdk)
         {
             // Call bootstrap
-            sdk.GetType("EloBuddy.SDK.Bootstrap")
-                .GetMethod("Init", BindingFlags.Public | BindingFlags.Static)
-                .Invoke(null, new object[] { null });
+            sdk.GetType("Agony.SDK.Bootstrap").GetMethod("Init", BindingFlags.Public | BindingFlags.Static).Invoke(null, new object[] { null });
         }
 
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
@@ -303,6 +301,7 @@ namespace Sandbox
                     {
                         LoadedAddons.Add(assemblyName.Name);
                     }
+                    Console.WriteLine("Loaded addon: " + assemblyName.Name);
                     return true;
                 }
             }
@@ -322,17 +321,19 @@ namespace Sandbox
                         if (assembly.IsFullyTrusted)
                         {
                             // Verify that the DLL is the SDK
-                            if (Sandbox.EqualsPublicToken(assemblyName, "6b574a82b1ea937e"))
+                            if(assemblyName.Name == "Agony.SDK")
+                            //if (Sandbox.EqualsPublicToken(assemblyName, "6b574a82b1ea937e"))
                             {
                                 // Call bootstrap
                                 InitSDKBootstrap(assembly);
                             }
                         }
+                        Console.WriteLine("Loaded: " + assemblyName.Name);
                         return true;
                     }
                     catch (Exception e)
                     {
-                        Logs.Log("Sandbox: Failed to call Bootstrap for EloBuddy.SDK");
+                        Logs.Log("Sandbox: Failed to call Bootstrap for Agony.SDK");
                         Logs.Log(e.ToString());
                     }
                 }

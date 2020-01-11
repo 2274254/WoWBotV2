@@ -14,7 +14,7 @@ namespace StrongNameKeyParser
         [STAThread]
         private static void Main(string[] args)
         {
-            var assemblyName = AssemblyName.GetAssemblyName(@"C:\Users\Hellsing\OneDrive\Development\EloBuddy\Loader\System\EloBuddy.SDK.dll");
+            var assemblyName = AssemblyName.GetAssemblyName(@"D:\\AgonyWoW\\x64\\Debug\\Agony.SDK.dll");
             Clipboard.SetText(assemblyName.GetPublicKey().ToHex());
 
             return;

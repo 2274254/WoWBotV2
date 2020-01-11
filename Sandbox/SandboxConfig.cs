@@ -131,7 +131,22 @@ namespace Sandbox
 
             try
             {
-                config = ServiceFactory.CreateProxy<ILoaderService>().GetConfiguration(Sandbox.Pid);
+                config = new Configuration()
+                {
+                    Console = true,
+                    AntiAfk = false,
+                    DisableChatFunction = false,
+                    DisableRangeIndicator = false,
+                    DrawWatermark = false,
+                    EloBuddyDllPath = "D:\\AgonyWoW\x64\\Debug\\Agony.dll",
+                    IsBuddy = true,
+                    ExtendedZoom = false,
+                    LibrariesDirectory = "D:\\AgonyWoW\x64\\Debug\\",
+                    Username = "H3XC0R3",
+                    DataDirectory = "D:\\AgonyWoW\x64\\Debug\\",
+                    Hwid = "",
+                    
+                };// ServiceFactory.CreateProxy<ILoaderService>().GetConfiguration(Sandbox.Pid);
             }
             catch (Exception e)
             {

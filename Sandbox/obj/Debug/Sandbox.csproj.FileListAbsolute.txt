@@ -1,1 +1,9 @@
-D:\AgonyWoW\Sandbox\obj\Debug\Sandbox.csprojAssemblyReference.cache
+D:\AgonyWoW\Sandbox\bin\Debug\Sandbox.dll.config
+D:\AgonyWoW\Sandbox\bin\Debug\Sandbox.dll
+D:\AgonyWoW\Sandbox\bin\Debug\Sandbox.pdb
+D:\AgonyWoW\Sandbox\bin\Debug\EloBuddy.dll
+D:\AgonyWoW\x64\Debug\Sandbox.dll.config
+D:\AgonyWoW\x64\Debug\Sandbox.dll
+D:\AgonyWoW\x64\Debug\Sandbox.pdb
+D:\AgonyWoW\Sandbox\obj\Debug\Sandbox.dll
+D:\AgonyWoW\Sandbox\obj\Debug\Sandbox.pdb

@@ -1,5 +1,6 @@
 #pragma once
 using namespace System;
+#include "Game.h"
 
 namespace Agony
 {

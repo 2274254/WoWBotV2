@@ -123,6 +123,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Agony.SDK.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>

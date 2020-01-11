@@ -8,6 +8,8 @@ using System.Security;
 using System.Security.Permissions;
 using System.Threading;
 using Sandbox.Shared;
+using System.Runtime.InteropServices;
+using RGiesecke.DllExport;
 
 namespace Sandbox
 {
@@ -64,7 +66,9 @@ namespace Sandbox
         ///     features which will be needed to control the application domain without any problems. Bootstrap will return 1 if
         ///     any of the bootstrap actions will fail.
         /// </returns>
-        public static int Bootstrap(string param)
+
+        [DllExport(CallingConvention = CallingConvention.Cdecl, ExportName = "Bootstrap")]
+        public static int Bootstrap()
         {
             try
             {
@@ -102,18 +106,22 @@ namespace Sandbox
 
             try
             {
-                Logs.Log("Loading Agony");
-                LoadLibrary("7339047cb10f6e86");
+                //Logs.Log("Loading Agony");
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.dll", new string[1]);
+                //LoadLibrary("7339047cb10f6e86");
 
                 Logs.Log("Loading Agony.SDK");
-                LoadLibrary("6b574a82b1ea937e");
+                //LoadLibrary("6b574a82b1ea937e");
+                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.SDK.dll", new string[1]);
 
-                var addons = ServiceFactory.CreateProxy<ILoaderService>().GetAssemblyList((int) 0);
+                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Libraries\\Test.dll", new string[1]);
+
+                /*var addons = ServiceFactory.CreateProxy<ILoaderService>().GetAssemblyList((int) 0);
                 Logs.Log("Loading {0} Addon{1}", addons.Count, addons.Count < 1 || addons.Count > 1 ? "s" : "");
                 foreach (var assembly in addons)
                 {
                     SandboxDomain.Instance.LoadAddon(assembly.PathToBinary, new string[1]);
-                }
+                }*/
             }
             catch (Exception e)
             {
@@ -178,7 +186,7 @@ namespace Sandbox
 
             try
             {
-                ServiceFactory.CreateProxy<ILoaderService>().Recompile(Process.GetCurrentProcess().Id);
+                //ServiceFactory.CreateProxy<ILoaderService>().Recompile(Process.GetCurrentProcess().Id);
             }
             catch (Exception e)
             {

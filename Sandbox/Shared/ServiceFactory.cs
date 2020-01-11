@@ -5,7 +5,7 @@ namespace Sandbox.Shared
 {
     public static class ServiceFactory
     {
-        private const string PipeName = "EloBuddy";
+        private const string PipeName = "Agony";
 
         public static TInterfaceType CreateProxy<TInterfaceType>() where TInterfaceType : class
         {

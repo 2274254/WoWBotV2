@@ -2,3 +2,4 @@
 
 #include "Agony.SDK.h"
 
+#define MANAGED_BUILD

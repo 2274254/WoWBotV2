@@ -23,6 +23,7 @@ namespace Offsets
 	inline uintptr_t Error = 0x1904770; //LuaL_error
 
 	//Game:
+	inline uintptr_t GameVersion = 0x206FEFC;
 	inline uintptr_t GetBaseFromToken = 0x15D7CC0;
 	inline uintptr_t InGame = 0x292F7B4;
 	inline uintptr_t TerrainClick = 0xD11760;
