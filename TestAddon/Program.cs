@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using Agony.SDK;
 using Agony.SDK.Enumerations;
 using Agony.SDK.Events;
 using Agony.SDK.Utils;
@@ -17,7 +17,7 @@ namespace TestAddon
         static void LoadingComplete(EventArgs args)
         {
             Logger.Log(LogLevel.Info, "LoadingComplete triggered inside TestAddon!");
-            Console.WriteLine("Game version = " + Agony.SDK.Game.GameVersion);
+            Console.WriteLine("Game version = " + Game.GameVersion);
         }
     }
 }
