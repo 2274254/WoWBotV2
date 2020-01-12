@@ -200,9 +200,10 @@ namespace Sandbox
                     // Executing assembly
                     resolvedAssembly = Assembly.GetExecutingAssembly();
                 }
-                else if (Sandbox.EqualsPublicToken(assemblyName, "7339047cb10f6e86"))
+                //else if (Sandbox.EqualsPublicToken(assemblyName, "7339047cb10f6e86"))
+                else if (assemblyName.Name == "Agony")
                 {
-                    // EloBuddy.dll
+                    // Agony.dll
                     resolvedAssembly = Assembly.LoadFrom(SandboxConfig.EloBuddyDllPath);
                 }
                 else
@@ -231,7 +232,8 @@ namespace Sandbox
                             if (resolvedAssembly.IsFullyTrusted)
                             {
                                 // Check if the DLL is the SDK
-                                if (Sandbox.EqualsPublicToken(assemblyName, "6b574a82b1ea937e"))
+                                //if (Sandbox.EqualsPublicToken(assemblyName, "6b574a82b1ea937e"))
+                                if (assemblyName.Name == "Agony.SDK")
                                 {
                                     // Call bootstrap
                                     InitSDKBootstrap(resolvedAssembly);

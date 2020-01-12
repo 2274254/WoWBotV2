@@ -96,7 +96,6 @@
     <None Include="packages.config" />
     <None Include="Sandbox.snk" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\UnmanagedExports.Repack.1.0.4\build\UnmanagedExports.Repack.targets" Condition="Exists('..\packages\UnmanagedExports.Repack.1.0.4\build\UnmanagedExports.Repack.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

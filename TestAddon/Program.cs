@@ -12,6 +12,16 @@ namespace TestAddon
         {
             Logger.Log(LogLevel.Info, "TestAddon has been loaded!");
             Loading.OnLoadingComplete += LoadingComplete;
+            Messages.OnMessage += Messages_OnMessage;
+        }
+
+        private static void Messages_OnMessage(Messages.WindowMessage args)
+        {
+            Console.WriteLine("ON MESSAGE...");
+            if (args.Message == WindowMessages.KeyUp && args.Handle.WParam == 0x74)
+            {
+                Console.WriteLine("PRESSED THE RELOAD KEY");
+            }
         }
 
         static void LoadingComplete(EventArgs args)

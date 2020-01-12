@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Document Version="2">
+    <Protection InputFileName="D:\AgonyWoW\x64\Debug\Agony.dll" Options="985032" LicenseDataFileName="D:\AgonyWoW\Agony.dll.vmp">
+        <Messages />
+        <Folders />
+        <Procedures>
+            <Procedure MapAddress="EntryPoint" Options="0" CompilationType="2" />
+            <Procedure MapAddress="SafeInjection" Options="0" CompilationType="2" />
+            <Procedure MapAddress="Bootstrap" Options="0" CompilationType="2" />
+        </Procedures>
+        <Objects />
+    </Protection>
+    <DLLBox>
+        <Folders />
+        <DLL Name="VMProtectSDK64.dll" FileName="C:\Program Files\VMProtect Ultimate\Lib\Windows\VMProtectSDK64.dll" />
+    </DLLBox>
+    <Script />
+</Document>

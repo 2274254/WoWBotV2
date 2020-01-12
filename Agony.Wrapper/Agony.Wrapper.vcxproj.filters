@@ -16,6 +16,15 @@
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{bcdaa454-1da1-410e-828c-de264a9f642a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Events">
+      <UniqueIdentifier>{7fbbb9ae-3907-46c9-b2de-6096dd0dc9df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Events\Windows">
+      <UniqueIdentifier>{065977bd-cfec-4faf-99ab-45ee80d550ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{04ab4998-0aab-4c68-8012-56fc37fc6fea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -30,6 +39,12 @@
     <ClInclude Include="Agony.Wrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WndEventArgs.h">
+      <Filter>Header Files\Events\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -40,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="Agony.Wrapper.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

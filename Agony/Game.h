@@ -1,6 +1,5 @@
 #pragma once
 #include "Macros.h"
-#include <string>
 
 namespace Agony
 {
@@ -9,8 +8,10 @@ namespace Agony
 		class DLLEXPORT Game
 		{
 		public:
+			static Game* GetInstance();
 			static bool IsInGame();
 			static char* GetGameVersion();
+			bool ApplyHooks(void*);
 		};
 	}
 }

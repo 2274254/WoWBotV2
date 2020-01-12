@@ -52,6 +52,10 @@
       <Project>{b63bb553-e6bf-4857-ac66-37170e1dc5fc}</Project>
       <Name>Agony.SDK</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Agony.Wrapper\Agony.Wrapper.vcxproj">
+      <Project>{e6f487d9-9122-4718-8d75-a8cdc8e594cb}</Project>
+      <Name>Agony.Wrapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

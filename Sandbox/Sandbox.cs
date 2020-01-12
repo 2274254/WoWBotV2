@@ -107,14 +107,10 @@ namespace Sandbox
 
             try
             {
-                //Logs.Log("Loading Agony");
-                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.dll", new string[1]);
-                //LoadLibrary("7339047cb10f6e86");
-
-                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.Wrapper.dll", new string[1]);
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.Wrapper.dll", new string[1]);
 
                 //LoadLibrary("6b574a82b1ea937e");
-                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.SDK.dll", new string[1]);
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.SDK.dll", new string[1]);
 
                 SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\TestAddon.exe", new string[1]);
 

@@ -1,14 +1,24 @@
 #pragma once
 #include "../Agony/Game.h"
+#include "WndEventArgs.h"
+#include "Macros.h"
+
 using namespace Agony::Native;
-using namespace System;
-using namespace System::Text;
 
 namespace Agony
 {
+	MAKE_EVENT_GLOBAL(GameWndProc, WndEventArgs^ args);
+
 	public ref class Game
 	{
+	internal:
+		MAKE_EVENT_INTERNAL_PROCESS(GameWndProc, (HWND, UINT, WPARAM, LPARAM));
 	public:
+		static Game::Game();
+		MAKE_EVENT_PUBLIC(OnWndProc, GameWndProc);
+
+		static void DomainUnloadEventHandler(Object^, EventArgs^);
+
 		static property bool IsInGame
 		{
 			bool get()
@@ -17,9 +27,9 @@ namespace Agony
 			}
 		}
 
-		static property String^ GameVersion
+		static property System::String^ GameVersion
 		{
-			String^ get()
+			System::String^ get()
 			{
 				char* gameVersion = Native::Game::GetGameVersion();
 				if (gameVersion != nullptr)

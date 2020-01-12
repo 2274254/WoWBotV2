@@ -208,13 +208,14 @@
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <OmitFramePointers>false</OmitFramePointers>
       <BrowseInformation>true</BrowseInformation>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -224,7 +225,7 @@
       </EnableCOMDATFolding>
       <OptimizeReferences>
       </OptimizeReferences>
-      <AdditionalDependencies>libMinHook.x64.lib;FW1FontWrapper.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libMinHook.x64.lib;VMProtectSDK64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AssemblyDebug>
       </AssemblyDebug>
       <AdditionalLibraryDirectories>D:\AgonyWoW\Libs</AdditionalLibraryDirectories>
@@ -245,25 +246,35 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bootstrapper.h" />
+    <ClInclude Include="Console.h" />
+    <ClInclude Include="Core.h" />
+    <ClInclude Include="D3dxHook.h" />
+    <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="MoveMap.h" />
     <ClInclude Include="MoveMapSharedDefines.h" />
     <ClInclude Include="Navigation.h" />
+    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PathFinder.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Drawings.h" />
-    <ClInclude Include="FW1FontWrapper.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="kiero.h" />
     <ClInclude Include="LuaFunctions.h" />
     <ClInclude Include="MinHook.h" />
     <ClInclude Include="Offsets.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="vector3.h" />
     <ClInclude Include="WoWObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bootstrapper.cpp" />
+    <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="D3dxHook.cpp" />
     <ClCompile Include="Detour\Source\DetourAlloc.cpp" />
     <ClCompile Include="Detour\Source\DetourCommon.cpp" />
     <ClCompile Include="Detour\Source\DetourNavMesh.cpp" />
@@ -287,6 +298,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="MoveMap.cpp" />
     <ClCompile Include="Navigation.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PathFinder.cpp" />
     <ClCompile Include="Drawings.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
@@ -296,6 +308,7 @@
     <ClCompile Include="imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="kiero.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

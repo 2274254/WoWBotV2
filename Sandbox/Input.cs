@@ -13,6 +13,7 @@ namespace Sandbox
         /// </summary>
         public static void Subscribe()
         {
+            //SandboxConfig.ReloadKey
             AppDomain.CurrentDomain.AssemblyResolve += SandboxDomain.DomainOnAssemblyResolve;
             //Game.OnWndProc += Game_OnWndProc;
         }
@@ -29,16 +30,19 @@ namespace Sandbox
             {
                 if (args.WParam == SandboxConfig.ReloadKey)
                 {
+                    Console.WriteLine("RELOAD KEY PRESSED");
                     Sandbox.Reload();
                 }
 
                 if (args.WParam == SandboxConfig.ReloadAndRecompileKey)
                 {
+                    Console.WriteLine("Recompile KEY PRESSED");
                     Sandbox.Recompile();
                 }
 
                 if (args.WParam == SandboxConfig.UnloadKey)
                 {
+                    Console.WriteLine("Unload KEY PRESSED");
                     Sandbox.Unload();
                 }
             }
