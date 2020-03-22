@@ -13,6 +13,7 @@ namespace Agony
 			static D3D11Present Od11Present;
 			static D3D11ResizeBuffers Od11ResizeBuffers;
 			static bool initialised;
+			static short lastGameState;
 		public:
 			static bool ApplyHooks();
 			static HRESULT __fastcall HkPresentD11(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);

@@ -2,7 +2,6 @@
 #include <iostream>
 #include "Navigation.h"
 #include "Offsets.h"
-#include "LuaFunctions.h"
 #include "Drawings.h"
 #include "imgui_impl_dx11.h"
 #include "imgui_impl_win32.h"
@@ -13,35 +12,11 @@
 #include "Utils.h"
 #include "kiero.h"
 
-#undef MANAGED_BUILD
-namespace Agony
-{
-	namespace Native
-	{		
-		int16_t last_state = 0;
-		bool initialised = false;
-
-		void GameLoop()
-		{
-			//check if in game if not set we need to re register,
-			//if we are in game and need to re regiser, then reregister, ez pz :P
-			const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-			if (last_state != currentState)
-			{
-				last_state = currentState;
-				if ((currentState >> 4) & 1) //its not 4 in retail will have to print it once
-				{
-					for (const auto function : FunctionsMap)
-					{
-						if (FramescriptRegister(function.first, function.second))
-						{
-							printf("Registered %s\n", function.first);
-						}
-					}
-				}
-			}
-		}
-
+//#undef MANAGED_BUILD //Why did i do this !?
+//namespace Agony
+//{
+//	namespace Native
+//	{
 		struct handle_data {
 			unsigned long process_id;
 			HWND window_handle;
@@ -116,11 +91,12 @@ namespace Agony
 		{
 			//if (Utils::IsProcess("World of Warcraft"))
 			{
-				Console::Create();
+				Agony::Native::Console::Create();
 			}
+			std::cout << "It works!" << std::endl;
 
-			Core::MainModule = reinterpret_cast<int>(GetModuleHandle(nullptr));
-			Core* _core = new Core(GetModuleHandle(nullptr));
+			Agony::Native::Core::MainModule = reinterpret_cast<int>(GetModuleHandle(nullptr));
+			Agony::Native::Core* _core = new Agony::Native::Core(GetModuleHandle(nullptr));
 
 			//std::cout << std::hex << reinterpret_cast<uintptr_t*>(GetLocalPlayer());	
 			//CameraBase* pCameraBase = *reinterpret_cast<CameraBase**>(Offsets::Base + Offsets::CameraBase);
@@ -135,17 +111,22 @@ namespace Agony
 			printf("Movemaps Loaded. Started. \r\n");
 
 			while (1 & !GetAsyncKeyState(VK_F4))
+			{
 				Sleep(1);
+			}
 			kiero::shutdown();
 
 			const auto conHandle = GetConsoleWindow();
 			FreeConsole();
 			PostMessage(conHandle, WM_CLOSE, 0, 0);
 			FreeLibraryAndExitThread(static_cast<HMODULE>(param), NULL);
+
+			//No return !?
 		}
 
 		BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 		{
+			//MessageBox(GetActiveWindow(), "blah", "blah2", 0x00000000L);
 			static HANDLE hThread = nullptr;
 			Navigation* navigation = Navigation::GetInstance();
 			///if (Utils::IsProcess("World of Warcraft"))
@@ -153,7 +134,7 @@ namespace Agony
 			{
 				case DLL_PROCESS_ATTACH:
 				{
-					Core::MainWindowHandle = FindMainWindow(GetCurrentProcessId());
+					Agony::Native::Core::MainWindowHandle = FindMainWindow(GetCurrentProcessId());
 					hThread = CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(Initialize), nullptr, NULL, nullptr);
 					//DisableThreadLibraryCalls(hModule);
 				}
@@ -167,5 +148,5 @@ namespace Agony
 			}
 			return TRUE;
 		}
-	}
-}
+//	}
+//}

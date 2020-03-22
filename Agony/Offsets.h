@@ -6,28 +6,35 @@ namespace Offsets
 	//now just modify
 	inline uintptr_t Base = reinterpret_cast<uintptr_t>(GetModuleHandle(nullptr));
 	//WoW Lua
-	inline uintptr_t InvalidFunctionPtr = 0x28291D0; //48 8b 05 ? ? ? ? 48 85 d2 74
-	inline uintptr_t FrameScriptRegister = 0x5394C0;
-	inline uintptr_t FrameScriptExecute = 0x539570;//32978
-	inline uintptr_t FrameScriptGetText = 0x53D3F0;//32978
+	inline uintptr_t InvalidFunctionPtr = 0x29551F0;
+	inline uintptr_t FrameScript_RegisterFunction = 0x51D610;
+	inline uintptr_t FrameScript_Execute = 0x51C640;
+	inline uintptr_t FrameScript_GetText = 0x5204C0;
 	//Lua
-	inline uintptr_t GetTop = 0x2003C0;
-	inline uintptr_t IsNumber = 0x200670;
-	inline uintptr_t ToNumber = 0x201970;
-	inline uintptr_t PushNumber = 0x200C60;
-	inline uintptr_t IsString = 0x2006A0;
-	inline uintptr_t ToLString = 0x2018D0;
-	inline uintptr_t PushBoolean = 0x2009D0;
-	inline uintptr_t lua_createtable = 0x1FFCC0;
-	inline uintptr_t lua_rawseti = 0x2010A0;
-	inline uintptr_t Error = 0x1904770; //LuaL_error
+	inline uintptr_t lua_gettop = 0x1D82D0;
+	inline uintptr_t lua_isnumber = 0x1D8580;
+	inline uintptr_t lua_tonumber = 0x1D9880;
+	inline uintptr_t lua_pushnumber = 0x1D8B70;
+	inline uintptr_t lua_pushinteger = 0x1D8A80;
+	inline uintptr_t lua_pushstring = 0x1D8B90;
+	inline uintptr_t lua_isstring = 0x1D85B0;
+	inline uintptr_t lua_tolstring = 0x1D97E0;
+	inline uintptr_t lua_pushboolean = 0x1D88E0;
+	inline uintptr_t lua_createtable = 0x1D7BD0;
+	inline uintptr_t lua_rawseti = 0x1D8FB0;
+	inline uintptr_t lua_pcall = 0x1D8850;
+	inline uintptr_t lua_settop = 0x1D9520;
+	inline uintptr_t luaL_error = 0x19A45A0;
+	inline uintptr_t lua_state = 0x292C8A8;
+	inline uintptr_t lua_getfield = 0x1D81B0;
 
 	//Game:
-	inline uintptr_t GameVersion = 0x207FF2C;//32978
-	inline uintptr_t GetBaseFromToken = 0x15D7CC0;
-	inline uintptr_t InGame = 0x29387A4;//32978
-	inline uintptr_t TerrainClick = 0xD11760;
-	inline uintptr_t CameraBase = 0x2930758;
-	inline uintptr_t CorpseBase = 0x267CA48;
+	inline uintptr_t GameVersion = 0x207FF2C;
+	inline uintptr_t GetBaseFromToken = 0x1670AE0;
+	inline uintptr_t InGame = 0x2A5DAEC;
+
+	inline uintptr_t TerrainClick = 0xD83ED0;
+	inline uintptr_t CameraBase = 0x2A5EAA8;
+	inline uintptr_t CorpseBase = 0x27B5DB8;
 
 }

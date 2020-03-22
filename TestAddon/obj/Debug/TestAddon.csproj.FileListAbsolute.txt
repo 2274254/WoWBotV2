@@ -10,3 +10,4 @@ D:\AgonyWoW\TestAddon\obj\Debug\TestAddon.pdb
 D:\AgonyWoW\x64\Debug\TestAddon.pdb
 D:\AgonyWoW\x64\Debug\TestAddon.exe
 D:\AgonyWoW\TestAddon\obj\Debug\TestAddon.exe
+D:\AgonyWoW\TestAddon\obj\Debug\TestAddon.csproj.CoreCompileInputs.cache

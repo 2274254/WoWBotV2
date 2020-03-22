@@ -27,6 +27,8 @@ namespace Agony
 			auto wcharDLLPath = new wchar_t[MAX_PATH];
 			MultiByteToWideChar(CP_ACP, 0, dirDllPath, -1, wcharDLLPath, 4096);
 
+			std::cout << "Directory: " << dir << " DLL: " << dll << std::endl;
+
 			return wcharDLLPath;
 		}
 

@@ -3,8 +3,11 @@
 #include "Drawings.h"
 #include "imgui_impl_dx11.h"
 #include "imgui_impl_win32.h"
+#include "LuaFunctions.h"
 #include "Offsets.h"
 #include "Core.h"
+
+#include <iostream>
 
 namespace Agony
 {
@@ -13,6 +16,7 @@ namespace Agony
 		D3D11Present D3dxHook::Od11Present = nullptr;
 		D3D11ResizeBuffers D3dxHook::Od11ResizeBuffers = nullptr;
 		bool D3dxHook::initialised = false;
+		short D3dxHook::lastGameState = 0;
 
 		bool D3dxHook::ApplyHooks()
 		{
@@ -132,17 +136,37 @@ namespace Agony
 				Drawings::pDeviceContext->OMGetRenderTargets(1, &Drawings::NormalTargetView, &NormalDepthStencil);
 				Drawings::pDeviceContext->OMSetRenderTargets(1, &Drawings::RenderTargetView, m_DepthStencilView);
 
+				//check if in game if not set we need to re register,
+				//if we are in game and need to re regiser, then reregister, ez pz :P
+				const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
+				if (lastGameState != currentState)
+				{
+					lastGameState = currentState;
+					if ((currentState >> 4) & 1) //its not 4 in retail will have to print it once
+					{
+						for (const auto function : Agony::Native::LuaFunctions::FunctionsMap)
+						{
+							if (Agony::Native::LuaFunctions::FramescriptRegister(function.first, function.second))
+							{
+								printf("Registered %s\n", function.first);
+							}
+						}
+
+						Agony::Native::LuaFunctions::Call("GetUnitPosition", "player");
+
+						//std::tuple<float, float, float> ret = Agony::Native::LuaFunctions::Call("GetUnitPosition", "player");
+						//std::cout << "Player Pos = " << std::any_cast<float>(test[0]) << ", " << std::any_cast<float>(test[1]) << ", " << std::any_cast<float>(test[2]) << std::endl;
+					}
+				}
+
 				ImGui_ImplDX11_NewFrame();
 				ImGui_ImplWin32_NewFrame();
 
 				ImGui::NewFrame();
 
-
-				//GameLoop();
-
 				//ImGui::GetOverlayDrawList()->AddText(ImVec2(10, 10), 0xFF0000FF, "HELLO WORLD");
 				//ImGui::GetOverlayDrawList()->AddLine(ImVec2(10, 10), ImVec2(300, 10), 0xFF0000FF);
-				const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
+				//const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
 				if ((currentState >> 4) & 1)
 				{
 					if (Drawings::Waypoints)

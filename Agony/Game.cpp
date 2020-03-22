@@ -15,7 +15,7 @@ Agony::Native::Game* Agony::Native::Game::GetInstance()
 WNDPROC m_wndProc;
 LRESULT WINAPI hkWndProc(HWND hwnd, UINT msg, WPARAM WParam, LPARAM LParam)
 {
-	printf("ON MESSAGE\n");
+	//printf("ON MESSAGE\n");
 	auto process = Agony::Native::EventHandler<1, Agony::Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->TriggerProcess(hwnd, msg, WParam, LParam);
 	LRESULT returnValue;
 	/*if (msg == WM_KEYUP)
@@ -48,7 +48,7 @@ bool Agony::Native::Game::IsInGame()
 {
 	IS_NULL_RETN(Offsets::Base, static_cast<int>(Offsets::InGame), false);
 	const int16_t gameState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-	return ((gameState >> 4) & 1);
+	return ((gameState >> 6) & 1);
 }
 
 char* Agony::Native::Game::GetGameVersion()

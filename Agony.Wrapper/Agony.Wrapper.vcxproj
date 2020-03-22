@@ -75,8 +75,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include;</IncludePath>
-    <LibraryPath>D:\AgonyWoW\Libs;D:\AgonyWoW\x64\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include</IncludePath>
+    <LibraryPath>D:\AgonyWoW\Libs;D:\AgonyWoW\x64\Debug;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -89,6 +89,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>Agony.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AssemblyLinkResource>
+      </AssemblyLinkResource>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -100,6 +102,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -130,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="Agony.Wrapper.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Lua.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
@@ -139,6 +143,7 @@
     <ClCompile Include="Agony.Wrapper.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Lua.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

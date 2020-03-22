@@ -110,7 +110,7 @@ namespace Agony
 
 		bool Bootstrapper::InjectWrapper()
 		{
-			auto path = m_isFallback ? Utils::GetDllPath(TEXT("EloBuddy.Wrapper.dll")) : m_bsMemoryLayout->WrapperDllPath;
+			auto path = m_isFallback ? Utils::GetDllPath(TEXT("Agony.Wrapper.dll")) : m_bsMemoryLayout->WrapperDllPath;
 			return LoadLibraryW(path) != nullptr;
 		}
 

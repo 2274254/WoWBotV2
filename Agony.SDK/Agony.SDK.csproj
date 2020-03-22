@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
+    <Compile Include="Core\Lua.cs" />
     <Compile Include="Enumerations\LogLevel.cs" />
     <Compile Include="Events\Loading.cs" />
     <Compile Include="Game.cs" />

@@ -63,7 +63,7 @@ namespace Agony
 			{
 				auto process = true;
 				auto tickCount = GetTickCount();
-				printf("WE ARE HERE1\n");
+				//printf("WE ARE HERE1\n");
 				for (auto ptr : m_EventCallbacks)
 				{
 					printf("WE ARE HERE2\n");
