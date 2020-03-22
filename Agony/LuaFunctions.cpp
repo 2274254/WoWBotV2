@@ -1,41 +1,12 @@
 #include "LuaFunctions.h"
-#include "Offsets.h"
 #include "vector3.h"
 #include "Navigation.h"
 #include "Drawings.h"
-
-struct any {
-    enum type { Int, Float, String, Boolean, Double };
-    any(int   e) { m_data.INT = e; m_type = Int; }
-    any(float e) { m_data.FLOAT = e; m_type = Float; }
-    any(char* e) { m_data.STRING = e; m_type = String; }
-    any(bool e) { m_data.BOOLEAN = e; m_type = Boolean; }
-    any(double e) { m_data.DOUBLE = e; m_type = Double; }
-    type get_type() const { return m_type; }
-    int get_int() const { return m_data.INT; }
-    float get_float() const { return m_data.FLOAT; }
-    char* get_string() const { return m_data.STRING; }
-    bool get_bool() const { return m_data.BOOLEAN; }
-    double get_double() const { return m_data.DOUBLE; }
-private:
-    type m_type;
-    union {
-        int   INT;
-        float FLOAT;
-        char* STRING;
-        bool BOOLEAN;
-        double DOUBLE;
-    } m_data;
-};
 
 namespace Agony
 {
     namespace Native
     {
-        #define LUA_GLOBALSINDEX        (-10002)
-        #define lua_pop(L,n)            LuaFunctions::LuaSetTop(L, -(n)-1)
-        #define lua_getglobal(L,s)      LuaFunctions::LuaGetField(L, LUA_GLOBALSINDEX, (s))
-
         std::map<const char*, int64_t> LuaFunctions::FunctionsMap =
         {
             {"Unlock", reinterpret_cast<int64_t>(Unlock)},
@@ -79,68 +50,6 @@ namespace Agony
         void LuaFunctions::Execute(const std::string& com)
         {
             Execute(com.c_str());
-        }
-
-        template<typename ...Args>
-        void LuaFunctions::Call(std::string const& functionName, Args&&... args)
-        {
-            /*uintptr_t* L = *(uintptr_t**)(Offsets::Base + Offsets::lua_state);
-            lua_getglobal(L, functionName);
-            //std::vector<any> vec = { args... }; // unnecessary
-            any vec[sizeof...(Args)] = { args... }; // more efficient
-            for (unsigned i = 0; i < vec.size(); ++i)
-            {
-                switch (vec[i].get_type())
-                {
-                    case any::Int:
-                    {
-                        LuaPushInteger(L, vec[i].get_int());
-                    }
-                    break;
-                    case any::Float:
-                    {
-                        LuaPushNumber(L, (double)vec[i].get_float());
-                    }
-                    break;
-                    case any::String:
-                    {
-                        LuaPushString(L, vec[i].get_string());
-                    }
-                    break;
-                    case any::Boolean:
-                    {
-                        LuaPushBoolean(L, vec[i].get_bool());
-                    }
-                    break;
-                    case any::Double:
-                    {
-                        LuaPushNumber(L, vec[i].get_double());
-                    }
-                    break;
-                }
-            }
-            if (LuaPCall(L, 2, 1, 0) != 0)
-            {
-                auto error = LuaToString(L, -1);
-                std::count << "LUA Error: " << error << std::endl;
-                return;
-            }
-            std::vector<std::any> returnValues;
-            for (unsigned i = 0; i < returnValues.size(); i++)
-            {
-                auto expectedType = returnValues[i];
-                switch (expectedType)
-                {
-                    case "string": returnValues.push_back(LuaFunctions::LuaToString(L, i - 1)); break;
-                    case "float":
-                    case "double":
-                    case "number": returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1)); break;
-                    case "bool": returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1) == 1); break;
-                }
-            }
-            lua_pop(L, 1);
-            return returnValues;*/
-            
         }
 
         std::string LuaFunctions::ExecuteGetResult(const std::string& com, const std::string& arg)
