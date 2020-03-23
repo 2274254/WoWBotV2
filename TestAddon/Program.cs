@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Agony.SDK;
 using Agony.SDK.Core;
 using Agony.SDK.Enumerations;
@@ -15,14 +14,6 @@ namespace TestAddon
             Logger.Log(LogLevel.Info, "TestAddon has been loaded!");
             Loading.OnLoadingComplete += LoadingComplete;
             Messages.OnMessage += Messages_OnMessage;
-
-            Task.Factory.StartNew(() =>
-            {
-                Task.Delay(1000 * 10);
-
-                var playerPosition = Lua.Call("GetUnitPosition", new System.Collections.Generic.List<int>() { 1, 1, 1 }, "player");
-                Logger.Log(LogLevel.Info, $"Player position = {playerPosition[0]}, {playerPosition[1]}, {playerPosition[2]}");
-            });
         }
 
         private static void Messages_OnMessage(Messages.WindowMessage args)
@@ -38,6 +29,10 @@ namespace TestAddon
         {
             Logger.Log(LogLevel.Info, "LoadingComplete triggered inside TestAddon!");
             Logger.Log(LogLevel.Info, "Game version = " + Game.GameVersion);
+
+            Logger.Log(LogLevel.Info, "Will attempt to get GetUnitPosition from c#");
+            var playerPosition = Lua.Call("GetUnitPosition", new System.Collections.Generic.List<int>() { 1, 1, 1 }, "player");
+            Logger.Log(LogLevel.Info, $"Player position = {(double)playerPosition[0]}, {(double)playerPosition[1]}, {(double)playerPosition[2]}");
         }
     }
 }

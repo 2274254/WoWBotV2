@@ -9,13 +9,17 @@ namespace Agony
 	}
 	System::Collections::Generic::List<System::Object^>^ Lua::Call(System::String^ code, System::Collections::Generic::List<System::Int32>^ returns, ... array<System::Object^>^ variableArgs)
 	{
+		std::string functionName = msclr::interop::marshal_as<std::string>(code);
+
+		std::cout << "Calling " << functionName << std::endl;
+
 		std::vector<int> returnsUnmanaged;
 		for each (int expectedReturn in returns)
 		{
 			returnsUnmanaged.push_back(expectedReturn);
 		}
 
-		auto result = Agony::Native::LuaFunctions::Call(msclr::interop::marshal_as<std::string>(code).c_str(), returnsUnmanaged, "player");//TODO
+		auto result = Agony::Native::LuaFunctions::Call(functionName, returnsUnmanaged, "player");//TODO
 
 		System::Collections::Generic::List<System::Object^>^ returnValues = gcnew System::Collections::Generic::List<System::Object^>();
 

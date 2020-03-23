@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <iostream>
 #include <string>
 #include <cmath>
 #include <map>
@@ -14,13 +15,13 @@ struct any {
     enum type { Int, Float, String, Boolean, Double };
     any(int   e) { m_data.INT = e; m_type = Int; }
     any(float e) { m_data.FLOAT = e; m_type = Float; }
-    any(char* e) { m_data.STRING = e; m_type = String; }
+    any(const char* e) { m_data.STRING = e; m_type = String; }
     any(bool e) { m_data.BOOLEAN = e; m_type = Boolean; }
     any(double e) { m_data.DOUBLE = e; m_type = Double; }
     type get_type() const { return m_type; }
     int get_int() const { return m_data.INT; }
     float get_float() const { return m_data.FLOAT; }
-    char* get_string() const { return m_data.STRING; }
+    const char* get_string() const { return m_data.STRING; }
     bool get_bool() const { return m_data.BOOLEAN; }
     double get_double() const { return m_data.DOUBLE; }
 private:
@@ -28,7 +29,7 @@ private:
     union {
         int   INT;
         float FLOAT;
-        char* STRING;
+        const char* STRING;
         bool BOOLEAN;
         double DOUBLE;
     } m_data;
@@ -54,47 +55,48 @@ namespace Agony
                 std::vector<std::any> returnValues;
                 uintptr_t* L = *(uintptr_t**)(Offsets::Base + Offsets::lua_state);
                 lua_getglobal(L, functionName.c_str());
-                std::vector<any> vec = { args... };
-
-                std::cout << "Args count = " << vec.size() << std::endl;
-
+                int argsSize = sizeof...(Args);
+                any vec[sizeof...(Args)] = { args... };
                 int argsc = 0;
-
-                for (unsigned i = 0; i < vec.size(); i++)
+                for (unsigned i = 0; i < argsSize; ++i)
                 {
                     switch (vec[i].get_type())
                     {
-                    case any::Int:
-                    {
-                        LuaPushInteger(L, vec[i].get_int());
-                        argsc++;
-                    }
-                    break;
-                    case any::Float:
-                    {
-                        LuaPushNumber(L, (double)vec[i].get_float());
-                        argsc++;
-                    }
-                    break;
-                    case any::String:
-                    {
-                        LuaPushString(L, vec[i].get_string());
-                        std::cout << "Pushed string" << std::endl;
-                        argsc++;
-                    }
-                    break;
-                    case any::Boolean:
-                    {
-                        LuaPushBoolean(L, vec[i].get_bool());
-                        argsc++;
-                    }
-                    break;
-                    case any::Double:
-                    {
-                        LuaPushNumber(L, vec[i].get_double());
-                        argsc++;
-                    }
-                    break;
+                        case any::Int:
+                        {
+                            LuaPushInteger(L, vec[i].get_int());
+                            argsc++;
+                        }
+                        break;
+                        case any::Float:
+                        {
+                            LuaPushNumber(L, (double)vec[i].get_float());
+                            argsc++;
+                        }
+                        break;
+                        case any::String:
+                        {
+                            LuaPushString(L, vec[i].get_string());
+                            argsc++;
+                        }
+                        break;
+                        case any::Boolean:
+                        {
+                            LuaPushBoolean(L, vec[i].get_bool());
+                            argsc++;
+                        }
+                        break;
+                        case any::Double:
+                        {
+                            LuaPushNumber(L, vec[i].get_double());
+                            argsc++;
+                        }
+                        break;
+                        default:
+                        {
+                            std::cout << "Unable to find type" << std::endl;
+                        }
+                        break;
                     }
                 }
 

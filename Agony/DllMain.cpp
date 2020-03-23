@@ -93,7 +93,6 @@
 			{
 				Agony::Native::Console::Create();
 			}
-			std::cout << "It works!" << std::endl;
 
 			Agony::Native::Core::MainModule = reinterpret_cast<int>(GetModuleHandle(nullptr));
 			Agony::Native::Core* _core = new Agony::Native::Core(GetModuleHandle(nullptr));

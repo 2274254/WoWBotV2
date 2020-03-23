@@ -24,7 +24,6 @@ namespace Agony
 				if (instance == nullptr)
 				{
 					instance = new EventHandler();
-					printf("WE CREATED A NEW INSTANCE\n");
 				}
 				return instance;
 			}

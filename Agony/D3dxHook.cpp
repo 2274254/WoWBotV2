@@ -22,7 +22,7 @@ namespace Agony
 		{
 			if (init(kiero::RenderType::D3D11) == kiero::Status::Success && kiero::bind(8, reinterpret_cast<void**>(&Od11Present), static_cast<void*>(HkPresentD11)) == kiero::Status::Success)
 			{
-				printf("Successfully hooked dxd11!\n");
+				//printf("Successfully hooked dxd11!\n");
 				if (kiero::bind(13, reinterpret_cast<void**>(&Od11ResizeBuffers), static_cast<void*>(HkResizeBuffersD11)) == kiero::Status::Success)
 				{
 					//SUCCESS
@@ -148,7 +148,7 @@ namespace Agony
 						{
 							if (Agony::Native::LuaFunctions::FramescriptRegister(function.first, function.second))
 							{
-								printf("Registered %s\n", function.first);
+								//printf("Registered %s\n", function.first);
 							}
 						}
 

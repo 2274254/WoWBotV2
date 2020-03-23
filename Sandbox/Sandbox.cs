@@ -68,8 +68,8 @@ namespace Sandbox
         ///     any of the bootstrap actions will fail.
         /// </returns>
 
-        [DllExport(CallingConvention = CallingConvention.Cdecl, ExportName = "Bootstrap")]
-        public static int Bootstrap()
+        //[DllExport(CallingConvention = CallingConvention.Cdecl, ExportName = "Bootstrap")]
+        public static int Bootstrap(string param)
         {
             try
             {
@@ -110,7 +110,7 @@ namespace Sandbox
                 //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.Wrapper.dll", new string[1]);
 
                 //LoadLibrary("6b574a82b1ea937e");
-                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.SDK.dll", new string[1]);
+                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.SDK.dll", new string[1]);
 
                 SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\TestAddon.exe", new string[1]);
 

@@ -45,7 +45,7 @@ namespace Agony.SDK.Events
         internal static void OnTick(EventArgs args)
         {
             // OnLoadingComplete
-            if(true)//if(Game.IsInGame)
+            if(Game.IsInGame)
             {
                 IsLoadingComplete = true;
                 CallLoadingComplete();
