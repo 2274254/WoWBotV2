@@ -11,14 +11,7 @@ namespace Agony
 	internal:
 	public:
 		static Lua::Lua();
-		generic<class T>
-		static T Call(System::String^ code, ... array<System::Object^>^ variableArgs)
-		{
-			//auto test = System::Tuple::Create("dsad", 4234, 4234.423, "dsad");
 
-			//auto result = Agony::Native::LuaFunctions::Call<std::tuple<T>>(msclr::interop::marshal_as<std::string>(code).c_str(), 231);
-
-			return (T)0;
-		}
+		static System::Collections::Generic::List<System::Object^>^ Call(System::String^ code, System::Collections::Generic::List<System::Int32>^ returns, ... array<System::Object^>^ variableArgs);
 	};
 }

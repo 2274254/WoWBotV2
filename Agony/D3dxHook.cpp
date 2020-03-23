@@ -153,8 +153,11 @@ namespace Agony
 						}
 
 						//std::string result = Agony::Native::LuaFunctions::ExecuteGetResult("globalVar = GetUnitPosition('player')", "globalVar");
-						auto ret = Agony::Native::LuaFunctions::Call<std::tuple<float, float, float>>("GetUnitPosition", "player");
-						std::cout << "Player Pos = " << std::get<0>(ret) << ", " << std::get<1>(ret) << ", " << std::get<2>(ret) << std::endl;
+						auto ret = Agony::Native::LuaFunctions::Call("GetUnitPosition", {1, 1, 1}, "player");
+						if (ret.size() == 3)
+						{
+							std::cout << "Player Pos = " << std::any_cast<double>(ret[0]) << ", " << std::any_cast<double>(ret[1]) << ", " << std::any_cast<double>(ret[2]) << std::endl;
+						}
 					}
 				}
 

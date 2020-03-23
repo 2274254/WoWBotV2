@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Agony.SDK;
 using Agony.SDK.Core;
 using Agony.SDK.Enumerations;
@@ -15,8 +16,13 @@ namespace TestAddon
             Loading.OnLoadingComplete += LoadingComplete;
             Messages.OnMessage += Messages_OnMessage;
 
-            //var playerPosition = Lua.Execute("GetUnitPosition('player')");
-            //Logger.Log(LogLevel.Info, $"Player position = {playerPosition}");
+            Task.Factory.StartNew(() =>
+            {
+                Task.Delay(1000 * 10);
+
+                var playerPosition = Lua.Call("GetUnitPosition", new System.Collections.Generic.List<int>() { 1, 1, 1 }, "player");
+                Logger.Log(LogLevel.Info, $"Player position = {playerPosition[0]}, {playerPosition[1]}, {playerPosition[2]}");
+            });
         }
 
         private static void Messages_OnMessage(Messages.WindowMessage args)

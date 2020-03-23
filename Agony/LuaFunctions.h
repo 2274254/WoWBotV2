@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <tuple>
+#include <any>
 #include "Macros.h"
 #include "Offsets.h"
 #include "WoWObject.h"
@@ -37,96 +38,85 @@ namespace Agony
 {
     namespace Native
     {
-        struct DLLEXPORT Caster
+        /*template <class ...Args>
+        void LuaFunctions::Call(const char* functionName, Args... values)
         {
-            Caster(int top, uintptr_t* L) : top(top), L(L)
-            {
-            }
-            template<typename ...T>
-            operator std::tuple<T...>()
-            {
-                constexpr auto size = std::tuple_size<std::tuple<T...>>::value;
-                constexpr auto seq = std::make_index_sequence<size>{};
-                return std::make_tuple(Get<T>(seq) ...);
-            }
-
-            template<typename R, size_t I, size_t ... REST>
-            R Get(const std::index_sequence<REST ...>&)
-            {
-                if (std::is_same<R, int>::value)
-                    return reinterpret_cast<double(__fastcall*)(uintptr_t*, int32_t)>(Offsets::Base + Offsets::lua_tonumber)(L, top + I);
-                return R();
-            }
-
-            int top;
-            uintptr_t* L;
-        };
+            return LuaFunctions::internal_Call(std::string functionName, const Args &... args);
+        }*/
         class DLLEXPORT LuaFunctions
         {
             #define LUA_GLOBALSINDEX        (-10002)
             #define lua_pop(L,n)            LuaFunctions::LuaSetTop(L, -(n)-1)
             #define lua_getglobal(L,s)      LuaFunctions::LuaGetField(L, LUA_GLOBALSINDEX, (s))
-
-            /*template <class ...Args>
-            static void internal_Call(const char* functionName, const Args&... args)
+            template <class ...Args>
+            static std::vector<std::any> internal_Call(std::string const& functionName, std::vector<int> returns, const Args&... args)
             {
+                std::vector<std::any> returnValues;
                 uintptr_t* L = *(uintptr_t**)(Offsets::Base + Offsets::lua_state);
-                lua_getglobal(L, functionName);
-                //std::vector<any> vec = { args... }; // unnecessary
-                any vec[sizeof...(Args)] = { args... }; // more efficient
-                for (unsigned i = 0; i < vec.size(); ++i)
+                lua_getglobal(L, functionName.c_str());
+                std::vector<any> vec = { args... };
+
+                std::cout << "Args count = " << vec.size() << std::endl;
+
+                int argsc = 0;
+
+                for (unsigned i = 0; i < vec.size(); i++)
                 {
                     switch (vec[i].get_type())
                     {
-                        case any::Int:
-                        {
-                            LuaPushInteger(L, vec[i].get_int());
-                        }
-                        break;
-                        case any::Float:
-                        {
-                            LuaPushNumber(L, (double)vec[i].get_float());
-                        }
-                        break;
-                        case any::String:
-                        {
-                            LuaPushString(L, vec[i].get_string());
-                        }
-                        break;
-                        case any::Boolean:
-                        {
-                            LuaPushBoolean(L, vec[i].get_bool());
-                        }
-                        break;
-                        case any::Double:
-                        {
-                            LuaPushNumber(L, vec[i].get_double());
-                        }
-                        break;
+                    case any::Int:
+                    {
+                        LuaPushInteger(L, vec[i].get_int());
+                        argsc++;
+                    }
+                    break;
+                    case any::Float:
+                    {
+                        LuaPushNumber(L, (double)vec[i].get_float());
+                        argsc++;
+                    }
+                    break;
+                    case any::String:
+                    {
+                        LuaPushString(L, vec[i].get_string());
+                        std::cout << "Pushed string" << std::endl;
+                        argsc++;
+                    }
+                    break;
+                    case any::Boolean:
+                    {
+                        LuaPushBoolean(L, vec[i].get_bool());
+                        argsc++;
+                    }
+                    break;
+                    case any::Double:
+                    {
+                        LuaPushNumber(L, vec[i].get_double());
+                        argsc++;
+                    }
+                    break;
                     }
                 }
-                if (LuaPCall(L, 2, 1, 0) != 0)
+
+                if (LuaPCall(L, argsc, returns.size(), 0) != 0)
                 {
                     auto error = LuaToString(L, -1);
-                    std::count << "LUA Error: " << error << std::endl;
-                    return;
+                    std::cout << "LUA Error: " << error << std::endl;
+                    return returnValues;
                 }
-                /*std::vector<std::any> returnValues;
-                for (unsigned i = 0; i < returnValues.size(); i++)
+                for (unsigned i = 0; i < returns.size(); i++)
                 {
-                    auto expectedType = returnValues[i];
+                    int expectedType = returns[i];
                     switch (expectedType)
                     {
-                        case "string": returnValues.push_back(LuaFunctions::LuaToString(L, i - 1)); break;
-                        case "float":
-                        case "double":
-                        case "number": returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1)); break;
-                        case "bool": returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1) == 1); break;
+                    case 2: returnValues.push_back(LuaFunctions::LuaToString(L, i - 1)); break;
+                    case 1: returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1)); break;
+                    case 0: returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1) == 1); break;
                     }
-                }* /
+                }
                 lua_pop(L, 1);
-                //return returnValues;
-            }*/
+                return returnValues;
+            }
         public:
             static WoWObject* GetUnitById(const char* unitid);
             static WoWObject* GetLocalPlayer();
@@ -135,70 +125,11 @@ namespace Agony
             static void Execute(const char* com);
             static void Execute(const std::string& com);
             
-            template<typename R, typename ...Args>
-            static R Call(std::string const& functionName, Args&&... args)
+            template <class ...Args>
+            static std::vector<std::any> Call(std::string const& functionName, std::vector<int> returns, Args... args)
             {
-                uintptr_t* L = *(uintptr_t**)(Offsets::Base + Offsets::lua_state);
-
-                constexpr auto size = std::tuple_size<R>::value;
-                int top = 0;
-
-                lua_getglobal(L, functionName.c_str());
-
-                //any vec[sizeof...(Args)] = { args... };
-                std::vector<any> vec = { args... };
-                
-                for (unsigned i = 0; i < vec.size(); ++i)
-                {
-                    switch (vec[i].get_type())
-                    {
-                    case any::Int:
-                    {
-                        LuaPushInteger(L, vec[i].get_int());
-                    }
-                    break;
-                    case any::Float:
-                    {
-                        LuaPushNumber(L, (double)vec[i].get_float());
-                    }
-                    break;
-                    case any::String:
-                    {
-                        LuaPushString(L, vec[i].get_string());
-                    }
-                    break;
-                    case any::Boolean:
-                    {
-                        LuaPushBoolean(L, vec[i].get_bool());
-                    }
-                    break;
-                    case any::Double:
-                    {
-                        LuaPushNumber(L, vec[i].get_double());
-                    }
-                    break;
-                    }
-                }
-                
-                if (LuaPCall(L, vec.size(), size, 0) != 0)
-                {
-                    //auto error = LuaToString(L, -1);
-                    //std::count << "LUA Error: " << error << std::endl;
-                    //return Caster(top, L);
-                }
-
-                top = LuaGetTop(L);
-
-                for (unsigned i = 0; i < top; i++)
-                {
-                    
-                }
-
-                //Foreach top, get type in R and add it to caster ?
-
-                // lua_pcall(L, sizeof...(Args), size, errfunc); // check return value!
-                return Caster(top, L);
-            }
+                return internal_Call(functionName, returns, any(args)...);
+            };
             static std::string ExecuteGetResult(const std::string& com, const std::string& arg);
             static bool FramescriptRegister(const char* command, const int64_t funcPointer);
             static int64_t LuaSetTop(uintptr_t* l, const int32_t a2);

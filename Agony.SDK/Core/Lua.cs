@@ -8,9 +8,9 @@ namespace Agony.SDK.Core
 {
     public class Lua
     {
-        public static T Call<T>(string functionName, params object[] parameters)
+        public static List<object> Call(string functionName, List<int> returns, params object[] parameters)
         {            
-            return Agony.Lua.Call<T>(functionName, parameters);
+            return Agony.Lua.Call(functionName, returns, parameters);
         }
     }
 }
