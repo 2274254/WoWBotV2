@@ -38,8 +38,8 @@ namespace Agony
 			}
 			else
 			{
-				this->CreateThreadBootstrapAddons();
-				this->DisplayWelcomeMessage();
+				//this->CreateThreadBootstrapAddons();
+				//this->DisplayWelcomeMessage();
 			}
 
 			VMProtectEnd();

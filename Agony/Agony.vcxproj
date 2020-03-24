@@ -248,6 +248,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bootstrapper.h" />
+    <ClInclude Include="CGObject.h" />
+    <ClInclude Include="CGUnit.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="D3dxHook.h" />
@@ -273,6 +275,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bootstrapper.cpp" />
+    <ClCompile Include="CGObject.cpp" />
+    <ClCompile Include="CGUnit.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="D3dxHook.cpp" />

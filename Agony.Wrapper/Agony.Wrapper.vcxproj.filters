@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{04ab4998-0aab-4c68-8012-56fc37fc6fea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Pathing">
+      <UniqueIdentifier>{99a1f99e-295b-4d1e-b32f-5c32726d078f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pathing">
+      <UniqueIdentifier>{ab0c2fa7-8688-4ed8-b5a3-aacb7b02ab71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -48,6 +54,9 @@
     <ClInclude Include="Lua.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="PathingController.h">
+      <Filter>Header Files\Pathing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -64,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="Lua.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="PathingController.cpp">
+      <Filter>Source Files\Pathing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

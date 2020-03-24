@@ -1,0 +1,14 @@
+D:\AgonyWoW\BattlegroundMode\bin\Debug\BattlegroundMode.exe.config
+D:\AgonyWoW\BattlegroundMode\bin\Debug\BattlegroundMode.exe
+D:\AgonyWoW\BattlegroundMode\bin\Debug\BattlegroundMode.pdb
+D:\AgonyWoW\BattlegroundMode\bin\Debug\Agony.SDK.dll
+D:\AgonyWoW\BattlegroundMode\bin\Debug\Agony.Wrapper.dll
+D:\AgonyWoW\BattlegroundMode\bin\Debug\System.Numerics.Vectors.dll
+D:\AgonyWoW\BattlegroundMode\bin\Debug\Agony.Wrapper.pdb
+D:\AgonyWoW\BattlegroundMode\bin\Debug\Agony.SDK.pdb
+D:\AgonyWoW\BattlegroundMode\bin\Debug\System.Numerics.Vectors.xml
+D:\AgonyWoW\BattlegroundMode\obj\Debug\BattlegroundMode.csprojAssemblyReference.cache
+D:\AgonyWoW\BattlegroundMode\obj\Debug\BattlegroundMode.csproj.CoreCompileInputs.cache
+D:\AgonyWoW\BattlegroundMode\obj\Debug\BattlegroundMode.csproj.CopyComplete
+D:\AgonyWoW\BattlegroundMode\obj\Debug\BattlegroundMode.exe
+D:\AgonyWoW\BattlegroundMode\obj\Debug\BattlegroundMode.pdb

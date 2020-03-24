@@ -53,7 +53,7 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
-      <Filter>Source Files\Objects</Filter>
+      <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Console.cpp">
       <Filter>Source Files\Core</Filter>
@@ -79,6 +79,12 @@
     <ClCompile Include="LuaFunctions.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="CGObject.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CGUnit.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MinHook.h">
@@ -88,9 +94,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vector3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WoWObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
@@ -121,7 +124,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ObjectManager.h">
-      <Filter>Header Files\Objects</Filter>
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="EventHandler.h">
       <Filter>Header Files\Events</Filter>
@@ -150,6 +153,15 @@
     <ClInclude Include="LuaFunctions.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="WoWObject.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CGObject.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CGUnit.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -176,12 +188,6 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{514533cd-0684-46b2-ac70-629d2d86c615}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Objects">
-      <UniqueIdentifier>{d8831d48-ed52-4262-af83-353455dcf9e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects">
-      <UniqueIdentifier>{a6a3b762-3c1c-42eb-9fda-10a2ce666290}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Events">
       <UniqueIdentifier>{7bfff771-58a3-446f-85bf-0883d25f3290}</UniqueIdentifier>
     </Filter>
@@ -193,6 +199,18 @@
     </Filter>
     <Filter Include="Source Files\Rendering">
       <UniqueIdentifier>{384b29cc-abf5-4902-8e9a-903c99767712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{d8831d48-ed52-4262-af83-353455dcf9e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Objects">
+      <UniqueIdentifier>{6d7a846f-b28a-428b-bdcb-8cc905ebfd9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{a6a3b762-3c1c-42eb-9fda-10a2ce666290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Objects">
+      <UniqueIdentifier>{fc36c5a3-d61d-4688-953b-59a2d157ef71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

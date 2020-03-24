@@ -102,7 +102,7 @@
 			//std::cout << "CameraInfo:" << std::hex << reinterpret_cast<uintptr_t*>(pCameraBase->camera_ptr);
 			
 			printf("Loading MoveMaps. \r\n");
-			Navigation* navigation = Navigation::GetInstance();
+			Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
 			navigation->Initialize(0);
 			/*navigation->Initialize(3358);
 			navigation->Initialize(3277);
@@ -119,15 +119,13 @@
 			FreeConsole();
 			PostMessage(conHandle, WM_CLOSE, 0, 0);
 			FreeLibraryAndExitThread(static_cast<HMODULE>(param), NULL);
-
-			//No return !?
 		}
 
 		BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 		{
 			//MessageBox(GetActiveWindow(), "blah", "blah2", 0x00000000L);
 			static HANDLE hThread = nullptr;
-			Navigation* navigation = Navigation::GetInstance();
+			Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
 			///if (Utils::IsProcess("World of Warcraft"))
 			switch (ul_reason_for_call)
 			{

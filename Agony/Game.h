@@ -1,5 +1,6 @@
 #pragma once
 #include "Macros.h"
+#include "WoWObject.h"
 
 namespace Agony
 {
@@ -11,6 +12,7 @@ namespace Agony
 			static Game* GetInstance();
 			static bool IsInGame();
 			static char* GetGameVersion();
+			static WoWObject* Me();
 			bool ApplyHooks(void*);
 		};
 	}

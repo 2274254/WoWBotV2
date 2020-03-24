@@ -6,7 +6,8 @@
 #include "LuaFunctions.h"
 #include "Offsets.h"
 #include "Core.h"
-
+#include "Game.h"
+#include "ObjectManager.h"
 #include <iostream>
 
 namespace Agony
@@ -15,8 +16,8 @@ namespace Agony
 	{
 		D3D11Present D3dxHook::Od11Present = nullptr;
 		D3D11ResizeBuffers D3dxHook::Od11ResizeBuffers = nullptr;
-		bool D3dxHook::initialised = false;
-		short D3dxHook::lastGameState = 0;
+		bool D3dxHook::initialised		= false;
+		bool D3dxHook::lastGameState	= false;
 
 		bool D3dxHook::ApplyHooks()
 		{
@@ -138,28 +139,49 @@ namespace Agony
 
 				//check if in game if not set we need to re register,
 				//if we are in game and need to re regiser, then reregister, ez pz :P
-				const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-				if (lastGameState != currentState)
+				auto isInGame = Agony::Native::Game::IsInGame();
+				if (isInGame)
 				{
-					lastGameState = currentState;
-					if ((currentState >> 4) & 1) //its not 4 in retail will have to print it once
+					if (lastGameState == false)
 					{
-						for (const auto function : Agony::Native::LuaFunctions::FunctionsMap)
+						std::cout << "Game state changed" << std::endl;
+						/*for (const auto function : Agony::Native::LuaFunctions::FunctionsMap)
 						{
 							if (Agony::Native::LuaFunctions::FramescriptRegister(function.first, function.second))
 							{
-								//printf("Registered %s\n", function.first);
+								printf("Registered %s\n", function.first);
 							}
-						}
-
+						}*/
 						//std::string result = Agony::Native::LuaFunctions::ExecuteGetResult("globalVar = GetUnitPosition('player')", "globalVar");
-						auto ret = Agony::Native::LuaFunctions::Call("GetUnitPosition", {1, 1, 1}, "player");
+						/*auto ret = Agony::Native::LuaFunctions::Call("GetUnitPosition", { 1, 1, 1 }, "player");
 						if (ret.size() == 3)
 						{
 							std::cout << "Player Pos = " << std::any_cast<double>(ret[0]) << ", " << std::any_cast<double>(ret[1]) << ", " << std::any_cast<double>(ret[2]) << std::endl;
-						}
+						}*/
+
+						//
+						/*
+						WoWObject* me = Agony::Native::Game::Me();
+						std::cout << "Local player class " << (int)me->unitClass << std::endl;
+						std::cout << "Local player race " << (int)me->unitRace << std::endl;
+						std::cout << "Local player address 0x" << std::hex << me << std::endl;*/
+
+						//int health = *(int*)(me + 0x1580);
+						//std::cout << "Player Health = " << health << std::endl;
+
+						ObjectManager::GetVisibleObjects();
+
+
+						//uintptr_t* objMgr = *(uintptr_t**)(Offsets::Base + Offsets::ObjectMgr);
+
+						//uintptr_t* FirstObj = objMgr + 0x120;
 					}
 				}
+				else
+				{
+					std::cout << "We are NOT ingame" << std::endl;
+				}
+				lastGameState = isInGame;
 
 				ImGui_ImplDX11_NewFrame();
 				ImGui_ImplWin32_NewFrame();
@@ -169,7 +191,7 @@ namespace Agony
 				//ImGui::GetOverlayDrawList()->AddText(ImVec2(10, 10), 0xFF0000FF, "HELLO WORLD");
 				//ImGui::GetOverlayDrawList()->AddLine(ImVec2(10, 10), ImVec2(300, 10), 0xFF0000FF);
 				//const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-				if ((currentState >> 4) & 1)
+				if (isInGame)
 				{
 					if (Drawings::Waypoints)
 					{

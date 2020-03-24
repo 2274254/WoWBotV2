@@ -11,36 +11,34 @@ namespace Agony
 	{
 		std::string functionName = msclr::interop::marshal_as<std::string>(code);
 
-		std::cout << "Calling " << functionName << std::endl;
-
 		std::vector<int> returnsUnmanaged;
 		for each (int expectedReturn in returns)
 		{
 			returnsUnmanaged.push_back(expectedReturn);
 		}
 
-		auto result = Agony::Native::LuaFunctions::Call(functionName, returnsUnmanaged, "player");//TODO
+		auto result = Agony::Native::LuaFunctions::Call(functionName, returnsUnmanaged, "player");
 
 		System::Collections::Generic::List<System::Object^>^ returnValues = gcnew System::Collections::Generic::List<System::Object^>();
 
 		int i = 0;
-		for each (int expectedReturn in returns)
+		for (unsigned i = 0; i < result.size(); i++)
 		{
+			auto returnValue	= result[i];
+			auto expectedReturn = returns[i];
 			if (expectedReturn == 0)
 			{
-				returnValues->Add(gcnew System::Boolean(std::any_cast<bool>(result[i])));
+				returnValues->Add(gcnew System::Boolean(std::any_cast<bool>(returnValue)));
 			}
 			else if (expectedReturn == 1)
 			{
-				returnValues->Add(gcnew System::Double(std::any_cast<double>(result[i])));
+				returnValues->Add(gcnew System::Double(std::any_cast<double>(returnValue)));
 			}
 			else if (expectedReturn == 3)
 			{
-				returnValues->Add(gcnew System::String(std::any_cast<char*>(result[i])));
+				returnValues->Add(gcnew System::String(std::any_cast<char*>(returnValue)));
 			}
-			i++;
 		}
-
 		return returnValues;
 	}
 }

@@ -132,6 +132,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Agony.Wrapper.h" />
+    <ClInclude Include="PathingController.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Lua.h" />
     <ClInclude Include="Macros.h" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="Agony.Wrapper.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="PathingController.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Lua.cpp" />
     <ClCompile Include="pch.cpp">

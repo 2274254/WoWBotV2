@@ -2,6 +2,8 @@
 #include "Offsets.h"
 #include "Macros.h"
 #include "EventHandler.h"
+#include "Bootstrapper.h"
+#include "LuaFunctions.h"
 #include <iostream>
 
 #pragma comment(lib, "User32.lib")
@@ -18,13 +20,13 @@ LRESULT WINAPI hkWndProc(HWND hwnd, UINT msg, WPARAM WParam, LPARAM LParam)
 	//printf("ON MESSAGE\n");
 	auto process = Agony::Native::EventHandler<1, Agony::Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->TriggerProcess(hwnd, msg, WParam, LParam);
 	LRESULT returnValue;
-	/*if (msg == WM_KEYUP)
+	if (msg == WM_KEYUP)
 	{
 		if (WParam == VK_F5)
 		{
-			Bootstrapper::GetInstance()->Trigger(BootstrapEventType::Load);
+			Agony::Native::Bootstrapper::GetInstance()->Trigger(BootstrapEventType::Load);
 		}
-	}*/
+	}
 
 	if (!process)
 	{
@@ -46,15 +48,22 @@ LRESULT WINAPI hkWndProc(HWND hwnd, UINT msg, WPARAM WParam, LPARAM LParam)
 
 bool Agony::Native::Game::IsInGame()
 {
-	IS_NULL_RETN(Offsets::Base, static_cast<int>(Offsets::InGame), false);
-	const int16_t gameState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-	return ((gameState >> 6) & 1);
+	return true;
+	//IS_NULL_RETN(Offsets::Base, static_cast<unsigned __int16>(Offsets::InGame), false);
+	const unsigned __int16 gameState = *reinterpret_cast<unsigned __int16*>(Offsets::Base + Offsets::InGame);
+	return ((gameState >> 4) & 1);
 }
 
 char* Agony::Native::Game::GetGameVersion()
 {
-	IS_NULL_RETN(Offsets::Base, static_cast<int>(Offsets::GameVersion), "Unknown");
-	return reinterpret_cast<char*>(Offsets::Base + static_cast<int>(Offsets::GameVersion));
+	return "Unknown";
+	//auto returnValues = LuaFunctions::Call("GetBuildInfo", { 2, 2, 2, 1 }, NULL);
+	//return (std::string(std::any_cast<const char*>(returnValues[0])) + std::string(std::any_cast<const char*>(returnValues[1]))).c_str();
+}
+
+WoWObject* Agony::Native::Game::Me()
+{
+	return reinterpret_cast<WoWObject * (__fastcall*)(const char*)>(Offsets::Base + Offsets::GetBaseFromToken)("player");
 }
 
 bool Agony::Native::Game::ApplyHooks(void* mainWindowHandle)
