@@ -94,26 +94,32 @@
 				Agony::Native::Console::Create();
 			}
 
-			Agony::Native::Core::MainModule = reinterpret_cast<int>(GetModuleHandle(nullptr));
-			Agony::Native::Core* _core = new Agony::Native::Core(GetModuleHandle(nullptr));
+			Agony::Native::Core::MainModule = reinterpret_cast<uintptr_t>(GetModuleHandle(nullptr));
+			auto _core = new Agony::Native::Core(GetModuleHandle(nullptr));
+			if (_core->Initialize())
+			{
+				//std::cout << std::hex << reinterpret_cast<uintptr_t*>(GetLocalPlayer());	
+				//CameraBase* pCameraBase = *reinterpret_cast<CameraBase**>(Offsets::Base + Offsets::CameraBase);
+				//std::cout << "CameraInfo:" << std::hex << reinterpret_cast<uintptr_t*>(pCameraBase->camera_ptr);
 
-			//std::cout << std::hex << reinterpret_cast<uintptr_t*>(GetLocalPlayer());	
-			//CameraBase* pCameraBase = *reinterpret_cast<CameraBase**>(Offsets::Base + Offsets::CameraBase);
-			//std::cout << "CameraInfo:" << std::hex << reinterpret_cast<uintptr_t*>(pCameraBase->camera_ptr);
-			
-			printf("Loading MoveMaps. \r\n");
-			Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
-			navigation->Initialize(0);
-			/*navigation->Initialize(3358);
-			navigation->Initialize(3277);
-			navigation->Initialize(2107);*/
-			printf("Movemaps Loaded. Started. \r\n");
+				/*printf("Loading MoveMaps. \r\n");
+				Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
+				navigation->Initialize(0);
+				navigation->Initialize(3358);
+				navigation->Initialize(3277);
+				navigation->Initialize(2107);
+				printf("Movemaps Loaded. Started. \r\n");	*/			
+				while (1 & !GetAsyncKeyState(VK_F4))
+				{
+					Sleep(1);
+				}
+				_core->ClearHooks();
+			}
 
 			while (1 & !GetAsyncKeyState(VK_F4))
 			{
 				Sleep(1);
 			}
-			kiero::shutdown();
 
 			const auto conHandle = GetConsoleWindow();
 			FreeConsole();
@@ -125,7 +131,7 @@
 		{
 			//MessageBox(GetActiveWindow(), "blah", "blah2", 0x00000000L);
 			static HANDLE hThread = nullptr;
-			Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
+			//Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
 			///if (Utils::IsProcess("World of Warcraft"))
 			switch (ul_reason_for_call)
 			{
@@ -133,12 +139,12 @@
 				{
 					Agony::Native::Core::MainWindowHandle = FindMainWindow(GetCurrentProcessId());
 					hThread = CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(Initialize), nullptr, NULL, nullptr);
-					//DisableThreadLibraryCalls(hModule);
+					DisableThreadLibraryCalls(hModule);
 				}
 				break;
 				case DLL_PROCESS_DETACH:
 				{
-					navigation->Release();
+					//navigation->Release();
 					SuspendThread(hThread);
 				}
 				break;

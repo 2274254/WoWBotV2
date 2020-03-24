@@ -1,5 +1,5 @@
 #include "Bootstrapper.h"
-#include "VMProtect/VMProtectSDK.h"
+//#include "VMProtect/VMProtectSDK.h"
 #include "EventHandler.h"
 #include "Console.h"
 #include <future>
@@ -116,7 +116,7 @@ namespace Agony
 
 		bool Bootstrapper::LoadSandbox()
 		{
-			VMProtectBeginVirtualization(__FUNCTION__);
+			//VMProtectBeginVirtualization(__FUNCTION__);
 			auto path = m_isFallback ? Utils::GetDllPath(TEXT("Sandbox.dll")) : m_bsMemoryLayout->SandboxDllPath;
 
 			DWORD dwRetCode = 0;
@@ -133,7 +133,7 @@ namespace Agony
 				Console::PrintLn("[!] Sandbox failed: %08x", hr);
 			}
 
-			VMProtectEnd();
+			//VMProtectEnd();
 
 			return SUCCEEDED(hr);
 		}

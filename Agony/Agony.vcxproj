@@ -84,7 +84,7 @@
     <TargetName>$(ProjectName)</TargetName>
     <TargetExt>.dll</TargetExt>
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(IncludePath);$(DXSDK_DIR)Include;$(DXSDK_DIR)Samples\C++\Effects11\inc</IncludePath>
+    <IncludePath>$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
     <LibraryPath>D:\AgonyWoW\Libs;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -140,7 +140,7 @@
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_CONSOLE;_LIB;USE_STANDARD_MALLOC;PREPARED_SLN;_WINDOWS;_WIN32;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR="Release";DT_POLYREF64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>Detour\Include;g3dlite\Include;Utilities</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Detour\Include;g3dlite\Include;Utilities;D:\AgonyWoW\Agony\imgui;D:\AgonyWoW\DirectXMath-master\Inc</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <RuntimeTypeInfo>
       </RuntimeTypeInfo>
@@ -226,7 +226,7 @@
       </EnableCOMDATFolding>
       <OptimizeReferences>
       </OptimizeReferences>
-      <AdditionalDependencies>libMinHook.x64.lib;VMProtectSDK64.lib;mscoree.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libMinHook.x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AssemblyDebug>
       </AssemblyDebug>
       <AdditionalLibraryDirectories>D:\AgonyWoW\Libs</AdditionalLibraryDirectories>
@@ -268,6 +268,7 @@
     <ClInclude Include="LuaFunctions.h" />
     <ClInclude Include="MinHook.h" />
     <ClInclude Include="Offsets.h" />
+    <ClInclude Include="StaticEnums.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="vector3.h" />

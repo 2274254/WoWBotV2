@@ -8,16 +8,56 @@ namespace Agony::Native
 		__try
 		{
 			if (this == nullptr) return WoWObjectType::Invalid;
-			auto unitType = *reinterpret_cast<WoWObjectType**>(this + static_cast<int>(Offsets::GameObject::Type));
-			if (unitType != nullptr)
-			{
-				return *static_cast<WoWObjectType*>(unitType);
-			}
+			return *reinterpret_cast<WoWObjectType*>(this + static_cast<int>(Offsets::GameObject::Type));
 		}
 		__except (1)
 		{
 			Console::PrintLn("Native Exception thrown at: const Native::CGObject::GetType() &");
 		}
 		return WoWObjectType::Invalid;
+	}
+
+	std::string CGObject::GetName()
+	{
+		const char* name = "Unknown";
+		if (this == nullptr)
+		{
+			return "Unknown";
+		}
+		if (this->GetType() == WoWObjectType::GameObject)
+		{
+			name = reinterpret_cast<const char* (__fastcall*)(CGObject*)>(Offsets::Base + Offsets::CGGameObject_C__GetName)(this);
+		}
+		else if (this->GetType() == WoWObjectType::Unit)
+		{
+			name = reinterpret_cast<const char* (__fastcall*)(CGObject*)>(Offsets::Base + Offsets::CGUnit_C__GetUnitNameExposed)(this);
+		}
+		else if (this->GetType() == WoWObjectType::Item)
+		{
+
+		}
+		else if (this->GetType() == WoWObjectType::Player)
+		{
+
+		}
+		else
+		{
+			name = "Not Implemented yet";
+		}
+		return name == nullptr ? "Unknown" : std::string(name);
+	}
+
+	Vector3 CGObject::GetPosition()
+	{
+		/*__try
+		{
+			if (this == nullptr) return Vector3();
+			return reinterpret_cast<Vector3(__fastcall*)(CGObject*)>(Offsets::Base + Offsets::CGGameObject_C__GetPosition)(this);
+		}
+		__except (1)
+		{
+			Console::PrintLn("Native Exception thrown at: const Native::CGObject::GetPosition() &");
+		}*/
+		return Vector3();
 	}
 }

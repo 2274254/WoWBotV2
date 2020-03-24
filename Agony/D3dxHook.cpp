@@ -23,7 +23,7 @@ namespace Agony
 		{
 			if (init(kiero::RenderType::D3D11) == kiero::Status::Success && kiero::bind(8, reinterpret_cast<void**>(&Od11Present), static_cast<void*>(HkPresentD11)) == kiero::Status::Success)
 			{
-				//printf("Successfully hooked dxd11!\n");
+				printf("Successfully hooked dxd11!\n");
 				if (kiero::bind(13, reinterpret_cast<void**>(&Od11ResizeBuffers), static_cast<void*>(HkResizeBuffersD11)) == kiero::Status::Success)
 				{
 					//SUCCESS
@@ -31,13 +31,21 @@ namespace Agony
 				else
 				{
 					printf("Failed to hook dxd11 resize buffers");
+					ClearHooks();
+					return false;
 				}
 			}
 			else
 			{
 				printf("Failed to hook dxd11 present");
+				return false;
 			}
 			return true;
+		}
+
+		void D3dxHook::ClearHooks()
+		{
+			kiero::shutdown();
 		}
 
 		HRESULT __fastcall D3dxHook::HkPresentD11(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags)
@@ -145,13 +153,14 @@ namespace Agony
 					if (lastGameState == false)
 					{
 						std::cout << "Game state changed" << std::endl;
-						for (const auto function : Agony::Native::LuaFunctions::FunctionsMap)
+						/*for (const auto function : Agony::Native::LuaFunctions::FunctionsMap)
 						{
 							if (Agony::Native::LuaFunctions::FramescriptRegister(function.first, function.second))
 							{
 								printf("Registered %s\n", function.first);
 							}
-						}
+						}*/
+
 						//std::string result = Agony::Native::LuaFunctions::ExecuteGetResult("globalVar = GetUnitPosition('player')", "globalVar");
 						/*auto ret = Agony::Native::LuaFunctions::Call("GetUnitPosition", { 1, 1, 1 }, "player");
 						if (ret.size() == 3)
@@ -193,7 +202,7 @@ namespace Agony
 				//const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
 				if (isInGame)
 				{
-					if (Drawings::Waypoints)
+					if (Drawings::Waypoints != nullptr)
 					{
 						int pointsCount = 0;
 						ImVec2* points = new ImVec2[Drawings::WaypointsLenght - Drawings::CurrentWaypoint + pointsCount];
@@ -258,7 +267,7 @@ namespace Agony
 		HRESULT __stdcall D3dxHook::HkResizeBuffersD11(IDXGISwapChain* pSwapChain, UINT BufferCount, UINT Width, UINT Height, DXGI_FORMAT NewFormat, UINT SwapChainFlags)
 		{
 			ImGui_ImplDX11_InvalidateDeviceObjects();
-			if (Drawings::RenderTargetView)
+			if (Drawings::RenderTargetView != nullptr)
 			{
 				Drawings::RenderTargetView->Release();
 				Drawings::RenderTargetView = nullptr;

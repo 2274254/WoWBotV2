@@ -14,6 +14,7 @@ namespace Agony
 			static char* GetGameVersion();
 			static WoWObject* Me();
 			bool ApplyHooks(void*);
+			void ClearHooks(void* mainWindowHandle);
 		};
 	}
 }

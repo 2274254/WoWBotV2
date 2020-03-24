@@ -16,6 +16,7 @@ namespace Agony
 			static bool lastGameState;
 		public:
 			static bool ApplyHooks();
+			static void ClearHooks();
 			static HRESULT __fastcall HkPresentD11(IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
 			static HRESULT __stdcall HkResizeBuffersD11(IDXGISwapChain* pSwapChain, UINT BufferCount, UINT Width, UINT Height, DXGI_FORMAT NewFormat, UINT SwapChainFlags);
 		};

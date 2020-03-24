@@ -162,6 +162,7 @@
     <ClInclude Include="CGUnit.h">
       <Filter>Header Files\GameObjects\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="StaticEnums.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

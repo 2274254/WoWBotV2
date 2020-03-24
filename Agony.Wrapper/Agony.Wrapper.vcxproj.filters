@@ -75,6 +75,9 @@
     <ClInclude Include="StaticEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CGUnit.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -96,6 +99,9 @@
       <Filter>Source Files\Pathing</Filter>
     </ClCompile>
     <ClCompile Include="CGObject.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CGUnit.cpp">
       <Filter>Source Files\GameObjects\Objects</Filter>
     </ClCompile>
   </ItemGroup>

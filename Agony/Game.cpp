@@ -71,3 +71,8 @@ bool Agony::Native::Game::ApplyHooks(void* mainWindowHandle)
 	m_wndProc = (WNDPROC)SetWindowLongPtr((HWND)mainWindowHandle, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(hkWndProc));
 	return true;
 }
+
+void Agony::Native::Game::ClearHooks(void* mainWindowHandle)
+{
+	SetWindowLongPtr((HWND)mainWindowHandle, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(m_wndProc));
+}

@@ -15,6 +15,9 @@ namespace Agony
 			explicit Core(HMODULE h_module);
 			~Core();
 
+			bool Initialize();
+			void ClearHooks();
+
 			void CreateThreadBootstrapAddons() const;
 			void DisplayWelcomeMessage() const;
 
@@ -24,7 +27,7 @@ namespace Agony
 			/*
 			 * static
 			*/
-			static int MainModule;
+			static uintptr_t MainModule;
 			static void* MainWindowHandle;
 
 			template <typename T>

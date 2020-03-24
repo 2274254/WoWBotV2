@@ -4,7 +4,12 @@ namespace Agony
 {
 	Native::CGObject* CGObject::GetPtr()
 	{
-		return nullptr;
+		return this->self;
+	}
+
+	CGObject::CGObject(Native::CGObject* obj)
+	{
+		this->self = obj;
 	}
 
 	WoWObjectType CGObject::Type::get()

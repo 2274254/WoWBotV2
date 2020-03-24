@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClInclude Include="Agony.Wrapper.h" />
     <ClInclude Include="CGObject.h" />
+    <ClInclude Include="CGUnit.h" />
     <ClInclude Include="PathingController.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Lua.h" />
@@ -146,6 +147,7 @@
     <ClCompile Include="Agony.Wrapper.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="CGObject.cpp" />
+    <ClCompile Include="CGUnit.cpp" />
     <ClCompile Include="PathingController.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Lua.cpp" />

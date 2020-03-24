@@ -1,6 +1,5 @@
 #pragma once
 #include "CGObject.h"
-#include "vector3.h"
 #include <string>
 
 namespace Agony
@@ -10,13 +9,13 @@ namespace Agony
 		class DLLEXPORT CGUnit : public CGObject
 		{
 		public:
-			std::string GetName();
 			Vector3 GetPosition();
+			UnitRaceId GetRace();
+			UnitClassId GetClass();
 
-			//MAKE_GET(Position, Vector3, Offsets::GameObject::Position);
+			bool CanAttack(CGUnit* target);
+
 			MAKE_GET(fAngle, float, Offsets::GameObject::fAngle);
-			MAKE_GET(UnitRace, int8_t, Offsets::GameObject::UnitRace);
-			MAKE_GET(UnitClass, int8_t, Offsets::GameObject::UnitClass);
 			MAKE_GET(CurrentHP, int32_t, Offsets::GameObject::CurrentHP);
 			MAKE_GET(MaxHP, int32_t, Offsets::GameObject::MaxHP);
 			MAKE_GET(CurrentMana, int32_t, Offsets::GameObject::CurrentMana);

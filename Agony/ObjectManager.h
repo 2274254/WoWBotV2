@@ -1,5 +1,6 @@
 #pragma once
 #include "WoWObject.h"
+#include "CGObject.h"
 #include <vector>
 
 #pragma pack(push, 1)
@@ -57,6 +58,13 @@ public:
 	uint64_t HiWord = 0;
 };
 
+struct CurMgr0x8Entry
+{
+	uint64_t Next;
+	ObjectGuid WowGuid;
+	Agony::Native::CGObject* ObjectBase;
+};
+
 // size = 0x168?
 struct CGObjectManager
 {
@@ -80,8 +88,10 @@ namespace Agony
 		class ObjectManager
 		{
 		public:
-			static std::vector<WoWObject*> GetVisibleObjects();
-			static WoWObject* GetBaseFromToken(std::string token);
+			static std::vector<CGObject*> GetVisibleObjects();
+			static CGObject* GetBaseFromToken(std::string token);
+			static ObjectGuid* GetGUIDFromToken(std::string token);
+			static CGObject* GetObjectFromGuid(ObjectGuid* guid);
 			static bool UnitExist(std::string token);
 		};
 	}

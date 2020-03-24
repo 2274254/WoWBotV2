@@ -1,7 +1,7 @@
 #include "Core.h"
 #include "Game.h"
 #include "Console.h"
-#include "VMProtect/VMProtectSDK.h"
+//#include "VMProtect/VMProtectSDK.h"
 #include "EventHandler.h"
 #include "Bootstrapper.h"
 #include "D3dxHook.h"
@@ -11,42 +11,61 @@ namespace Agony
 {
 	namespace Native
 	{
-		int Core::MainModule = 0;
+		uintptr_t Core::MainModule = 0;
 		void* Core::MainWindowHandle = nullptr;
 		void BootstrapAddons();
 
 		bool Core::ApplyHooks() const
 		{
-			Agony::Native::Game::GetInstance()->ApplyHooks(Core::MainWindowHandle);
-			VERIFY_HOOK(D3dxHook::ApplyHooks, "D3DXHook");
-			return true;
+			if (Agony::Native::Game::GetInstance()->ApplyHooks(Core::MainWindowHandle))
+			{
+				if (D3dxHook::ApplyHooks())
+				{
+					return true;
+				}
+				else
+				{
+					Agony::Native::Game::GetInstance()->ClearHooks(Core::MainWindowHandle);
+				}
+			}
+			//VERIFY_HOOK(D3dxHook::ApplyHooks, "D3DXHook");
+			return false;
 		}
 
 		Core::Core(HMODULE h_module)
 		{
-			VMProtectBeginUltra(__FUNCTION__);
-
+			//VMProtectBeginUltra(__FUNCTION__);
 			this->hModule = h_module;
+			//VMProtectEnd();
+		}
 
+		Core::~Core()
+		{
+		}
+
+		bool Core::Initialize()
+		{
+			//VMProtectBeginUltra(__FUNCTION__);
 			srand(time(nullptr));
-
 			Console::PrintLn("Agony (%s - %s %s) loading... ", Game::GetGameVersion(), __TIME__, __DATE__);
 
 			if (!this->ApplyHooks())
 			{
 				Console::PrintLn("3123911");
+				return false;
 			}
 			else
 			{
 				//this->CreateThreadBootstrapAddons();
 				//this->DisplayWelcomeMessage();
 			}
-
-			VMProtectEnd();
+			//VMProtectEnd();
+			return true;
 		}
 
-		Core::~Core()
+		void Core::ClearHooks()
 		{
+			Agony::Native::Game::GetInstance()->ClearHooks(Core::MainWindowHandle);			
 		}
 
 		void Core::CreateThreadBootstrapAddons() const

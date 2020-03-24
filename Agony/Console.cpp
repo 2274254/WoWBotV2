@@ -9,11 +9,11 @@ namespace Agony
 	{
 		void Console::Create()
 		{
-			char title[56];
-			sprintf(title, "Debug Window - %d", GetCurrentProcessId());
+			//char title[56];
+			//sprintf(title, "Debug Window - %d", GetCurrentProcessId());
 
 			AllocConsole();
-			SetConsoleTitle(title);
+			//SetConsoleTitle(title);
 			freopen("CON", "w", stdout);
 		}
 
