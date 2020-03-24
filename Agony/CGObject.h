@@ -6,7 +6,7 @@ namespace Agony
 {
 	namespace Native
 	{
-		DLLEXPORT enum WoWObjectType : signed char
+		enum WoWObjectType : signed char
 		{
 			Object = 0,
 			Item = 1,
@@ -27,8 +27,7 @@ namespace Agony
 			Loot = 16,
 			Invalid = 17,
 		};
-
-		DLLEXPORT class CGObject
+		class DLLEXPORT CGObject
 		{
 		public:
 			WoWObjectType GetType();

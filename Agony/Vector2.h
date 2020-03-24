@@ -1,7 +1,8 @@
 #pragma once
 #include <math.h>
+#include "Macros.h"
 
-class Vector2
+class DLLEXPORT Vector2
 {
 public:
     float x, y;

@@ -145,13 +145,13 @@ namespace Agony
 					if (lastGameState == false)
 					{
 						std::cout << "Game state changed" << std::endl;
-						/*for (const auto function : Agony::Native::LuaFunctions::FunctionsMap)
+						for (const auto function : Agony::Native::LuaFunctions::FunctionsMap)
 						{
 							if (Agony::Native::LuaFunctions::FramescriptRegister(function.first, function.second))
 							{
 								printf("Registered %s\n", function.first);
 							}
-						}*/
+						}
 						//std::string result = Agony::Native::LuaFunctions::ExecuteGetResult("globalVar = GetUnitPosition('player')", "globalVar");
 						/*auto ret = Agony::Native::LuaFunctions::Call("GetUnitPosition", { 1, 1, 1 }, "player");
 						if (ret.size() == 3)

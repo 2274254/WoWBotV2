@@ -31,6 +31,18 @@
     <Filter Include="Source Files\Pathing">
       <UniqueIdentifier>{ab0c2fa7-8688-4ed8-b5a3-aacb7b02ab71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects">
+      <UniqueIdentifier>{1b22d14d-1664-4f89-8741-977534993864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Objects">
+      <UniqueIdentifier>{d48f6cbc-7f86-40d2-8417-4052717787b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects">
+      <UniqueIdentifier>{d61f0f9f-9121-4a7e-bc14-2bd2af2fa7b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Objects">
+      <UniqueIdentifier>{d91bd017-3bc4-4197-b5e5-0531361f439d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -57,6 +69,12 @@
     <ClInclude Include="PathingController.h">
       <Filter>Header Files\Pathing</Filter>
     </ClInclude>
+    <ClInclude Include="CGObject.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -76,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="PathingController.cpp">
       <Filter>Source Files\Pathing</Filter>
+    </ClCompile>
+    <ClCompile Include="CGObject.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

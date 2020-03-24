@@ -48,7 +48,7 @@ LRESULT WINAPI hkWndProc(HWND hwnd, UINT msg, WPARAM WParam, LPARAM LParam)
 
 bool Agony::Native::Game::IsInGame()
 {
-	return true;
+	//return true;
 	//IS_NULL_RETN(Offsets::Base, static_cast<unsigned __int16>(Offsets::InGame), false);
 	const unsigned __int16 gameState = *reinterpret_cast<unsigned __int16*>(Offsets::Base + Offsets::InGame);
 	return ((gameState >> 4) & 1);

@@ -7,12 +7,13 @@ namespace Agony
 {
 	namespace Native
 	{
-		DLLEXPORT class CGUnit
+		class DLLEXPORT CGUnit : public CGObject
 		{
 		public:
 			std::string GetName();
+			Vector3 GetPosition();
 
-			MAKE_GET(Position, Vector3, Offsets::GameObject::Position);
+			//MAKE_GET(Position, Vector3, Offsets::GameObject::Position);
 			MAKE_GET(fAngle, float, Offsets::GameObject::fAngle);
 			MAKE_GET(UnitRace, int8_t, Offsets::GameObject::UnitRace);
 			MAKE_GET(UnitClass, int8_t, Offsets::GameObject::UnitClass);

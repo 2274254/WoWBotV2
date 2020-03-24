@@ -16,7 +16,7 @@ namespace Agony::Native
 		}
 		__except (1)
 		{
-			Console::PrintLn("Native Exception thrown at: const Native::GameObject::GetType() &");
+			Console::PrintLn("Native Exception thrown at: const Native::CGObject::GetType() &");
 		}
 		return WoWObjectType::Invalid;
 	}

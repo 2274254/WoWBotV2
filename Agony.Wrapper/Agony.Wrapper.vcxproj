@@ -132,17 +132,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Agony.Wrapper.h" />
+    <ClInclude Include="CGObject.h" />
     <ClInclude Include="PathingController.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Lua.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="StaticEnums.h" />
     <ClInclude Include="WndEventArgs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Agony.Wrapper.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="CGObject.cpp" />
     <ClCompile Include="PathingController.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Lua.cpp" />
@@ -160,11 +163,19 @@
     <Image Include="app.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="SharpDX">
+      <HintPath>..\packages\SharpDX.2.6.3\Bin\DirectX11-Signed-net40\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>..\packages\SharpDX.2.6.3\Bin\DirectX11-Signed-net40\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\packages\SharpDX.2.6.3\Bin\DirectX11-Signed-net40\SharpDX.DXGI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

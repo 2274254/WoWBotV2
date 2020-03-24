@@ -2,8 +2,9 @@
 #include <cmath>
 #include <cstdint>
 #include <string>
+#include "Macros.h"
 
-class Vector3 final
+class DLLEXPORT Vector3 final
 {
 public:
 

@@ -17,9 +17,10 @@ namespace Agony
 				if (wowObj->Type == WoWObjectType::Player)
 				{
 					CGUnit* unit = (CGUnit*)wowObj;
+					unit->GetType();
 					std::cout << "Obj player address 0x" << std::hex << unit << std::endl;
-					std::cout << "Obj Pos = " << unit->GetPosition()->x << ", " << unit->GetPosition()->y << ", " << unit->GetPosition()->z << std::endl;
-					std::cout << "Obj name " << unit->GetName() << std::endl;
+					std::cout << "Obj Pos = " << unit->GetPosition().x << ", " << unit->GetPosition().y << ", " << unit->GetPosition().z << std::endl;
+					//std::cout << "Obj name " << unit->GetName() << std::endl;
 				}
 				returnList.push_back(wowObj);
 			}
