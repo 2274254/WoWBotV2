@@ -161,7 +161,7 @@ namespace Agony
                 //if we have 1 arg then its pos on stack is 1
                 if (LuaIsString(l, 1))
                 {
-                    const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
+                    const auto currentState = *reinterpret_cast<unsigned __int16*>(Offsets::Base + Offsets::InGame);
                     if ((currentState >> 4) & 1)
                     {
                         //if we are here the 1 arg on the stack is a string now we need to convert it to a string type for lua > c++
@@ -188,8 +188,8 @@ namespace Agony
             {
                 if (LuaIsString(l, 1))
                 {
-                    const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-                    if ((currentState >> 5) & 1)
+                    const auto currentState = *reinterpret_cast<unsigned __int16*>(Offsets::Base + Offsets::InGame);
+                    if ((currentState >> 4) & 1)
                     {
                         auto unitId = LuaToString(l, 1);
                         auto unit = GetUnitById(unitId);
@@ -232,8 +232,8 @@ namespace Agony
                 auto target = GetTarget();
                 if (target == nullptr)
                 {
-                    const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-                    if ((currentState >> 5) & 1)
+                    const auto currentState = *reinterpret_cast<unsigned __int16*>(Offsets::Base + Offsets::InGame);
+                    if ((currentState >> 4) & 1)
                     {
                         auto Object1Facing = player->fAngle;
 
@@ -263,8 +263,8 @@ namespace Agony
             {
                 if (LuaIsNumber(l, 1) && LuaIsNumber(l, 2) && LuaIsNumber(l, 3) && LuaIsNumber(l, 4))
                 {
-                    const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-                    if ((currentState >> 5) & 1)
+                    const auto currentState = *reinterpret_cast<unsigned __int16*>(Offsets::Base + Offsets::InGame);
+                    if ((currentState >> 4) & 1)
                     {
                         auto player = GetLocalPlayer();
 
@@ -344,8 +344,8 @@ namespace Agony
             {
                 if (LuaIsNumber(l, 1) && LuaIsNumber(l, 2) && LuaIsNumber(l, 3))
                 {
-                    const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-                    if ((currentState >> 5) & 1)
+                    const auto currentState = *reinterpret_cast<unsigned __int16*>(Offsets::Base + Offsets::InGame);
+                    if ((currentState >> 4) & 1)
                     {
                         auto player = GetLocalPlayer();
                         Vector3 point = Vector3(LuaToNumber(l, 1), LuaToNumber(l, 2), LuaToNumber(l, 3));
@@ -441,8 +441,8 @@ namespace Agony
             auto numArgs = LuaGetTop(l);
             if (numArgs == 0)
             {
-                const auto currentState = *reinterpret_cast<int16_t*>(Offsets::Base + Offsets::InGame);
-                LuaPushBoolean(l, (currentState >> 5) & 1);
+                const auto currentState = *reinterpret_cast<unsigned __int16*>(Offsets::Base + Offsets::InGame);
+                LuaPushBoolean(l, (currentState >> 4) & 1);
                 return 1;
             }
             return 0;
