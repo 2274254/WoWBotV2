@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Agony.SDK.Events
 {
@@ -28,18 +27,7 @@ namespace Agony.SDK.Events
         internal static void Initialize()
         {
             // Listen to required events
-            //Game.OnTick += OnTick;
-
-            //TODO: FIX THIS:
-            Task.Factory.StartNew(async () =>
-            {
-                while(true)
-                {
-                    await Task.Delay(100);
-                    IsLoadingComplete = true;
-                    CallLoadingComplete();
-                }
-            });
+            Agony.Game.OnTick += OnTick;
         }
 
         internal static void OnTick(EventArgs args)

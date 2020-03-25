@@ -75,7 +75,6 @@ namespace Sandbox
             {
                 Reload();
                 Input.Subscribe();
-                Logs.Log("Sandbox: Bootstrap Completed");
             }
             catch (Exception e)
             {
@@ -114,7 +113,6 @@ namespace Sandbox
 
                 SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\TestAddon.exe", new string[1]);
 
-                Console.WriteLine("Loaded Addons");
                 /*var addons = ServiceFactory.CreateProxy<ILoaderService>().GetAssemblyList((int) 0);
                 Logs.Log("Loading {0} Addon{1}", addons.Count, addons.Count < 1 || addons.Count > 1 ? "s" : "");
                 foreach (var assembly in addons)

@@ -14,11 +14,11 @@ namespace Agony
 		ATTACH_EVENT(GameTick, 3, Native::OnGameTick);
 		ATTACH_EVENT(GamePostTick,4, Native::OnGamePostTick);
 
-		GameWndProcHandlers = gcnew List<GameWndProc^>();
+		/*GameWndProcHandlers = gcnew List<GameWndProc^>();
 		m_GameWndProcNativeDelegate = gcnew OnGameWndProcNativeDelegate(OnGameWndProcNative);
 		m_GameWndProcNative = Marshal::GetFunctionPointerForDelegate(m_GameWndProcNativeDelegate);
-		Native::EventHandler<1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(m_GameWndProcNative.ToPointer());
-
+		Native::EventHandler<1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(m_GameWndProcNative.ToPointer());*/
+		System::Console::WriteLine("Called static Game");
 	}
 
 	void Game::DomainUnloadEventHandler(Object^, System::EventArgs^)
@@ -27,6 +27,7 @@ namespace Agony
 		DETACH_EVENT(GamePreTick, 2, Native::OnGamePreTick);
 		DETACH_EVENT(GameTick, 3, Native::OnGameTick);
 		DETACH_EVENT(GamePostTick, 4, Native::OnGamePostTick);
+		System::Console::WriteLine("Domain Unloaded");
 	}
 
 	bool Game::OnGameWndProcNative(HWND HWnd, UINT message, WPARAM WParam, LPARAM LParam)
@@ -52,6 +53,7 @@ namespace Agony
 
 	void Game::OnGamePreTickNative()
 	{
+		System::Console::WriteLine("OnPreTick in Wrapper");
 		START_TRACE
 			for each (auto eventHandle in GamePreTickHandlers->ToArray())
 			{
@@ -64,6 +66,7 @@ namespace Agony
 
 	void Game::OnGameTickNative()
 	{
+		System::Console::WriteLine("RECEIVED ONTICK INSIDE WRAPPER");
 		START_TRACE
 			for each (auto eventHandle in GameTickHandlers->ToArray())
 			{

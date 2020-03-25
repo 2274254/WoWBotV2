@@ -182,7 +182,7 @@ namespace Agony
 						//int health = *(int*)(me + 0x1580);
 						//std::cout << "Player Health = " << health << std::endl;
 
-						ObjectManager::GetVisibleObjects();
+						//ObjectManager::GetVisibleObjects();
 
 
 						//uintptr_t* objMgr = *(uintptr_t**)(Offsets::Base + Offsets::ObjectMgr);

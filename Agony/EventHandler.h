@@ -17,8 +17,7 @@ namespace Agony
 		#define EVENT_TIMEOUT_EJECT 250
 
 		// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember
-		template <int uniqueEventNumber, typename T, typename ... TArgs>
-		class DLLEXPORT EventHandler
+		template <int uniqueEventNumber, typename T, typename ... TArgs> class DLLEXPORT EventHandler
 		{
 			std::vector<void*> m_EventCallbacks;
 			DWORD t_RemovalTickCount;
@@ -30,6 +29,7 @@ namespace Agony
 				{
 					instance = new EventHandler();
 				}
+
 				return instance;
 			}
 
@@ -37,18 +37,12 @@ namespace Agony
 			{
 				if (callback != nullptr)
 				{
-					printf("ADDED CALLBACK\n");
 					m_EventCallbacks.push_back(callback);
-				}
-				else
-				{
-					printf("CALLBACK WAS NULLPTR\n");
 				}
 			}
 
 			void Remove(void* listener)
 			{
-				printf("CALLBACK REMOVED\n");
 				if (listener == nullptr)
 				{
 					return;
@@ -67,16 +61,13 @@ namespace Agony
 			{
 				auto process = true;
 				auto tickCount = GetTickCount();
-				//printf("WE ARE HERE1\n");
+
 				for (auto ptr : m_EventCallbacks)
 				{
-					printf("WE ARE HERE2\n");
 					if (ptr != nullptr)
 					{
-						printf("WE ARE HERE3\n");
 						if (tickCount - t_RemovalTickCount > EVENT_TIMEOUT_EJECT)
 						{
-							printf("WE ARE HERE4\n");
 							if (!static_cast<T*>(ptr) (args...))
 							{
 								process = false;
