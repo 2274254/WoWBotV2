@@ -1,6 +1,5 @@
 ﻿using System;
 using Agony.SDK;
-using Agony.SDK.Core;
 using Agony.SDK.Enumerations;
 using Agony.SDK.Events;
 using Agony.SDK.Utils;
@@ -14,6 +13,12 @@ namespace TestAddon
             Logger.Log(LogLevel.Info, "TestAddon has been loaded!");
             Loading.OnLoadingComplete += LoadingComplete;
             Messages.OnMessage += Messages_OnMessage;
+            Agony.Game.OnTick += Game_OnTick;
+        }
+
+        private static void Game_OnTick(EventArgs args)
+        {
+            Console.WriteLine("OnTick From C#");
         }
 
         private static void Messages_OnMessage(Messages.WindowMessage args)

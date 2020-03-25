@@ -2,6 +2,7 @@
 #include "Offsets.h"
 #include "CGUnit.h"
 #include "Game.h"
+#include "Console.h"
 #include <iostream>
 
 namespace Agony
@@ -24,8 +25,8 @@ namespace Agony
 			std::cout << "Player guid1 type " << std::dec << player->GetGuid().Type() << std::endl;
 			std::cout << "Player guid2 type " << std::dec << playerGuid.Type() << std::endl;
 
-			//auto player2 = GetObjectFromGuid(&playerGuid);
-			//std::cout << "Player2 address 0x" << std::hex << player2 << std::endl;
+			auto player2 = GetObjectFromGuid(&playerGuid);
+			std::cout << "Player2 address 0x" << std::hex << player2 << std::endl;
 
 			std::vector<CGObject*> returnList;
 			for (auto i = *(uintptr_t*)(m_CurObjectMgr->VisibleObjects.Next); i != m_CurObjectMgr->VisibleObjects.Next; i = *(uintptr_t*)(i))
@@ -69,26 +70,31 @@ namespace Agony
 
 		CGObject* ObjectManager::GetObjectFromGuid(ObjectGuid* guid)
 		{
-			CGObject wowObject;
-			return reinterpret_cast<CGObject * (__fastcall*)(ObjectGuid*, uint64_t)>(Offsets::Base + Offsets::ClntObjMgrObjectPtr)(guid, 1);
-			/*const CGObjectManager* m_CurObjectMgr = *reinterpret_cast<CGObjectManager**>(Offsets::Base + Offsets::ObjectMgr);
-			uint64_t arrayIndex = (uint64_t)(m_CurObjectMgr->ActiveObjects.Capacity - 1) & (0xA2AA033B * guid->LoWord + 0xD6D018F5 * guid->HiWord);
-			uint64_t entryAddress = *reinterpret_cast<uint64_t*>(m_CurObjectMgr->ActiveObjects.Array + 8 * arrayIndex);
-			while (entryAddress > 0)
+			const CGObjectManager* m_CurObjectMgr = *reinterpret_cast<CGObjectManager**>(Offsets::Base + Offsets::ObjectMgr);
+			for (uint64_t i = 0; i < m_CurObjectMgr->ActiveObjects.Capacity; i++)
 			{
-				CurMgr0x8Entry entry = *reinterpret_cast<CurMgr0x8Entry*>(entryAddress);
-				ObjectHeader header = Bot.Mem64.Read<ObjectHeader>(entry.ObjectBase);
-				if (header.WowGuid == guid)
+				CurMgr0x8Entry* entry = *reinterpret_cast<CurMgr0x8Entry**>(m_CurObjectMgr->ActiveObjects.Array + (8 * i));
+				if(entry != nullptr && entry->ObjectBase->GetGuid().HiWord == guid->HiWord && entry->WowGuid.LoWord == guid->LoWord)
 				{
-					/*WowData data = new WowData
-					{
-						Address = entry.ObjectBase,
-						Header = header,
-					};* /
-					return entry.ObjectBase;
+					Console::PrintLn(entry->ObjectBase->GetName().c_str());
+					return entry->ObjectBase;
 				}
-				entryAddress = entry.Next;
-			}*/
+			}
+			/*
+			uint64_t arrayIndex = (uint64_t)(m_CurObjectMgr->ActiveObjects.Capacity - 1) & (0xA2AA033B * guid->LoWord + 0xD6D018F5 * guid->HiWord);
+			std::cout << "Array Index: " << std::hex << arrayIndex << std::endl;
+			CurMgr0x8Entry* entry = *reinterpret_cast<CurMgr0x8Entry**>(m_CurObjectMgr->ActiveObjects.Array + (8 * arrayIndex));
+			while (entry > 0)
+			{
+				std::cout << "Entry Index: " << std::hex << entry << std::endl;
+				if (entry->ObjectBase->GetGuid().HiWord == guid->HiWord && entry->WowGuid.LoWord == guid->LoWord)
+				{
+					Console::PrintLn(entry->ObjectBase->GetName().c_str());
+					return entry->ObjectBase;
+				}
+				entry = reinterpret_cast<CurMgr0x8Entry*>(entry->Next);
+			}
+			*/
 			return nullptr;
 		}
 

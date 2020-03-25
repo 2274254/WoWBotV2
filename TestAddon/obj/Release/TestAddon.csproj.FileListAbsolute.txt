@@ -17,3 +17,5 @@ D:\AgonyWoW\TestAddon\obj\Release\TestAddon.csproj.CoreCompileInputs.cache
 D:\AgonyWoW\TestAddon\obj\Release\TestAddon.csproj.CopyComplete
 D:\AgonyWoW\TestAddon\obj\Release\TestAddon.exe
 D:\AgonyWoW\TestAddon\obj\Release\TestAddon.pdb
+D:\AgonyWoW\x64\Release\TestAddon.exe
+D:\AgonyWoW\x64\Release\TestAddon.pdb

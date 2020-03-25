@@ -47,6 +47,7 @@ namespace Agony
 			return UnitClassId::InvalidClassId;
 		}
 
+		//Not tested:
 		bool CGUnit::CanAttack(CGUnit* target)
 		{
 			__try

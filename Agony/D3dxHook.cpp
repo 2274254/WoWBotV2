@@ -8,6 +8,8 @@
 #include "Core.h"
 #include "Game.h"
 #include "ObjectManager.h"
+#include "Console.h"
+#include "EventHandler.h"
 #include <iostream>
 
 namespace Agony
@@ -18,26 +20,28 @@ namespace Agony
 		D3D11ResizeBuffers D3dxHook::Od11ResizeBuffers = nullptr;
 		bool D3dxHook::initialised		= false;
 		bool D3dxHook::lastGameState	= false;
+		uint64_t D3dxHook::lastTick = 0;
 
 		bool D3dxHook::ApplyHooks()
 		{
 			if (init(kiero::RenderType::D3D11) == kiero::Status::Success && kiero::bind(8, reinterpret_cast<void**>(&Od11Present), static_cast<void*>(HkPresentD11)) == kiero::Status::Success)
 			{
-				printf("Successfully hooked dxd11!\n");
+				Console::PrintLn("Successfully hooked dxd11 Present");
 				if (kiero::bind(13, reinterpret_cast<void**>(&Od11ResizeBuffers), static_cast<void*>(HkResizeBuffersD11)) == kiero::Status::Success)
 				{
 					//SUCCESS
 				}
 				else
 				{
-					printf("Failed to hook dxd11 resize buffers");
+					Console::PrintLn("Failed to hook dxd11 Resize buffers");
+					printf("");
 					ClearHooks();
 					return false;
 				}
 			}
 			else
 			{
-				printf("Failed to hook dxd11 present");
+				Console::PrintLn("Failed to hook dxd11 Present");
 				return false;
 			}
 			return true;
@@ -152,12 +156,12 @@ namespace Agony
 				{
 					if (lastGameState == false)
 					{
-						std::cout << "Game state changed" << std::endl;
+						Console::PrintLn("Game state changed");
 						for (const auto function : Agony::Native::LuaFunctions::FunctionsMap)
 						{
 							if (Agony::Native::LuaFunctions::FramescriptRegister(function.first, function.second))
 							{
-								printf("Registered %s\n", function.first);
+								Console::PrintLn("Registered %s", function.first);
 							}
 						}
 
@@ -185,11 +189,18 @@ namespace Agony
 
 						//uintptr_t* FirstObj = objMgr + 0x120;
 					}
+
+					auto now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+					if (now - lastTick > 40)//25 Tick per seconds
+					{
+						lastTick = now;
+						//Trigger On Tick
+						EventHandler<2, OnGamePreTick>::GetInstance()->Trigger();
+						EventHandler<3, OnGameTick>::GetInstance()->Trigger();
+						EventHandler<4, OnGamePostTick>::GetInstance()->Trigger();
+					}
 				}
-				else
-				{
-					std::cout << "We are NOT ingame" << std::endl;
-				}
+
 				lastGameState = isInGame;
 
 				ImGui_ImplDX11_NewFrame();

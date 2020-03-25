@@ -1,5 +1,6 @@
 #pragma once
 #include "dxgi.h"
+#include <chrono>
 
 typedef HRESULT(__fastcall* D3D11Present) (IDXGISwapChain* pSwapChain, UINT syncInterval, UINT flags);
 typedef HRESULT(__stdcall* D3D11ResizeBuffers) (IDXGISwapChain* pSwapChain, UINT BufferCount, UINT Width, UINT Height, DXGI_FORMAT NewFormat, UINT SwapChainFlags);
@@ -14,6 +15,7 @@ namespace Agony
 			static D3D11ResizeBuffers Od11ResizeBuffers;
 			static bool initialised;
 			static bool lastGameState;
+			static uint64_t lastTick;
 		public:
 			static bool ApplyHooks();
 			static void ClearHooks();

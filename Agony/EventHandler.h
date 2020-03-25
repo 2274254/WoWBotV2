@@ -9,6 +9,11 @@ namespace Agony
 	{
 		//Game
 		typedef bool(OnWndProc)(HWND, UINT, WPARAM, LPARAM);
+
+		typedef void(OnGamePreTick)();
+		typedef void(OnGameTick)();
+		typedef void(OnGamePostTick)();
+
 		#define EVENT_TIMEOUT_EJECT 250
 
 		// ReSharper disable once CppClassNeedsConstructorBecauseOfUninitializedMember

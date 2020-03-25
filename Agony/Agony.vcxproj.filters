@@ -85,6 +85,9 @@
     <ClCompile Include="CGUnit.cpp">
       <Filter>Source Files\GameObjects\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="EventHandler.cpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MinHook.h">

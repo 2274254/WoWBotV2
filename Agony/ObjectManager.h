@@ -18,13 +18,6 @@ struct TSLink
 	uintptr_t Previous;
 };
 
-struct CurMgr0x8Entry
-{
-	uint64_t Next;
-	Agony::Native::ObjectGuid WowGuid;
-	Agony::Native::CGObject* ObjectBase;
-};
-
 struct CGObjectManager
 {
 	TSGrowableArray ActiveObjects;	// 0x000
@@ -39,6 +32,14 @@ struct CGObjectManager
 	uintptr_t MovementGlobals;		// 0x160
 };
 #pragma pack(pop)
+
+struct CurMgr0x8Entry
+{
+public:
+	uint64_t Next;							//0x0000
+	Agony::Native::ObjectGuid WowGuid;		//0x0008
+	Agony::Native::CGObject* ObjectBase;	//0x0018
+}; //Size: 0x0020
 
 namespace Agony
 {

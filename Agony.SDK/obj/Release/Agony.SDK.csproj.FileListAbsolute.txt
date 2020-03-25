@@ -15,3 +15,5 @@ D:\AgonyWoW\Agony.SDK\bin\Release\System.Numerics.Vectors.xml
 D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.csproj.CopyComplete
 D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.dll
 D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.pdb
+D:\AgonyWoW\x64\Release\Agony.SDK.dll
+D:\AgonyWoW\x64\Release\Agony.SDK.pdb

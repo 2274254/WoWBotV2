@@ -10,6 +10,9 @@ namespace Agony
 		ATTACH_DOMAIN();
 
 		ATTACH_EVENT(GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
+		ATTACH_EVENT(GamePreTick, 2, Native::OnGamePreTick);
+		ATTACH_EVENT(GameTick, 3, Native::OnGameTick);
+		ATTACH_EVENT(GamePostTick,4, Native::OnGamePostTick);
 
 		GameWndProcHandlers = gcnew List<GameWndProc^>();
 		m_GameWndProcNativeDelegate = gcnew OnGameWndProcNativeDelegate(OnGameWndProcNative);
@@ -22,6 +25,9 @@ namespace Agony
 	void Game::DomainUnloadEventHandler(Object^, System::EventArgs^)
 	{
 		DETACH_EVENT(GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
+		DETACH_EVENT(GamePreTick, 2, Native::OnGamePreTick);
+		DETACH_EVENT(GameTick, 3, Native::OnGameTick);
+		DETACH_EVENT(GamePostTick, 4, Native::OnGamePostTick);
 		printf("DOMAIN UNLOADED!?!?!?!\n");
 	}
 
@@ -44,6 +50,42 @@ namespace Agony
 		END_TRACE
 
 		return process;
+	}
+
+	void Game::OnGamePreTickNative()
+	{
+		START_TRACE
+			for each (auto eventHandle in GamePreTickHandlers->ToArray())
+			{
+				START_TRACE
+					eventHandle(EventArgs::Empty);
+				END_TRACE
+			}
+		END_TRACE
+	}
+
+	void Game::OnGameTickNative()
+	{
+		START_TRACE
+			for each (auto eventHandle in GameTickHandlers->ToArray())
+			{
+				START_TRACE
+					eventHandle(EventArgs::Empty);
+				END_TRACE
+			}
+		END_TRACE
+	}
+
+	void Game::OnGamePostTickNative()
+	{
+		START_TRACE
+			for each (auto eventHandle in GamePostTickHandlers->ToArray())
+			{
+				START_TRACE
+					eventHandle(EventArgs::Empty);
+				END_TRACE
+			}
+		END_TRACE
 	}
 
 	CGUnit^ Game::Me::get()

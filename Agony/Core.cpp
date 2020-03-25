@@ -56,8 +56,8 @@ namespace Agony
 			}
 			else
 			{
-				//this->CreateThreadBootstrapAddons();
-				//this->DisplayWelcomeMessage();
+				this->CreateThreadBootstrapAddons();
+				this->DisplayWelcomeMessage();
 			}
 			//VMProtectEnd();
 			return true;
@@ -77,6 +77,15 @@ namespace Agony
 		{
 			EventHandler<1, OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(nullptr);
 			EventHandler<1, OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Remove(nullptr);
+
+			EventHandler<2, OnGamePreTick>::GetInstance()->Add(nullptr);
+			EventHandler<2, OnGamePreTick>::GetInstance()->Remove(nullptr);
+
+			EventHandler<3, OnGameTick>::GetInstance()->Add(nullptr);
+			EventHandler<3, OnGameTick>::GetInstance()->Remove(nullptr);
+
+			EventHandler<4, OnGamePostTick>::GetInstance()->Add(nullptr);
+			EventHandler<4, OnGamePostTick>::GetInstance()->Remove(nullptr);
 		}
 
 		HMODULE Core::get_hModule() const
