@@ -1,2 +1,17 @@
 D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.csprojAssemblyReference.cache
 D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.csproj.CoreCompileInputs.cache
+D:\AgonyWoW\Agony.SDK\bin\Release\Agony.SDK.dll
+D:\AgonyWoW\Agony.SDK\bin\Release\Agony.SDK.pdb
+D:\AgonyWoW\Agony.SDK\bin\Release\Agony.Wrapper.dll
+D:\AgonyWoW\Agony.SDK\bin\Release\SharpDX.Direct3D11.dll
+D:\AgonyWoW\Agony.SDK\bin\Release\SharpDX.dll
+D:\AgonyWoW\Agony.SDK\bin\Release\SharpDX.DXGI.dll
+D:\AgonyWoW\Agony.SDK\bin\Release\System.Numerics.Vectors.dll
+D:\AgonyWoW\Agony.SDK\bin\Release\Agony.Wrapper.pdb
+D:\AgonyWoW\Agony.SDK\bin\Release\SharpDX.xml
+D:\AgonyWoW\Agony.SDK\bin\Release\SharpDX.Direct3D11.xml
+D:\AgonyWoW\Agony.SDK\bin\Release\SharpDX.DXGI.xml
+D:\AgonyWoW\Agony.SDK\bin\Release\System.Numerics.Vectors.xml
+D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.csproj.CopyComplete
+D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.dll
+D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.pdb

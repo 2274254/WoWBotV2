@@ -8,7 +8,7 @@ namespace Agony
 {
 	namespace Native
 	{
-		DLLEXPORT class ObjectGuid
+		class DLLEXPORT ObjectGuid
 		{
 		public:
 			ObjectGuid() = default;

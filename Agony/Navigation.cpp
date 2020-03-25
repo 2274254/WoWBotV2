@@ -74,8 +74,8 @@ namespace Agony
         {
             if (Game::IsInGame())
             {
-                WoWObject* player = Agony::Native::Game::Me();
-                reinterpret_cast<void(__fastcall*)(WoWObject*, Vector3*)>(Offsets::Base + Offsets::TerrainClick)(player, location);
+                CGObject* player = Agony::Native::Game::Me();
+                reinterpret_cast<void(__fastcall*)(CGObject*, Vector3*)>(Offsets::Base + Offsets::TerrainClick)(player, location);
             }
         }
 

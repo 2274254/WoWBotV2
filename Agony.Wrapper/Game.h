@@ -2,8 +2,9 @@
 #include "../Agony/Game.h"
 #include "WndEventArgs.h"
 #include "Macros.h"
+#include "CGUnit.h"
 
-using namespace Agony::Native;
+//using namespace Agony::Native;
 
 namespace Agony
 {
@@ -39,5 +40,11 @@ namespace Agony
 				return "Unknown";
 			}
 		}
+
+		static property CGUnit^ Me
+		{
+			CGUnit^ get();
+		}
+
 	};
 }

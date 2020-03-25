@@ -9,12 +9,12 @@ namespace Agony
 	{
 		ATTACH_DOMAIN();
 
-		//ATTACH_EVENT(GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
+		ATTACH_EVENT(GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
 
 		GameWndProcHandlers = gcnew List<GameWndProc^>();
 		m_GameWndProcNativeDelegate = gcnew OnGameWndProcNativeDelegate(OnGameWndProcNative);
 		m_GameWndProcNative = Marshal::GetFunctionPointerForDelegate(m_GameWndProcNativeDelegate);
-		Agony::Native::EventHandler<1, Agony::Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(m_GameWndProcNative.ToPointer());
+		Native::EventHandler<1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(m_GameWndProcNative.ToPointer());
 
 		printf("WE ATTACHED\n");
 	}
@@ -44,5 +44,11 @@ namespace Agony
 		END_TRACE
 
 		return process;
+	}
+
+	CGUnit^ Game::Me::get()
+	{
+		return gcnew CGUnit(nullptr);
+		//return gcnew CGUnit(Native::Game::Me());
 	}
 }

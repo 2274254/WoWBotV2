@@ -102,13 +102,13 @@
 				//CameraBase* pCameraBase = *reinterpret_cast<CameraBase**>(Offsets::Base + Offsets::CameraBase);
 				//std::cout << "CameraInfo:" << std::hex << reinterpret_cast<uintptr_t*>(pCameraBase->camera_ptr);
 
-				/*printf("Loading MoveMaps. \r\n");
+				Agony::Native::Console::PrintLn("Loading MoveMaps");
 				Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
 				navigation->Initialize(0);
 				navigation->Initialize(3358);
 				navigation->Initialize(3277);
 				navigation->Initialize(2107);
-				printf("Movemaps Loaded. Started. \r\n");	*/			
+				Agony::Native::Console::PrintLn("Movemaps Loaded");
 				while (1 & !GetAsyncKeyState(VK_F4))
 				{
 					Sleep(1);
@@ -131,7 +131,7 @@
 		{
 			//MessageBox(GetActiveWindow(), "blah", "blah2", 0x00000000L);
 			static HANDLE hThread = nullptr;
-			//Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
+			Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
 			///if (Utils::IsProcess("World of Warcraft"))
 			switch (ul_reason_for_call)
 			{
@@ -144,7 +144,7 @@
 				break;
 				case DLL_PROCESS_DETACH:
 				{
-					//navigation->Release();
+					navigation->Release();
 					SuspendThread(hThread);
 				}
 				break;
