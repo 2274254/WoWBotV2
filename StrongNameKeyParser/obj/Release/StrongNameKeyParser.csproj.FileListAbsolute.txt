@@ -5,3 +5,6 @@ D:\AgonyWoW\StrongNameKeyParser\obj\Release\StrongNameKeyParser.csprojAssemblyRe
 D:\AgonyWoW\StrongNameKeyParser\obj\Release\StrongNameKeyParser.csproj.CoreCompileInputs.cache
 D:\AgonyWoW\StrongNameKeyParser\obj\Release\StrongNameKeyParser.exe
 D:\AgonyWoW\StrongNameKeyParser\obj\Release\StrongNameKeyParser.pdb
+D:\AgonyWoW\x64\Release\StrongNameKeyParser.exe.config
+D:\AgonyWoW\x64\Release\StrongNameKeyParser.exe
+D:\AgonyWoW\x64\Release\StrongNameKeyParser.pdb

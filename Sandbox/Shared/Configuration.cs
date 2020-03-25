@@ -38,7 +38,7 @@ namespace Sandbox.Shared
         public bool DisableChatFunction { get; set; }
 
         [DataMember]
-        public string EloBuddyDllPath { get; set; }
+        public string AgonyDllPath { get; set; }
 
         [DataMember]
         public string LibrariesDirectory { get; set; }

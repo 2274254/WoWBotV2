@@ -26,7 +26,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\x64\Release\</OutputPath>
@@ -78,7 +78,7 @@
     <Compile Include="CLRByPasser.cs" />
     <Compile Include="Cryptography\RijndaelHelper.cs" />
     <Compile Include="Cryptography\CustomRsa.cs" />
-    <Compile Include="ElobuddyAddon\SignedAddon.cs" />
+    <Compile Include="AgonyAddon\SignedAddon.cs" />
     <Compile Include="SandboxDomain.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Input.cs" />

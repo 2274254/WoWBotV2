@@ -8,7 +8,7 @@ using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
-using Sandbox.ElobuddyAddon;
+using Sandbox.AgonyAddon;
 
 namespace Sandbox
 {
@@ -45,7 +45,7 @@ namespace Sandbox
                 // Initialize all permissions
                 var permissionSet = new PermissionSet(PermissionState.None);
                 permissionSet.AddPermission(new EnvironmentPermission(EnvironmentPermissionAccess.Read, "USERNAME"));
-                permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, Assembly.GetExecutingAssembly().Location));
+                permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, SandboxConfig.DataDirectory));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.PathDiscovery, Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..\\..\\..\\..\\"))));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read, Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..\\..\\..\\..\\"))));
@@ -56,18 +56,18 @@ namespace Sandbox
                 permissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.SerializationFormatter));
                 permissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.UnmanagedCode));
                 permissionSet.AddPermission(new UIPermission(PermissionState.Unrestricted));
-                permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(\\w+)\\.lolnexus\\.com\\/.*")));
+                /*permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(\\w+)\\.lolnexus\\.com\\/.*")));
                 permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(\\w+)\\.riotgames\\.com\\/.*")));
                 permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(www\\.)?champion\\.gg\\/.*")));
-                permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(www\\.)?elobuddy\\.net\\/.*")));
-                permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/edge\\.elobuddy\\.net\\/.*")));
+                permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(www\\.)?Agony\\.net\\/.*")));
+                permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/edge\\.Agony\\.net\\/.*")));
                 permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(www\\.)?leaguecraft\\.com\\/.*")));
                 permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(www\\.)?lolbuilder\\.net\\/.*")));
                 permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(www\\.|raw.)?github(usercontent)?\\.com\\/.*")));
                 permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/(www|oce|las|ru|br|lan|tr|euw|na|eune|sk2)\\.op\\.gg\\/.*")));
                 permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/ddragon\\.leagueoflegends\\.com\\/.*")));
                 permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("http?:\\/\\/strefainformatyka\\.hekko24\\.pl\\/.*")));
-                permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/strefainformatyka\\.hekko24\\.pl\\/.*")));
+                permissionSet.AddPermission(new WebPermission(NetworkAccess.Connect, new Regex("https?:\\/\\/strefainformatyka\\.hekko24\\.pl\\/.*")));*/
 
                 // Load extra permissions if existing
                 if (SandboxConfig.Permissions != null)
@@ -79,14 +79,14 @@ namespace Sandbox
                     }
                 }
 
-#if DEBUG
-    // TODO: Remove once protected domain works
+                #if DEBUG
+                // TODO: Remove once protected domain works
                 var appDomain = AppDomain.CreateDomain(domainName);
-#else
+                #else
                 // Create the AppDomain
                 var appDomain = AppDomain.CreateDomain(domainName, null, appDomainSetup, permissionSet,
                     PublicKeys.AllKeys.Concat(new[] { Assembly.GetExecutingAssembly().Evidence.GetHostEvidence<StrongName>() }).ToArray());
-#endif
+                #endif
 
                 // Create a new Domain instance
                 domain = (SandboxDomain) Activator.CreateInstanceFrom(appDomain, Assembly.GetExecutingAssembly().Location, typeof (SandboxDomain).FullName).Unwrap();
@@ -203,17 +203,18 @@ namespace Sandbox
                 //else if (Sandbox.EqualsPublicToken(assemblyName, "7339047cb10f6e86"))
                 else if (assemblyName.Name == "Agony")
                 {
+                    Console.WriteLine("Agony Token: " + assemblyName.GetPublicKeyToken().Select(o => o.ToString("x2")).Concat(new[] { string.Empty }).Aggregate(string.Concat));
                     // Agony.dll
-                    resolvedAssembly = Assembly.LoadFrom(SandboxConfig.EloBuddyDllPath);
+                    resolvedAssembly = Assembly.LoadFrom(SandboxConfig.AgonyDllPath);
                 }
                 else
                 {
                     string resolvedPath;
                     if (FindAddon(assemblyName, out resolvedPath))
                     {
-#if DEBUG
+                        #if DEBUG
                         Logs.Log("Sandbox: Successfully resolved '{0}'", assemblyName.Name);
-#endif
+                        #endif
                         if (LoadedLibraries.ContainsKey(assemblyToken))
                         {
                             resolvedAssembly = LoadedLibraries[assemblyToken];
@@ -224,7 +225,8 @@ namespace Sandbox
                             Logs.Log("Sandbox: Creating new instance '{0}'", assemblyName.Name);
 #endif
                             // Load the addon into the app domain
-                            resolvedAssembly = Assembly.LoadFrom(resolvedPath); //AddonLoadFrom(resolvedPath);
+                            //resolvedAssembly = Assembly.LoadFrom(resolvedPath); //AddonLoadFrom(resolvedPath);
+                            resolvedAssembly = AddonLoadFrom(resolvedPath);
 
                             // Add the addon to the loaded addons dictionary
                             LoadedLibraries.Add(assemblyToken, resolvedAssembly);
@@ -232,8 +234,8 @@ namespace Sandbox
                             if (resolvedAssembly.IsFullyTrusted)
                             {
                                 // Check if the DLL is the SDK
-                                //if (Sandbox.EqualsPublicToken(assemblyName, "6b574a82b1ea937e"))
-                                if (assemblyName.Name == "Agony.SDK")
+                                //if(assemblyName.Name == "Agony.SDK")
+                                if (Sandbox.EqualsPublicToken(assemblyName, "a99070253df2afda"))
                                 {
                                     // Call bootstrap
                                     InitSDKBootstrap(resolvedAssembly);
@@ -251,9 +253,9 @@ namespace Sandbox
 
             if (resolvedAssembly != null && resolvedAssembly.IsFullyTrusted)
             {
-#if DEBUG
+                #if DEBUG
                 Logs.Log("Sandbox: Resolved assembly '{0}' is fully trusted!", resolvedAssembly.GetName().Name);
-#endif
+                #endif
             }
 
             return resolvedAssembly;
@@ -263,13 +265,13 @@ namespace Sandbox
         private static void OnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
         {
             Logs.Log("Sandbox: Unhandled addon exception:");
-#if DEBUG
+            #if DEBUG
             var securityException = unhandledExceptionEventArgs.ExceptionObject as SecurityException;
             if (securityException != null)
             {
                 Logs.Log(unhandledExceptionEventArgs.ExceptionObject.ToString());
             }
-#endif
+            #endif
             Logs.PrintException(unhandledExceptionEventArgs.ExceptionObject);
         }
 
@@ -296,7 +298,6 @@ namespace Sandbox
                 {
                     // Get the AssemblyName of the addon by the path
                     assemblyName = AssemblyName.GetAssemblyName(path);
-
                     // Try to execute the addon
                     DomainHandle.ExecuteAssemblyByName(assemblyName, args);
                     if (!LoadedAddons.Contains(assemblyName.Name))
@@ -305,6 +306,10 @@ namespace Sandbox
                     }
                     return true;
                 }
+                /*else
+                {
+                    Logs.Log("Sandbox: Failed to load addon: File does not exists (" + path + ")");
+                }*/
             }
             catch (MissingMethodException)
             {
@@ -315,15 +320,13 @@ namespace Sandbox
                     {
                         // Load the DLL
                         var assembly = DomainHandle.Load(assemblyName);
-
                         // Store the DLL into loaded addons
                         LoadedLibraries[assemblyName.GenerateToken()] = assembly;
-
                         if (assembly.IsFullyTrusted)
                         {
                             // Verify that the DLL is the SDK
-                            if(assemblyName.Name == "Agony.SDK")
-                            //if (Sandbox.EqualsPublicToken(assemblyName, "6b574a82b1ea937e"))
+                            //if(assemblyName.Name == "Agony.SDK")
+                            if (Sandbox.EqualsPublicToken(assemblyName, "a99070253df2afda"))
                             {
                                 // Call bootstrap
                                 InitSDKBootstrap(assembly);

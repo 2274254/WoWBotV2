@@ -14,13 +14,13 @@ namespace StrongNameKeyParser
         [STAThread]
         private static void Main(string[] args)
         {
-            var assemblyName = AssemblyName.GetAssemblyName(@"D:\\AgonyWoW\\x64\\Debug\\Agony.SDK.dll");
+            var assemblyName = AssemblyName.GetAssemblyName(@"D:\\AgonyWoW\\x64\Release\\SharpDX.DXGI.dll");
             Clipboard.SetText(assemblyName.GetPublicKey().ToHex());
 
             return;
 
-            //using (var stream = File.OpenRead(@"C:\Users\Hellsing\OneDrive\Development\EloBuddy\EloBuddy.SDK\EloBuddy.SDK\EloBuddy.SDK.snk"))
-            using (var stream = File.OpenRead(@"C:\Users\Hellsing\OneDrive\Development\EloBuddy\Loader\System\SharpDX.dll"))
+            //using (var stream = File.OpenRead(@"C:\Users\Hellsing\OneDrive\Development\Agony\Agony.SDK\Agony.SDK\Agony.SDK.snk"))
+            using (var stream = File.OpenRead(@"C:\Users\Hellsing\OneDrive\Development\Agony\Loader\System\SharpDX.dll"))
             {
                 var keyBytes = new byte[stream.Length];
                 stream.Read(keyBytes, 0, (int) stream.Length);

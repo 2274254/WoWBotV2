@@ -75,6 +75,7 @@ namespace Sandbox
             {
                 Reload();
                 Input.Subscribe();
+                Logs.Log("Sandbox: Bootstrap Completed");
             }
             catch (Exception e)
             {
@@ -104,16 +105,16 @@ namespace Sandbox
             {
                 return;
             }
-
             try
             {
-                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.Wrapper.dll", new string[1]);
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.Wrapper.dll", new string[1]);
 
-                //LoadLibrary("6b574a82b1ea937e");
-                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.SDK.dll", new string[1]);
+                LoadLibrary("a99070253df2afda");
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.SDK.dll", new string[1]);
 
-                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\TestAddon.exe", new string[1]);
+                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\TestAddon.exe", new string[1]);
 
+                Console.WriteLine("Loaded Addons");
                 /*var addons = ServiceFactory.CreateProxy<ILoaderService>().GetAssemblyList((int) 0);
                 Logs.Log("Loading {0} Addon{1}", addons.Count, addons.Count < 1 || addons.Count > 1 ? "s" : "");
                 foreach (var assembly in addons)

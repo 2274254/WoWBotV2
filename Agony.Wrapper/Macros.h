@@ -30,7 +30,7 @@ using namespace System::Runtime::InteropServices;
 #define END_TRACE } catch (System::Exception^ ex) {\
 	System::Console::WriteLine();\
 	System::Console::WriteLine("========================================");\
-	System::Console::WriteLine("Exception occured! EloBuddy might crash!");\
+	System::Console::WriteLine("Exception occured! Agony might crash!");\
 	System::Console::WriteLine();\
 	System::Console::WriteLine("Type: {0}", ex->GetType()->FullName);\
 	System::Console::WriteLine("Message: {0}", ex->Message);\

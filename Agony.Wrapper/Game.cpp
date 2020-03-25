@@ -19,7 +19,6 @@ namespace Agony
 		m_GameWndProcNative = Marshal::GetFunctionPointerForDelegate(m_GameWndProcNativeDelegate);
 		Native::EventHandler<1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(m_GameWndProcNative.ToPointer());
 
-		printf("WE ATTACHED\n");
 	}
 
 	void Game::DomainUnloadEventHandler(Object^, System::EventArgs^)
@@ -28,7 +27,6 @@ namespace Agony
 		DETACH_EVENT(GamePreTick, 2, Native::OnGamePreTick);
 		DETACH_EVENT(GameTick, 3, Native::OnGameTick);
 		DETACH_EVENT(GamePostTick, 4, Native::OnGamePostTick);
-		printf("DOMAIN UNLOADED!?!?!?!\n");
 	}
 
 	bool Game::OnGameWndProcNative(HWND HWnd, UINT message, WPARAM WParam, LPARAM LParam)

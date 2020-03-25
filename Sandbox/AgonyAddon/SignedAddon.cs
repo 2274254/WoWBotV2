@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using Sandbox.Cryptography;
 
-namespace Sandbox.ElobuddyAddon
+namespace Sandbox.AgonyAddon
 {
     internal static class SignedAddon
     {

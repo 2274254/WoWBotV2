@@ -21,9 +21,9 @@ namespace Sandbox
         public static string LibrariesDirectory;
 
         /// <summary>
-        ///     A full path towards the EloBuddy.dll
+        ///     A full path towards the Agony.dll
         /// </summary>
-        public static string EloBuddyDllPath;
+        public static string AgonyDllPath;
 
         /// <summary>
         ///     Permissions for the secure application domain.
@@ -138,12 +138,12 @@ namespace Sandbox
                     DisableChatFunction = false,
                     DisableRangeIndicator = false,
                     DrawWatermark = false,
-                    EloBuddyDllPath = "D:\\AgonyWoW\x64\\Debug\\Agony.dll",
+                    AgonyDllPath = "D:\\AgonyWoW\\x64\\Release\\Agony.dll",
                     IsBuddy = true,
                     ExtendedZoom = false,
-                    LibrariesDirectory = "D:\\AgonyWoW\x64\\Debug\\",
+                    LibrariesDirectory = "D:\\AgonyWoW\\x64\\Release\\",
                     Username = "H3XC0R3",
-                    DataDirectory = "D:\\AgonyWoW\x64\\Debug\\",
+                    DataDirectory = "D:\\AgonyWoW\\x64\\Release\\",
                     Hwid = "",
                     
                 };// ServiceFactory.CreateProxy<ILoaderService>().GetConfiguration(Sandbox.Pid);
@@ -157,7 +157,7 @@ namespace Sandbox
             if (config != null)
             {
                 DataDirectory = config.DataDirectory;
-                EloBuddyDllPath = config.EloBuddyDllPath;
+                AgonyDllPath = config.AgonyDllPath;
                 LibrariesDirectory = config.LibrariesDirectory;
                 Permissions = config.Permissions;
                 MenuKey = config.MenuKey;
