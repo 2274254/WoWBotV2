@@ -1,0 +1,2 @@
+D:\AgonyWoW\BattlegroundMode\obj\Release\BattlegroundMode.csprojAssemblyReference.cache
+D:\AgonyWoW\BattlegroundMode\obj\Release\BattlegroundMode.csproj.CoreCompileInputs.cache

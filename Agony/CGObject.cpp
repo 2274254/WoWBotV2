@@ -17,6 +17,12 @@ namespace Agony::Native
 		return WoWObjectType::Invalid;
 	}
 
+	ObjectGuid CGObject::GetGuid()
+	{
+		if (this == nullptr) return ObjectGuid{};
+		return *reinterpret_cast<ObjectGuid*>(this + static_cast<int>(Offsets::GameObject::Guid));
+	}
+
 	std::string CGObject::GetName()
 	{
 		const char* name = "Unknown";

@@ -1,0 +1,2 @@
+D:\AgonyWoW\Sandbox\obj\Release\Sandbox.csprojAssemblyReference.cache
+D:\AgonyWoW\Sandbox\obj\Release\Sandbox.csproj.CoreCompileInputs.cache

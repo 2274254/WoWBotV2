@@ -31,6 +31,7 @@ namespace Offsets
 	//Game:
 	inline uintptr_t GameVersion = 0x21A31BC;
 	inline uintptr_t GetBaseFromToken = 0x16842E0;
+	inline uintptr_t ClntObjMgrObjectPtr = 0xFBC330;
 	inline uintptr_t InGame = 0x2A73ADC;
 
 	inline uintptr_t TerrainClick = 0xD99F80;
@@ -46,6 +47,7 @@ namespace Offsets
 	namespace GameObject
 	{
 		inline uintptr_t Type = 0x0010;
+		inline uintptr_t Guid = 0x0040;
 		inline uintptr_t Position = 0x0110;
 		inline uintptr_t fAngle = 0x0120;
 		inline uintptr_t UnitRace = 0x157C;

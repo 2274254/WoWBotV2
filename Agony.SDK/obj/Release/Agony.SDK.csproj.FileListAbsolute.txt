@@ -1,0 +1,2 @@
+D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.csprojAssemblyReference.cache
+D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.csproj.CoreCompileInputs.cache
