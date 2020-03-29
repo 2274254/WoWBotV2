@@ -10,7 +10,7 @@ namespace Agony
 			__try
 			{
 				if (this == nullptr) return Vector3();
-				return *reinterpret_cast<Vector3*>(this + static_cast<int>(Offsets::GameObject::Position));
+				return *reinterpret_cast<Vector3*>(this + static_cast<uintptr_t>(Offsets::GameObject::UnitPosition));
 			}
 			__except (1)
 			{
@@ -24,7 +24,7 @@ namespace Agony
 			__try
 			{
 				if (this == nullptr) return UnitRaceId::InvalidRaceId;
-				return *reinterpret_cast<UnitRaceId*>(this + static_cast<int>(Offsets::GameObject::UnitRace));
+				return *reinterpret_cast<UnitRaceId*>(this + static_cast<uintptr_t>(Offsets::GameObject::UnitRace));
 			}
 			__except (1)
 			{
@@ -38,7 +38,7 @@ namespace Agony
 			__try
 			{
 				if (this == nullptr) return UnitClassId::InvalidClassId;
-				return *reinterpret_cast<UnitClassId*>(this + static_cast<int>(Offsets::GameObject::UnitClass));
+				return *reinterpret_cast<UnitClassId*>(this + static_cast<uintptr_t>(Offsets::GameObject::UnitClass));
 			}
 			__except (1)
 			{

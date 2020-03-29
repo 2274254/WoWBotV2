@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Agony.SDK.Events;
 using Agony.SDK.Enumerations;
 using Agony.SDK.Utils;
@@ -15,9 +12,7 @@ namespace Agony.SDK
     public static class Bootstrap
     {
         internal static readonly Process CurrentProcess = Process.GetCurrentProcess();
-
         internal static bool _initialized;
-
         internal static readonly List<Type> SkipInitialization = new List<Type>();
 
         public static void Init(string[] args)

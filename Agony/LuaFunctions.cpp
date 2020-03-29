@@ -2,6 +2,7 @@
 #include "vector3.h"
 #include "Navigation.h"
 #include "Drawings.h"
+#include "ObjectManager.h"
 
 namespace Agony
 {
@@ -19,7 +20,8 @@ namespace Agony
             {"GetCorpsePosition", reinterpret_cast<int64_t>(GetCorpsePosition)},
             {"GetPlayerAngle", reinterpret_cast<int64_t>(GetPlayerAngle)},
             {"NextPoint", reinterpret_cast<int64_t>(NextPoint)},
-            {"IsInGame", reinterpret_cast<int64_t>(IsInGame)}
+            {"IsInGame", reinterpret_cast<int64_t>(IsInGame)},
+            {"GatherClosest", reinterpret_cast<int64_t>(GatherClosest)}
         };
 
         WoWObject* LuaFunctions::GetUnitById(const char* unitid)
@@ -444,6 +446,50 @@ namespace Agony
                 const auto currentState = *reinterpret_cast<unsigned __int16*>(Offsets::Base + Offsets::InGame);
                 LuaPushBoolean(l, (currentState >> 4) & 1);
                 return 1;
+            }
+            return 0;
+        }
+
+        int32_t LuaFunctions::GatherClosest(uintptr_t* l)
+        {
+            auto numArgs = LuaGetTop(l);
+            if (numArgs == 0)
+            {
+                //ObjectGuid guid1 = {};
+               /* bool exactMatch = false;
+                auto guid2 = reinterpret_cast<ObjectGuid*(__fastcall*)(ObjectGuid*, const char*, uint32_t, int32_t, uint32_t, bool, float, int32_t, int32_t)>(Offsets::Base + Offsets::CGGameUI__ClosestObjectMatch)(
+                    &guid1, "mouseover", 1u, 1, 1u, exactMatch, 3.4028235e38, 0, 0
+                );*/
+                ObjectGuid* guid2 = reinterpret_cast<ObjectGuid*>(Offsets::Base + Offsets::CGGameUI__m_currentObjectTrack);
+                if (guid2 != nullptr && !(guid2->HiWord == 0 && guid2->LoWord))
+                {
+                    //std::cout << "guid1 type " << std::dec << guid1.Type()  << std::endl;
+                    std::cout << "guid2 type " << std::dec << guid2->Type() << std::endl;
+
+                    auto obj = ObjectManager::GetObjectFromGuid(guid2);
+                    if (obj != nullptr)
+                    {
+                        std::cout << "Obj address 0x" << std::hex << obj << std::endl;
+                        if (obj->GetType() == WoWObjectType::Unit)
+                        {
+                            std::cout << obj->GetName() << std::endl;
+                        }
+                        else if (obj->GetType() == WoWObjectType::GameObject)
+                        {
+                            reinterpret_cast<bool(__fastcall*)(ObjectGuid*)>(Offsets::Base + Offsets::CGGameUI__OnSpriteRightClick)(guid2);
+                        }
+                    }
+                }
+                /*auto gameObjects = ObjectManager::GetVisibleObjects();
+                for (std::size_t i = 0; i < gameObjects.size(); ++i)
+                {
+                    auto gameObject = gameObjects[i];
+                    if (gameObject->GetType() == WoWObjectType::GameObject)
+                    {
+                        //std::cout << gameObject->GetName() << std::endl;
+                        reinterpret_cast<bool(__fastcall*)(ObjectGuid*)>(Offsets::Base + Offsets::CGGameUI__OnSpriteRightClick)(&gameObject->GetGuid());
+                    }
+                }*/
             }
             return 0;
         }

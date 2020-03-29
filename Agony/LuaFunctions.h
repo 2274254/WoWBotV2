@@ -160,6 +160,7 @@ namespace Agony
             static int32_t GetCorpsePosition(uintptr_t* l);
             static int32_t GetPlayerAngle(uintptr_t* l);
             static int32_t IsInGame(uintptr_t* l);
+            static int32_t GatherClosest(uintptr_t* l);
             static std::map<const char*, int64_t> FunctionsMap;
         };
     }

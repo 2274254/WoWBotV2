@@ -42,12 +42,16 @@ namespace Offsets
 	inline uintptr_t CGUnit_C__GetUnitNameExposed = 0xD7B960;
 	inline uintptr_t CGUnit_C__CanAttack = 0xD62350;
 	inline uintptr_t Script_GetGUIDFromToken = 0x1682F60;
+	inline uintptr_t CGGameUI__OnSpriteRightClick = 0x11900B0;
+	inline uintptr_t CGGameUI__ClosestObjectMatch = 0x117D920;
+	inline uintptr_t CGGameUI__m_currentObjectTrack = 0x2A73AE0;
 
 	namespace GameObject
 	{
 		inline uintptr_t Type = 0x0010;
 		inline uintptr_t Guid = 0x0040;
-		inline uintptr_t Position = 0x0110;
+		inline uintptr_t ObjectPosition = 0x00C8;
+		inline uintptr_t UnitPosition = 0x0110;
 		inline uintptr_t fAngle = 0x0120;
 		inline uintptr_t UnitRace = 0x157C;
 		inline uintptr_t UnitClass = 0x157D;

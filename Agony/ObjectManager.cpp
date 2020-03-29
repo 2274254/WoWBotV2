@@ -12,7 +12,7 @@ namespace Agony
 		std::vector<CGObject*> ObjectManager::GetVisibleObjects()
 		{
 			const CGObjectManager* m_CurObjectMgr = *reinterpret_cast<CGObjectManager**>(Offsets::Base + Offsets::ObjectMgr);
-
+			/*
 			auto player = reinterpret_cast<CGUnit*>(Agony::Native::Game::Me());
 			std::cout << "Player name " << player->GetName() << std::endl;
 			std::cout << "Player address 0x" << std::hex << player << std::endl;
@@ -27,12 +27,12 @@ namespace Agony
 
 			auto player2 = GetObjectFromGuid(&playerGuid);
 			std::cout << "Player2 address 0x" << std::hex << player2 << std::endl;
-
+			*/
 			std::vector<CGObject*> returnList;
 			for (auto i = *(uintptr_t*)(m_CurObjectMgr->VisibleObjects.Next); i != m_CurObjectMgr->VisibleObjects.Next; i = *(uintptr_t*)(i))
 			{
 				CGObject* wowObj = reinterpret_cast<CGObject*>(i - 0x18);
-				if (wowObj->GetType() == WoWObjectType::Player)
+				/*if (wowObj->GetType() == WoWObjectType::Player)
 				{
 					CGUnit* unit = reinterpret_cast<CGUnit*>(wowObj);
 					std::cout << "Obj player address 0x" << std::hex << unit << std::endl;
@@ -46,8 +46,11 @@ namespace Agony
 				else
 				{
 					//std::cout << "Obj name " << wowObj->GetName() << std::endl;
+				}*/
+				if (wowObj->GetType() != WoWObjectType::Invalid)
+				{
+					returnList.push_back(wowObj);
 				}
-				returnList.push_back(wowObj);
 			}
 			return returnList;
 		}
@@ -76,7 +79,6 @@ namespace Agony
 				CurMgr0x8Entry* entry = *reinterpret_cast<CurMgr0x8Entry**>(m_CurObjectMgr->ActiveObjects.Array + (8 * i));
 				if(entry != nullptr && entry->ObjectBase->GetGuid().HiWord == guid->HiWord && entry->WowGuid.LoWord == guid->LoWord)
 				{
-					Console::PrintLn(entry->ObjectBase->GetName().c_str());
 					return entry->ObjectBase;
 				}
 			}
