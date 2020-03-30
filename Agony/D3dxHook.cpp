@@ -171,22 +171,15 @@ namespace Agony
 						{
 							std::cout << "Player Pos = " << std::any_cast<double>(ret[0]) << ", " << std::any_cast<double>(ret[1]) << ", " << std::any_cast<double>(ret[2]) << std::endl;
 						}*/
-
-						//
 						/*
 						WoWObject* me = Agony::Native::Game::Me();
 						std::cout << "Local player class " << (int)me->unitClass << std::endl;
 						std::cout << "Local player race " << (int)me->unitRace << std::endl;
 						std::cout << "Local player address 0x" << std::hex << me << std::endl;*/
-
 						//int health = *(int*)(me + 0x1580);
 						//std::cout << "Player Health = " << health << std::endl;
-
 						//ObjectManager::GetVisibleObjects();
-
-
 						//uintptr_t* objMgr = *(uintptr_t**)(Offsets::Base + Offsets::ObjectMgr);
-
 						//uintptr_t* FirstObj = objMgr + 0x120;
 					}
 

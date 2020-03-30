@@ -2,6 +2,7 @@
 #include "../Agony/CGUnit.h"
 #include "CGObject.h"
 using namespace SharpDX;
+using namespace System;
 
 namespace Agony
 {
@@ -25,5 +26,67 @@ namespace Agony
 		{
 			UnitClassId get();
 		}
+
+		property float fAngle
+		{
+			float get();
+		}
+
+		property Int32 CurrentHP
+		{
+			Int32 get();
+		}
+
+		property Int32 MaxHP
+		{
+			Int32 get();
+		}
+
+		property Int32 CurrentMana
+		{
+			Int32 get();
+		}
+
+		property Int32 MaxMana
+		{
+			Int32 get();
+		}
+
+		property Int32 Strength
+		{
+			Int32 get();
+		}
+
+		property Int32 Agility
+		{
+			Int32 get();
+		}
+
+		property Int32 Stamina
+		{
+			Int32 get();
+		}
+
+		property Int32 Intellect
+		{
+			Int32 get();
+		}
+
+		property Int32 Spirit
+		{
+			Int32 get();
+		}
+
+		property Int32 BaseArmor
+		{
+			Int32 get();
+		}
+
+		property Int32 NegBuffArmor
+		{
+			Int32 get();
+		}
+
+		bool Interact();
 	};
 }

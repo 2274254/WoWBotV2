@@ -5,20 +5,6 @@ namespace Agony
 {
 	namespace Native
 	{
-		Vector3 CGUnit::GetPosition()
-		{
-			__try
-			{
-				if (this == nullptr) return Vector3();
-				return *reinterpret_cast<Vector3*>(this + static_cast<uintptr_t>(Offsets::GameObject::UnitPosition));
-			}
-			__except (1)
-			{
-				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::GetPosition() &");
-			}
-			return Vector3();
-		}
-
 		UnitRaceId CGUnit::GetRace()
 		{
 			__try
@@ -60,6 +46,11 @@ namespace Agony
 				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::CanAttack(CGUnit target) &");
 			}
 			return false;
+		}
+
+		bool CGUnit::Interact()
+		{
+			return reinterpret_cast<bool(__fastcall*)(ObjectGuid*)>(Offsets::Base + Offsets::CGGameUI__OnSpriteRightClick)(&this->GetGuid());
 		}
 	}
 }

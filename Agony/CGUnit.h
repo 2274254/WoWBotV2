@@ -9,11 +9,11 @@ namespace Agony
 		class DLLEXPORT CGUnit : public CGObject
 		{
 		public:
-			Vector3 GetPosition();
 			UnitRaceId GetRace();
 			UnitClassId GetClass();
 
 			bool CanAttack(CGUnit* target);
+			bool Interact();
 
 			MAKE_GET(fAngle, float, Offsets::GameObject::fAngle);
 			MAKE_GET(CurrentHP, int32_t, Offsets::GameObject::CurrentHP);
@@ -27,9 +27,6 @@ namespace Agony
 			MAKE_GET(Spirit, int32_t, Offsets::GameObject::Spirit);
 			MAKE_GET(BaseArmor, int32_t, Offsets::GameObject::BaseArmor);
 			MAKE_GET(NegBuffArmor, int32_t, Offsets::GameObject::NegBuffArmor);
-			MAKE_GET(Money, int32_t, Offsets::GameObject::Money);
-			MAKE_GET(CurrentXP, int32_t, Offsets::GameObject::CurrentXP);
-			MAKE_GET(MaxXP, int32_t, Offsets::GameObject::MaxXP);
 		};
 	}
 }

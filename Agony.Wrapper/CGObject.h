@@ -28,5 +28,10 @@ namespace Agony
 		{
 			System::String^ get();
 		}
+
+		property SharpDX::Vector3 Position
+		{
+			SharpDX::Vector3 get();
+		}
 	};
 }

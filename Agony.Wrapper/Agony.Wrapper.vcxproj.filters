@@ -81,6 +81,15 @@
     <ClInclude Include="ObjectGuid.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="CGGameObject.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CGPlayer.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CGLocalPlayer.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -109,6 +118,15 @@
     </ClCompile>
     <ClCompile Include="ObjectGuid.cpp">
       <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CGGameObject.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CGPlayer.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CGLocalPlayer.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,7 +12,7 @@
 #include "Utils.h"
 #include "kiero.h"
 
-#undef MANAGED_BUILD //Why did i do this !?
+#undef MANAGED_BUILD
 //namespace Agony
 //{
 //	namespace Native

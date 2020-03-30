@@ -41,4 +41,15 @@ namespace Agony
 		}
 		return gcnew System::String("Unknown");
 	}
+
+	SharpDX::Vector3 CGObject::Position::get()
+	{
+		auto obj = this->GetPtr();
+		if (obj != nullptr)
+		{
+			auto position = obj->GetPosition();
+			return SharpDX::Vector3(position.x, position.y, position.z);
+		}
+		return SharpDX::Vector3(0, 0, 0);
+	}
 }

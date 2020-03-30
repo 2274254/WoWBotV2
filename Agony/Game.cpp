@@ -65,9 +65,9 @@ namespace Agony
 			//return (std::string(std::any_cast<const char*>(returnValues[0])) + std::string(std::any_cast<const char*>(returnValues[1]))).c_str();
 		}
 
-		CGObject* Game::Me()
+		CGLocalPlayer* Game::Me()
 		{
-			return reinterpret_cast<CGObject * (__fastcall*)(const char*)>(Offsets::Base + Offsets::GetBaseFromToken)("player");
+			return reinterpret_cast<CGLocalPlayer * (__fastcall*)(const char*)>(Offsets::Base + Offsets::GetBaseFromToken)("player");
 		}
 
 		bool Game::ApplyHooks(void* mainWindowHandle)

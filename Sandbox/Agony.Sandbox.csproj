@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6B0B7724-86A0-47C5-950F-79D23D4A5BC2}</ProjectGuid>
+    <ProjectGuid>{5290B6CB-93D8-4BA7-8222-54012E90AD95}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Agony.Sandbox</RootNamespace>

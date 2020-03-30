@@ -260,7 +260,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bootstrapper.h" />
+    <ClInclude Include="CGGameObject.h" />
+    <ClInclude Include="CGLocalPlayer.h" />
     <ClInclude Include="CGObject.h" />
+    <ClInclude Include="CGPlayer.h" />
     <ClInclude Include="CGUnit.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="Core.h" />
@@ -288,7 +291,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bootstrapper.cpp" />
+    <ClCompile Include="CGGameObject.cpp" />
+    <ClCompile Include="CGLocalPlayer.cpp" />
     <ClCompile Include="CGObject.cpp" />
+    <ClCompile Include="CGPlayer.cpp" />
     <ClCompile Include="CGUnit.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Core.cpp" />

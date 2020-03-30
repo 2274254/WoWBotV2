@@ -9,24 +9,25 @@ namespace Agony
 	{
 		ATTACH_DOMAIN();
 
-		ATTACH_EVENT(GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
-		ATTACH_EVENT(GamePreTick, 2, Native::OnGamePreTick);
-		ATTACH_EVENT(GameTick, 3, Native::OnGameTick);
-		ATTACH_EVENT(GamePostTick,4, Native::OnGamePostTick);
+		ATTACH_EVENT(GameWndProc,	1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
+		ATTACH_EVENT(GamePreTick,	2, Native::OnGamePreTick);
+		ATTACH_EVENT(GameTick,		3, Native::OnGameTick);
+		ATTACH_EVENT(GamePostTick,	4, Native::OnGamePostTick);
 
-		/*GameWndProcHandlers = gcnew List<GameWndProc^>();
+		GameWndProcHandlers			= gcnew List<GameWndProc^>();
 		m_GameWndProcNativeDelegate = gcnew OnGameWndProcNativeDelegate(OnGameWndProcNative);
-		m_GameWndProcNative = Marshal::GetFunctionPointerForDelegate(m_GameWndProcNativeDelegate);
-		Native::EventHandler<1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(m_GameWndProcNative.ToPointer());*/
+		m_GameWndProcNative			= Marshal::GetFunctionPointerForDelegate(m_GameWndProcNativeDelegate);
+		Native::EventHandler<1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(m_GameWndProcNative.ToPointer());
+
 		System::Console::WriteLine("Called static Game");
 	}
 
 	void Game::DomainUnloadEventHandler(Object^, System::EventArgs^)
 	{
-		DETACH_EVENT(GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
-		DETACH_EVENT(GamePreTick, 2, Native::OnGamePreTick);
-		DETACH_EVENT(GameTick, 3, Native::OnGameTick);
-		DETACH_EVENT(GamePostTick, 4, Native::OnGamePostTick);
+		DETACH_EVENT(GameWndProc,	1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
+		DETACH_EVENT(GamePreTick,	2, Native::OnGamePreTick);
+		DETACH_EVENT(GameTick,		3, Native::OnGameTick);
+		DETACH_EVENT(GamePostTick,	4, Native::OnGamePostTick);
 		System::Console::WriteLine("Domain Unloaded");
 	}
 
@@ -89,9 +90,8 @@ namespace Agony
 		END_TRACE
 	}
 
-	CGUnit^ Game::Me::get()
+	CGLocalPlayer^ Game::Me::get()
 	{
-		return gcnew CGUnit(nullptr);
-		//return gcnew CGUnit(Native::Game::Me());
+		return gcnew CGLocalPlayer(Native::Game::Me());
 	}
 }

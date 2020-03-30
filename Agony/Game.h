@@ -1,6 +1,6 @@
 #pragma once
 #include "Macros.h"
-#include "CGObject.h"
+#include "CGLocalPlayer.h"
 
 namespace Agony
 {
@@ -12,7 +12,7 @@ namespace Agony
 			static Game* GetInstance();
 			static bool IsInGame();
 			static char* GetGameVersion();
-			static CGObject* Me();
+			static CGLocalPlayer* Me();
 			bool ApplyHooks(void*);
 			void ClearHooks(void* mainWindowHandle);
 		};

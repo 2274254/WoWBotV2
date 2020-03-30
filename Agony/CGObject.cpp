@@ -59,7 +59,14 @@ namespace Agony::Native
 		__try
 		{
 			if (this == nullptr) return Vector3();
-			return *reinterpret_cast<Vector3*>(this + static_cast<uintptr_t>(Offsets::GameObject::ObjectPosition));
+			if (this->GetType() == WoWObjectType::Unit || this->GetType() == WoWObjectType::Player)
+			{
+				return *reinterpret_cast<Vector3*>(this + static_cast<uintptr_t>(Offsets::GameObject::UnitPosition));
+			}
+			else if (this->GetType() == WoWObjectType::GameObject)
+			{
+				return *reinterpret_cast<Vector3*>(this + static_cast<uintptr_t>(Offsets::GameObject::ObjectPosition));
+			}
 		}
 		__except (1)
 		{

@@ -88,6 +88,15 @@
     <ClCompile Include="EventHandler.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
+    <ClCompile Include="CGGameObject.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CGPlayer.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CGLocalPlayer.cpp">
+      <Filter>Source Files\GameObjects\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MinHook.h">
@@ -166,6 +175,15 @@
       <Filter>Header Files\GameObjects\Objects</Filter>
     </ClInclude>
     <ClInclude Include="StaticEnums.h" />
+    <ClInclude Include="CGGameObject.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CGPlayer.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CGLocalPlayer.h">
+      <Filter>Header Files\GameObjects\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

@@ -37,4 +37,134 @@ namespace Agony
 		}
 		return Agony::UnitClassId::Invalid;
 	}
+
+	float CGUnit::fAngle::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetfAngle();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::CurrentHP::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetCurrentHP();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::MaxHP::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetMaxHP();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::CurrentMana::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetCurrentMana();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::MaxMana::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetMaxMana();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::Strength::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetStrength();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::Agility::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetAgility();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::Stamina::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetStamina();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::Intellect::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetIntellect();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::Spirit::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetSpirit();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::BaseArmor::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetBaseArmor();
+		}
+		return 0;
+	}
+
+	Int32 CGUnit::NegBuffArmor::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetNegBuffArmor();
+		}
+		return 0;
+	}
+
+	bool CGUnit::Interact()
+	{
+		auto gameObject = this->GetPtr();
+		if (gameObject != nullptr)
+		{
+			return this->GetPtr()->Interact();
+		}
+		return false;
+	}
 }

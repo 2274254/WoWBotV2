@@ -2,7 +2,7 @@
 #include "../Agony/Game.h"
 #include "WndEventArgs.h"
 #include "Macros.h"
-#include "CGUnit.h"
+#include "CGLocalPlayer.h"
 
 //using namespace Agony::Native;
 
@@ -50,9 +50,9 @@ namespace Agony
 			}
 		}
 
-		static property CGUnit^ Me
+		static property CGLocalPlayer^ Me
 		{
-			CGUnit^ get();
+			CGLocalPlayer^ get();
 		}
 
 	};
