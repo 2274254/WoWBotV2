@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Sandbox
+namespace Agony.Sandbox
 {
     public static class CLRByPasser
     {

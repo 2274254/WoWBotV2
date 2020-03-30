@@ -2,7 +2,7 @@
 using System.IO;
 using System.Numerics;
 
-namespace Sandbox.Cryptography
+namespace Agony.Sandbox.Cryptography
 {
     internal static class CustomRsa
     {

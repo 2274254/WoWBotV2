@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Security.Cryptography;
 
-namespace Sandbox.Cryptography
+namespace Agony.Sandbox.Cryptography
 {
     internal static class RijndaelHelper
     {

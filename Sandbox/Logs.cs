@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Permissions;
 
-namespace Sandbox
+namespace Agony.Sandbox
 {
     internal static class Logs
     {

@@ -3,9 +3,9 @@ using System.IO;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-using Sandbox.Cryptography;
+using Agony.Sandbox.Cryptography;
 
-namespace Sandbox.AgonyAddon
+namespace Agony.Sandbox.AgonyAddon
 {
     internal static class SignedAddon
     {

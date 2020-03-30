@@ -146,8 +146,6 @@ namespace Agony
             return reinterpret_cast<int32_t(__fastcall*)(uintptr_t*, int32_t, int32_t, int32_t)>(Offsets::Base + Offsets::lua_pcall)(l, nargs, nresults, errfunc);
         }
 
-        //Leave me those in case im lost :D
-
         //the first param will be sent by wow when u call this function and its the lua_state pointer aka stack basically
         int32_t LuaFunctions::Unlock(uintptr_t* l) //ok so ur return value here is how many returns ur lua function will return we aernt returning anything so will be 0
         {
@@ -455,11 +453,13 @@ namespace Agony
             auto numArgs = LuaGetTop(l);
             if (numArgs == 0)
             {
-                //ObjectGuid guid1 = {};
-               /* bool exactMatch = false;
+                /*
+                ObjectGuid guid1 = {};
+                bool exactMatch = false;
                 auto guid2 = reinterpret_cast<ObjectGuid*(__fastcall*)(ObjectGuid*, const char*, uint32_t, int32_t, uint32_t, bool, float, int32_t, int32_t)>(Offsets::Base + Offsets::CGGameUI__ClosestObjectMatch)(
                     &guid1, "mouseover", 1u, 1, 1u, exactMatch, 3.4028235e38, 0, 0
-                );*/
+                );
+                */
                 ObjectGuid* guid2 = reinterpret_cast<ObjectGuid*>(Offsets::Base + Offsets::CGGameUI__m_currentObjectTrack);
                 if (guid2 != nullptr && !(guid2->HiWord == 0 && guid2->LoWord))
                 {
@@ -476,6 +476,7 @@ namespace Agony
                         }
                         else if (obj->GetType() == WoWObjectType::GameObject)
                         {
+                            std::cout << obj->GetName() << std::endl;
                             reinterpret_cast<bool(__fastcall*)(ObjectGuid*)>(Offsets::Base + Offsets::CGGameUI__OnSpriteRightClick)(guid2);
                         }
                     }

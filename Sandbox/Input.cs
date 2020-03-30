@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sandbox
+namespace Agony.Sandbox
 {
     /// <summary>
     ///     Input class will handle any input commands, mainly key commands which link back to a reload, recompile and an

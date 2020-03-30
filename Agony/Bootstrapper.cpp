@@ -117,12 +117,12 @@ namespace Agony
 		bool Bootstrapper::LoadSandbox()
 		{
 			//VMProtectBeginVirtualization(__FUNCTION__);
-			auto path = m_isFallback ? Utils::GetDllPath(TEXT("Sandbox.dll")) : m_bsMemoryLayout->SandboxDllPath;
+			auto path = m_isFallback ? Utils::GetDllPath(TEXT("Agony.Sandbox.dll")) : m_bsMemoryLayout->SandboxDllPath;
 
 			DWORD dwRetCode = 0;
 			auto hr = this->pRuntimeHost->ExecuteInDefaultAppDomain(
 				path,
-				L"Sandbox.Sandbox",
+				L"Agony.Sandbox.Sandbox",
 				L"Bootstrap",
 				L"TestAddon.exe",
 				&dwRetCode

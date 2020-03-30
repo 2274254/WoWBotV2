@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security;
 
-namespace Sandbox.Shared
+namespace Agony.Sandbox.Shared
 {
     [DataContract]
     public class Configuration

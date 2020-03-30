@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Security;
 using System.Security.Permissions;
-using Sandbox.Shared;
+using Agony.Sandbox.Shared;
 
-namespace Sandbox
+namespace Agony.Sandbox
 {
     /// <summary>
     ///     Sandbox Configuration Placeholder.

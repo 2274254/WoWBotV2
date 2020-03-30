@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Sandbox.Shared
+namespace Agony.Sandbox.Shared
 {
     [DataContract]
     public class SharedAddon

@@ -37,7 +37,7 @@ namespace Offsets
 	inline uintptr_t CameraBase = 0x2A74A88;
 	inline uintptr_t CorpseBase = 0x27CBDA8;
 	inline uintptr_t ObjectMgr = 0x29DBED0;
-	inline uintptr_t CGGameObject_C__GetName = 0x6D10B0;
+	inline uintptr_t CGGameObject_C__GetName = 0xE14AC0;
 	//inline uintptr_t CGGameObject_C__GetPosition = 0x6D10B0;
 	inline uintptr_t CGUnit_C__GetUnitNameExposed = 0xD7B960;
 	inline uintptr_t CGUnit_C__CanAttack = 0xD62350;

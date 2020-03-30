@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 
-namespace Sandbox.Shared
+namespace Agony.Sandbox.Shared
 {
     [ServiceContract]
     public interface ILoaderService

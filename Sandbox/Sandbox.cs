@@ -7,11 +7,11 @@ using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
-using Sandbox.Shared;
+using Agony.Sandbox.Shared;
 using System.Runtime.InteropServices;
 using RGiesecke.DllExport;
 
-namespace Sandbox
+namespace Agony.Sandbox
 {
     /// <summary>
     ///     Sandbox main file, contains the static bootstrap to instance a new Sandbox which acts as a safe Application Domain
@@ -106,7 +106,7 @@ namespace Sandbox
             }
             try
             {
-                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.Wrapper.dll", new string[1]);
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.dll", new string[1]);
 
                 LoadLibrary("a99070253df2afda");
                 //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.SDK.dll", new string[1]);

@@ -14,7 +14,7 @@ namespace StrongNameKeyParser
         [STAThread]
         private static void Main(string[] args)
         {
-            var assemblyName = AssemblyName.GetAssemblyName(@"D:\\AgonyWoW\\x64\Release\\SharpDX.DXGI.dll");
+            var assemblyName = AssemblyName.GetAssemblyName(@"D:\\AgonyWoW\\x64\Release\\Agony.dll");
             Clipboard.SetText(assemblyName.GetPublicKey().ToHex());
 
             return;

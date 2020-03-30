@@ -7,8 +7,8 @@
     <ProjectGuid>{6B0B7724-86A0-47C5-950F-79D23D4A5BC2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sandbox</RootNamespace>
-    <AssemblyName>Sandbox</AssemblyName>
+    <RootNamespace>Agony.Sandbox</RootNamespace>
+    <AssemblyName>Agony.Sandbox</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>

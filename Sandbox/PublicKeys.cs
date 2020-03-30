@@ -1,7 +1,7 @@
 ﻿using System.Security.Permissions;
 using System.Security.Policy;
 
-namespace Sandbox
+namespace Agony.Sandbox
 {
     /// <summary>
     /// PublicKeys (StrongName) for fully trusted assemblies that may be loaded by this sandbox.
@@ -78,7 +78,7 @@ namespace Sandbox
                 "Agony.SDK", new System.Version(1, 0, 0, 0));
 
         /// <summary>
-        /// PublicKey (StrongName) for fully trusted Agony.Wrapper.dll
+        /// PublicKey (StrongName) for fully trusted Agony.dll
         /// </summary>
         internal static readonly StrongName AgonyWrapper =
             new StrongName(

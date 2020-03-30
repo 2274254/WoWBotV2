@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
 
-namespace Sandbox
+namespace Agony.Sandbox
 {
     internal static class Extensions
     {

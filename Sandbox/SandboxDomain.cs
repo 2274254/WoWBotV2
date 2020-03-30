@@ -8,9 +8,9 @@ using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
-using Sandbox.AgonyAddon;
+using Agony.Sandbox.AgonyAddon;
 
-namespace Sandbox
+namespace Agony.Sandbox
 {
     internal class SandboxDomain : MarshalByRefObject
     {

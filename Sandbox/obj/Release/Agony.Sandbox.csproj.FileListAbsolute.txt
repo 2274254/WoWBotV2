@@ -1,0 +1,8 @@
+D:\AgonyWoW\Sandbox\obj\Release\Agony.Sandbox.csprojAssemblyReference.cache
+D:\AgonyWoW\Sandbox\obj\Release\Agony.Sandbox.csproj.CoreCompileInputs.cache
+D:\AgonyWoW\x64\Release\Agony.Sandbox.dll.config
+D:\AgonyWoW\x64\Release\Agony.Sandbox.dll
+D:\AgonyWoW\x64\Release\Agony.Sandbox.pdb
+D:\AgonyWoW\Sandbox\obj\Release\Agony.Sandbox.csproj.CopyComplete
+D:\AgonyWoW\Sandbox\obj\Release\Agony.Sandbox.dll
+D:\AgonyWoW\Sandbox\obj\Release\Agony.Sandbox.pdb

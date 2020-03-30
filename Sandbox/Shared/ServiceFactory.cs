@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 
-namespace Sandbox.Shared
+namespace Agony.Sandbox.Shared
 {
     public static class ServiceFactory
     {
