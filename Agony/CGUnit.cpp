@@ -74,8 +74,9 @@ namespace Agony
 			{
 				if (this == nullptr) return false;
 				//*(float*)(*(_QWORD*)(v4 + 0xB0) + 0xA4i64)
-				uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
-				return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::CurrentSpeed));
+				return *(float*)(*(uintptr_t*)(this + Offsets::GameObject::MovementInfo) + Offsets::GameObject::MovementInfos::CurrentSpeed);
+				//uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
+				//return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::CurrentSpeed));
 			}
 			__except (1)
 			{
@@ -90,8 +91,9 @@ namespace Agony
 			{
 				if (this == nullptr) return false;
 				//*(float*)(*(_QWORD*)(v4 + 0xB0) + 0xA4i64)
-				uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
-				return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::RunSpeed));
+				return *(float*)(*(uintptr_t*)(this + Offsets::GameObject::MovementInfo) + Offsets::GameObject::MovementInfos::RunSpeed);
+				//uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
+				//return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::RunSpeed));
 			}
 			__except (1)
 			{
@@ -106,8 +108,9 @@ namespace Agony
 			{
 				if (this == nullptr) return false;
 				//*(float*)(*(_QWORD*)(v4 + 0xB0) + 0xA4i64)
-				uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
-				return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::FlightSpeed));
+				return *(float*)(*(uintptr_t*)(this + Offsets::GameObject::MovementInfo) + Offsets::GameObject::MovementInfos::FlightSpeed);
+				//uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
+				//return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::FlightSpeed));
 			}
 			__except (1)
 			{
@@ -122,8 +125,9 @@ namespace Agony
 			{
 				if (this == nullptr) return false;
 				//*(float*)(*(_QWORD*)(v4 + 0xB0) + 0xA4i64)
-				uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
-				return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::SwimSpeed));
+				return *(float*)(*(uintptr_t*)(this + Offsets::GameObject::MovementInfo) + Offsets::GameObject::MovementInfos::SwimSpeed);
+				//uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
+				//return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::SwimSpeed));
 			}
 			__except (1)
 			{

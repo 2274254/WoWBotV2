@@ -39,8 +39,25 @@ namespace Gathering.Decorators
                     //If no nodes arround, move to a hotspot...
                     if (Gathering.NodeObject == null)
                     {
+                        var playerPosition = Game.Me.Position;
                         XmlNode hotspots = Gathering.Profile["HBProfile"]["Hotspots"];
-                        if (Gathering.HotspotIndex == -1 || Gathering.HotspotIndex == hotspots.ChildNodes.Count)
+                        if (Gathering.HotspotIndex == -1)
+                        {
+                            Gathering.HotspotIndex = 0;
+                            float currentDistance = float.MaxValue;
+                            //Find closest node
+                            for(var i = 0; i < hotspots.ChildNodes.Count; i++)
+                            {
+                                var hotspot = hotspots.ChildNodes.Item(i);
+                                var hotspotDistance = Vector3.Distance(new Vector3(float.Parse(hotspot.Attributes.GetNamedItem("X").Value), float.Parse(hotspot.Attributes.GetNamedItem("Y").Value), float.Parse(hotspot.Attributes.GetNamedItem("Z").Value)), playerPosition);
+                                if (hotspotDistance < currentDistance)
+                                {
+                                    Gathering.HotspotIndex = i;
+                                    currentDistance = hotspotDistance;
+                                }
+                            }
+                        }
+                        else if(Gathering.HotspotIndex == hotspots.ChildNodes.Count)
                         {
                             Gathering.HotspotIndex = 0;
                         }
@@ -49,9 +66,14 @@ namespace Gathering.Decorators
                         var y = float.Parse(currentHotspot.Attributes.GetNamedItem("Y").Value);
                         var z = float.Parse(currentHotspot.Attributes.GetNamedItem("Z").Value);
                         var hotspotPosition = new Vector3(x, y, z);
-                        var distance = Vector3.Distance(hotspotPosition, Game.Me.Position);
-                        Logger.Log(LogLevel.Debug, string.Format("Distance: {0}, Pos: ({1}, {2}, {3}), Target: ({4}, {5}, {6}) | {7}", distance, Game.Me.Position.X, Game.Me.Position.Y, Game.Me.Position.Z, hotspotPosition.X, hotspotPosition.Y, hotspotPosition.Z, Game.Me.Name));
-                        if (distance < 3)
+                        var distance = Vector3.Distance(hotspotPosition, playerPosition);
+
+                        Logger.Log(LogLevel.Debug, string.Format("Distance: {0}", distance));
+                        Logger.Log(LogLevel.Debug, string.Format("Pos: ({0}, {1}, {2})", playerPosition.X, playerPosition.Y, playerPosition.Z));
+                        Logger.Log(LogLevel.Debug, string.Format("Target: ({0}, {1}, {2}", hotspotPosition.X, hotspotPosition.Y, hotspotPosition.Z));
+                        Logger.Log(LogLevel.Debug, string.Format("CurrentSpeed: {0}", Game.Me.CurrentSpeed));
+
+                        if (distance < 50)
                         {
                             Gathering.HotspotIndex++;
                         }

@@ -24,6 +24,7 @@ namespace Gathering.Decorators
             {
                 Logger.Log(LogLevel.Info, "[Gathering] Waiting...");
                 PathingController.Reset();
+                Gathering.HotspotIndex = -1;
             });
         }
 
