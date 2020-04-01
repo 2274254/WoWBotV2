@@ -12,11 +12,6 @@ namespace Agony
 	public:
 		CGUnit(Native::CGObject* obj) : CGObject(obj) {}
 
-		property SharpDX::Vector3 Position
-		{
-			SharpDX::Vector3 get();
-		}
-
 		property UnitRaceId Race
 		{
 			UnitRaceId get();
@@ -88,5 +83,7 @@ namespace Agony
 		}
 
 		bool Interact();
+
+		bool IsInCombat();
 	};
 }

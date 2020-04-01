@@ -39,11 +39,11 @@ namespace Agony
 				if (callback != nullptr)
 				{
 					m_EventCallbacks.push_back(callback);
-					std::cout << "Added callback " << std::hex << callback << " inside : " << std::hex << &m_EventCallbacks << std::endl;
+					//std::cout << "Added callback " << std::hex << callback << " inside : " << std::hex << &m_EventCallbacks << std::endl;
 				}
 				else
 				{
-					std::cout << "Cannot add nullptr callback" << std::endl;
+					//std::cout << "Cannot add nullptr callback" << std::endl;
 				}
 			}
 
@@ -51,17 +51,15 @@ namespace Agony
 			{
 				if (listener == nullptr)
 				{
-					std::cout << "Cannot remove nullptr callback" << std::endl;
+					//std::cout << "Cannot remove nullptr callback" << std::endl;
 					return;
 				}
-				std::cout << "Removed callback " << std::hex << listener << std::endl;
-
+				//std::cout << "Removed callback " << std::hex << listener << std::endl;
 				auto eventPtr = find(m_EventCallbacks.begin(), m_EventCallbacks.end(), listener);
 				if (eventPtr != m_EventCallbacks.end())
 				{
 					m_EventCallbacks.erase(find(m_EventCallbacks.begin(), m_EventCallbacks.end(), listener));
 				}
-
 				this->t_RemovalTickCount = GetTickCount();
 			}
 
@@ -90,12 +88,12 @@ namespace Agony
 			bool __cdecl Trigger(TArgs... args)
 			{
 				auto tickCount = GetTickCount();
-				std::cout << "Event callback = " << std::hex << &m_EventCallbacks << std::endl;
+				//std::cout << "Event callback = " << std::hex << &m_EventCallbacks << std::endl;
 				for (auto ptr : m_EventCallbacks)
 				{
 					if (ptr != nullptr)
 					{
-						std::cout << "Called event on " << std::hex << ptr << std::endl;
+						//std::cout << "Called event on " << std::hex << ptr << std::endl;
 						//if (tickCount - t_RemovalTickCount > EVENT_TIMEOUT_EJECT)
 						{
 							static_cast<T*>(ptr) (args...);
@@ -103,7 +101,7 @@ namespace Agony
 					}
 					else
 					{
-						std::cout << "Cannot nullptr event" << std::endl;
+						//std::cout << "Cannot nullptr event" << std::endl;
 					}
 				}
 				return true;

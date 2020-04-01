@@ -10,7 +10,7 @@ namespace TestAddon
     {
         private static void Main(string[] args)
         {
-            Logger.Log(LogLevel.Info, "TestAddon has been loaded: " + Agony.Game.InstanceCount);
+            Logger.Log(LogLevel.Info, "TestAddon has been loaded");
             Loading.OnLoadingComplete += LoadingComplete;
             Messages.OnMessage += Messages_OnMessage;
             Agony.Game.OnTick += Game_OnTick;
@@ -18,7 +18,7 @@ namespace TestAddon
 
         private static void Game_OnTick(EventArgs args)
         {
-            Console.WriteLine("OnTick From C#");
+            //Console.WriteLine("OnTick From C#");
         }
 
         private static void Messages_OnMessage(Messages.WindowMessage args)

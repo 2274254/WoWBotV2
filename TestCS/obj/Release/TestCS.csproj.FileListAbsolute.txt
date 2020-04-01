@@ -1,0 +1,6 @@
+D:\AgonyWoW\TestCS\bin\Release\TestCS.exe.config
+D:\AgonyWoW\TestCS\bin\Release\TestCS.exe
+D:\AgonyWoW\TestCS\bin\Release\TestCS.pdb
+D:\AgonyWoW\TestCS\obj\Release\TestCS.csproj.CoreCompileInputs.cache
+D:\AgonyWoW\TestCS\obj\Release\TestCS.exe
+D:\AgonyWoW\TestCS\obj\Release\TestCS.pdb

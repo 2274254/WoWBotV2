@@ -17,3 +17,6 @@ D:\AgonyWoW\Gathering\bin\Release\System.Numerics.Vectors.xml
 D:\AgonyWoW\Gathering\obj\Release\Gathering.csproj.CopyComplete
 D:\AgonyWoW\Gathering\obj\Release\Gathering.dll
 D:\AgonyWoW\Gathering\obj\Release\Gathering.pdb
+D:\AgonyWoW\x64\Release\Gathering.dll.config
+D:\AgonyWoW\x64\Release\Gathering.dll
+D:\AgonyWoW\x64\Release\Gathering.pdb

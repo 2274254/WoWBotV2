@@ -27,7 +27,7 @@ namespace Agony.SDK.CommonBot
         All = 4294967295
     }
 
-    public class BotBase
+    public abstract class BotBase
     {
         public virtual string Name { get { return ""; } }
         public virtual PulseFlags PulseFlags { get { return PulseFlags.All; } }

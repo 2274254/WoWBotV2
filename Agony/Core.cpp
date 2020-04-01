@@ -107,7 +107,6 @@ namespace Agony
 			}
 			else
 			{
-				Console::PrintLn("Bootstrap loaded.");
 				Sleep(150u);
 				/*if (ClientFacade::GetInstance()->GetGameState() == static_cast<uintptr_t>(GameMode::Running))
 					EventHandler<3, OnGameStart>::GetInstance()->Trigger();

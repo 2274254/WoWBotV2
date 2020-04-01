@@ -2,7 +2,7 @@
 
 namespace Agony.SDK.Pathing
 {
-    class ClickToMoveMover
+    public class ClickToMoveMover
     {
         public static void MoveTowards(Vector3 location)
         {

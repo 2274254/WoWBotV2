@@ -59,7 +59,7 @@ namespace Agony::Native
 		__try
 		{
 			if (this == nullptr) return Vector3();
-			if (this->GetType() == WoWObjectType::Unit || this->GetType() == WoWObjectType::Player)
+			if (this->GetType() == WoWObjectType::Unit || this->GetType() == WoWObjectType::Player || this->GetType() == WoWObjectType::ActivePlayer)
 			{
 				return *reinterpret_cast<Vector3*>(this + static_cast<uintptr_t>(Offsets::GameObject::UnitPosition));
 			}
@@ -72,6 +72,6 @@ namespace Agony::Native
 		{
 			Console::PrintLn("Native Exception thrown at: const Native::CGObject::GetPosition() &");
 		}
-		return Vector3();
+		return Vector3(0, 0, 0);
 	}
 }

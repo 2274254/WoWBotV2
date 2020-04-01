@@ -194,7 +194,6 @@ namespace Agony
 						//EventHandler<2, OnGamePreTick>::GetInstance()->Trigger();
 						//EventHandler<3, OnGameTick>::GetInstance()->Trigger();
 						//EventHandler<4, OnGamePostTick>::GetInstance()->Trigger();
-						std::cout << "TRIGGERED ON TICK INSIDE C++" << std::endl;
 					}
 				}
 

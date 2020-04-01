@@ -105,6 +105,7 @@ namespace Agony.SDK
                 Logger.Info("----------------------------------");
                 Logger.Info("SDK Bootstrap fully loaded!");
                 Logger.Info("----------------------------------");
+                Bot.Initialize();
             };
         }
 

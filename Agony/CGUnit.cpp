@@ -52,5 +52,20 @@ namespace Agony
 		{
 			return reinterpret_cast<bool(__fastcall*)(ObjectGuid*)>(Offsets::Base + Offsets::CGGameUI__OnSpriteRightClick)(&this->GetGuid());
 		}
+
+		bool CGUnit::IsInCombat()
+		{
+			__try
+			{
+				if (this == nullptr) return false;
+				DWORD someWeirdFlag = *reinterpret_cast<DWORD*>(this + static_cast<uintptr_t>(Offsets::GameObject::AffectingCombat));
+				return (someWeirdFlag >> 19) & 1;
+			}
+			__except (1)
+			{
+				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::IsInCombat() &");
+			}
+			return false;
+		}
 	}
 }

@@ -47,6 +47,7 @@ namespace Agony.Sandbox
                 permissionSet.AddPermission(new EnvironmentPermission(EnvironmentPermissionAccess.Read, "USERNAME"));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, SandboxConfig.DataDirectory));
+                permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, "D:\\AgonyWoW\\x64\\Release\\Profiles\\Gathering\\Herbalist\\"));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.PathDiscovery, Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..\\..\\..\\..\\"))));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read, Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..\\..\\..\\..\\"))));
                 permissionSet.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
@@ -78,7 +79,7 @@ namespace Agony.Sandbox
                         //permissionSet.SetPermission(permission);
                     }
                 }
-
+                /*
                 #if DEBUG
                 // TODO: Remove once protected domain works
                 var appDomain = AppDomain.CreateDomain(domainName);
@@ -87,6 +88,8 @@ namespace Agony.Sandbox
                 var appDomain = AppDomain.CreateDomain(domainName, null, appDomainSetup, permissionSet,
                     PublicKeys.AllKeys.Concat(new[] { Assembly.GetExecutingAssembly().Evidence.GetHostEvidence<StrongName>() }).ToArray());
                 #endif
+                */
+                var appDomain = AppDomain.CreateDomain(domainName);
 
                 // Create a new Domain instance
                 domain = (SandboxDomain) Activator.CreateInstanceFrom(appDomain, Assembly.GetExecutingAssembly().Location, typeof (SandboxDomain).FullName).Unwrap();
@@ -306,10 +309,10 @@ namespace Agony.Sandbox
                     }
                     return true;
                 }
-                /*else
+                else
                 {
                     Logs.Log("Sandbox: Failed to load addon: File does not exists (" + path + ")");
-                }*/
+                }
             }
             catch (MissingMethodException)
             {
@@ -320,6 +323,7 @@ namespace Agony.Sandbox
                     {
                         // Load the DLL
                         var assembly = DomainHandle.Load(assemblyName);
+                        Console.WriteLine("Loaded " + assembly.FullName);
                         // Store the DLL into loaded addons
                         LoadedLibraries[assemblyName.GenerateToken()] = assembly;
                         if (assembly.IsFullyTrusted)

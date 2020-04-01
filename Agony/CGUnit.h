@@ -14,6 +14,7 @@ namespace Agony
 
 			bool CanAttack(CGUnit* target);
 			bool Interact();
+			bool IsInCombat();
 
 			MAKE_GET(fAngle, float, Offsets::GameObject::fAngle);
 			MAKE_GET(CurrentHP, int32_t, Offsets::GameObject::CurrentHP);

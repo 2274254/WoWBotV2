@@ -1,0 +1,7 @@
+D:\AgonyWoW\TestCS\bin\Debug\TestCS.exe.config
+D:\AgonyWoW\TestCS\bin\Debug\TestCS.exe
+D:\AgonyWoW\TestCS\bin\Debug\TestCS.pdb
+D:\AgonyWoW\TestCS\obj\Debug\TestCS.csprojAssemblyReference.cache
+D:\AgonyWoW\TestCS\obj\Debug\TestCS.csproj.CoreCompileInputs.cache
+D:\AgonyWoW\TestCS\obj\Debug\TestCS.exe
+D:\AgonyWoW\TestCS\obj\Debug\TestCS.pdb

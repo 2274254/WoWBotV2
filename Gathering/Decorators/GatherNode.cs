@@ -24,7 +24,7 @@ namespace Gathering.Decorators
             return new Action(a =>
             {
                 Logger.Log(LogLevel.Info, "[Gathering] Gathering node.");
-
+                Gathering.NodeObject.Interact();
             });
         }
 

@@ -1,0 +1,8 @@
+D:\AgonyWoW\x64\Debug\Agony.Sandbox.dll.config
+D:\AgonyWoW\x64\Debug\Agony.Sandbox.dll
+D:\AgonyWoW\x64\Debug\Agony.Sandbox.pdb
+D:\AgonyWoW\Sandbox\obj\Debug\Agony.Sandbox.csprojAssemblyReference.cache
+D:\AgonyWoW\Sandbox\obj\Debug\Agony.Sandbox.csproj.CoreCompileInputs.cache
+D:\AgonyWoW\Sandbox\obj\Debug\Agony.Sandbox.csproj.CopyComplete
+D:\AgonyWoW\Sandbox\obj\Debug\Agony.Sandbox.dll
+D:\AgonyWoW\Sandbox\obj\Debug\Agony.Sandbox.pdb

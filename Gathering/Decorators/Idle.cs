@@ -11,7 +11,7 @@ namespace Gathering.Decorators
         static bool ShouldTakeAction()
         {
             //If i need to wait for what ever reason...
-            if(Game.Me == null)//OR IS CASTING/CHANNELING/OR IN COMBAT...
+            if(Game.Me == null || Game.Me.IsInCombat())//OR IS CASTING/CHANNELING/OR IN COMBAT...
             {
                 return true;
             }
@@ -23,7 +23,7 @@ namespace Gathering.Decorators
             return new Action(a =>
             {
                 Logger.Log(LogLevel.Info, "[Gathering] Waiting...");
-
+                PathingController.Reset();
             });
         }
 

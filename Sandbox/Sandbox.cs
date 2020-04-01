@@ -111,6 +111,8 @@ namespace Agony.Sandbox
                 //LoadLibrary("a99070253df2afda");
                 SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.SDK.dll", new string[1]);
 
+                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Gathering.dll", new string[1]);
+
                 SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\TestAddon.exe", new string[1]);
 
                 /*var addons = ServiceFactory.CreateProxy<ILoaderService>().GetAssemblyList((int) 0);

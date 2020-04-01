@@ -7,17 +7,6 @@ namespace Agony
 		return static_cast<Native::CGUnit*>(this->self);
 	}
 
-	SharpDX::Vector3 CGUnit::Position::get()
-	{
-		auto unit = this->GetPtr();
-		if (unit != nullptr)
-		{
-			auto pos = unit->GetPosition();
-			return SharpDX::Vector3(pos.x, pos.y, pos.z);
-		}
-		return SharpDX::Vector3::Zero;
-	}
-
 	UnitRaceId CGUnit::Race::get()
 	{
 		auto unit = this->GetPtr();
@@ -160,10 +149,20 @@ namespace Agony
 
 	bool CGUnit::Interact()
 	{
-		auto gameObject = this->GetPtr();
-		if (gameObject != nullptr)
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
 		{
-			return this->GetPtr()->Interact();
+			return unit->Interact();
+		}
+		return false;
+	}
+
+	bool CGUnit::IsInCombat()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->IsInCombat();
 		}
 		return false;
 	}
