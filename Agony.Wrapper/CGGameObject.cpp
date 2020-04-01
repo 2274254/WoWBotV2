@@ -4,12 +4,7 @@ namespace Agony
 {
 	Native::CGGameObject* CGGameObject::GetPtr()
 	{
-		return this->self;
-	}
-
-	CGGameObject::CGGameObject(Native::CGGameObject* obj)
-	{
-		this->self = obj;
+		return static_cast<Native::CGGameObject*>(this->self);
 	}
 
 	bool CGGameObject::Interact()

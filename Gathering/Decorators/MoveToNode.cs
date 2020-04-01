@@ -1,5 +1,6 @@
 ﻿using Agony;
 using Agony.SDK.Enumerations;
+using Agony.SDK.Pathing;
 using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
 using SharpDX;
@@ -34,7 +35,7 @@ namespace Gathering.Decorators
                     var nodePosition = Gathering.NodeObject.Position;
                     if (Vector3.Distance(playerPosition, nodePosition) > 3)
                     {
-                        PathingController.ClickToMove(nodePosition.X, nodePosition.Y, nodePosition.Z);
+                        MoveTo.Move(nodePosition);
                     }
                 }
             });

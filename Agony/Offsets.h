@@ -71,6 +71,8 @@ namespace Offsets
 		inline uintptr_t MaxHP = 0x1590;
 
 		inline uintptr_t AffectingCombat = 0x15C0;//This is some flag enum, i dont know yet what it is... but we can know if unit is in combat or has aggro with that using ( (*(_DWORD *)(wowObj + 0x15C0) >> 19) & 1 )
+		inline uintptr_t IsDeadFlag = 0x15C8;
+		inline uintptr_t IsGhostFlag = 0x1AB8;
 
 		inline uintptr_t CurrentMana = 0x1788;
 		inline uintptr_t MaxMana = 0x17A0;

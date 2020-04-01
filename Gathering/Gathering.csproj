@@ -59,6 +59,7 @@
     <Compile Include="Decorators\GatherNode.cs" />
     <Compile Include="Decorators\Idle.cs" />
     <Compile Include="Decorators\MoveToNode.cs" />
+    <Compile Include="Decorators\ReleaseCorpse.cs" />
     <Compile Include="Decorators\RepairEquipment.cs" />
     <Compile Include="Decorators\UseMount.cs" />
     <Compile Include="Decorators\WalkToCorpse.cs" />

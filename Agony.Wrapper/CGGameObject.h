@@ -12,8 +12,7 @@ namespace Agony
 	protected:
 		Native::CGGameObject* self;
 	public:
-		CGGameObject(Native::CGGameObject* obj);
-		CGGameObject() {};
+		CGGameObject(Native::CGGameObject* obj) : CGObject(obj) {}
 		bool Interact();
 	};
 }

@@ -206,4 +206,24 @@ namespace Agony
 		}
 		return false;
 	}
+
+	bool CGUnit::IsDead()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->IsDead();
+		}
+		return false;
+	}
+
+	bool CGUnit::IsGhost()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->IsGhost();
+		}
+		return false;
+	}
 }

@@ -15,6 +15,8 @@ namespace Agony
 			bool CanAttack(CGUnit* target);
 			bool Interact();
 			bool IsInCombat();
+			bool IsDead();
+			bool IsGhost();
 
 			float GetCurrentSpeed();
 			float GetRunSpeed();

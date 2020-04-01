@@ -55,6 +55,21 @@ namespace Agony
 			return returnList;
 		}
 
+		std::vector<CGObject*> ObjectManager::GetObjects()
+		{
+			std::vector<CGObject*> returnList;
+			const CGObjectManager* m_CurObjectMgr = *reinterpret_cast<CGObjectManager**>(Offsets::Base + Offsets::ObjectMgr);
+			for (uint64_t i = 0; i < m_CurObjectMgr->ActiveObjects.Capacity; i++)
+			{
+				CurMgr0x8Entry* entry = *reinterpret_cast<CurMgr0x8Entry**>(m_CurObjectMgr->ActiveObjects.Array + (8 * i));
+				if (entry != nullptr && entry->ObjectBase->GetType() != WoWObjectType::Invalid)
+				{
+					returnList.push_back(entry->ObjectBase);
+				}
+			}
+			return returnList;
+		}
+
 		CGObject* ObjectManager::GetBaseFromToken(std::string token)
 		{
 			return reinterpret_cast<CGObject * (__fastcall*)(const char*)>(Offsets::Base + Offsets::GetBaseFromToken)(token.c_str());

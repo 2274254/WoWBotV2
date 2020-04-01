@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+#include "ObjectManager.h"
 
 namespace Agony
 {

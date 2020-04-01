@@ -31,6 +31,7 @@ namespace Gathering
             get
             {
                 return _root ?? (_root = new PrioritySelector(
+                    ReleaseCorpse.BehaviorComposite,
                     WalkToCorpse.BehaviorComposite,
                     Idle.BehaviorComposite,
                     RepairEquipment.BehaviorComposite,

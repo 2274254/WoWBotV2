@@ -105,5 +105,9 @@ namespace Agony
 		bool Interact();
 
 		bool IsInCombat();
+
+		bool IsDead();
+
+		bool IsGhost();
 	};
 }

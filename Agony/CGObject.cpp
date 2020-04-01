@@ -28,7 +28,7 @@ namespace Agony::Native
 		const char* name = "Unknown";
 		if (this == nullptr)
 		{
-			return "Unknown";
+			return "Invalid";
 		}
 		if (this->GetType() == WoWObjectType::GameObject)
 		{

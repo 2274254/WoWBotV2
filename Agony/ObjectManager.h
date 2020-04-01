@@ -1,6 +1,7 @@
 #pragma once
 #include "WoWObject.h"
 #include "CGObject.h"
+#include "Macros.h"
 #include <vector>
 
 #pragma pack(push, 1)
@@ -45,10 +46,11 @@ namespace Agony
 {
 	namespace Native
 	{
-		class ObjectManager
+		class DLLEXPORT ObjectManager
 		{
 		public:
 			static std::vector<CGObject*> GetVisibleObjects();
+			static std::vector<CGObject*> GetObjects();
 			static CGObject* GetBaseFromToken(std::string token);
 			static ObjectGuid GetGUIDFromToken(std::string token);
 			static CGObject* GetObjectFromGuid(ObjectGuid* guid);

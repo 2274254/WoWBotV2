@@ -5,6 +5,8 @@ using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
 using SharpDX;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using Action = Agony.SDK.TreeSharp.Action;
 
@@ -12,6 +14,10 @@ namespace Gathering.Decorators
 {
     public static class FindNode
     {
+        static List<string> HerbalistNodes = new List<string>()
+        {
+            "Peacebloom", "Silverleaf", "Earthroot"
+        };
         static bool ShouldTakeAction()
         {
             if
@@ -20,7 +26,6 @@ namespace Gathering.Decorators
                 Gathering.NodeObject.Type == Agony.WoWObjectType.Invalid
             )
             {
-                Gathering.NodeObject = null;
                 return true;
             }
             return false;
@@ -34,12 +39,22 @@ namespace Gathering.Decorators
                 {
                     Logger.Log(LogLevel.Info, "[Gathering] Searching node.");
                     Gathering.NodeObject = null;
+                    var playerPosition = Game.Me.Position;
                     //Look for any NODE arround...
+                    var gameObjects = Agony.ObjectManager.GetGameObjectsVisible().OrderBy(x => Vector3.Distance(x.Position, playerPosition));
+                    foreach(var gameObject in gameObjects)
+                    {
+                        Console.WriteLine(gameObject.Name);
+                        if(HerbalistNodes.Contains(gameObject.Name))
+                        {
+                            Gathering.NodeObject = gameObject;
+                            break;
+                        }
+                    }
 
                     //If no nodes arround, move to a hotspot...
                     if (Gathering.NodeObject == null)
                     {
-                        var playerPosition = Game.Me.Position;
                         XmlNode hotspots = Gathering.Profile["HBProfile"]["Hotspots"];
                         if (Gathering.HotspotIndex == -1)
                         {

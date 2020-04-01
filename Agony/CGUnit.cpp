@@ -68,6 +68,36 @@ namespace Agony
 			return false;
 		}
 
+		bool CGUnit::IsDead()
+		{
+			__try
+			{
+				if (this == nullptr) return false;
+				DWORD someWeirdFlag = *reinterpret_cast<DWORD*>(this + static_cast<uintptr_t>(Offsets::GameObject::IsDeadFlag));
+				return (someWeirdFlag >> 13) & 1;
+			}
+			__except (1)
+			{
+				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::IsDead() &");
+			}
+			return false;
+		}
+
+		bool CGUnit::IsGhost()
+		{
+			__try
+			{
+				if (this == nullptr) return false;
+				DWORD someWeirdFlag = *reinterpret_cast<DWORD*>(this + static_cast<uintptr_t>(Offsets::GameObject::IsGhostFlag));
+				return (someWeirdFlag >> 4) & 1;
+			}
+			__except (1)
+			{
+				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::IsGhost() &");
+			}
+			return false;
+		}
+
 		float CGUnit::GetCurrentSpeed()
 		{
 			__try

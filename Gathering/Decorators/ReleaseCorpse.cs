@@ -1,16 +1,15 @@
-﻿using Agony;
-using Agony.SDK.Enumerations;
+﻿using Agony.SDK.Enumerations;
 using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
 using Action = Agony.SDK.TreeSharp.Action;
 
 namespace Gathering.Decorators
 {
-    public static class WalkToCorpse
+    public static class ReleaseCorpse
     {
         static bool ShouldTakeAction()
         {
-            if (Game.Me.IsGhost())
+            if(Agony.Game.Me.IsDead() && !Agony.Game.Me.IsGhost())
             {
                 return true;
             }
@@ -21,8 +20,11 @@ namespace Gathering.Decorators
         {
             return new Action(a =>
             {
-                Logger.Log(LogLevel.Info, "[Gathering] Walking to corpse.");
-
+                Logger.Log(LogLevel.Info, "[Gathering] Releasing corpse.");
+                Agony.SDK.Pathing.MoveTo.Reset();
+                Agony.PathingController.Reset();
+                //
+                //TODO: Release corpse...
             });
         }
 
