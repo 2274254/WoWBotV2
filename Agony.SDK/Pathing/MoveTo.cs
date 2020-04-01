@@ -20,7 +20,7 @@ namespace Agony.SDK.Pathing
             if(targetLocation != Vector3.Zero && nextWaypointPosition != Vector3.Zero)
             {
                 var playerPosition = Agony.Game.Me.Position;
-                var distanceToWaypoint = Vector3.DistanceSquared(playerPosition, nextWaypointPosition);
+                var distanceToWaypoint = Vector3.Distance(playerPosition, nextWaypointPosition);
                 System.Console.WriteLine("Distance to next waypoint: " + distanceToWaypoint);
                 if (distanceToWaypoint < 3)
                 {
@@ -37,6 +37,11 @@ namespace Agony.SDK.Pathing
                         nextWaypointPosition = Vector3.Zero;
                         nextWaypointIndex = 0;
                     }
+                }
+                else if(Agony.Game.Me.CurrentSpeed < 1)
+                {
+                    PathingController.Reset();
+                    PathingController.ClickToMove(nextWaypointPosition.X, nextWaypointPosition.Y, nextWaypointPosition.Z);
                 }
             }
         }

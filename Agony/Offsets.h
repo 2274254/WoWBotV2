@@ -47,8 +47,16 @@ namespace Offsets
 
 	namespace GameObject
 	{
+		namespace MovementInfos
+		{
+			inline uintptr_t CurrentSpeed = 0xA4;
+			inline uintptr_t RunSpeed = 0xAC;
+			inline uintptr_t FlightSpeed = 0xBC;
+			inline uintptr_t SwimSpeed = 0xB4;
+		}
 		inline uintptr_t Type = 0x0010;
 		inline uintptr_t Guid = 0x0040;
+		inline uintptr_t MovementInfo = 0x00B0;
 		inline uintptr_t ObjectPosition = 0x00C8;
 		inline uintptr_t UnitPosition = 0x0110;
 		inline uintptr_t fAngle = 0x0120;

@@ -82,6 +82,26 @@ namespace Agony
 			Int32 get();
 		}
 
+		property float CurrentSpeed
+		{
+			float get();
+		}
+
+		property float RunSpeed
+		{
+			float get();
+		}
+
+		property float FlightSpeed
+		{
+			float get();
+		}
+
+		property float SwimSpeed
+		{
+			float get();
+		}
+
 		bool Interact();
 
 		bool IsInCombat();

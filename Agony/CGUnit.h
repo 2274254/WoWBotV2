@@ -16,6 +16,11 @@ namespace Agony
 			bool Interact();
 			bool IsInCombat();
 
+			float GetCurrentSpeed();
+			float GetRunSpeed();
+			float GetFlightSpeed();
+			float GetSwimSpeed();
+
 			MAKE_GET(fAngle, float, Offsets::GameObject::fAngle);
 			MAKE_GET(CurrentHP, int32_t, Offsets::GameObject::CurrentHP);
 			MAKE_GET(MaxHP, int32_t, Offsets::GameObject::MaxHP);

@@ -67,5 +67,69 @@ namespace Agony
 			}
 			return false;
 		}
+
+		float CGUnit::GetCurrentSpeed()
+		{
+			__try
+			{
+				if (this == nullptr) return false;
+				//*(float*)(*(_QWORD*)(v4 + 0xB0) + 0xA4i64)
+				uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
+				return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::CurrentSpeed));
+			}
+			__except (1)
+			{
+				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::CurrentSpeed() &");
+			}
+			return 0.0f;
+		}
+
+		float CGUnit::GetRunSpeed()
+		{
+			__try
+			{
+				if (this == nullptr) return false;
+				//*(float*)(*(_QWORD*)(v4 + 0xB0) + 0xA4i64)
+				uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
+				return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::RunSpeed));
+			}
+			__except (1)
+			{
+				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::RunSpeed() &");
+			}
+			return 0.0f;
+		}
+
+		float CGUnit::GetFlightSpeed()
+		{
+			__try
+			{
+				if (this == nullptr) return false;
+				//*(float*)(*(_QWORD*)(v4 + 0xB0) + 0xA4i64)
+				uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
+				return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::FlightSpeed));
+			}
+			__except (1)
+			{
+				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::FlightSpeed() &");
+			}
+			return 0.0f;
+		}
+
+		float CGUnit::GetSwimSpeed()
+		{
+			__try
+			{
+				if (this == nullptr) return false;
+				//*(float*)(*(_QWORD*)(v4 + 0xB0) + 0xA4i64)
+				uintptr_t movementInfo = *reinterpret_cast<uintptr_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::MovementInfo));
+				return *reinterpret_cast<float*>(this + static_cast<uintptr_t>(movementInfo + Offsets::GameObject::MovementInfos::SwimSpeed));
+			}
+			__except (1)
+			{
+				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::SwimSpeed() &");
+			}
+			return 0.0f;
+		}
 	}
 }

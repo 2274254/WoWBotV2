@@ -147,6 +147,46 @@ namespace Agony
 		return 0;
 	}
 
+	float CGUnit::CurrentSpeed::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetCurrentSpeed();
+		}
+		return 0;
+	}
+
+	float CGUnit::RunSpeed::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetRunSpeed();
+		}
+		return 0;
+	}
+
+	float CGUnit::FlightSpeed::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetFlightSpeed();
+		}
+		return 0;
+	}
+
+	float CGUnit::SwimSpeed::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetSwimSpeed();
+		}
+		return 0;
+	}
+
 	bool CGUnit::Interact()
 	{
 		auto unit = this->GetPtr();
