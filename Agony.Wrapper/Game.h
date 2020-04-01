@@ -37,6 +37,14 @@ namespace Agony
 			}
 		}
 
+		static property Int64 FrameTimeMS
+		{
+			Int64 get()
+			{
+				return Native::Game::GetFrameMS();
+			}
+		}
+
 		static property bool IsInGame
 		{
 			bool get()
@@ -49,7 +57,7 @@ namespace Agony
 		{
 			System::String^ get()
 			{
-				char* gameVersion = Native::Game::GetGameVersion();
+				const char* gameVersion = Native::Game::GetGameVersion();
 				if (gameVersion != nullptr)
 				{
 					return gcnew System::String(Native::Game::GetGameVersion());

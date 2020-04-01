@@ -3,6 +3,7 @@ using Agony.SDK.CommonBot;
 using Agony.SDK.TreeSharp;
 using Gathering.Decorators;
 using System;
+using System.Collections.Generic;
 using System.Xml;
 
 namespace Gathering
@@ -12,6 +13,9 @@ namespace Gathering
         internal static CGGameObject NodeObject = null;
         internal static XmlDocument Profile = new XmlDocument();
         internal static int HotspotIndex = -1;
+        internal static long GatherWaitTill = 0;
+        internal static int GatherAttempts = 0;
+        internal static Dictionary<string, long> BlacklistedNodes = new Dictionary<string, long>();
 
         public override string Name { get { return "Gathering"; } }
 

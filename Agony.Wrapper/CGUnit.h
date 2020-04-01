@@ -102,6 +102,16 @@ namespace Agony
 			float get();
 		}
 
+		property Int64 SpellStartTimeMS
+		{
+			Int64 get();
+		}
+
+		property Int64 SpellEndTimeMS
+		{
+			Int64 get();
+		}
+
 		bool Interact();
 
 		bool IsInCombat();
@@ -109,5 +119,7 @@ namespace Agony
 		bool IsDead();
 
 		bool IsGhost();
+
+		bool IsCasting();
 	};
 }

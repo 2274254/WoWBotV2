@@ -187,6 +187,9 @@
     <ClInclude Include="Signal.h">
       <Filter>Header Files\Events</Filter>
     </ClInclude>
+    <ClInclude Include="BuildInfo.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

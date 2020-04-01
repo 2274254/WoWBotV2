@@ -44,6 +44,7 @@ namespace Offsets
 	inline uintptr_t CGGameUI__OnSpriteRightClick = 0x11900B0;
 	inline uintptr_t CGGameUI__ClosestObjectMatch = 0x117D920;
 	inline uintptr_t CGGameUI__m_currentObjectTrack = 0x2A73AE0;//(Mouse over object)
+	inline uintptr_t FrameTime__GetCurTimeMs = 0x4A71D0;
 
 	namespace GameObject
 	{

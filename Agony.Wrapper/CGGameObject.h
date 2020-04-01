@@ -9,8 +9,6 @@ namespace Agony
 	{
 	internal:
 		Native::CGGameObject* GetPtr();
-	protected:
-		Native::CGGameObject* self;
 	public:
 		CGGameObject(Native::CGGameObject* obj) : CGObject(obj) {}
 		bool Interact();

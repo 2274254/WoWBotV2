@@ -47,14 +47,18 @@ namespace Gathering.Decorators
                         Console.WriteLine(gameObject.Name);
                         if(HerbalistNodes.Contains(gameObject.Name))
                         {
-                            Gathering.NodeObject = gameObject;
-                            break;
+                            if(!Gathering.BlacklistedNodes.ContainsKey(gameObject.Guid.LoWord + "-" + gameObject.Guid.HiWord) || Gathering.BlacklistedNodes[gameObject.Guid.LoWord + "-" + gameObject.Guid.HiWord] < Game.FrameTimeMS)
+                            { 
+                                Gathering.NodeObject = gameObject;
+                                break;
+                            }
                         }
                     }
 
                     //If no nodes arround, move to a hotspot...
                     if (Gathering.NodeObject == null)
                     {
+                        Gathering.GatherAttempts = 0;
                         XmlNode hotspots = Gathering.Profile["HBProfile"]["Hotspots"];
                         if (Gathering.HotspotIndex == -1)
                         {
@@ -76,12 +80,19 @@ namespace Gathering.Decorators
                         {
                             Gathering.HotspotIndex = 0;
                         }
+
                         var currentHotspot = hotspots.ChildNodes.Item(Gathering.HotspotIndex);
                         var x = float.Parse(currentHotspot.Attributes.GetNamedItem("X").Value);
                         var y = float.Parse(currentHotspot.Attributes.GetNamedItem("Y").Value);
                         var z = float.Parse(currentHotspot.Attributes.GetNamedItem("Z").Value);
                         var hotspotPosition = new Vector3(x, y, z);
                         var distance = Vector3.Distance(hotspotPosition, playerPosition);
+
+                        if(distance < 50 && Gathering.HotspotIndex == hotspots.ChildNodes.Count)
+                        {
+                            Gathering.HotspotIndex = 0;
+                            return;
+                        }
 
                         Logger.Log(LogLevel.Debug, string.Format("Distance: {0}", distance));
                         Logger.Log(LogLevel.Debug, string.Format("Pos: ({0}, {1}, {2})", playerPosition.X, playerPosition.Y, playerPosition.Z));

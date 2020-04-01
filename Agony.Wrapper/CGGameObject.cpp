@@ -12,8 +12,10 @@ namespace Agony
 		auto gameObject = this->GetPtr();
 		if (gameObject != nullptr)
 		{
+			System::Console::WriteLine("About to call Native Interact");
 			return this->GetPtr()->Interact();
 		}
+		System::Console::WriteLine("GameObject PTR is NULLPTR");
 		return false;
 	}
 }

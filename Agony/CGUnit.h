@@ -17,6 +17,7 @@ namespace Agony
 			bool IsInCombat();
 			bool IsDead();
 			bool IsGhost();
+			bool IsCasting();
 
 			float GetCurrentSpeed();
 			float GetRunSpeed();
@@ -24,6 +25,10 @@ namespace Agony
 			float GetSwimSpeed();
 
 			MAKE_GET(fAngle, float, Offsets::GameObject::fAngle);
+
+			MAKE_GET(SpellStartTimeMS, uint64_t, Offsets::GameObject::CastSpellStartTimeMS);
+			MAKE_GET(SpellEndTimeMS, uint64_t, Offsets::GameObject::CastSpellEndTimeMS);
+
 			MAKE_GET(CurrentHP, int32_t, Offsets::GameObject::CurrentHP);
 			MAKE_GET(MaxHP, int32_t, Offsets::GameObject::MaxHP);
 			MAKE_GET(CurrentMana, int32_t, Offsets::GameObject::CurrentMana);

@@ -10,8 +10,9 @@ namespace Gathering.Decorators
     {
         static bool ShouldTakeAction()
         {
+            var player = Game.Me;
             //If i need to wait for what ever reason...
-            if(Game.Me == null || Game.Me.IsInCombat())//OR IS CASTING/CHANNELING/OR IN COMBAT...
+            if(player == null || player.IsInCombat() || player.IsCasting() || Gathering.GatherWaitTill > Game.FrameTimeMS)//OR IS CASTING/CHANNELING/OR IN COMBAT...
             {
                 return true;
             }

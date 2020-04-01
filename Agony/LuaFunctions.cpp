@@ -21,7 +21,7 @@ namespace Agony
             {"GetPlayerAngle", reinterpret_cast<int64_t>(GetPlayerAngle)},
             {"NextPoint", reinterpret_cast<int64_t>(NextPoint)},
             {"IsInGame", reinterpret_cast<int64_t>(IsInGame)},
-            {"GatherClosest", reinterpret_cast<int64_t>(GatherClosest)}
+            {"InteractWith", reinterpret_cast<int64_t>(InteractWith)}
         };
 
         WoWObject* LuaFunctions::GetUnitById(const char* unitid)
@@ -448,11 +448,16 @@ namespace Agony
             return 0;
         }
 
-        int32_t LuaFunctions::GatherClosest(uintptr_t* l)
+        int32_t LuaFunctions::InteractWith(uintptr_t* l)
         {
             auto numArgs = LuaGetTop(l);
-            if (numArgs == 0)
+            if (numArgs == 2)
             {
+                ObjectGuid guid;
+                guid.LoWord = (uint64_t)LuaToNumber(l, 1);
+                guid.HiWord = (uint64_t)LuaToNumber(l, 2);
+                std::cout << "This is being called ..." << std::endl;
+                reinterpret_cast<bool(__fastcall*)(ObjectGuid*)>(Offsets::Base + Offsets::CGGameUI__OnSpriteRightClick)(&guid);
                 /*
                 ObjectGuid guid1 = {};
                 bool exactMatch = false;
@@ -460,7 +465,7 @@ namespace Agony
                     &guid1, "mouseover", 1u, 1, 1u, exactMatch, 3.4028235e38, 0, 0
                 );
                 */
-                ObjectGuid* guid2 = reinterpret_cast<ObjectGuid*>(Offsets::Base + Offsets::CGGameUI__m_currentObjectTrack);
+                /*ObjectGuid* guid2 = reinterpret_cast<ObjectGuid*>(Offsets::Base + Offsets::CGGameUI__m_currentObjectTrack);
                 if (guid2 != nullptr && !(guid2->HiWord == 0 && guid2->LoWord))
                 {
                     //std::cout << "guid1 type " << std::dec << guid1.Type()  << std::endl;
@@ -477,11 +482,13 @@ namespace Agony
                         else if (obj->GetType() == WoWObjectType::GameObject)
                         {
                             std::cout << obj->GetName() << std::endl;
-                            reinterpret_cast<bool(__fastcall*)(ObjectGuid*)>(Offsets::Base + Offsets::CGGameUI__OnSpriteRightClick)(guid2);
+                            //This even check if it is called from Unlock or not : this one?
+                            reinterpret_cast<bool(__fastcall*)(ObjectGuid*)>(Offsets::Base + Offsets::CGGameUI__OnSpriteRightClick)(&obj->GetGuid());
                         }
                     }
-                }
-                /*auto gameObjects = ObjectManager::GetVisibleObjects();
+                }*/
+                /*THIS ALSO WORKS:
+                auto gameObjects = ObjectManager::GetVisibleObjects();
                 for (std::size_t i = 0; i < gameObjects.size(); ++i)
                 {
                     auto gameObject = gameObjects[i];

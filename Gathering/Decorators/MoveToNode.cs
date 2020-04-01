@@ -33,6 +33,7 @@ namespace Gathering.Decorators
                 {
                     var playerPosition = Game.Me.Position;
                     var nodePosition = Gathering.NodeObject.Position;
+                    //TODO, Implement some logic here, if unable to reach node, blacklist it...
                     if (Vector3.Distance(playerPosition, nodePosition) > 3)
                     {
                         MoveTo.Move(nodePosition);

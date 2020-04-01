@@ -4,6 +4,7 @@
 #include "EventHandler.h"
 #include "Bootstrapper.h"
 #include "LuaFunctions.h"
+#include "ObjectManager.h"
 #include <iostream>
 
 #pragma comment(lib, "User32.lib")
@@ -12,6 +13,7 @@ namespace Agony
 {
 	namespace Native
 	{
+		BuildInfo Game::BuildInfos = BuildInfo();
 		Game* Game::GetInstance()
 		{
 			static auto inst = new Game();
@@ -58,11 +60,16 @@ namespace Agony
 			return ((gameState >> 4) & 1);
 		}
 
-		char* Game::GetGameVersion()
+		const char* Game::GetGameVersion()
 		{
-			return "Unknown";
+			return BuildInfos.ToString().c_str();
 			//auto returnValues = LuaFunctions::Call("GetBuildInfo", { 2, 2, 2, 1 }, NULL);
 			//return (std::string(std::any_cast<const char*>(returnValues[0])) + std::string(std::any_cast<const char*>(returnValues[1]))).c_str();
+		}
+
+		uint64_t Game::GetFrameMS()
+		{
+			return reinterpret_cast<uint64_t(__fastcall*)()>(Offsets::Base + Offsets::FrameTime__GetCurTimeMs)();
 		}
 
 		CGLocalPlayer* Game::Me()

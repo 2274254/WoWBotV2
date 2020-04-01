@@ -2,6 +2,7 @@
 #include "Macros.h"
 #include "CGLocalPlayer.h"
 #include "EventHandler.h"
+#include "BuildInfo.h"
 
 namespace Agony
 {
@@ -9,11 +10,13 @@ namespace Agony
 	{
 		class DLLEXPORT Game
 		{
+			static BuildInfo BuildInfos;
 		public:
 			int InstanceCount = 0;
 			static Game* GetInstance();
 			static bool IsInGame();
-			static char* GetGameVersion();
+			static const char* GetGameVersion();
+			static uint64_t GetFrameMS();
 			static CGLocalPlayer* Me();
 			EventHandler<2, void()> OnPreTick = EventHandler<2, void()>();
 			EventHandler<3, void()> OnTick = EventHandler<3, void()>();

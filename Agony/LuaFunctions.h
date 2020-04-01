@@ -12,18 +12,20 @@
 #include "WoWObject.h"
 
 struct any {
-    enum type { Int, Float, String, Boolean, Double };
+    enum type { Int, Float, String, Boolean, Double, Uint64 };
     any(int   e) { m_data.INT = e; m_type = Int; }
     any(float e) { m_data.FLOAT = e; m_type = Float; }
     any(const char* e) { m_data.STRING = e; m_type = String; }
     any(bool e) { m_data.BOOLEAN = e; m_type = Boolean; }
     any(double e) { m_data.DOUBLE = e; m_type = Double; }
+    any(uint64_t e) { m_data.UINT64 = e; m_type = Uint64; }
     type get_type() const { return m_type; }
     int get_int() const { return m_data.INT; }
     float get_float() const { return m_data.FLOAT; }
     const char* get_string() const { return m_data.STRING; }
     bool get_bool() const { return m_data.BOOLEAN; }
     double get_double() const { return m_data.DOUBLE; }
+    uint64_t get_uint64() const { return m_data.UINT64; }
 private:
     type m_type;
     union {
@@ -32,6 +34,7 @@ private:
         const char* STRING;
         bool BOOLEAN;
         double DOUBLE;
+        uint64_t UINT64;
     } m_data;
 };
 
@@ -92,6 +95,12 @@ namespace Agony
                             argsc++;
                         }
                         break;
+                        case any::Uint64:
+                        {
+                            LuaPushNumber(L, vec[i].get_double());
+                            argsc++;
+                        }
+                        break;
                         default:
                         {
                             std::cout << "Unable to find type" << std::endl;
@@ -111,9 +120,9 @@ namespace Agony
                     int expectedType = returns[i];
                     switch (expectedType)
                     {
-                    case 2: returnValues.push_back(LuaFunctions::LuaToString(L, i - 1)); break;
-                    case 1: returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1)); break;
-                    case 0: returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1) == 1); break;
+                        case 2: returnValues.push_back(LuaFunctions::LuaToString(L, i - 1)); break;
+                        case 1: returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1)); break;
+                        case 0: returnValues.push_back(LuaFunctions::LuaToNumber(L, i - 1) == 1); break;
                     }
                 }
                 lua_pop(L, 1);
@@ -160,7 +169,7 @@ namespace Agony
             static int32_t GetCorpsePosition(uintptr_t* l);
             static int32_t GetPlayerAngle(uintptr_t* l);
             static int32_t IsInGame(uintptr_t* l);
-            static int32_t GatherClosest(uintptr_t* l);
+            static int32_t InteractWith(uintptr_t* l);
             static std::map<const char*, int64_t> FunctionsMap;
         };
     }

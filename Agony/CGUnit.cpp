@@ -1,5 +1,6 @@
 #include "CGUnit.h"
 #include "Console.h"
+#include "Game.h"
 
 namespace Agony
 {
@@ -94,6 +95,17 @@ namespace Agony
 			__except (1)
 			{
 				Console::PrintLn("Native Exception thrown at: const Native::CGUnit::IsGhost() &");
+			}
+			return false;
+		}
+
+		bool CGUnit::IsCasting()
+		{
+			uint64_t castEndTime = *reinterpret_cast<uint64_t*>(this + static_cast<uintptr_t>(Offsets::GameObject::CastSpellEndTimeMS));
+			if ((Game::GetFrameMS() - castEndTime) < 0)
+			{
+				std::cout << "FrameMS : " << Game::GetFrameMS() << " CastEndTime : " << castEndTime << std::endl;
+				return true;
 			}
 			return false;
 		}

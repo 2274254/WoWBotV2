@@ -15,6 +15,7 @@ namespace Agony
 			explicit Core(HMODULE h_module);
 			~Core();
 
+
 			bool Initialize();
 			void ClearHooks();
 

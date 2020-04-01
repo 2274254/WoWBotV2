@@ -187,6 +187,26 @@ namespace Agony
 		return 0;
 	}
 
+	Int64 CGUnit::SpellStartTimeMS::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetSpellStartTimeMS();
+		}
+		return 0;
+	}
+
+	Int64 CGUnit::SpellEndTimeMS::get()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->GetSpellEndTimeMS();
+		}
+		return 0;
+	}
+
 	bool CGUnit::Interact()
 	{
 		auto unit = this->GetPtr();
@@ -223,6 +243,16 @@ namespace Agony
 		if (unit != nullptr)
 		{
 			return unit->IsGhost();
+		}
+		return false;
+	}
+
+	bool CGUnit::IsCasting()
+	{
+		auto unit = this->GetPtr();
+		if (unit != nullptr)
+		{
+			return unit->IsCasting();
 		}
 		return false;
 	}
