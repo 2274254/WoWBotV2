@@ -29,6 +29,14 @@ namespace Agony
 
 		static void DomainUnloadEventHandler(Object^, EventArgs^);
 
+		static property int InstanceCount
+		{
+			int get()
+			{
+				return Native::Game::GetInstance()->InstanceCount;
+			}
+		}
+
 		static property bool IsInGame
 		{
 			bool get()

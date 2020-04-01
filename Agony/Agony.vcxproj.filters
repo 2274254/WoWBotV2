@@ -184,6 +184,9 @@
     <ClInclude Include="CGLocalPlayer.h">
       <Filter>Header Files\GameObjects\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Signal.h">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

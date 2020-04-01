@@ -259,6 +259,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Signal.h" />
     <ClInclude Include="Bootstrapper.h" />
     <ClInclude Include="CGGameObject.h" />
     <ClInclude Include="CGLocalPlayer.h" />

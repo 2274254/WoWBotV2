@@ -108,8 +108,8 @@ namespace Agony.Sandbox
             {
                 //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.dll", new string[1]);
 
-                LoadLibrary("a99070253df2afda");
-                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.SDK.dll", new string[1]);
+                //LoadLibrary("a99070253df2afda");
+                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.SDK.dll", new string[1]);
 
                 SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\TestAddon.exe", new string[1]);
 

@@ -98,6 +98,7 @@
 			auto _core = new Agony::Native::Core(GetModuleHandle(nullptr));
 			if (_core->Initialize())
 			{
+				Agony::Native::Game::GetInstance()->InstanceCount = 666;
 				//std::cout << std::hex << reinterpret_cast<uintptr_t*>(GetLocalPlayer());	
 				//CameraBase* pCameraBase = *reinterpret_cast<CameraBase**>(Offsets::Base + Offsets::CameraBase);
 				//std::cout << "CameraInfo:" << std::hex << reinterpret_cast<uintptr_t*>(pCameraBase->camera_ptr);

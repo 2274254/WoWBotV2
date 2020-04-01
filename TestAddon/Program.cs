@@ -10,7 +10,7 @@ namespace TestAddon
     {
         private static void Main(string[] args)
         {
-            Logger.Log(LogLevel.Info, "TestAddon has been loaded!");
+            Logger.Log(LogLevel.Info, "TestAddon has been loaded: " + Agony.Game.InstanceCount);
             Loading.OnLoadingComplete += LoadingComplete;
             Messages.OnMessage += Messages_OnMessage;
             Agony.Game.OnTick += Game_OnTick;

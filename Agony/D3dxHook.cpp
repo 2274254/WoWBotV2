@@ -188,9 +188,13 @@ namespace Agony
 					{
 						lastTick = now;
 						//Trigger On Tick
-						EventHandler<2, OnGamePreTick>::GetInstance()->Trigger();
-						EventHandler<3, OnGameTick>::GetInstance()->Trigger();
-						EventHandler<4, OnGamePostTick>::GetInstance()->Trigger();
+						Agony::Native::Game::GetInstance()->OnPreTick.Trigger();
+						Agony::Native::Game::GetInstance()->OnTick.Trigger();
+						Agony::Native::Game::GetInstance()->OnPostTick.Trigger();
+						//EventHandler<2, OnGamePreTick>::GetInstance()->Trigger();
+						//EventHandler<3, OnGameTick>::GetInstance()->Trigger();
+						//EventHandler<4, OnGamePostTick>::GetInstance()->Trigger();
+						std::cout << "TRIGGERED ON TICK INSIDE C++" << std::endl;
 					}
 				}
 
