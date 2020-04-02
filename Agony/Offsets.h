@@ -37,6 +37,7 @@ namespace Offsets
 	inline uintptr_t CameraBase = 0x2A74A88;
 	inline uintptr_t CorpseBase = 0x27CBDA8;
 	inline uintptr_t ObjectMgr = 0x29DBED0;
+	inline uintptr_t ClntObjMgrObjectPtr = 0xFBC440;
 	inline uintptr_t CGGameObject_C__GetName = 0xE14AC0;
 	inline uintptr_t CGUnit_C__GetUnitNameExposed = 0xD7B960;
 	inline uintptr_t CGUnit_C__CanAttack = 0xD62350;
@@ -45,6 +46,7 @@ namespace Offsets
 	inline uintptr_t CGGameUI__ClosestObjectMatch = 0x117D920;
 	inline uintptr_t CGGameUI__m_currentObjectTrack = 0x2A73AE0;//(Mouse over object)
 	inline uintptr_t FrameTime__GetCurTimeMs = 0x4A71D0;
+	inline uintptr_t CGBag_C__GetItemPointer = 0xEF59C0;
 
 	namespace GameObject
 	{

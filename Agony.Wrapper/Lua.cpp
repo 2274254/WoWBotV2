@@ -17,7 +17,7 @@ namespace Agony
 			returnsUnmanaged.push_back(expectedReturn);
 		}
 
-		auto result = Agony::Native::LuaFunctions::Call(functionName, returnsUnmanaged, "player");
+		auto result = Agony::Native::LuaFunctions::Call(functionName, returnsUnmanaged, 5);//TODO
 
 		System::Collections::Generic::List<System::Object^>^ returnValues = gcnew System::Collections::Generic::List<System::Object^>();
 

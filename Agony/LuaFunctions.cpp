@@ -3,6 +3,7 @@
 #include "Navigation.h"
 #include "Drawings.h"
 #include "ObjectManager.h"
+#include "Game.h"
 
 namespace Agony
 {
@@ -21,7 +22,7 @@ namespace Agony
             {"GetPlayerAngle", reinterpret_cast<int64_t>(GetPlayerAngle)},
             {"NextPoint", reinterpret_cast<int64_t>(NextPoint)},
             {"IsInGame", reinterpret_cast<int64_t>(IsInGame)},
-            {"InteractWith", reinterpret_cast<int64_t>(InteractWith)}
+            {"Test", reinterpret_cast<int64_t>(Test)}
         };
 
         WoWObject* LuaFunctions::GetUnitById(const char* unitid)
@@ -37,11 +38,6 @@ namespace Agony
         WoWObject* LuaFunctions::GetTarget()
         {
             return GetUnitById("target");
-        }
-
-        CorpseBase* LuaFunctions::GetCorpseBase()
-        {
-            return reinterpret_cast<CorpseBase*>(Offsets::Base + Offsets::CorpseBase);
         }
 
         void LuaFunctions::Execute(const char* com)
@@ -406,7 +402,7 @@ namespace Agony
             auto numArgs = LuaGetTop(l);
             if (numArgs == 0)
             {
-                auto corpseBase = GetCorpseBase();
+                auto corpseBase = reinterpret_cast<CorpseBase*>(Offsets::Base + Offsets::CorpseBase);
                 if (corpseBase == nullptr)
                 {
                     LuaPushNumber(l, 0);
@@ -448,23 +444,22 @@ namespace Agony
             return 0;
         }
 
-        int32_t LuaFunctions::InteractWith(uintptr_t* l)
+        int32_t LuaFunctions::Test(uintptr_t* l)
         {
             auto numArgs = LuaGetTop(l);
-            if (numArgs == 2)
+            if (numArgs == 0)
             {
-                ObjectGuid guid;
-                guid.LoWord = (uint64_t)LuaToNumber(l, 1);
-                guid.HiWord = (uint64_t)LuaToNumber(l, 2);
-                std::cout << "This is being called ..." << std::endl;
-                reinterpret_cast<bool(__fastcall*)(ObjectGuid*)>(Offsets::Base + Offsets::CGGameUI__OnSpriteRightClick)(&guid);
-                /*
-                ObjectGuid guid1 = {};
-                bool exactMatch = false;
-                auto guid2 = reinterpret_cast<ObjectGuid*(__fastcall*)(ObjectGuid*, const char*, uint32_t, int32_t, uint32_t, bool, float, int32_t, int32_t)>(Offsets::Base + Offsets::CGGameUI__ClosestObjectMatch)(
-                    &guid1, "mouseover", 1u, 1, 1u, exactMatch, 3.4028235e38, 0, 0
-                );
-                */
+                //auto player = Agony::Native::Game::Me();
+                //uintptr_t* L = *(uintptr_t**)(Offsets::Base + Offsets::lua_state);
+                //auto v4 = 0;// reinterpret_cast<uintptr_t* (__thiscall*)(void*)>(Offsets::Base + 0xD08BE0)(L);
+                //auto result = LuaFunctions::Call("GetProfessionInfo", {2, 2, 1, 1, 1, 1, 1, 1, 1, 1}, 5);
+                //std::cout << "v4 = " << std::dec << std::any_cast<int>(result[2]) << "/" << std::any_cast<int>(result[3]) << std::endl;
+
+                auto result = LuaFunctions::Call("UnitHealth", {1}, "player");
+                std::cout << "Test = " << std::dec << std::any_cast<int>(result[0]) << std::endl;
+
+
+
                 /*ObjectGuid* guid2 = reinterpret_cast<ObjectGuid*>(Offsets::Base + Offsets::CGGameUI__m_currentObjectTrack);
                 if (guid2 != nullptr && !(guid2->HiWord == 0 && guid2->LoWord))
                 {

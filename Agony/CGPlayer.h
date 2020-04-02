@@ -8,6 +8,7 @@ namespace Agony
 		class DLLEXPORT CGPlayer : public CGUnit
 		{
 		public:
+			CGObject* GetItemBySlot(int slot);
 		};
 	}
 }

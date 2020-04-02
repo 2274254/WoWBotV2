@@ -1,13 +1,6 @@
 #pragma once
 #include "vector3.h"
 
-class CorpseBase
-{
-public:
-    char pad_0000[40]; //0x0000
-    Vector3 pos; //0x0028
-}; //Size: 0x0034
-
 enum WoWObjectType : uint8_t
 {
 	Object = 0,

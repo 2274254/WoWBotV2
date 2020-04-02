@@ -36,4 +36,22 @@ namespace Agony
 		}
 		return 0;
 	}
+
+	void CGLocalPlayer::RepopMe()
+	{
+		auto player = this->GetPtr();
+		if (player != nullptr)
+		{
+			player->RepopMe();
+		}
+	}
+
+	void CGLocalPlayer::RetrieveCorpse()
+	{
+		auto player = this->GetPtr();
+		if (player != nullptr)
+		{
+			player->RetrieveCorpse();
+		}
+	}
 }

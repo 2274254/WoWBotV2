@@ -110,4 +110,10 @@ namespace Agony
 	{
 		return gcnew CGLocalPlayer(Native::Game::Me());
 	}
+
+	SharpDX::Vector3 Game::CorpseLocation::get()
+	{
+		auto corpseLocation = Native::Game::GetCorpseLocation();
+		return SharpDX::Vector3(corpseLocation.x, corpseLocation.y, corpseLocation.z);
+	}
 }

@@ -74,7 +74,20 @@ namespace Agony
 
 		CGLocalPlayer* Game::Me()
 		{
+			//const CGObjectManager* m_CurObjectMgr = *reinterpret_cast<CGObjectManager**>(Offsets::Base + Offsets::ObjectMgr);
+			//ObjectGuid guid = m_CurObjectMgr->LocalGuid;
+			//return (CGLocalPlayer*)ObjectManager::GetObjectFromGuid(&guid);
 			return reinterpret_cast<CGLocalPlayer * (__fastcall*)(const char*)>(Offsets::Base + Offsets::GetBaseFromToken)("player");
+		}
+
+		Vector3 Game::GetCorpseLocation()
+		{
+			auto corpseBase = reinterpret_cast<CorpseBase*>(Offsets::Base + Offsets::CorpseBase);
+			if (corpseBase != nullptr)
+			{
+				return corpseBase->pos;
+			}
+			return Vector3();
 		}
 
 		bool Game::ApplyHooks(void* mainWindowHandle)

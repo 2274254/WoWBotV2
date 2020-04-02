@@ -6,6 +6,13 @@ namespace Agony
 {
 	namespace Native
 	{
+		class DLLEXPORT CorpseBase
+		{
+		public:
+			char pad_0000[40]; //0x0000
+			Vector3 pos; //0x0028
+		}; //Size: 0x0034
+
 		class DLLEXPORT CGUnit : public CGObject
 		{
 		public:

@@ -132,7 +132,6 @@ namespace Agony
             static WoWObject* GetUnitById(const char* unitid);
             static WoWObject* GetLocalPlayer();
             static WoWObject* GetTarget();
-            static CorpseBase* GetCorpseBase();
             static void Execute(const char* com);
             static void Execute(const std::string& com);
             
@@ -169,7 +168,7 @@ namespace Agony
             static int32_t GetCorpsePosition(uintptr_t* l);
             static int32_t GetPlayerAngle(uintptr_t* l);
             static int32_t IsInGame(uintptr_t* l);
-            static int32_t InteractWith(uintptr_t* l);
+            static int32_t Test(uintptr_t* l);
             static std::map<const char*, int64_t> FunctionsMap;
         };
     }

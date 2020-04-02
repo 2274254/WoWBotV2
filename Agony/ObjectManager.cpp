@@ -49,6 +49,10 @@ namespace Agony
 				}*/
 				if (wowObj->GetType() != WoWObjectType::Invalid)
 				{
+					if (wowObj->GetType() == WoWObjectType::Item)
+					{
+						std::cout << "Obj item address 0x" << std::hex << wowObj << std::endl;
+					}
 					returnList.push_back(wowObj);
 				}
 			}
@@ -88,6 +92,13 @@ namespace Agony
 
 		CGObject* ObjectManager::GetObjectFromGuid(ObjectGuid* guid)
 		{
+			/*return reinterpret_cast<CGObject* (__fastcall*)(ObjectGuid*, uint64_t, uint64_t, uint64_t)>(Offsets::Base + Offsets::ClntObjMgrObjectPtr)(
+				guid,
+				0x20,
+				0,
+				0x1A84
+			);*/
+
 			const CGObjectManager* m_CurObjectMgr = *reinterpret_cast<CGObjectManager**>(Offsets::Base + Offsets::ObjectMgr);
 			for (uint64_t i = 0; i < m_CurObjectMgr->ActiveObjects.Capacity; i++)
 			{

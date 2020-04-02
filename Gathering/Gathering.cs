@@ -58,7 +58,7 @@ namespace Gathering
         public override void Pulse()
         {
             if (!Agony.SDK.Game.IsInGame) return;
-            if(!started) Root.Start(null);
+            if (!started) { Root.Start(null); /*started = true;*/ }
             Root.Tick(null);
         }
 

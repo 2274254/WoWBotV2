@@ -71,5 +71,10 @@ namespace Agony
 			CGLocalPlayer^ get();
 		}
 
+		static property SharpDX::Vector3 CorpseLocation
+		{
+			SharpDX::Vector3 get();
+		}
+
 	};
 }

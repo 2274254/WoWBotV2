@@ -18,6 +18,7 @@ namespace Agony
 			static const char* GetGameVersion();
 			static uint64_t GetFrameMS();
 			static CGLocalPlayer* Me();
+			static Vector3 GetCorpseLocation();
 			EventHandler<2, void()> OnPreTick = EventHandler<2, void()>();
 			EventHandler<3, void()> OnTick = EventHandler<3, void()>();
 			EventHandler<4, void()> OnPostTick = EventHandler<4, void()>();

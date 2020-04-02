@@ -24,5 +24,8 @@ namespace Agony
 		{
 			Int32 get();
 		}
+
+		void RepopMe();
+		void RetrieveCorpse();
 	};
 }

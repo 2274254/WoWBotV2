@@ -1,4 +1,5 @@
-﻿using Agony.SDK.Enumerations;
+﻿using Agony;
+using Agony.SDK.Enumerations;
 using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
 using Action = Agony.SDK.TreeSharp.Action;
@@ -25,6 +26,7 @@ namespace Gathering.Decorators
                 Agony.PathingController.Reset();
                 //
                 //TODO: Release corpse...
+                Game.Me.RepopMe();
             });
         }
 
