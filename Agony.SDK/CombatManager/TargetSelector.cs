@@ -5,7 +5,6 @@ namespace Agony.SDK.CombatManager
 {
     public static class TargetSelector
     {
-        private static bool started = false;
         private static CGUnit _target = null;
         public static CGUnit ForcedTarget = null;
         private static Composite _root;
@@ -29,8 +28,9 @@ namespace Agony.SDK.CombatManager
             if (ForcedTarget == null && Game.Me.IsInCombat())
             {
                 //Find best target to attack...
-                if (!started) { _root.Start(null); started = true; }
+                _root.Start(null);
                 _root.Tick(null);
+                _root.Stop(null);
             }
         }
     }
