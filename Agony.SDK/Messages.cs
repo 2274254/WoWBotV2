@@ -127,7 +127,6 @@ namespace Agony.SDK
 
         internal static void OnWndProc(WndEventArgs args)
         {
-            Console.WriteLine("WE GOT ONWNDPROC IN SDK");
             if (OnMessage != null)
             {
                 WindowMessage eventHandle = null;

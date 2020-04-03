@@ -87,12 +87,14 @@ namespace Agony
 		{
 			switch (eventType)
 			{
-			case BootstrapEventType::Load:
-				/*if (ClientFacade::GetInstance()->GetGameState() == static_cast<uintptr_t>(GameMode::Running))
+				case BootstrapEventType::Load:
+				{
+					/*if (ClientFacade::GetInstance()->GetGameState() == static_cast<uintptr_t>(GameMode::Running))
 					EventHandler<3, OnGameStart>::GetInstance()->Trigger();
 
-				if (ClientFacade::GetInstance()->GetGameState() == static_cast<uintptr_t>(GameMode::Connecting))
-					EventHandler<26, OnGameLoad>::GetInstance()->Trigger();*/
+					if (ClientFacade::GetInstance()->GetGameState() == static_cast<uintptr_t>(GameMode::Connecting))
+						EventHandler<26, OnGameLoad>::GetInstance()->Trigger();*/
+				}
 				break;
 			}
 		}

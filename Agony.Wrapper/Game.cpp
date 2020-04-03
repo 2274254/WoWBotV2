@@ -10,48 +10,29 @@ namespace Agony
 		ATTACH_DOMAIN();
 
 		System::Console::WriteLine("Binding Game Event: GameWndProc");
-		ATTACH_EVENT(GameWndProc,	1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
-
+		ATTACH_EVENT(GameWndProc, Agony::Native::Game::Game::GetInstance()->GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
+		
 		System::Console::WriteLine("Binding Game Event: GamePreTick");
-		//ATTACH_EVENT(GamePreTick,	2, Native::OnGamePreTick);
-		GamePreTickHandlers  = gcnew List<GamePreTick^>();
-		m_GamePreTickNativeDelegate = gcnew OnGamePreTickNativeDelegate(OnGamePreTickNative);
-		m_GamePreTickNative = Marshal::GetFunctionPointerForDelegate(m_GamePreTickNativeDelegate);
-		Agony::Native::Game::Game::GetInstance()->OnPreTick.Add(m_GamePreTickNative.ToPointer());
+		ATTACH_EVENT(GamePreTick, Agony::Native::Game::Game::GetInstance()->OnPreTick, 2, Native::OnGamePreTick);
 
 		System::Console::WriteLine("Binding Game Event: GameTick");
-		//ATTACH_EVENT(GameTick,		3, Native::OnGameTick);
-		GameTickHandlers = gcnew List<GameTick^>();
-		m_GameTickNativeDelegate = gcnew OnGameTickNativeDelegate(OnGameTickNative);
-		m_GameTickNative = Marshal::GetFunctionPointerForDelegate(m_GameTickNativeDelegate);
-		Agony::Native::Game::Game::GetInstance()->OnTick.Add(m_GameTickNative.ToPointer());
+		ATTACH_EVENT(GameTick, Agony::Native::Game::Game::GetInstance()->OnTick, 3, Native::OnGameTick);
 
 		System::Console::WriteLine("Binding Game Event: GamePostTick");
-		//ATTACH_EVENT(GamePostTick,	4, Native::OnGamePostTick);
-		GamePostTickHandlers = gcnew List<GamePostTick^>();
-		m_GamePostTickNativeDelegate = gcnew OnGamePostTickNativeDelegate(OnGamePostTickNative);
-		m_GamePostTickNative = Marshal::GetFunctionPointerForDelegate(m_GamePostTickNativeDelegate);
-		Agony::Native::Game::Game::GetInstance()->OnPostTick.Add(m_GamePostTickNative.ToPointer());
-
-		/*GameWndProcHandlers			= gcnew List<GameWndProc^>();
-		m_GameWndProcNativeDelegate = gcnew OnGameWndProcNativeDelegate(OnGameWndProcNative);
-		m_GameWndProcNative			= Marshal::GetFunctionPointerForDelegate(m_GameWndProcNativeDelegate);
-		Native::EventHandler<1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(m_GameWndProcNative.ToPointer());
-		*/
+		ATTACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, 4, Native::OnGamePostTick);
 	}
 
 	void Game::DomainUnloadEventHandler(Object^, System::EventArgs^)
 	{
-		DETACH_EVENT(GameWndProc,	1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
-		DETACH_EVENT(GamePreTick,	2, Native::OnGamePreTick);
-		DETACH_EVENT(GameTick,		3, Native::OnGameTick);
-		DETACH_EVENT(GamePostTick,	4, Native::OnGamePostTick);
+		DETACH_EVENT(GameWndProc, Agony::Native::Game::Game::GetInstance()->GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
+		DETACH_EVENT(GamePreTick, Agony::Native::Game::Game::GetInstance()->OnPreTick, 2, Native::OnGamePreTick);
+		DETACH_EVENT(GameTick, Agony::Native::Game::Game::GetInstance()->OnTick, 3, Native::OnGameTick);
+		DETACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, 4, Native::OnGamePostTick);
 		System::Console::WriteLine("Domain Unloaded");
 	}
 
 	bool Game::OnGameWndProcNative(HWND HWnd, UINT message, WPARAM WParam, LPARAM LParam)
 	{
-		printf("WE GOT WNDPROC in WRAPPER\n");
 		bool process = true;
 
 		START_TRACE

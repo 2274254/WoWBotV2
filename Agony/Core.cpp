@@ -75,9 +75,10 @@ namespace Agony
 
 		void Core::DisplayWelcomeMessage() const
 		{
+			/*
 			EventHandler<1, OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Add(nullptr);
 			EventHandler<1, OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->Remove(nullptr);
-			/*
+			
 			EventHandler<2, OnGamePreTick>::GetInstance()->Add(nullptr);
 			EventHandler<2, OnGamePreTick>::GetInstance()->Remove(nullptr);
 

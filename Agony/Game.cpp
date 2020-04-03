@@ -24,7 +24,7 @@ namespace Agony
 		LRESULT WINAPI hkWndProc(HWND hwnd, UINT msg, WPARAM WParam, LPARAM LParam)
 		{
 			//printf("ON MESSAGE\n");
-			auto process = EventHandler<1, OnWndProc, HWND, UINT, WPARAM, LPARAM>::GetInstance()->TriggerProcess(hwnd, msg, WParam, LParam);
+			auto process = Game::GetInstance()->GameWndProc.TriggerProcess(hwnd, msg, WParam, LParam);
 			LRESULT returnValue;
 			if (msg == WM_KEYUP)
 			{

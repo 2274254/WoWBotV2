@@ -7,7 +7,10 @@ namespace Agony.Sandbox
     {
         internal static void Log(string text, params object[] args)
         {
-            Console.WriteLine(text, args);
+            if(text != null)
+            {
+                Console.WriteLine(text, args);
+            }
         }
 
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
@@ -18,7 +21,7 @@ namespace Agony.Sandbox
             Log("An exception ocurred! Agony might crash!");
             Log("");
             var exception = exceptionObject as Exception;
-            if (exception != null)
+            if (exception != null && exception.GetType() != null)
             {
                 Log("Type: {0}", exception.GetType().FullName);
                 Log("Message: {0}", exception.Message);
@@ -26,7 +29,7 @@ namespace Agony.Sandbox
                 Log("Stracktrace:");
                 Log(exception.StackTrace);
                 exception = exception.InnerException;
-                if (exception != null)
+                if (exception != null && exception.GetType() != null)
                 {
                     Log("");
                     Log("InnerException(s):");

@@ -8,6 +8,8 @@ namespace Agony
 {
 	namespace Native
 	{
+		typedef bool(OnWndProc)(HWND, UINT, WPARAM, LPARAM);
+
 		class DLLEXPORT Game
 		{
 			static BuildInfo BuildInfos;
@@ -19,6 +21,7 @@ namespace Agony
 			static uint64_t GetFrameMS();
 			static CGLocalPlayer* Me();
 			static Vector3 GetCorpseLocation();
+			EventHandler<1, OnWndProc, HWND, UINT, WPARAM, LPARAM> GameWndProc = EventHandler<1, OnWndProc, HWND, UINT, WPARAM, LPARAM>();
 			EventHandler<2, void()> OnPreTick = EventHandler<2, void()>();
 			EventHandler<3, void()> OnTick = EventHandler<3, void()>();
 			EventHandler<4, void()> OnPostTick = EventHandler<4, void()>();

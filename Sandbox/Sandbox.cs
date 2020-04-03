@@ -215,9 +215,11 @@ namespace Agony.Sandbox
             catch (Exception e)
             {
                 Logs.Log("Sandbox: Unloading AppDomain failed");
+                //Logs.PrintException(e);
                 Logs.Log(e.ToString());
             }
             SandboxDomain.Instance = null;
+            Thread.Sleep(1000 * 2);
         }
 
         /// <summary>

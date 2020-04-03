@@ -97,6 +97,12 @@
     <None Include="packages.config" />
     <None Include="Sandbox.snk" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agony.Wrapper\Agony.Wrapper.vcxproj">
+      <Project>{e6f487d9-9122-4718-8d75-a8cdc8e594cb}</Project>
+      <Name>Agony.Wrapper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\UnmanagedExports.Repack.1.0.4\build\UnmanagedExports.Repack.targets" Condition="Exists('..\packages\UnmanagedExports.Repack.1.0.4\build\UnmanagedExports.Repack.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

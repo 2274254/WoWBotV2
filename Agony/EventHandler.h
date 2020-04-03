@@ -9,7 +9,6 @@ namespace Agony
 	namespace Native
 	{
 		//Game
-		typedef bool(OnWndProc)(HWND, UINT, WPARAM, LPARAM);
 
 		typedef void(OnGamePreTick)();
 		typedef void(OnGameTick)();

@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gathering", "Gathering\Gath
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCS", "TestCS\TestCS.csproj", "{08D83059-C002-4BE2-AE92-E5B639E255F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgonyLauncher", "AgonyLauncher\AgonyLauncher.csproj", "{99257FAA-CB30-442F-900C-6FE0E26B85B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +175,18 @@ Global
 		{08D83059-C002-4BE2-AE92-E5B639E255F6}.Release|x64.Build.0 = Release|Any CPU
 		{08D83059-C002-4BE2-AE92-E5B639E255F6}.Release|x86.ActiveCfg = Release|Any CPU
 		{08D83059-C002-4BE2-AE92-E5B639E255F6}.Release|x86.Build.0 = Release|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Debug|x64.Build.0 = Debug|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Debug|x86.Build.0 = Debug|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Release|x64.ActiveCfg = Release|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Release|x64.Build.0 = Release|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Release|x86.ActiveCfg = Release|Any CPU
+		{99257FAA-CB30-442F-900C-6FE0E26B85B9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
