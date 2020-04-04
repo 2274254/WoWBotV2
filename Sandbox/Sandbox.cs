@@ -9,6 +9,7 @@ using System.Security.Permissions;
 using System.Threading;
 using Agony.Sandbox.Shared;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Agony.Sandbox
 {
@@ -57,6 +58,8 @@ namespace Agony.Sandbox
 
         internal static bool AllAddonsLoaded { get; set; }
 
+        internal static AgonyStatus Status = AgonyStatus.Stopped;
+
         /// <summary>
         ///     Bootstrap of the Sandbox (Secure Application Domain) from an external source.
         /// </summary>
@@ -72,8 +75,8 @@ namespace Agony.Sandbox
         {
             try
             {
-                Reload();
-                Input.Subscribe();
+                //Input.Subscribe();
+                MonitorStatus();
             }
             catch (Exception e)
             {
@@ -83,6 +86,32 @@ namespace Agony.Sandbox
             }
 
             return 0;
+        }
+
+        internal static void MonitorStatus()
+        {
+            Task.Factory.StartNew(async () =>
+            {
+                while(true)
+                {
+                    var status = ServiceFactory.CreateProxy<ILoaderService>().GetStatus();
+                    if(Status != status)
+                    {
+                        Status = status;
+                        if (status == AgonyStatus.Stopped)
+                        {
+                            Unload();
+                        }
+                        else
+                        {
+                            UpdateConfig();
+                            CreateApplicationDomain();
+                            Load();
+                        }
+                    }
+                    await Task.Delay(250);
+                }
+            });
         }
 
         /// <summary>

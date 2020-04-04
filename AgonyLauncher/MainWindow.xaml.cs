@@ -1,4 +1,5 @@
-﻿using AgonyLauncher.Globals;
+﻿using Agony.Sandbox.Shared;
+using AgonyLauncher.Globals;
 using AgonyLauncher.Routines;
 using AgonyLauncher.Utils;
 using AgonyLauncher.Windows;
@@ -14,6 +15,7 @@ namespace AgonyLauncher
     /// </summary>
     public partial class MainWindow : Window
     {
+        internal static AgonyStatus Status = AgonyStatus.Stopped;
         public PluginsWindow Plugins = new PluginsWindow();
         public MainWindow()
         {
@@ -86,6 +88,20 @@ namespace AgonyLauncher
         {
             LoaderUpdateRoutines.InstallFilesRoutine(null, new System.Collections.Generic.Dictionary<string, object>());
             //UpdateSystem();
+        }
+
+        private void ButtonStartStop_Click(object sender, RoutedEventArgs e)
+        {
+            if(Status == AgonyStatus.Stopped)
+            {
+                Status = AgonyStatus.Running;
+                ButtonStartStop.Content = "Stop";
+            }
+            else
+            {
+                Status = AgonyStatus.Stopped;
+                ButtonStartStop.Content = "Start";
+            }
         }
     }
 }

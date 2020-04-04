@@ -64,7 +64,7 @@
                         </StackPanel>
                     </ScrollViewer>
                     <DockPanel Grid.Row="1" Background="#FF333333">
-                        <Button x:Name="ButtonStartStop" Content="Start" Width="185" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button x:Name="ButtonStartStop" Content="Start" Width="185" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonStartStop_Click"/>
                     </DockPanel>
                 </Grid>
             </DockPanel>

@@ -43,6 +43,11 @@ namespace AgonyLauncher.Services
             };
         }
 
+        public AgonyStatus GetStatus()
+        {
+            return MainWindow.Status;
+        }
+
         public void Recompile(int pid)
         {
             Settings.Instance.InstalledPlugins.RecompileSelectedPlugins();

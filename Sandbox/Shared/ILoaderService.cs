@@ -3,6 +3,11 @@ using System.ServiceModel;
 
 namespace Agony.Sandbox.Shared
 {
+    public enum AgonyStatus
+    {
+        Stopped = 0,
+        Running = 1
+    }
     [ServiceContract]
     public interface ILoaderService
     {
@@ -14,5 +19,8 @@ namespace Agony.Sandbox.Shared
 
         [OperationContract]
         void Recompile(int pid);
+
+        [OperationContract]
+        AgonyStatus GetStatus();
     }
 }
