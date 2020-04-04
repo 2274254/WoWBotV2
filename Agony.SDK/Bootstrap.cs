@@ -15,7 +15,7 @@ namespace Agony.SDK
         internal static bool _initialized;
         internal static readonly List<Type> SkipInitialization = new List<Type>();
 
-        public static void Init(string[] args)
+        public static void Init(object[] args)
         {
             if (_initialized)
             {
@@ -23,6 +23,12 @@ namespace Agony.SDK
             }
             Logger.Log(LogLevel.Info, "Init Bootstrap");
             _initialized = true;
+
+            Dictionary<string, string> pluginConfigs = (Dictionary<string, string>)args[0];
+            string currentProfile = (string)args[1];
+
+            Console.WriteLine(currentProfile);
+
             // Set thread culture
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;

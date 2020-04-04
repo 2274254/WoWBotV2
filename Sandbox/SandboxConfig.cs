@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security;
 using System.Security.Permissions;
 using Agony.Sandbox.Shared;
@@ -35,6 +36,10 @@ namespace Agony.Sandbox
         /// </summary>
         public static bool IsVip;
 
+        public static Dictionary<string, string> PluginConfigs { get; set; }
+
+        public static string CurrentProfile { get; set; }
+
         static SandboxConfig()
         {
             Reload();
@@ -61,6 +66,8 @@ namespace Agony.Sandbox
                 LibrariesDirectory = config.LibrariesDirectory;
                 Permissions = config.Permissions;
                 IsVip = config.IsVip;
+                PluginConfigs = config.PluginConfigs;
+                CurrentProfile = config.CurrentProfile;
             }
             else
             {

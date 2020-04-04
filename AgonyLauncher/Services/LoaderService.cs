@@ -34,12 +34,20 @@ namespace AgonyLauncher.Services
 
         public Configuration GetConfiguration(int pid)
         {
+            Dictionary<string, string> pluginConfigs = new Dictionary<string, string>();
+            foreach(var plugin in Settings.Instance.InstalledPlugins.Where(plugin => plugin.Enabled && (plugin.Type == PluginType.Executable || plugin.Type == PluginType.Library) && plugin.State == PluginState.Ready))
+            {
+                pluginConfigs.Add(plugin.GetOutputFilePath(), plugin.Configs);
+            }
             return new Configuration
             {
                 DataDirectory = Settings.Instance.Directories.AppDataDirectory,
                 WrapperDllPath = PathRandomizer.WrapperDllPath,
                 LibrariesDirectory = Settings.Instance.Directories.LibrariesDirectory,
                 Permissions = null, //possible security issue
+                CurrentProfile = MainWindow.ProfilePath,
+                IsVip = true,
+                PluginConfigs = pluginConfigs
             };
         }
 

@@ -1,15 +1,11 @@
 ﻿using Agony.Sandbox;
-using Agony.SDK.CommonBot;
 using AgonyLauncher.Data;
 using AgonyLauncher.Logger;
 using AgonyLauncher.Types;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;

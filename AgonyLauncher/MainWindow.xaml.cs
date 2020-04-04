@@ -16,6 +16,7 @@ namespace AgonyLauncher
     public partial class MainWindow : Window
     {
         internal static AgonyStatus Status = AgonyStatus.Stopped;
+        internal static string ProfilePath = "";
         public PluginsWindow Plugins = new PluginsWindow();
         public MainWindow()
         {
@@ -54,7 +55,8 @@ namespace AgonyLauncher
             var result = fileDialog.ShowDialog();
             if (result.HasValue && result.Value)
             {
-                Log("Profile: " + fileDialog.FileName, "#FFFFFF");
+                Log("Selected profile: " + fileDialog.FileName, "#FFFFFF");
+                ProfilePath = fileDialog.FileName;
             }
         }
 

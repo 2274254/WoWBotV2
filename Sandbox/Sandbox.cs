@@ -236,7 +236,6 @@ namespace Agony.Sandbox
             {
                 return;
             }
-
             try
             {
                 SandboxDomain.UnloadDomain(SandboxDomain.Instance);

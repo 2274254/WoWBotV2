@@ -26,6 +26,12 @@ namespace Agony.Sandbox.Shared
         [DataMember]
         public bool IsVip { get; set; }
 
+        [DataMember]
+        public string CurrentProfile { get; set; }
+
+        [DataMember]
+        public Dictionary<string, string> PluginConfigs { get; set; }
+
         public override string ToString()
         {
             var excludedProperties = new HashSet<string>

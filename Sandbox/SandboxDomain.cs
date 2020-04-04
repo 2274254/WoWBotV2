@@ -170,7 +170,7 @@ namespace Agony.Sandbox
         private static void InitSDKBootstrap(Assembly sdk)
         {
             // Call bootstrap
-            sdk.GetType("Agony.SDK.Bootstrap").GetMethod("Init", BindingFlags.Public | BindingFlags.Static).Invoke(null, new object[] { null });
+            sdk.GetType("Agony.SDK.Bootstrap").GetMethod("Init", BindingFlags.Public | BindingFlags.Static).Invoke(null, new object[] { SandboxConfig.PluginConfigs, SandboxConfig.CurrentProfile });
         }
 
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
