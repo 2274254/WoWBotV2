@@ -24,11 +24,32 @@ namespace Gathering
         public override PulseFlags PulseFlags { get { return PulseFlags.All; } }
 
         private Composite _root;
-        private bool started = false;
+        private bool hasProfile = false;
 
-        public Gathering()
+        public override void Initialize(string configs = "", string profile = "")
         {
-            //Profile.Load("D:\\AgonyWoW\\x64\\Release\\Profiles\\Gathering\\Herbalist\\Mining+Herbing 1-75 [Start at Goldshire].xml");
+            try
+            {
+                if (!string.IsNullOrEmpty(configs))
+                {
+                    Configs = new XmlDocument();
+                    Configs.LoadXml(configs);
+                }
+                if (!string.IsNullOrEmpty(profile))
+                {
+                    //Profile.Load("D:\\AgonyWoW\\x64\\Release\\Profiles\\Gathering\\Herbalist\\Mining+Herbing 1-75 [Start at Goldshire].xml");
+                    Profile.LoadXml(profile);
+                    hasProfile = true;
+                }
+                else
+                {
+
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         public override Composite Root
@@ -50,24 +71,12 @@ namespace Gathering
             }
         }
 
-        public override void Start()
-        {
-            Root.Start(null);
-            started = true;
-        }
-
         public override void Pulse()
         {
-            if (!Agony.SDK.Game.IsInGame) return;
+            if (!hasProfile || !Agony.SDK.Game.IsInGame) return;
             Root.Start(null);
             Root.Tick(null);
             Root.Stop(null);
-        }
-
-        public override void Stop()
-        {
-            Root.Stop(null);
-            started = false;
         }
 
         public override string ShowConfigs(string configs)

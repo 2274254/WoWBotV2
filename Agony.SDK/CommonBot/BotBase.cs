@@ -30,11 +30,12 @@ namespace Agony.SDK.CommonBot
 
     public abstract class BotBase : PluginBase
     {
+        public override PluginType Type { get { return PluginType.BotBase; } }
         public virtual PulseFlags PulseFlags { get { return PulseFlags.All; } }
         public virtual Composite Root {  get { return null; } }
         public virtual void Start() { }
         public virtual void Stop() { }
-        public virtual void Initialize() { }
+        public virtual void Initialize(string configs = "", string profile = "") { }
         public virtual void Pulse() { }
     }
 }

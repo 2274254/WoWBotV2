@@ -24,10 +24,11 @@ namespace Agony.SDK
             Logger.Log(LogLevel.Info, "Init Bootstrap");
             _initialized = true;
 
-            Dictionary<string, string> pluginConfigs = (Dictionary<string, string>)args[0];
-            string currentProfile = (string)args[1];
-
-            Console.WriteLine(currentProfile);
+            if(args.Length == 2)
+            {
+                Bot.PluginConfigs = (Dictionary<string, string>)args[0];
+                Bot.CurrentProfile = (string)args[1];
+            }
 
             // Set thread culture
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;

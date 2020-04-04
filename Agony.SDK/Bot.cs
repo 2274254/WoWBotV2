@@ -7,16 +7,25 @@ namespace Agony.SDK
 {
     public static class Bot
     {
-        public static BotBase CurrentBot = null;
+        internal static BotBase CurrentBot = null;
+        internal static Dictionary<string, string> PluginConfigs = new Dictionary<string, string>();
+        internal static string CurrentProfile = "";
 
         public static void Initialize()
         {
-            IEnumerable<Type> currentAssemblytypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).Where(y => typeof(BotBase).IsAssignableFrom(y) && !y.IsAbstract && !y.IsInterface);
-            Console.WriteLine(string.Format("Found {0} BotBase", currentAssemblytypes.Count()));
-            if(currentAssemblytypes.Any())
+            foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                CurrentBot = (BotBase)Activator.CreateInstance(currentAssemblytypes.First());
-                Console.WriteLine(string.Format("Initialized {0} BotBase", CurrentBot.Name));
+                IEnumerable<Type> plugins = assembly.GetTypes().Where(y => typeof(PluginBase).IsAssignableFrom(y) && !y.IsAbstract && !y.IsInterface);
+                foreach(var plugin in plugins)
+                {
+                    var pluginBase = (PluginBase)Activator.CreateInstance(plugin);
+                    if (pluginBase.Type == PluginType.BotBase)
+                    {
+                        CurrentBot = (BotBase)pluginBase;
+                        CurrentBot.Initialize(PluginConfigs.ContainsKey(assembly.FullName) ? PluginConfigs[assembly.FullName] : "", CurrentProfile);
+                        Console.WriteLine(string.Format("Initialized {0} BotBase with profile: ", CurrentBot.Name, CurrentProfile));
+                    }
+                }
             }
             Agony.Game.OnTick += Game_OnTick;
         }
