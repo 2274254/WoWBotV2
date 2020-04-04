@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="309.302" Width="304.651" Background="#FF333333" Title="Configs">
+        Height="250" Width="304.651" Background="#FF333333" Title="Configs">
     <Window.Resources>
         <ResourceDictionary >
             <ResourceDictionary.MergedDictionaries>
@@ -13,6 +13,11 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Label>Hello World!</Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="25"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="1">Hello World!</Label>
     </Grid>
 </Window>

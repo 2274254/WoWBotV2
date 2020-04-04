@@ -345,7 +345,8 @@ namespace Agony.Sandbox
 
         internal string GetPluginBase()
         {
-            IEnumerable<Type> currentAssemblytypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes()).Where(y => typeof(PluginBase).IsAssignableFrom(y) && !y.IsAbstract && !y.IsInterface);
+            IEnumerable<Type> currentAssemblytypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
+                .Where(y => typeof(PluginBase).IsAssignableFrom(y) && !y.IsAbstract && !y.IsInterface);
             if (currentAssemblytypes.Any())
             {
                 var CurrentBot = (PluginBase)Activator.CreateInstance(currentAssemblytypes.First());

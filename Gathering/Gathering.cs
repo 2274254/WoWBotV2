@@ -4,7 +4,6 @@ using Agony.SDK.TreeSharp;
 using Gathering.Decorators;
 using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.Xml;
 
 namespace Gathering
@@ -28,7 +27,7 @@ namespace Gathering
 
         public Gathering()
         {
-            //Console.WriteLine("Gathering Initialized");
+            Console.WriteLine("Gathering Initialized");
             //Profile.Load("D:\\AgonyWoW\\x64\\Release\\Profiles\\Gathering\\Herbalist\\Mining+Herbing 1-75 [Start at Goldshire].xml");
         }
 
@@ -73,13 +72,12 @@ namespace Gathering
 
         public override string ShowConfigs(string configs)
         {
-            Configs = new XmlDocument();
-            if (configs != null) Configs.LoadXml(configs);
-
-            var WinApp = new Application();
-            WinApp.Run(new ConfigsWindow());
-
-            //new ConfigsWindow().ShowDialog();
+            if(!string.IsNullOrEmpty(configs))
+            {
+                Configs = new XmlDocument();
+                Configs.Load(configs);
+            }
+            new ConfigsWindow().ShowDialog();
             return Configs.OuterXml;
         }
     }

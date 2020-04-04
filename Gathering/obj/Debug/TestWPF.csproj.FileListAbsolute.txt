@@ -1,0 +1,5 @@
+D:\AgonyWoW\TestWPF\obj\Debug\ConfigsWindow.baml
+D:\AgonyWoW\TestWPF\obj\Debug\ConfigsWindow.g.cs
+D:\AgonyWoW\TestWPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\AgonyWoW\TestWPF\obj\Debug\Gathering_MarkupCompile.cache
+D:\AgonyWoW\TestWPF\obj\Debug\Gathering_MarkupCompile.lref
