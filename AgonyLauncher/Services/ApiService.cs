@@ -26,7 +26,7 @@ namespace AgonyLauncher.Services
             }
             catch (Exception ex)
             {
-                Log.Instance.DoLog(String.Format("Failed to setup elobuddy uri scheme! Exception: {0}", ex), Log.LogType.Error);
+                Log.Instance.DoLog(String.Format("Failed to setup agony uri scheme! Exception: {0}", ex), Log.LogType.Error);
             }
         }
 

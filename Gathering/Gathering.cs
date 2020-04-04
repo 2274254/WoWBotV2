@@ -11,6 +11,7 @@ namespace Gathering
     public class Gathering : BotBase
     {
         internal static XmlDocument Configs = new XmlDocument();
+        internal static string ConfigsString = "";
         internal static CGGameObject NodeObject = null;
         internal static XmlDocument Profile = new XmlDocument();
         internal static int HotspotIndex = -1;
@@ -27,7 +28,6 @@ namespace Gathering
 
         public Gathering()
         {
-            Console.WriteLine("Gathering Initialized");
             //Profile.Load("D:\\AgonyWoW\\x64\\Release\\Profiles\\Gathering\\Herbalist\\Mining+Herbing 1-75 [Start at Goldshire].xml");
         }
 
@@ -74,11 +74,10 @@ namespace Gathering
         {
             if(!string.IsNullOrEmpty(configs))
             {
-                Configs = new XmlDocument();
-                Configs.Load(configs);
+                ConfigsString = configs;
             }
             new ConfigsWindow().ShowDialog();
-            return Configs.OuterXml;
+            return ConfigsString;
         }
     }
 }

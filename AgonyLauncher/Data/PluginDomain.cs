@@ -343,16 +343,21 @@ namespace Agony.Sandbox
             return buffer == null ? null : Assembly.Load(buffer);
         }
 
-        internal string GetPluginBase()
+        internal string ShowPluginConfigs(string assemblyPath)
         {
-            IEnumerable<Type> currentAssemblytypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
-                .Where(y => typeof(PluginBase).IsAssignableFrom(y) && !y.IsAbstract && !y.IsInterface);
-            if (currentAssemblytypes.Any())
+            foreach(var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                var CurrentBot = (PluginBase)Activator.CreateInstance(currentAssemblytypes.First());
-                if(CurrentBot != null)
+                if(assembly.Location == assemblyPath)
                 {
-                    return CurrentBot.ShowConfigs(null);
+                    IEnumerable<Type> currentAssemblytypes = assembly.GetTypes().Where(y => typeof(PluginBase).IsAssignableFrom(y) && !y.IsAbstract && !y.IsInterface);
+                    if (currentAssemblytypes.Any())
+                    {
+                        var CurrentBot = (PluginBase)Activator.CreateInstance(currentAssemblytypes.First());
+                        if (CurrentBot != null)
+                        {
+                            return CurrentBot.ShowConfigs(null);
+                        }
+                    }
                 }
             }
             return null;

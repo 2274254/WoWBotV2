@@ -1,6 +1,7 @@
 ﻿using Agony.Sandbox;
 using Agony.SDK.CommonBot;
 using AgonyLauncher.Data;
+using AgonyLauncher.Logger;
 using AgonyLauncher.Types;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace AgonyLauncher.Windows
     /// </summary>
     public partial class PluginsWindow : Window
     {
+        internal static PluginDomain Domain = null;
         internal static PluginsWindow Instance = null;
         public readonly ObservableCollection<InstalledPluginDataGridItem> Items = new ObservableCollection<InstalledPluginDataGridItem>();
         
@@ -29,6 +31,7 @@ namespace AgonyLauncher.Windows
             Instance = this;
             PluginsGrid.ItemsSource = Items;
             RefreshPlugins();
+            RebuildPluginDomain();
         }
 
         private void PluginEnabledCheckBoxChecked(object sender, RoutedEventArgs e)
@@ -103,12 +106,18 @@ namespace AgonyLauncher.Windows
                 Settings.Instance.InstalledPlugins.UninstallPlugin(plugin);
             }
             Settings.Save();
+            RebuildPluginDomain();
         }
 
         private void ButtonNewPlugin_Click(object sender, RoutedEventArgs e)
         {
+            int countBefore = Items.Count;
             (new NewPluginWindow { Owner = GetWindow(this) }).ShowDialog();
-            Settings.Save();
+            if(countBefore != Items.Count)
+            {
+                Settings.Save();
+                RebuildPluginDomain();
+            }
         }
 
         public void RefreshPlugins()
@@ -134,6 +143,31 @@ namespace AgonyLauncher.Windows
                     Items.Remove(item);
                 }
             }
+        }
+
+        public void RebuildPluginDomain()
+        {
+            try
+            {
+                if (Domain != null) PluginDomain.UnloadDomain(Domain);
+                Domain = PluginDomain.CreateDomain("AgonyLauncherTmp");
+                foreach(InstalledPluginDataGridItem item in Items)
+                {
+                    if(!string.IsNullOrEmpty(item.Plugin.GetOutputFilePath()))
+                    {
+                        try
+                        {
+                            Domain.LoadAddon(item.Plugin.GetOutputFilePath(), new string[1]);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Instance.DoLog("Failed to load plugin in temporary domain", Log.LogType.Error);
+                            Log.Instance.DoLog(ex.ToString(), Log.LogType.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception) { }
         }
 
         public void AddLastPlugin()
@@ -177,6 +211,7 @@ namespace AgonyLauncher.Windows
                 }
             }
             Settings.Save();
+            RebuildPluginDomain();
         }
 
         private void ButtonUpdate_Click(object sender, RoutedEventArgs e)
@@ -201,6 +236,7 @@ namespace AgonyLauncher.Windows
                 }
             }
             Settings.Save();
+            RebuildPluginDomain();
         }
 
         private void ButtonSettings_Click(object sender, RoutedEventArgs e)
@@ -209,23 +245,20 @@ namespace AgonyLauncher.Windows
             {
                 if (item != null && item.Plugin != null)
                 {
-                    PluginDomain domain = PluginDomain.CreateDomain("AgonyLauncherTmp");
                     try
                     {
-                        if(domain.LoadAddon(item.Plugin.GetOutputFilePath(), new string[1]))
+                        var configs = Domain.ShowPluginConfigs(item.Plugin.GetOutputFilePath());
+                        if (configs != null)
                         {
-                            var configs = domain.GetPluginBase();
-                            if(configs != null)
-                            {
-                                item.Plugin.Configs = configs;
-                            }
+                            item.Plugin.Configs = configs;
                         }
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.StackTrace);
+                        Log.Instance.DoLog("Failed to show plugin configs", Log.LogType.Error);
+                        Log.Instance.DoLog(ex.ToString(), Log.LogType.Error);
                     }
-                    PluginDomain.UnloadDomain(domain);
+                    
                 }
             }
             Settings.Save();
