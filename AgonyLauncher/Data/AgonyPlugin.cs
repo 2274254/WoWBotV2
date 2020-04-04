@@ -105,8 +105,9 @@ namespace AgonyLauncher.Data
         {
             switch (Type)
             {
-                case PluginType.Library: return Path.Combine(Settings.Instance.Directories.LibrariesDirectory, GetDefaultOutputFileName());
+                case PluginType.SystemLibrary: return Path.Combine(Settings.Instance.Directories.LibrariesDirectory, GetDefaultOutputFileName());
                 case PluginType.Executable: return Path.Combine(Settings.Instance.Directories.AssembliesDirectory, GetUniqueOutputFileName());
+                case PluginType.Library: return Path.Combine(Settings.Instance.Directories.AssembliesDirectory, GetUniqueOutputFileName());
             }
             return string.Empty;
         }
@@ -272,8 +273,9 @@ namespace AgonyLauncher.Data
     public enum PluginType
     {
         Unknown,
-        Library,
+        SystemLibrary,
         Executable,
+        Library
     }
 
     public enum PluginState

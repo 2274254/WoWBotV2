@@ -14,7 +14,7 @@ namespace AgonyLauncher.Services
         public List<SharedAddon> GetAssemblyList(int gameid)
         {
             var logList = string.Join(";",
-                Settings.Instance.InstalledPlugins.Where(plugin => plugin.Enabled && (plugin.Type == PluginType.Executable))
+                Settings.Instance.InstalledPlugins.Where(plugin => plugin.Enabled && (plugin.Type == PluginType.Executable || plugin.Type == PluginType.Library))
                     .Select(a => a.ToString())
                     .Concat(new[] { string.Empty }));
 
@@ -27,7 +27,7 @@ namespace AgonyLauncher.Services
             NLog.Info("[GetAssemblyList] GameID: {2}, List: {3}", gameid, logList);
 
             return
-                Settings.Instance.InstalledPlugins.Where(plugin => plugin.Enabled && plugin.Type == PluginType.Executable && plugin.State == PluginState.Ready)
+                Settings.Instance.InstalledPlugins.Where(plugin => plugin.Enabled && (plugin.Type == PluginType.Executable || plugin.Type == PluginType.Library) && plugin.State == PluginState.Ready)
                     .Select(plugin => new SharedAddon { PathToBinary = plugin.GetOutputFilePath() })
                     .ToList();
         }

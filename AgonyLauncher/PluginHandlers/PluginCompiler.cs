@@ -18,9 +18,12 @@ namespace AgonyLauncher.PluginHandlers
             {
                 [".csproj"] = new ProjectPluginHandler(),
                 [".vbproj"] = new ProjectPluginHandler(),
-                [".agoplg"] = new SignedPluginHandler()
+                [".agoplg"] = new SignedPluginHandler(),
+                [".exe"] = new ExePluginHandler(),
+                [".dll"] = new DllPluginHandler()
             };
         }
+
         internal static void Compile(AgonyPlugin plugin)
         {
             var format = Path.GetExtension(plugin.ProjectFilePath);

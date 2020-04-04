@@ -20,5 +20,5 @@ D:\AgonyWoW\Gathering\bin\Debug\SharpDX.xml
 D:\AgonyWoW\Gathering\bin\Debug\SharpDX.Direct3D11.xml
 D:\AgonyWoW\Gathering\bin\Debug\SharpDX.DXGI.xml
 D:\AgonyWoW\Gathering\obj\Debug\Gathering.csproj.CopyComplete
-D:\AgonyWoW\Gathering\bin\Debug\Gathering.exe
-D:\AgonyWoW\Gathering\obj\Debug\Gathering.exe
+D:\AgonyWoW\Gathering\bin\Debug\Gathering.dll
+D:\AgonyWoW\Gathering\obj\Debug\Gathering.dll

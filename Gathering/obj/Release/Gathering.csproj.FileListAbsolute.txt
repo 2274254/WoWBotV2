@@ -12,6 +12,6 @@ D:\AgonyWoW\Gathering\obj\Release\Gathering.g.resources
 D:\AgonyWoW\Gathering\obj\Release\Gathering.Properties.Resources.resources
 D:\AgonyWoW\Gathering\obj\Release\Gathering.csproj.GenerateResource.Cache
 D:\AgonyWoW\Gathering\obj\Release\Gathering.pdb
-D:\AgonyWoW\Gathering\bin\Release\Gathering.exe
-D:\AgonyWoW\Gathering\obj\Release\Gathering.exe
+D:\AgonyWoW\Gathering\bin\Release\Gathering.dll
+D:\AgonyWoW\Gathering\obj\Release\Gathering.dll
 D:\AgonyWoW\Gathering\obj\Release\Gathering.csprojResolveAssemblyReference.cache

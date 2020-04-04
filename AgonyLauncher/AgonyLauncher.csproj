@@ -95,6 +95,8 @@
     <Compile Include="Installers\PluginInstaller.cs" />
     <Compile Include="Installers\UriSchemeInstaller.cs" />
     <Compile Include="Logger\Log.cs" />
+    <Compile Include="PluginHandlers\DllPluginHandler.cs" />
+    <Compile Include="PluginHandlers\ExePluginHandler.cs" />
     <Compile Include="PluginHandlers\PluginCompiler.cs" />
     <Compile Include="PluginHandlers\ProjectPluginHandler.cs" />
     <Compile Include="PluginHandlers\SignedPluginHandler.cs" />

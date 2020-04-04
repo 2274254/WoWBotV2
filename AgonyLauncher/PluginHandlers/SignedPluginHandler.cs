@@ -135,7 +135,7 @@ namespace AgonyLauncher.PluginHandlers
             {
                 // buddy check
                 plugin.IsVipPlugin = header.Data.CData[0] != 0;
-                plugin.Type = header.Data.IsLibrary ? PluginType.Library : PluginType.Executable;
+                plugin.Type = header.Data.IsLibrary ? PluginType.SystemLibrary : PluginType.Executable;
                 plugin.Author = header.Data.Author;
                 plugin.Version = header.Data.Version;
                 FileHelper.SafeWriteAllBytes(plugin.GetOutputFilePath(), assembly);
