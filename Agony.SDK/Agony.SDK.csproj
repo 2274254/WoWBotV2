@@ -68,6 +68,7 @@
     <Compile Include="CombatManager\TargetSelector.cs" />
     <Compile Include="CommonBehaviors\Actions\ActionRunCoroutine.cs" />
     <Compile Include="CommonBot\BotBase.cs" />
+    <Compile Include="CommonBot\PluginBase.cs" />
     <Compile Include="Core\Lua.cs" />
     <Compile Include="Enumerations\LogLevel.cs" />
     <Compile Include="Events\Loading.cs" />

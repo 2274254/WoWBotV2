@@ -47,7 +47,8 @@ namespace Agony.Sandbox
                 permissionSet.AddPermission(new EnvironmentPermission(EnvironmentPermissionAccess.Read, "USERNAME"));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, SandboxConfig.DataDirectory));
-                permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, "D:\\AgonyWoW\\x64\\Release\\Profiles\\Gathering\\Herbalist\\"));
+                permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, SandboxConfig.LibrariesDirectory));
+                permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.AllAccess, SandboxConfig.WrapperDllPath));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.PathDiscovery, Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..\\..\\..\\..\\"))));
                 permissionSet.AddPermission(new FileIOPermission(FileIOPermissionAccess.Read, Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\..\\..\\..\\..\\"))));
                 permissionSet.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
@@ -208,7 +209,7 @@ namespace Agony.Sandbox
                 {
                     Console.WriteLine("Agony Token: " + assemblyName.GetPublicKeyToken().Select(o => o.ToString("x2")).Concat(new[] { string.Empty }).Aggregate(string.Concat));
                     // Agony.dll
-                    resolvedAssembly = Assembly.LoadFrom(SandboxConfig.AgonyDllPath);
+                    resolvedAssembly = Assembly.LoadFrom(SandboxConfig.WrapperDllPath);
                 }
                 else
                 {

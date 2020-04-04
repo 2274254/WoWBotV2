@@ -89,66 +89,67 @@
 
 		DWORD __stdcall Initialize(LPVOID param)
 		{
-			//if (Utils::IsProcess("World of Warcraft"))
+			if (Agony::Native::Utils::IsProcess("World of Warcraft"))
 			{
 				Agony::Native::Console::Create();
-			}
+				Agony::Native::Core::MainModule = reinterpret_cast<uintptr_t>(GetModuleHandle(nullptr));
+				auto _core = new Agony::Native::Core(GetModuleHandle(nullptr));
+				if (_core->Initialize())
+				{
+					Agony::Native::Game::GetInstance()->InstanceCount = 666;
+					//std::cout << std::hex << reinterpret_cast<uintptr_t*>(GetLocalPlayer());	
+					//CameraBase* pCameraBase = *reinterpret_cast<CameraBase**>(Offsets::Base + Offsets::CameraBase);
+					//std::cout << "CameraInfo:" << std::hex << reinterpret_cast<uintptr_t*>(pCameraBase->camera_ptr);
 
-			Agony::Native::Core::MainModule = reinterpret_cast<uintptr_t>(GetModuleHandle(nullptr));
-			auto _core = new Agony::Native::Core(GetModuleHandle(nullptr));
-			if (_core->Initialize())
-			{
-				Agony::Native::Game::GetInstance()->InstanceCount = 666;
-				//std::cout << std::hex << reinterpret_cast<uintptr_t*>(GetLocalPlayer());	
-				//CameraBase* pCameraBase = *reinterpret_cast<CameraBase**>(Offsets::Base + Offsets::CameraBase);
-				//std::cout << "CameraInfo:" << std::hex << reinterpret_cast<uintptr_t*>(pCameraBase->camera_ptr);
+					Agony::Native::Console::PrintLn("Loading MoveMaps");
+					Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
+					navigation->Initialize(0);
+					navigation->Initialize(3358);
+					navigation->Initialize(3277);
+					navigation->Initialize(2107);
+					Agony::Native::Console::PrintLn("Movemaps Loaded");
+					while (1 & !GetAsyncKeyState(VK_F4))
+					{
+						Sleep(1);
+					}
+					_core->ClearHooks();
+				}
 
-				Agony::Native::Console::PrintLn("Loading MoveMaps");
-				Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
-				navigation->Initialize(0);
-				navigation->Initialize(3358);
-				navigation->Initialize(3277);
-				navigation->Initialize(2107);
-				Agony::Native::Console::PrintLn("Movemaps Loaded");
 				while (1 & !GetAsyncKeyState(VK_F4))
 				{
 					Sleep(1);
 				}
-				_core->ClearHooks();
-			}
 
-			while (1 & !GetAsyncKeyState(VK_F4))
-			{
-				Sleep(1);
+				const auto conHandle = GetConsoleWindow();
+				FreeConsole();
+				PostMessage(conHandle, WM_CLOSE, 0, 0);
 			}
-
-			const auto conHandle = GetConsoleWindow();
-			FreeConsole();
-			PostMessage(conHandle, WM_CLOSE, 0, 0);
 			FreeLibraryAndExitThread(static_cast<HMODULE>(param), NULL);
 		}
 
 		BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 		{
 			//MessageBox(GetActiveWindow(), "blah", "blah2", 0x00000000L);
-			static HANDLE hThread = nullptr;
-			Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
-			///if (Utils::IsProcess("World of Warcraft"))
-			switch (ul_reason_for_call)
+			if (Agony::Native::Utils::IsProcess("World of Warcraft"))
 			{
-				case DLL_PROCESS_ATTACH:
+				static HANDLE hThread = nullptr;
+				Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
+				switch (ul_reason_for_call)
 				{
-					Agony::Native::Core::MainWindowHandle = FindMainWindow(GetCurrentProcessId());
-					hThread = CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(Initialize), nullptr, NULL, nullptr);
-					DisableThreadLibraryCalls(hModule);
+					case DLL_PROCESS_ATTACH:
+					{
+						Agony::Native::Core::MainWindowHandle = FindMainWindow(GetCurrentProcessId());
+						hThread = CreateThread(nullptr, NULL, reinterpret_cast<LPTHREAD_START_ROUTINE>(Initialize), nullptr, NULL, nullptr);
+						DisableThreadLibraryCalls(hModule);
+					}
+					break;
+					case DLL_PROCESS_DETACH:
+					{
+						navigation->Release();
+						SuspendThread(hThread);
+					}
+					break;
 				}
-				break;
-				case DLL_PROCESS_DETACH:
-				{
-					navigation->Release();
-					SuspendThread(hThread);
-				}
-				break;
 			}
 			return TRUE;
 		}

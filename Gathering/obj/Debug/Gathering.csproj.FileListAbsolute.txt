@@ -1,9 +1,6 @@
-D:\AgonyWoW\Gathering\bin\Debug\Gathering.dll.config
-D:\AgonyWoW\Gathering\bin\Debug\Gathering.dll
 D:\AgonyWoW\Gathering\bin\Debug\Gathering.pdb
 D:\AgonyWoW\Gathering\bin\Debug\Agony.SDK.dll
 D:\AgonyWoW\Gathering\bin\Debug\Agony.Wrapper.dll
-D:\AgonyWoW\Gathering\bin\Debug\SharpDX.dll
 D:\AgonyWoW\Gathering\bin\Debug\SharpDX.Direct3D11.dll
 D:\AgonyWoW\Gathering\bin\Debug\SharpDX.DXGI.dll
 D:\AgonyWoW\Gathering\bin\Debug\Agony.SDK.pdb
@@ -14,5 +11,12 @@ D:\AgonyWoW\Gathering\bin\Debug\SharpDX.DXGI.xml
 D:\AgonyWoW\Gathering\obj\Debug\Gathering.csprojAssemblyReference.cache
 D:\AgonyWoW\Gathering\obj\Debug\Gathering.csproj.CoreCompileInputs.cache
 D:\AgonyWoW\Gathering\obj\Debug\Gathering.csproj.CopyComplete
-D:\AgonyWoW\Gathering\obj\Debug\Gathering.dll
 D:\AgonyWoW\Gathering\obj\Debug\Gathering.pdb
+D:\AgonyWoW\Gathering\bin\Debug\Gathering.exe.config
+D:\AgonyWoW\Gathering\bin\Debug\Gathering.exe
+D:\AgonyWoW\Gathering\obj\Debug\Gathering.exe
+D:\AgonyWoW\Gathering\obj\Debug\Styles\ExpressionDark.baml
+D:\AgonyWoW\Gathering\obj\Debug\Gathering_MarkupCompile.cache
+D:\AgonyWoW\Gathering\obj\Debug\Gathering.g.resources
+D:\AgonyWoW\Gathering\obj\Debug\ConfigsWindow.baml
+D:\AgonyWoW\Gathering\obj\Debug\ConfigsWindow.g.cs

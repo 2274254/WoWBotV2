@@ -12,9 +12,14 @@ D:\AgonyWoW\Gathering\bin\Release\SharpDX.Direct3D11.xml
 D:\AgonyWoW\Gathering\bin\Release\SharpDX.xml
 D:\AgonyWoW\Gathering\bin\Release\SharpDX.DXGI.xml
 D:\AgonyWoW\Gathering\bin\Release\System.Numerics.Vectors.xml
-D:\AgonyWoW\Gathering\obj\Release\Gathering.dll
 D:\AgonyWoW\Gathering\obj\Release\Gathering.pdb
-D:\AgonyWoW\x64\Release\Gathering.dll.config
-D:\AgonyWoW\x64\Release\Gathering.dll
 D:\AgonyWoW\x64\Release\Gathering.pdb
+D:\AgonyWoW\x64\Release\Gathering.exe.config
+D:\AgonyWoW\x64\Release\Gathering.exe
+D:\AgonyWoW\Gathering\obj\Release\Gathering.exe
 D:\AgonyWoW\Gathering\obj\Release\Gathering.csprojResolveAssemblyReference.cache
+D:\AgonyWoW\Gathering\obj\Release\Styles\ExpressionDark.baml
+D:\AgonyWoW\Gathering\obj\Release\Gathering_MarkupCompile.cache
+D:\AgonyWoW\Gathering\obj\Release\Gathering.g.resources
+D:\AgonyWoW\Gathering\obj\Release\ConfigsWindow.baml
+D:\AgonyWoW\Gathering\obj\Release\ConfigsWindow.g.cs

@@ -4,12 +4,14 @@ using Agony.SDK.TreeSharp;
 using Gathering.Decorators;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Xml;
 
 namespace Gathering
 {
     public class Gathering : BotBase
     {
+        internal static XmlDocument Configs = new XmlDocument();
         internal static CGGameObject NodeObject = null;
         internal static XmlDocument Profile = new XmlDocument();
         internal static int HotspotIndex = -1;
@@ -26,8 +28,8 @@ namespace Gathering
 
         public Gathering()
         {
-            Console.WriteLine("Gathering Initialized");
-            Profile.Load("D:\\AgonyWoW\\x64\\Release\\Profiles\\Gathering\\Herbalist\\Mining+Herbing 1-75 [Start at Goldshire].xml");
+            //Console.WriteLine("Gathering Initialized");
+            //Profile.Load("D:\\AgonyWoW\\x64\\Release\\Profiles\\Gathering\\Herbalist\\Mining+Herbing 1-75 [Start at Goldshire].xml");
         }
 
         public override Composite Root
@@ -67,6 +69,18 @@ namespace Gathering
         {
             Root.Stop(null);
             started = false;
+        }
+
+        public override string ShowConfigs(string configs)
+        {
+            Configs = new XmlDocument();
+            if (configs != null) Configs.LoadXml(configs);
+
+            var WinApp = new Application();
+            WinApp.Run(new ConfigsWindow());
+
+            //new ConfigsWindow().ShowDialog();
+            return Configs.OuterXml;
         }
     }
 }

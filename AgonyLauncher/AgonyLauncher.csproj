@@ -30,7 +30,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\x64\Release\</OutputPath>
@@ -85,10 +85,13 @@
     <Compile Include="Cryptography\RijndaelHelper.cs" />
     <Compile Include="Data\AgonyPlugin.cs" />
     <Compile Include="Data\PathRandomizer.cs" />
+    <Compile Include="Data\PluginDomain.cs" />
+    <Compile Include="Data\SignedAddon.cs" />
     <Compile Include="Git\GitDownloader.cs" />
     <Compile Include="Globals\Constants.cs" />
     <Compile Include="Globals\EventHandlers.cs" />
     <Compile Include="Globals\Events.cs" />
+    <Compile Include="Injection\Bootstrap.cs" />
     <Compile Include="Installers\PluginInstaller.cs" />
     <Compile Include="Installers\UriSchemeInstaller.cs" />
     <Compile Include="Logger\Log.cs" />
@@ -99,13 +102,16 @@
     <Compile Include="Protections\Protection.cs" />
     <Compile Include="Protections\ProtectionPhase.cs" />
     <Compile Include="Routines\ApiServiceRoutine.cs" />
+    <Compile Include="Routines\LoaderServiceRoutine.cs" />
     <Compile Include="Routines\LoaderUpdateRoutines.cs" />
     <Compile Include="Services\ApiService.cs" />
+    <Compile Include="Services\LoaderService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Types\InstalledPluginDataGridItem.cs" />
     <Compile Include="UriScheme\UriHandler.cs" />
     <Compile Include="Utils\DirectoryHelper.cs" />
     <Compile Include="Utils\EnvironmentHelper.cs" />
+    <Compile Include="Utils\Extensions.cs" />
     <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Utils\Md5Hash.cs" />
     <Compile Include="Utils\NativeImports.cs" />
@@ -196,14 +202,16 @@
       <Project>{b63bb553-e6bf-4857-ac66-37170e1dc5fc}</Project>
       <Name>Agony.SDK</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Agony.Wrapper\Agony.Wrapper.vcxproj">
+      <Project>{e6f487d9-9122-4718-8d75-a8cdc8e594cb}</Project>
+      <Name>Agony.Wrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sandbox\Agony.Sandbox.csproj">
       <Project>{5290b6cb-93d8-4ba7-8222-54012e90ad95}</Project>
       <Name>Agony.Sandbox</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Injection\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

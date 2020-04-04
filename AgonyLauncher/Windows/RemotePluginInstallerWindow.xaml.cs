@@ -3,7 +3,6 @@ using AgonyLauncher.Installers;
 using AgonyLauncher.Logger;
 using AgonyLauncher.Utils;
 using System;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;

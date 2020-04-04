@@ -1,4 +1,7 @@
-﻿using AgonyLauncher.Logger;
+﻿using AgonyLauncher.Injection;
+using AgonyLauncher.Logger;
+using AgonyLauncher.Routines;
+using AgonyLauncher.Services;
 using AgonyLauncher.Utils;
 using System;
 using System.IO;
@@ -16,6 +19,7 @@ namespace AgonyLauncher.Globals
             AppDomain.CurrentDomain.AssemblyResolve     += OnAssemblyResolve;
             Events.OnStartUp                            += OnStartUp;
             Events.OnExit                               += OnExit;
+            Events.OnMainWindowLoaded                   += OnMainWindowLoaded;
         }
 
         public static void Initialize()
@@ -81,7 +85,7 @@ namespace AgonyLauncher.Globals
             // Delete invalid files from the Assemblies directory
             foreach (var file in Directory.GetFiles(Settings.Instance.Directories.AssembliesDirectory, "*", SearchOption.AllDirectories))
             {
-                if (!Settings.Instance.InstalledPlugins.Any(plugin => plugin.IsValid() && File.Exists(plugin.GetOutputFilePath())))
+                if (Settings.Instance != null && Settings.Instance.InstalledPlugins != null && !Settings.Instance.InstalledPlugins.Any(plugin => plugin.IsValid() && File.Exists(plugin.GetOutputFilePath())))
                 {
                     try
                     {
@@ -98,7 +102,7 @@ namespace AgonyLauncher.Globals
             var directories = Directory.GetDirectories(Settings.Instance.Directories.RepositoryDirectory);
             foreach (var dir in directories)
             {
-                if (
+                if (Settings.Instance != null && Settings.Instance.InstalledPlugins != null &&
                     !Settings.Instance.InstalledPlugins.Any(
                         plugin =>
                             !plugin.IsLocal &&
@@ -138,5 +142,17 @@ namespace AgonyLauncher.Globals
             Log.Instance.DoLog("AgonyLauncher has exited.\r\n");
         }
 
+        private static void OnMainWindowLoaded(MainWindow window, RoutedEventArgs args)
+        {
+            ApiService.Init();
+            LoaderServiceRoutine.StartService();
+            //InjectionRoutine.StartRoutine();
+
+            // Set memory layout
+            Bootstrap.SetMemoryLayout();
+
+            // Remove invalid addons
+            Settings.Instance.InstalledPlugins.RemoveInvalidPlugins();
+        }
     }
 }

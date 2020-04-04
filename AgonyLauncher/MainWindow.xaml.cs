@@ -1,4 +1,5 @@
-﻿using AgonyLauncher.Routines;
+﻿using AgonyLauncher.Globals;
+using AgonyLauncher.Routines;
 using AgonyLauncher.Utils;
 using AgonyLauncher.Windows;
 using Microsoft.Win32;
@@ -17,8 +18,14 @@ namespace AgonyLauncher
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
             Closing += MainWindow_Closing;
             Plugins.Closed += Plugins_Closed;
+        }
+
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Events.RaiseOnMainWindowLoaded(this, e);
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

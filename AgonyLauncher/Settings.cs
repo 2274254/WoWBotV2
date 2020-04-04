@@ -110,6 +110,7 @@ namespace AgonyLauncher
                     {
                         savedSettings.Directories.Verify();
                         _instance = savedSettings;
+                        if (_instance.InstalledPlugins == null) _instance.InstalledPlugins = new InstalledPluginList();
                     }
                     else
                     {

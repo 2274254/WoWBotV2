@@ -12,6 +12,10 @@ namespace AgonyLauncher.Globals
 
         public static event OnExitDelegate OnExit;
 
+        public delegate void OnMainWindowLoadedDelegate(MainWindow window, RoutedEventArgs args);
+
+        public static event OnMainWindowLoadedDelegate OnMainWindowLoaded;
+
         static Events()
         {
             EventHandlers.Initialize();
@@ -30,6 +34,14 @@ namespace AgonyLauncher.Globals
             if (OnStartUp != null)
             {
                 OnStartUp(e);
+            }
+        }
+
+        public static void RaiseOnMainWindowLoaded(MainWindow window, RoutedEventArgs args)
+        {
+            if (OnMainWindowLoaded != null)
+            {
+                OnMainWindowLoaded(window, args);
             }
         }
     }

@@ -8,6 +8,8 @@ using NLog;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Xml;
 
 namespace AgonyLauncher.Data
 {
@@ -24,6 +26,8 @@ namespace AgonyLauncher.Data
         public string Author { get; set; }
         public string Version { get; set; }
         public bool IsVipPlugin { get; set; }
+
+        public string Configs { get; set; }
 
         public bool IsAvailable
         {
@@ -147,7 +151,9 @@ namespace AgonyLauncher.Data
                 var item = PluginsWindow.Instance.PluginsGrid.Items.OfType<InstalledPluginDataGridItem>().FirstOrDefault(i => i.Plugin.Equals(this));
                 if (item != null)
                 {
-                    item.Refresh();
+                    item.RaisePropertyChanged("Status");
+                    //PluginsWindow.Instance.PluginsGrid.Items.Refresh();
+                    //Thread.Sleep(1000);
                 }
             }
         }
@@ -158,11 +164,9 @@ namespace AgonyLauncher.Data
             {
                 state = PluginState.VipOnly;
             }
-
             if (State != state)
             {
                 State = state;
-
                 if (refreshDisplay)
                 {
                     RefreshDisplay();
@@ -170,16 +174,16 @@ namespace AgonyLauncher.Data
             }
         }
 
-        public void Compile()
+        public void Compile(bool refreshDisplay = true)
         {
             Log.Instance.DoLog(string.Format("Compiling project: \"{0}\".", ProjectFilePath));
-            SetState(PluginState.Compiling);
+            SetState(PluginState.Compiling, refreshDisplay);
 
             if (!File.Exists(ProjectFilePath) && !IsLocal)
             {
                 if (!TrySetValidProjectFile())
                 {
-                    SetState(PluginState.CompilingError);
+                    SetState(PluginState.CompilingError, refreshDisplay);
 
                     Log.Instance.DoLog(string.Format("Project file: \"{0}\" not found. Compilation for plugin: \"{1}\" failed.", Path.GetFileName(ProjectFilePath), this), Log.LogType.Error);
                     return;
@@ -189,10 +193,11 @@ namespace AgonyLauncher.Data
             try
             {
                 PluginCompiler.Compile(this);
+                SetState(PluginState.Ready, refreshDisplay);
             }
             catch (Exception ex)
             {
-                SetState(PluginState.CompilingError);
+                SetState(PluginState.CompilingError, refreshDisplay);
                 Log.Instance.DoLog(string.Format("Exception during compilation.\r\nProject: \"{0}\"\r\nException: {1}", ProjectFilePath, ex), Log.LogType.Error);
             }
         }

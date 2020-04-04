@@ -105,21 +105,22 @@ namespace Agony.Sandbox
             }
             try
             {
-                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.dll", new string[1]);
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Debug\\Agony.Wrapper.dll", new string[1]);
 
-                //LoadLibrary("a99070253df2afda");
-                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.SDK.dll", new string[1]);
+                LoadLibrary("209d1d74adceabcd");
+                LoadLibrary("a99070253df2afda");
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Agony.SDK.dll", new string[1]);
 
-                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Gathering.dll", new string[1]);
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\Gathering.dll", new string[1]);
 
-                SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\TestAddon.exe", new string[1]);
+                //SandboxDomain.Instance.LoadAddon("D:\\AgonyWoW\\x64\\Release\\TestAddon.exe", new string[1]);
 
-                /*var addons = ServiceFactory.CreateProxy<ILoaderService>().GetAssemblyList((int) 0);
-                Logs.Log("Loading {0} Addon{1}", addons.Count, addons.Count < 1 || addons.Count > 1 ? "s" : "");
+                var addons = ServiceFactory.CreateProxy<ILoaderService>().GetAssemblyList((int) 0);
+                Logs.Log("Loading {0} Plugin{1}", addons.Count, addons.Count < 1 || addons.Count > 1 ? "s" : "");
                 foreach (var assembly in addons)
                 {
                     SandboxDomain.Instance.LoadAddon(assembly.PathToBinary, new string[1]);
-                }*/
+                }
             }
             catch (Exception e)
             {

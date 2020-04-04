@@ -12,10 +12,8 @@ D:\AgonyWoW\TestAddon\bin\Release\SharpDX.Direct3D11.xml
 D:\AgonyWoW\TestAddon\bin\Release\SharpDX.xml
 D:\AgonyWoW\TestAddon\bin\Release\SharpDX.DXGI.xml
 D:\AgonyWoW\TestAddon\bin\Release\System.Numerics.Vectors.xml
-D:\AgonyWoW\TestAddon\obj\Release\TestAddon.csprojAssemblyReference.cache
-D:\AgonyWoW\TestAddon\obj\Release\TestAddon.csproj.CoreCompileInputs.cache
-D:\AgonyWoW\TestAddon\obj\Release\TestAddon.csproj.CopyComplete
 D:\AgonyWoW\TestAddon\obj\Release\TestAddon.exe
 D:\AgonyWoW\TestAddon\obj\Release\TestAddon.pdb
 D:\AgonyWoW\x64\Release\TestAddon.exe
 D:\AgonyWoW\x64\Release\TestAddon.pdb
+D:\AgonyWoW\TestAddon\obj\Release\TestAddon.csprojResolveAssemblyReference.cache

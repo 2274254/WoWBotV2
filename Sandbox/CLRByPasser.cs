@@ -16,6 +16,7 @@ namespace Agony.Sandbox
 
         public static void ByPass()
         {
+            return;
             var functionAddress = GetProcAddress(GetModuleHandle("mscoree"), "CLRCreateInstance");
             try
             {

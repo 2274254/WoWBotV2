@@ -129,9 +129,9 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="ButtonEnableAll" Margin="5" Grid.Column="0" Content="Enable" Click="ButtonEnableAll_Click"/>
                     <Button x:Name="ButtonDisableAll" Margin="5" Grid.Column="1" Content="Disable" Click="ButtonDisableAll_Click"/>
-                    <Button Margin="5" Grid.Column="3" Content="Settings"/>
-                    <Button Margin="5" Grid.Column="4" Content="Update"/>
-                    <Button Margin="5" Grid.Column="5" Content="Recompile"/>
+                    <Button x:Name="ButtonSettings" Margin="5" Grid.Column="3" Content="Settings" Click="ButtonSettings_Click"/>
+                    <Button x:Name="ButtonUpdate" Margin="5" Grid.Column="4" Content="Update" Click="ButtonUpdate_Click"/>
+                    <Button x:Name="ButtonRecomile" Margin="5" Grid.Column="5" Content="Recompile" Click="ButtonRecomile_Click"/>
                     <Button x:Name="ButtonUninstall" Margin="5" Grid.Column="6" Content="Uninstall" Click="ButtonUninstall_Click"/>
                 </Grid>
             </Grid>

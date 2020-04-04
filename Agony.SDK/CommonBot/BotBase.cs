@@ -1,5 +1,6 @@
 ﻿using Agony.SDK.TreeSharp;
 using System;
+using System.Xml;
 
 namespace Agony.SDK.CommonBot
 {
@@ -27,9 +28,8 @@ namespace Agony.SDK.CommonBot
         All = 4294967295
     }
 
-    public abstract class BotBase
+    public abstract class BotBase : PluginBase
     {
-        public virtual string Name { get { return ""; } }
         public virtual PulseFlags PulseFlags { get { return PulseFlags.All; } }
         public virtual Composite Root {  get { return null; } }
         public virtual void Start() { }
