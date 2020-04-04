@@ -1,0 +1,70 @@
+﻿<Window x:Class="AgonyLauncher.Windows.NewPluginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AgonyLauncher.Windows"
+        mc:Ignorable="d"
+        ContentRendered="Window_ContentRendered"
+        WindowStartupLocation="CenterOwner"
+        Title="New Plugin" Height="380" Width="720" ResizeMode="NoResize" Background="#FF333333">
+    <Window.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ExpressionDark.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <RadioButton Margin="0 10" Grid.Column="1" Grid.Row="1" x:Name="LocalPluginRadiobutton"
+                         Content="Local plugin" IsChecked="False"
+                         RenderTransformOrigin="0.014,0.48">
+            <RadioButton.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="1.28" ScaleX="1.28" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform X="1.988" Y="-0.098" />
+                </TransformGroup>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+        <DockPanel Grid.Column="1" Grid.Row="2">
+            <Button DockPanel.Dock="Right" Content="..." Padding="15 0" FontSize="15" Foreground="White" AllowDrop="True" Click="Button_Click_2" />
+            <TextBox Height="28" x:Name="LocalPluginTextBox" VerticalContentAlignment="Center"
+                         Background="#FFF2F2F2"
+                         BorderBrush="#FFD6D6D6" BorderThickness="0" GotFocus="LocalPluginTextBox_GotFocus"
+                         FontSize="14" Foreground="Black" />
+        </DockPanel>
+        <RadioButton Margin="0 10" Grid.Column="1" Grid.Row="3" x:Name="RemotePluginRadiobutton" IsChecked="True"
+                         Content="Remote plugin"
+                         RenderTransformOrigin="0.014,0.48">
+            <RadioButton.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1.28" ScaleY="1.28" />
+                </TransformGroup>
+            </RadioButton.RenderTransform>
+        </RadioButton>
+        <TextBox Height="28" Grid.Column="1" Grid.Row="4" x:Name="RemotePluginTextbox"
+                     VerticalContentAlignment="Center"
+                     Background="#FFF2F2F2" BorderBrush="#FFD6D6D6" BorderThickness="0"
+                     GotFocus="RemotePluginTextbox_GotFocus" FontSize="14" Foreground="Black" />
+        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10">
+            <Button Content="Cancel" FontWeight="Bold" Padding="25 8" Click="Button_Click_1" />
+            <Button Margin="10 0 0 0" x:Name="InstallButton" Content="Install" FontWeight="Bold" Padding="25 8" Click="InstallButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

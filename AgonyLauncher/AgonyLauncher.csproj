@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\LibGit2Sharp.NativeBinaries.1.0.163\build\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.163\build\LibGit2Sharp.NativeBinaries.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -14,29 +15,48 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\x64\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LibGit2Sharp, Version=0.23.0.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibGit2Sharp.0.23.0\lib\net40\LibGit2Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.7.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,11 +76,56 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AgonyManager.cs" />
-    <Compile Include="Plugin.cs" />
+    <Compile Include="Compilers\ProjectCompiler.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\InverseBooleanConverter.cs" />
+    <Compile Include="Converter\InverseBoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\WindowTitleRandomizeConverter.cs" />
+    <Compile Include="Cryptography\CustomRsa.cs" />
+    <Compile Include="Cryptography\RijndaelHelper.cs" />
+    <Compile Include="Data\AgonyPlugin.cs" />
+    <Compile Include="Data\PathRandomizer.cs" />
+    <Compile Include="Git\GitDownloader.cs" />
+    <Compile Include="Globals\Constants.cs" />
+    <Compile Include="Globals\EventHandlers.cs" />
+    <Compile Include="Globals\Events.cs" />
+    <Compile Include="Installers\PluginInstaller.cs" />
+    <Compile Include="Installers\UriSchemeInstaller.cs" />
+    <Compile Include="Logger\Log.cs" />
+    <Compile Include="PluginHandlers\PluginCompiler.cs" />
+    <Compile Include="PluginHandlers\ProjectPluginHandler.cs" />
+    <Compile Include="PluginHandlers\SignedPluginHandler.cs" />
+    <Compile Include="Protections\AntiCLRHostProtection.cs" />
+    <Compile Include="Protections\Protection.cs" />
+    <Compile Include="Protections\ProtectionPhase.cs" />
+    <Compile Include="Routines\ApiServiceRoutine.cs" />
+    <Compile Include="Routines\LoaderUpdateRoutines.cs" />
+    <Compile Include="Services\ApiService.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SettingsBase.cs" />
+    <Compile Include="Types\InstalledPluginDataGridItem.cs" />
+    <Compile Include="UriScheme\UriHandler.cs" />
+    <Compile Include="Utils\DirectoryHelper.cs" />
+    <Compile Include="Utils\EnvironmentHelper.cs" />
+    <Compile Include="Utils\FileHelper.cs" />
+    <Compile Include="Utils\Md5Hash.cs" />
+    <Compile Include="Utils\NativeImports.cs" />
+    <Compile Include="Utils\RandomHelper.cs" />
+    <Compile Include="Utils\Serialization.cs" />
+    <Compile Include="Utils\VisualTreeHelpers.cs" />
+    <Compile Include="Windows\NewPluginWindow.xaml.cs">
+      <DependentUpon>NewPluginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PluginsWindow.xaml.cs">
       <DependentUpon>PluginsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\RemotePluginInstallerWindow.xaml.cs">
+      <DependentUpon>RemotePluginInstallerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TaskWindow.xaml.cs">
+      <DependentUpon>TaskWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UpdateWindow.xaml.cs">
+      <DependentUpon>UpdateWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -78,7 +143,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\NewPluginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\PluginsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RemotePluginInstallerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TaskWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -101,6 +182,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,9 +196,19 @@
       <Project>{b63bb553-e6bf-4857-ac66-37170e1dc5fc}</Project>
       <Name>Agony.SDK</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sandbox\Agony.Sandbox.csproj">
+      <Project>{5290b6cb-93d8-4ba7-8222-54012e90ad95}</Project>
+      <Name>Agony.Sandbox</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Injection\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.163\build\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibGit2Sharp.NativeBinaries.1.0.163\build\LibGit2Sharp.NativeBinaries.props'))" />
+  </Target>
 </Project>

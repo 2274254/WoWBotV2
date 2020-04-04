@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -43,6 +43,12 @@
     <AssemblyOriginatorKeyFile>Gathering.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Agony.SDK">
+      <HintPath>..\x64\Release\System\Agony.SDK.dll</HintPath>
+    </Reference>
+    <Reference Include="Agony.Wrapper">
+      <HintPath>..\x64\Release\System\Agony.Wrapper.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX, Version=2.6.3.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,16 +76,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Gathering.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Agony.SDK\Agony.SDK.csproj">
-      <Project>{B63BB553-E6BF-4857-AC66-37170E1DC5FC}</Project>
-      <Name>Agony.SDK</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Agony.Wrapper\Agony.Wrapper.vcxproj">
-      <Project>{e6f487d9-9122-4718-8d75-a8cdc8e594cb}</Project>
-      <Name>Agony.Wrapper</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

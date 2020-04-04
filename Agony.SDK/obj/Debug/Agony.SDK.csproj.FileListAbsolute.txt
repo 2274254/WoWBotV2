@@ -9,3 +9,5 @@ D:\AgonyWoW\Agony.SDK\obj\Debug\Agony.SDK.pdb
 D:\AgonyWoW\x64\Debug\Agony.SDK.dll
 D:\AgonyWoW\x64\Debug\Agony.SDK.pdb
 D:\AgonyWoW\Agony.SDK\obj\Debug\Agony.SDK.csproj.CoreCompileInputs.cache
+D:\AgonyWoW\x64\Debug\System\Agony.SDK.dll
+D:\AgonyWoW\x64\Debug\System\Agony.SDK.pdb

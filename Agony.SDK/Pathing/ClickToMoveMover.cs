@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+﻿using SharpDX;
 
 namespace Agony.SDK.Pathing
 {

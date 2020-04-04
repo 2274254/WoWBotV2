@@ -1,0 +1,102 @@
+﻿<Window x:Class="AgonyLauncher.Windows.RemotePluginInstallerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AgonyLauncher.Windows"
+        xmlns:converter="clr-namespace:AgonyLauncher.Converter"
+        mc:Ignorable="d"
+        Title="Remote Plugin Installer" Height="380" Width="720" Loaded="Window_Loaded"
+        BorderThickness="1" BorderBrush="Black" WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        ContentRendered="Window_ContentRendered" Background="#FF333333">
+    <Window.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/ExpressionDark.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:WindowTitleRandomizeConverter x:Key="WindowTitleConverter" />
+            <converter:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <converter:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="11*" />
+            <RowDefinition Height="Auto" MinHeight="33" />
+            <RowDefinition Height="Auto" MinHeight="231" />
+            <RowDefinition Height="30*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" Padding="0 5" Margin="10 0" x:Name="ProjectLabel"
+                   Content="Select plugin"
+                   Visibility="{Binding IsLoading, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+                   FontSize="16" BorderThickness="1" />
+        <DataGrid ItemsSource="{Binding Items}"
+                Visibility="{Binding IsLoading, Converter={StaticResource InverseBoolToVisibilityConverter}}"
+                Grid.Row="2" x:Name="ProjectsDataGrid"
+                IsSynchronizedWithCurrentItem="True"
+                GridLinesVisibility="Vertical"
+                CanUserAddRows="False"
+                HeadersVisibility="Column"
+                CanUserReorderColumns="True"
+                CanUserResizeColumns="False"
+                CanUserSortColumns="False" 
+                AutoGenerateColumns="False"
+                CanUserResizeRows="False" 
+                HorizontalContentAlignment="Left"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                Margin="10 0"
+                FontSize="11.5" RenderTransformOrigin="0.5,0.5" MaxHeight="231">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn MinWidth="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Install}" IsEnabled="{Binding Enabled}"  HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      HorizontalContentAlignment="Center" RenderTransformOrigin="0.5,0.5" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
+                                <CheckBox.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="0.78" ScaleY="0.78" />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                    </TransformGroup>
+                                </CheckBox.RenderTransform>
+                            </CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="Install" FontWeight="SemiBold" Margin="10 0" />
+                    </DataGridTemplateColumn.Header>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="*" Binding="{Binding PluginName}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock
+                            Text="Plugin"
+                            FontWeight="SemiBold" Margin="10 0" VerticalAlignment="Stretch"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="120" Binding="{Binding Status}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock
+                            Text="Status"
+                            FontWeight="SemiBold" Margin="10 0" />
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ProgressBar Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="2" x:Name="StatusProgressBar" HorizontalAlignment="Stretch" Height="14"
+                     VerticalAlignment="Center" IsIndeterminate="True" Margin="10 0" />
+        <Label Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}" Grid.Row="2" x:Name="StatusLabel" Content="Downloading data..." Foreground="#FF898888"
+               BorderThickness="1" Padding="0 5 5 5" FontSize="13" Margin="10 83 10 0"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="145,0,132,10" HorizontalAlignment="Center">
+            <Button x:Name="CancelButton" IsEnabled="{Binding IsWorking, Converter={StaticResource InverseBooleanConverter}}"
+                        Content="Cancel"
+                        FontWeight="Bold" Padding="25 6" Click="CancelButton_OnClick" />
+            <Button Margin="5 0 0 0" x:Name="InstallButton" IsEnabled="{Binding IsWorking, Converter={StaticResource InverseBooleanConverter}}"
+                        Content="Install"
+                        FontWeight="Bold" Padding="25 6" Click="InstallButton_OnClick"/>
+        </StackPanel>
+    </Grid>
+</Window>

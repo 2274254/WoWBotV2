@@ -77,14 +77,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include</IncludePath>
-    <LibraryPath>D:\AgonyWoW\Libs;D:\AgonyWoW\x64\Debug;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\AgonyWoW\Libs;D:\AgonyWoW\x64\Debug\System;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\System\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(DXSDK_DIR)Include</IncludePath>
-    <LibraryPath>D:\AgonyWoW\x64\Release;D:\AgonyWoW\Libs;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\AgonyWoW\x64\Release\System;D:\AgonyWoW\Libs;$(DXSDK_DIR)Lib\x64;$(LibraryPath)</LibraryPath>
     <LinkDelaySign>
     </LinkDelaySign>
     <LinkKeyFile>$(ProjectDir)AgonyWrapper.snk</LinkKeyFile>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\System\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

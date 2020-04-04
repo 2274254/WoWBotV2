@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:AgonyLauncher"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

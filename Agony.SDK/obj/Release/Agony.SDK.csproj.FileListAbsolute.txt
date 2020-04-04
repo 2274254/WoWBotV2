@@ -17,3 +17,5 @@ D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.dll
 D:\AgonyWoW\Agony.SDK\obj\Release\Agony.SDK.pdb
 D:\AgonyWoW\x64\Release\Agony.SDK.dll
 D:\AgonyWoW\x64\Release\Agony.SDK.pdb
+D:\AgonyWoW\x64\Release\System\Agony.SDK.dll
+D:\AgonyWoW\x64\Release\System\Agony.SDK.pdb

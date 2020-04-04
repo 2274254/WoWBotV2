@@ -1,19 +1,10 @@
-﻿using AgonyLauncher.Windows;
+﻿using AgonyLauncher.Routines;
+using AgonyLauncher.Utils;
+using AgonyLauncher.Windows;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AgonyLauncher
 {
@@ -22,9 +13,23 @@ namespace AgonyLauncher
     /// </summary>
     public partial class MainWindow : Window
     {
+        public PluginsWindow Plugins = new PluginsWindow();
         public MainWindow()
         {
             InitializeComponent();
+            Closing += MainWindow_Closing;
+            Plugins.Closed += Plugins_Closed;
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            EnvironmentHelper.ShutDown(true);
+        }
+
+        private void Plugins_Closed(object sender, System.EventArgs e)
+        {
+            Plugins = new PluginsWindow();
+            Plugins.Closed += Plugins_Closed;
         }
 
         internal void Log(string text, string color)
@@ -51,7 +56,29 @@ namespace AgonyLauncher
 
         private void ButtonPlugins_Click(object sender, RoutedEventArgs e)
         {
-            new PluginsWindow().ShowDialog();
+            Plugins.ShowDialog();
+        }
+
+        public static void UpdateSystem()
+        {
+            Logger.Log.Instance.DoLog("Running agony system updater.");
+            var updateWindow = new UpdateWindow();
+            updateWindow.BeginUpdate(
+                new UpdateWindow.UpdateWindowDelegate[]
+                {
+                    /*LoaderUpdateRoutines.InitializeUpdateRoutine,
+                    LoaderUpdateRoutines.LoaderUpdateRoutine,
+                    LoaderUpdateRoutines.SystemFilesUpdateRoutine,
+                    LoaderUpdateRoutines.PatchFilesUpdateRoutine,*/
+                    LoaderUpdateRoutines.InstallFilesRoutine
+                }, null);
+            Logger.Log.Instance.DoLog("Agony system updater has finished updating.");
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoaderUpdateRoutines.InstallFilesRoutine(null, new System.Collections.Generic.Dictionary<string, object>());
+            //UpdateSystem();
         }
     }
 }

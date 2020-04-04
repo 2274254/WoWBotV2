@@ -9,7 +9,6 @@ using System.Security.Permissions;
 using System.Threading;
 using Agony.Sandbox.Shared;
 using System.Runtime.InteropServices;
-using RGiesecke.DllExport;
 
 namespace Agony.Sandbox
 {
@@ -68,7 +67,7 @@ namespace Agony.Sandbox
         ///     any of the bootstrap actions will fail.
         /// </returns>
 
-        //[DllExport(CallingConvention = CallingConvention.Cdecl, ExportName = "Bootstrap")]
+        //[RGiesecke.DllExport(CallingConvention = CallingConvention.Cdecl, ExportName = "Bootstrap")]
         public static int Bootstrap(string param)
         {
             try

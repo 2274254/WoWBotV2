@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AgonyLauncher"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="[-----] Unknown" Width="555" Height="400" Background="#FF333333" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary >

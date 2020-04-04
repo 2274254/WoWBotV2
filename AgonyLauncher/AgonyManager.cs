@@ -8,8 +8,6 @@ namespace AgonyLauncher
 {
     public static class AgonyManager
     {
-        public static Settings Settings = new Settings();
-
         static AgonyManager()
         {
 
