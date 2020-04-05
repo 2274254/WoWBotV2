@@ -6,47 +6,46 @@ namespace Offsets
 	//now just modify
 	inline uintptr_t Base = reinterpret_cast<uintptr_t>(GetModuleHandle(nullptr));
 	//WoW Lua
-	inline uintptr_t InvalidFunctionPtr = 0x296B200;//GetTextEnd
-	inline uintptr_t FrameScript_RegisterFunction = 0x51AA40;
-	inline uintptr_t FrameScript_Execute = 0x519A70;
-	inline uintptr_t FrameScript_GetText = 0x51D8F0;
+	inline uintptr_t InvalidFunctionPtr = 0x294B240;//GetTextEnd
+	inline uintptr_t FrameScript_RegisterFunction = 0x513310;
+	inline uintptr_t FrameScript_Execute = 0x512340;
+	inline uintptr_t FrameScript_GetText = 0x5161C0;
 	//Lua
-	inline uintptr_t lua_gettop = 0x1DB700;
-	inline uintptr_t lua_isnumber = 0x1DB9B0;
-	inline uintptr_t lua_tonumber = 0x1DCCB0;
-	inline uintptr_t lua_pushnumber = 0x1DBFA0;
-	inline uintptr_t lua_pushinteger = 0x1DBEB0;
-	inline uintptr_t lua_pushstring = 0x1DBFC0;
-	inline uintptr_t lua_isstring = 0x1DB9E0;
-	inline uintptr_t lua_tolstring = 0x1DCC10;
-	inline uintptr_t lua_pushboolean = 0x1DBD10;
-	inline uintptr_t lua_createtable = 0x1DB000;
-	inline uintptr_t lua_rawseti = 0x1DC3E0;
-	inline uintptr_t lua_pcall = 0x1DBC80;
-	inline uintptr_t lua_settop = 0x1DC950;
-	inline uintptr_t luaL_error = 0x19B9F00;
-	inline uintptr_t lua_state = 0x29428A8;
-	inline uintptr_t lua_getfield = 0x1DB5E0;
+	inline uintptr_t lua_gettop = 0x1D0390;
+	inline uintptr_t lua_isnumber = 0x1D0640;
+	inline uintptr_t lua_tonumber = 0x1D1940;
+	inline uintptr_t lua_pushnumber = 0x1D0C30;
+	inline uintptr_t lua_pushinteger = 0x1D0B40;
+	inline uintptr_t lua_pushstring = 0x1D0C50;
+	inline uintptr_t lua_isstring = 0x1D0670;
+	inline uintptr_t lua_tolstring = 0x1D18A0;
+	inline uintptr_t lua_pushboolean = 0x1D09A0;
+	inline uintptr_t lua_createtable = 0x1CFC90;
+	inline uintptr_t lua_rawseti = 0x1D1070;
+	inline uintptr_t lua_pcall = 0x1D0910;
+	inline uintptr_t lua_settop = 0x1D15E0;
+	inline uintptr_t luaL_error = 0x1995B10;
+	inline uintptr_t lua_state = 0x29228E8;
+	inline uintptr_t lua_getfield = 0x1D0270;
 
 	//Game:
-	inline uintptr_t GameVersion = 0x21A31BC;
-	inline uintptr_t GetBaseFromToken = 0x16842E0;
-	inline uintptr_t InGame = 0x2A73ADC;
+	inline uintptr_t GetBaseFromToken = 0x16634C0;
+	inline uintptr_t InGame = 0x2A53B6C;
 
-	inline uintptr_t TerrainClick = 0xD99F80;
-	inline uintptr_t CameraBase = 0x2A74A88;
-	inline uintptr_t CorpseBase = 0x27CBDA8;
-	inline uintptr_t ObjectMgr = 0x29DBED0;
-	inline uintptr_t ClntObjMgrObjectPtr = 0xFBC440;
-	inline uintptr_t CGGameObject_C__GetName = 0xE14AC0;
-	inline uintptr_t CGUnit_C__GetUnitNameExposed = 0xD7B960;
-	inline uintptr_t CGUnit_C__CanAttack = 0xD62350;
-	inline uintptr_t Script_GetGUIDFromToken = 0x1682F60;
-	inline uintptr_t CGGameUI__OnSpriteRightClick = 0x11900B0;
-	inline uintptr_t CGGameUI__ClosestObjectMatch = 0x117D920;
-	inline uintptr_t CGGameUI__m_currentObjectTrack = 0x2A73AE0;//(Mouse over object)
-	inline uintptr_t FrameTime__GetCurTimeMs = 0x4A71D0;
-	inline uintptr_t CGBag_C__GetItemPointer = 0xEF59C0;
+	inline uintptr_t TerrainClick = 0xD79960;
+	inline uintptr_t CameraBase = 0x2A54B18;
+	inline uintptr_t CorpseBase = 0x27ABDD8;
+	inline uintptr_t ObjectMgr = 0x29BBF30;
+	inline uintptr_t ClntObjMgrObjectPtr = 0xFBC440;//TODO
+	inline uintptr_t CGGameObject_C__GetName = 0xDF4310;
+	inline uintptr_t CGUnit_C__GetUnitNameExposed = 0xD5B480;
+	inline uintptr_t CGUnit_C__CanAttack = 0xD628A0;
+	inline uintptr_t Script_GetGUIDFromToken = 0x1662140;
+	inline uintptr_t CGGameUI__OnSpriteRightClick = 0x1170940;
+	inline uintptr_t CGGameUI__ClosestObjectMatch = 0x115C920;
+	inline uintptr_t CGGameUI__m_currentObjectTrack = 0x2A53B70;//(Mouse over object)
+	inline uintptr_t FrameTime__GetCurTimeMs = 0x49FAA0;
+	inline uintptr_t CGBag_C__GetItemPointer = 0xED2E30;
 
 	namespace GameObject
 	{

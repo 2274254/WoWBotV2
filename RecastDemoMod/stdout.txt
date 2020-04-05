@@ -1,0 +1,1 @@
+Could not init datas. Maps folders exist?

@@ -6,6 +6,7 @@ using System.Threading;
 using Agony.SDK.Events;
 using Agony.SDK.Enumerations;
 using Agony.SDK.Utils;
+using System.Linq;
 
 namespace Agony.SDK
 {
@@ -15,21 +16,19 @@ namespace Agony.SDK
         internal static bool _initialized;
         internal static readonly List<Type> SkipInitialization = new List<Type>();
 
-        public static void Init(object[] args)
+        public static void Init(Dictionary<string, string> pluginConfigs, string currentProfile)
         {
             if (_initialized)
             {
                 return;
             }
-            Logger.Log(LogLevel.Info, "Init Bootstrap");
             _initialized = true;
 
-            if(args.Length == 2)
-            {
-                Bot.PluginConfigs = (Dictionary<string, string>)args[0];
-                Bot.CurrentProfile = (string)args[1];
-            }
+            Bot.PluginConfigs = pluginConfigs;
+            Bot.CurrentProfile = currentProfile;
 
+            Logger.Log(LogLevel.Info, "Init Bootstrap with profile: " + Bot.CurrentProfile + " and configs count = " + Bot.PluginConfigs.Count + " First config = " + Bot.PluginConfigs.First().Value);
+            
             // Set thread culture
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
             CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;

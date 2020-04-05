@@ -103,10 +103,11 @@
 
 					Agony::Native::Console::PrintLn("Loading MoveMaps");
 					Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
-					navigation->Initialize(0);
+					/*navigation->Initialize(0);
 					navigation->Initialize(3358);
 					navigation->Initialize(3277);
-					navigation->Initialize(2107);
+					navigation->Initialize(2107);*/
+					navigation->Initialize(2106);
 					Agony::Native::Console::PrintLn("Movemaps Loaded");
 					while (1 & !GetAsyncKeyState(VK_F4))
 					{

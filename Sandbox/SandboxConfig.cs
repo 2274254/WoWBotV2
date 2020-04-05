@@ -68,6 +68,7 @@ namespace Agony.Sandbox
                 IsVip = config.IsVip;
                 PluginConfigs = config.PluginConfigs;
                 CurrentProfile = config.CurrentProfile;
+                Logs.Log("Sandbox: Got profile: " + CurrentProfile);
             }
             else
             {

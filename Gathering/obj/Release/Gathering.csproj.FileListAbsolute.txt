@@ -14,11 +14,4 @@ D:\AgonyWoW\Gathering\obj\Release\Gathering.csproj.GenerateResource.Cache
 D:\AgonyWoW\Gathering\obj\Release\Gathering.pdb
 D:\AgonyWoW\Gathering\bin\Release\Gathering.dll
 D:\AgonyWoW\Gathering\obj\Release\Gathering.dll
-D:\AgonyWoW\Gathering\bin\Release\Agony.SDK.pdb
-D:\AgonyWoW\Gathering\bin\Release\Agony.Wrapper.pdb
-D:\AgonyWoW\Gathering\bin\Release\SharpDX.xml
-D:\AgonyWoW\Gathering\bin\Release\SharpDX.Direct3D11.xml
-D:\AgonyWoW\Gathering\bin\Release\SharpDX.DXGI.xml
-D:\AgonyWoW\Gathering\obj\Release\Gathering.csprojAssemblyReference.cache
-D:\AgonyWoW\Gathering\obj\Release\Gathering.csproj.CoreCompileInputs.cache
-D:\AgonyWoW\Gathering\obj\Release\Gathering.csproj.CopyComplete
+D:\AgonyWoW\Gathering\obj\Release\Gathering.csprojResolveAssemblyReference.cache

@@ -21,9 +21,10 @@ namespace Agony.SDK
                     var pluginBase = (PluginBase)Activator.CreateInstance(plugin);
                     if (pluginBase.Type == PluginType.BotBase)
                     {
+                        var configs = PluginConfigs.ContainsKey(assembly.FullName) ? PluginConfigs[assembly.FullName] : "";
                         CurrentBot = (BotBase)pluginBase;
-                        CurrentBot.Initialize(PluginConfigs.ContainsKey(assembly.FullName) ? PluginConfigs[assembly.FullName] : "", CurrentProfile);
-                        Console.WriteLine(string.Format("Initialized {0} BotBase with profile: ", CurrentBot.Name, CurrentProfile));
+                        CurrentBot.Initialize(configs, CurrentProfile);
+                        Console.WriteLine(string.Format("Initialized {0} BotBase with profile: {1}", CurrentBot.Name, CurrentProfile));
                     }
                 }
             }

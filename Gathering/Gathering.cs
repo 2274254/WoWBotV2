@@ -1,6 +1,7 @@
 ﻿using Agony;
 using Agony.SDK.CommonBot;
 using Agony.SDK.TreeSharp;
+using Agony.SDK.Utils;
 using Gathering.Decorators;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,7 @@ namespace Gathering
                 if (!string.IsNullOrEmpty(profile))
                 {
                     //Profile.Load("D:\\AgonyWoW\\x64\\Release\\Profiles\\Gathering\\Herbalist\\Mining+Herbing 1-75 [Start at Goldshire].xml");
-                    Profile.LoadXml(profile);
+                    Profile.Load(profile);
                     hasProfile = true;
                 }
                 else
@@ -48,7 +49,7 @@ namespace Gathering
             }
             catch(Exception ex)
             {
-
+                Logger.Log(Agony.SDK.Enumerations.LogLevel.Error, ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
 
