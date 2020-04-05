@@ -32,6 +32,10 @@ namespace Agony
 				{
 					Bootstrapper::GetInstance()->Trigger(BootstrapEventType::Load);
 				}
+				else if (WParam == VK_F2)
+				{
+					LuaFunctions::SolTest();
+				}
 			}
 
 			if (!process)

@@ -1,0 +1,17 @@
+D:\AgonyWoW\Gathering\bin\Release\Gathering.pdb
+D:\AgonyWoW\Gathering\bin\Release\Agony.SDK.dll
+D:\AgonyWoW\Gathering\bin\Release\Agony.Wrapper.dll
+D:\AgonyWoW\Gathering\bin\Release\SharpDX.Direct3D11.dll
+D:\AgonyWoW\Gathering\bin\Release\SharpDX.dll
+D:\AgonyWoW\Gathering\bin\Release\SharpDX.DXGI.dll
+D:\AgonyWoW\Gathering\obj\Release\ConfigsWindow.baml
+D:\AgonyWoW\Gathering\obj\Release\Styles\ExpressionDark.baml
+D:\AgonyWoW\Gathering\obj\Release\ConfigsWindow.g.cs
+D:\AgonyWoW\Gathering\obj\Release\Gathering_MarkupCompile.cache
+D:\AgonyWoW\Gathering\obj\Release\Gathering.g.resources
+D:\AgonyWoW\Gathering\obj\Release\Gathering.Properties.Resources.resources
+D:\AgonyWoW\Gathering\obj\Release\Gathering.csproj.GenerateResource.Cache
+D:\AgonyWoW\Gathering\obj\Release\Gathering.pdb
+D:\AgonyWoW\Gathering\bin\Release\Gathering.dll
+D:\AgonyWoW\Gathering\obj\Release\Gathering.dll
+D:\AgonyWoW\Gathering\obj\Release\Gathering.csprojResolveAssemblyReference.cache

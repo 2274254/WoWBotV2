@@ -11,6 +11,7 @@
 #include "Offsets.h"
 #include "WoWObject.h"
 
+
 struct any {
     enum type { Int, Float, String, Boolean, Double, Uint64 };
     any(int   e) { m_data.INT = e; m_type = Int; }
@@ -169,6 +170,8 @@ namespace Agony
             static int32_t GetPlayerAngle(uintptr_t* l);
             static int32_t IsInGame(uintptr_t* l);
             static int32_t Test(uintptr_t* l);
+            void Dummy(std::string msg);
+            static void SolTest();
             static std::map<const char*, int64_t> FunctionsMap;
         };
     }

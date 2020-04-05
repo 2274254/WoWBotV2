@@ -97,6 +97,7 @@
     <ClCompile Include="CGLocalPlayer.cpp">
       <Filter>Source Files\GameObjects\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="LuaGlobals.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MinHook.h">
@@ -190,6 +191,25 @@
     <ClInclude Include="BuildInfo.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="lauxlib.h">
+      <Filter>Header Files\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua.h">
+      <Filter>Header Files\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="luaconf.h">
+      <Filter>Header Files\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lualib.h">
+      <Filter>Header Files\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="sol\sol.hpp">
+      <Filter>Header Files\sol</Filter>
+    </ClInclude>
+    <ClInclude Include="sol\forward.hpp">
+      <Filter>Header Files\sol</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaGlobals.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -239,6 +259,12 @@
     </Filter>
     <Filter Include="Source Files\GameObjects\Objects">
       <UniqueIdentifier>{fc36c5a3-d61d-4688-953b-59a2d157ef71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lua">
+      <UniqueIdentifier>{83b926cc-053f-47bb-b21c-029193f943bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sol">
+      <UniqueIdentifier>{5f72ba8c-7f90-4fc1-986c-0334595ef4fb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

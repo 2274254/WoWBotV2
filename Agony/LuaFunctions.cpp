@@ -1,9 +1,11 @@
-#include "LuaFunctions.h"
+﻿#include "LuaFunctions.h"
 #include "vector3.h"
 #include "Navigation.h"
 #include "Drawings.h"
 #include "ObjectManager.h"
 #include "Game.h"
+#include "LuaGlobals.h"
+#include <tuple>
 
 namespace Agony
 {
@@ -495,6 +497,42 @@ namespace Agony
                 }*/
             }
             return 0;
+        }
+        
+        void LuaFunctions::Dummy(std::string msg)
+        {
+            std::cout << msg << "\n";
+        }
+
+        //create var to bind only once later
+        void LuaFunctions::SolTest() 
+        {
+            if (LuaGlobals::MainEnvironment == nullptr)
+            {
+                const auto l = *reinterpret_cast<lua_State**>(Offsets::Base + Offsets::lua_state);
+                LuaGlobals::MainEnvironment = std::make_unique<sol::state_view>(l);
+                auto& lua = *LuaGlobals::MainEnvironment;
+                lua["Dummy"] = &Dummy; //done can use in wow now nice!
+                std::cout << "Finished binding functions.\n";
+            }
+
+            auto& lua = *LuaGlobals::MainEnvironment;
+            //thats basically it 
+            const auto badCodeResult = lua.safe_script(
+                R"(ver = BuildInfo.new() print(ver.version.major))",
+                [](lua_State*, const sol::protected_function_result& pfr)
+                {
+                    const auto errObj = pfr.get<sol::error>();
+                    const auto errMsg = errObj.what();
+                    std::cerr << errMsg << "\n";
+                    return pfr;
+                }
+            );
+            //ok now u can call lua anywhere but we do here for example
+            //let start simple unithealth
+            int health = lua["UnitHealth"]("player");
+
+            std::tuple<std::string, std::string, int, int, int, std::string, std::string, std::string> result = lua["GetBattlefieldStatus"](1);//Guess it will work
         }
     }
 }

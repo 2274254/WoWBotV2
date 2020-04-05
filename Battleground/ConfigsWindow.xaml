@@ -1,0 +1,42 @@
+﻿<Window x:Class="Gathering.ConfigsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Height="250" Width="304.651" Background="#FF333333" Title="Configs" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/ExpressionDark.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <TabControl TabStripPlacement="Bottom" BorderThickness="0">
+            <TabItem Header="Mining" BorderThickness="0">
+                <StackPanel Margin="10">
+                    <CheckBox x:Name="CheckboxMiningEnabled" Content="Enabled" IsChecked="True"/>
+                    <Label Margin="0 10 0 0">Hello World!</Label>
+                    <ComboBox SelectedIndex="0">
+                        <ComboBoxItem Content="Test"/>
+                    </ComboBox>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Herbalist"></TabItem>
+        </TabControl>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ButtonCancel" Grid.Column="0" Content="Cancel" Margin="5" Click="ButtonCancel_Click"/>
+            <Button x:Name="ButtonSaveAndClose" Grid.Column="2" Content="Save &amp; Close" Margin="5" Click="ButtonSaveAndClose_Click"/>
+        </Grid>
+    </Grid>
+</Window>
