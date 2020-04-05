@@ -165,6 +165,8 @@ namespace Agony
 							}
 						}
 
+						LuaFunctions::SolTest();
+
 						//std::string result = Agony::Native::LuaFunctions::ExecuteGetResult("globalVar = GetUnitPosition('player')", "globalVar");
 						/*auto ret = Agony::Native::LuaFunctions::Call("GetUnitPosition", { 1, 1, 1 }, "player");
 						if (ret.size() == 3)

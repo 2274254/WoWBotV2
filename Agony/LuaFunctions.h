@@ -170,7 +170,7 @@ namespace Agony
             static int32_t GetPlayerAngle(uintptr_t* l);
             static int32_t IsInGame(uintptr_t* l);
             static int32_t Test(uintptr_t* l);
-            void Dummy(std::string msg);
+            static void Dummy(std::string msg);
             static void SolTest();
             static std::map<const char*, int64_t> FunctionsMap;
         };

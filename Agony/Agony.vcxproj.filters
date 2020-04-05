@@ -98,6 +98,15 @@
       <Filter>Source Files\GameObjects\Objects</Filter>
     </ClCompile>
     <ClCompile Include="LuaGlobals.cpp" />
+    <ClCompile Include="lauxlib.cpp">
+      <Filter>Source Files\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua.cpp">
+      <Filter>Source Files\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lualib.cpp">
+      <Filter>Source Files\Lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MinHook.h">
@@ -265,6 +274,9 @@
     </Filter>
     <Filter Include="Header Files\sol">
       <UniqueIdentifier>{5f72ba8c-7f90-4fc1-986c-0334595ef4fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Lua">
+      <UniqueIdentifier>{9cdf8166-e14c-424f-bcb8-2ba09a24e2ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

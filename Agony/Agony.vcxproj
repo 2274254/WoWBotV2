@@ -332,8 +332,11 @@
     </ClCompile>
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="lauxlib.cpp" />
+    <ClCompile Include="lua.cpp" />
     <ClCompile Include="LuaFunctions.cpp" />
     <ClCompile Include="LuaGlobals.cpp" />
+    <ClCompile Include="lualib.cpp" />
     <ClCompile Include="MoveMap.cpp" />
     <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="ObjectManager.cpp" />

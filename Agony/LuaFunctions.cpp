@@ -507,6 +507,16 @@ namespace Agony
         //create var to bind only once later
         void LuaFunctions::SolTest() 
         {
+            const auto l = *reinterpret_cast<lua_State**>(Offsets::Base + Offsets::lua_state);
+            lua_getglobal(l, "UnitHealth");
+            lua_pushstring(l, "player");
+            lua_call(l, 1, 1);
+            auto result = lua_tonumber(l, -1);
+            lua_pop(l, -1);
+            lua_getglobal(l, "print");
+            lua_pushnumber(l, result);
+            lua_call(l, 1, 0); //try that
+
             if (LuaGlobals::MainEnvironment == nullptr)
             {
                 const auto l = *reinterpret_cast<lua_State**>(Offsets::Base + Offsets::lua_state);
@@ -519,7 +529,7 @@ namespace Agony
             auto& lua = *LuaGlobals::MainEnvironment;
             //thats basically it 
             const auto badCodeResult = lua.safe_script(
-                R"(ver = BuildInfo.new() print(ver.version.major))",
+                R"(print("hello from sol"))",
                 [](lua_State*, const sol::protected_function_result& pfr)
                 {
                     const auto errObj = pfr.get<sol::error>();
@@ -528,11 +538,34 @@ namespace Agony
                     return pfr;
                 }
             );
-            //ok now u can call lua anywhere but we do here for example
-            //let start simple unithealth
+            ////ok now u can call lua anywhere but we do here for example
+            ////let start simple unithealth
             int health = lua["UnitHealth"]("player");
+            std::cout << "Player health = " << health << std::endl;
 
-            std::tuple<std::string, std::string, int, int, int, std::string, std::string, std::string> result = lua["GetBattlefieldStatus"](1);//Guess it will work
+            try
+            {
+                sol::variadic_results result2 = lua["GetBattlefieldStatus"](1);//Guess it will work
+                for (auto arg : result2)
+                {
+                    if (arg.valid())
+                    {
+                        if (arg.is<std::string>())
+                            std::cout << "Got arg: " << arg.as<std::string>() << std::endl;
+                        else if (arg.is<float>())
+                            std::cout << "Got arg: " << arg.as<float>() << std::endl;
+                        else if (arg.is<int>())
+                            std::cout << "Got arg: " << arg.as<int>() << std::endl;
+                        else if (arg.is<bool>())
+                            std::cout << "Got arg: " << arg.as<bool>() << std::endl;
+                    }
+                }
+                /*if (result2.size() == 8)
+                {
+                    std::cout << "status: " << result2.at(0).as<std::string>() << " mapName:  " << result2.at(1).as<std::string>() << std::endl;
+                }*/
+            }
+            catch (...) {}
         }
     }
 }
