@@ -1,4 +1,5 @@
 -- MAIN_CODE R"lua(
+--50.100.122.19:3389
 
 print("Agony loaded");
 AgonyCoreFrame = AgonyCoreFrame or CreateFrame("Frame")
