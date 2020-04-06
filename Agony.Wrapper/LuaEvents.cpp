@@ -7,23 +7,31 @@
 static Agony::WoWInternals::LuaEvents::LuaEvents()
 {
 	ATTACH_DOMAIN();
-	//Attach OnEvent here...
+	//TODO: Attach OnEvent here...
 }
 
 void Agony::WoWInternals::LuaEvents::DomainUnloadEventHandler(System::Object^, System::EventArgs^)
 {
-	//Detach OnEvent here...
+	//TODO: Detach OnEvent here...
 }
 
 void Agony::WoWInternals::LuaEvents::AttachEvent(System::String^ eventName, LuaEventHandlerDelegate^ handler)
 {
-	if (!RegisteredEvents->ContainsKey(eventName)) RegisteredEvents->Add(eventName, gcnew System::Collections::Generic::List<LuaEventHandlerDelegate^>);
+	if (!RegisteredEvents->ContainsKey(eventName))
+	{
+		RegisteredEvents->Add(eventName, gcnew System::Collections::Generic::List<LuaEventHandlerDelegate^>);
+		//TODO: Call unmanaged RegisterEvent
+	}
 	RegisteredEvents[eventName]->Add(handler);
 }
 
 void Agony::WoWInternals::LuaEvents::DetachEvent(System::String^ eventName, LuaEventHandlerDelegate^ handler)
 {
 	RegisteredEvents[eventName]->Remove(handler);
+	if (RegisteredEvents[eventName]->Count == 0)
+	{
+		//TODO: Call unmanaged UnregisterEvent
+	}
 }
 
 void OnLuaEventNative(std::string eventName, std::vector<std::any> results)
