@@ -3,7 +3,7 @@ using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
 using Action = Agony.SDK.TreeSharp.Action;
 
-namespace Gathering.Decorators
+namespace Battleground.Decorators
 {
     public static class RepairEquipment
     {
@@ -19,7 +19,7 @@ namespace Gathering.Decorators
         {
             return new Action(a =>
             {
-                Logger.Log(LogLevel.Info, "[Gathering] Repairing equipments.");
+                Logger.Log(LogLevel.Info, "[Battleground] Repairing equipments.");
 
             });
         }

@@ -20,9 +20,6 @@ namespace Agony
 
 		System::Console::WriteLine("Binding Game Event: GamePostTick");
 		ATTACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, Native::OnGamePostTick);
-
-		System::Console::WriteLine("Binding Game Event: OnGossipShow");
-		ATTACH_EVENT(GossipShow, Agony::Native::Game::Game::GetInstance()->GossipInfoEvents.GOSSIP_SHOW, void());
 	}
 
 	void Game::DomainUnloadEventHandler(Object^, System::EventArgs^)
@@ -31,7 +28,6 @@ namespace Agony
 		DETACH_EVENT(GamePreTick, Agony::Native::Game::Game::GetInstance()->OnPreTick, Native::OnGamePreTick);
 		DETACH_EVENT(GameTick, Agony::Native::Game::Game::GetInstance()->OnTick, Native::OnGameTick);
 		DETACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, Native::OnGamePostTick);
-		DETACH_EVENT(GossipShow, Agony::Native::Game::Game::GetInstance()->GossipInfoEvents.GOSSIP_SHOW, void());
 		System::Console::WriteLine("Domain Unloaded");
 	}
 
@@ -83,19 +79,6 @@ namespace Agony
 	{
 		START_TRACE
 			for each (auto eventHandle in GamePostTickHandlers->ToArray())
-			{
-				START_TRACE
-					eventHandle(EventArgs::Empty);
-				END_TRACE
-			}
-		END_TRACE
-	}
-
-	void Game::OnGossipShowNative()
-	{
-		System::Console::WriteLine("On Gossip Show inside wrapper!");
-		START_TRACE
-			for each (auto eventHandle in GossipShowHandlers->ToArray())
 			{
 				START_TRACE
 					eventHandle(EventArgs::Empty);

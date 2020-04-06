@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 
-namespace Gathering
+namespace Battleground
 {
     /// <summary>
     /// Interaction logic for ConfigsWindow.xaml
@@ -46,7 +46,7 @@ namespace Gathering
             mainNode.AppendChild(miningNode);
             miningNode.SetAttribute("Enabled", CheckboxMiningEnabled.IsChecked.Value ? "True" : "False");
 
-            Gathering.ConfigsString = xmlDoc.OuterXml;
+            Battleground.ConfigsString = xmlDoc.OuterXml;
 
             Close();
         }

@@ -21,18 +21,7 @@ AgonyCoreFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
 AgonyCoreFrame:RegisterEvent("WORLD_STATE_TIMER_STOP")
 
 AgonyCoreFrame:SetScript("OnEvent", function(self, event, ...)
-	if event == "GOSSIP_SHOW"  then
-		AgonyLuaEvents.OnGossipShow();
-	elseif event == "CINEMATIC_START"  then
-		local canCancel = ... --bad --cant have; here
-		AgonyLuaEvents.OnCinematicStart(canCancel);
-	elseif event == "CINEMATIC_STOP"  then
-		AgonyLuaEvents.OnCinematicStop();
-	elseif event == "PLAYER_STARTED_MOVING"  then
-		AgonyLuaEvents.OnPlayerStartedMoving();
-	elseif event == "PLAYER_STOPPED_MOVING"  then
-		AgonyLuaEvents.OnPlayerStoppedMoving();
-	end
+	AgonyLuaEvents.OnEvent(event, ...);
 	--print(event);
 end)
 

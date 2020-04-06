@@ -1,9 +1,11 @@
 #pragma once
-//using namespace System;
-//using namespace System::Collections::Generic;
+#include "../Agony/Game.h"
+#include "Macros.h"
 
 namespace Agony::WoWInternals
 {
+	MAKE_EVENT_GLOBAL(LuaEvent, std::string, std::vector<std::any>);
+
 	public ref class LuaEventArgs : System::EventArgs
 	{
 		System::String^ _eventName;
@@ -40,7 +42,9 @@ namespace Agony::WoWInternals
 
 	public ref class LuaEvents
 	{
+		MAKE_EVENT_INTERNAL(LuaEvent, (std::string, std::vector<std::any>));
 		static void DomainUnloadEventHandler(System::Object^, System::EventArgs^);
+		MAKE_EVENT_PUBLIC(OnLuaEvent, LuaEvent);
 	internal:
 		static System::Collections::Generic::Dictionary<System::String^, System::Collections::Generic::List<LuaEventHandlerDelegate^>^>^ RegisteredEvents = gcnew System::Collections::Generic::Dictionary<System::String^, System::Collections::Generic::List<LuaEventHandlerDelegate^>^>();
 	public:

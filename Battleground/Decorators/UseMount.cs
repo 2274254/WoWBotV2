@@ -4,7 +4,7 @@ using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
 using Action = Agony.SDK.TreeSharp.Action;
 
-namespace Gathering.Decorators
+namespace Battleground.Decorators
 {
     public static class UseMount
     {
@@ -22,7 +22,7 @@ namespace Gathering.Decorators
         {
             return new Action(a =>
             {
-                Logger.Log(LogLevel.Info, "[Gathering] Casting mount...");
+                Logger.Log(LogLevel.Info, "[Battleground] Casting mount...");
                 //Cast(Mount)...
             });
         }

@@ -4,7 +4,7 @@ using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
 using Action = Agony.SDK.TreeSharp.Action;
 
-namespace Gathering.Decorators
+namespace Battleground.Decorators
 {
     public static class ReleaseCorpse
     {

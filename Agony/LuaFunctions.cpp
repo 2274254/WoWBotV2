@@ -591,16 +591,69 @@ namespace Agony
                 LuaGlobals::MainEnvironment = std::make_unique<sol::state_view>(l);
                 auto& lua = *LuaGlobals::MainEnvironment;
 
-                
-
                 lua.new_usertype<void>("AgonyLuaEvents",
                     //"new", sol::no_constructor,
-                    "OnGossipShow", []() { Game::GetInstance()->GossipInfoEvents.GOSSIP_SHOW.Trigger(); },
-                    "OnAchievementEarned", [](int achievementID, bool alreadyEarned) { Game::GetInstance()->AchievementInfoEvents.ACHIEVEMENT_EARNED.Trigger(achievementID, alreadyEarned); },
-                    "OnCinematicStart", &OnCinematicStart,
-                    "OnCinematicStop", & OnCinematicStop,
-                    "OnPlayerStartedMoving", & OnPlayerStartedMoving,
-                    "OnPlayerStoppedMoving", & OnPlayerStoppedMoving
+                    "OnEvent", [](const sol::variadic_args& results)
+                    {
+                        std::string eventName;
+                        std::vector<std::any> args = std::vector<std::any>();
+                        int i = 0;
+                        for (const auto& result : results)
+                        {
+                            switch (result.get_type())
+                            {
+                                case sol::type::nil:
+                                {
+                                    args.push_back(nullptr);
+                                    break;
+                                }
+                                case sol::type::function:
+                                {
+                                    args.push_back(result.as<uintptr_t>());
+                                    break;
+                                }
+                                case sol::type::string:
+                                {
+                                    if (i == 0)
+                                    {
+                                        eventName = result.as<std::string>();
+                                    }
+                                    else
+                                    {
+                                        args.push_back(result.as<std::string>());
+                                    }
+                                    break;
+                                }
+                                case sol::type::number:
+                                {
+                                    args.push_back(result.as<double>());
+                                    break;
+                                }
+                                case sol::type::boolean:
+                                {
+                                    args.push_back(result.as<bool>());
+                                    break;
+                                }
+                                case sol::type::table:
+                                {
+                                    args.push_back(result.as<uintptr_t>());
+                                    break;
+                                }
+                                case sol::type::userdata:
+                                {
+                                    args.push_back(result.as<uintptr_t>());
+                                    break;
+                                }
+                                default:
+                                {
+                                    std::cout << "Type value is either unknown or doesn't matter\n";
+                                    break;
+                                }
+                            }
+                            i++;
+                        }
+                        Game::GetInstance()->OnLuaEvent.Trigger(eventName, args);
+                    }
                 );
 
                 //

@@ -4,7 +4,7 @@ using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
 using Action = Agony.SDK.TreeSharp.Action;
 
-namespace Gathering.Decorators
+namespace Battleground.Decorators
 {
     public static class Idle
     {
@@ -12,7 +12,7 @@ namespace Gathering.Decorators
         {
             var player = Game.Me;
             //If i need to wait for what ever reason...
-            if(player == null || player.IsInCombat() || player.IsCasting() || Gathering.GatherWaitTill > Game.FrameTimeMS)//OR IS CASTING/CHANNELING/OR IN COMBAT...
+            if(player == null || player.IsInCombat() || player.IsCasting() || Battleground.GatherWaitTill > Game.FrameTimeMS)//OR IS CASTING/CHANNELING/OR IN COMBAT...
             {
                 return true;
             }
@@ -25,7 +25,7 @@ namespace Gathering.Decorators
             {
                 Logger.Log(LogLevel.Info, "[Gathering] Waiting...");
                 PathingController.Reset();
-                Gathering.HotspotIndex = -1;
+                Battleground.HotspotIndex = -1;
             });
         }
 

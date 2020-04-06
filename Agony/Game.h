@@ -4,6 +4,7 @@
 #include "EventHandler.h"
 #include "BuildInfo.h"
 #include "LuaEvents.h"
+#include <any>
 
 namespace Agony
 {
@@ -26,12 +27,8 @@ namespace Agony
 			EventHandler<void()> OnPreTick = EventHandler<void()>();
 			EventHandler<void()> OnTick = EventHandler<void()>();
 			EventHandler<void()> OnPostTick = EventHandler<void()>();
+			EventHandler<void(std::string, std::vector<std::any>), std::string, std::vector<std::any>> OnLuaEvent = EventHandler<void(std::string, std::vector<std::any>), std::string, std::vector<std::any>>();
 
-			//Lua Events
-			LuaEvents::C_AchievementInfo AchievementInfoEvents = LuaEvents::C_AchievementInfo();
-			LuaEvents::C_GossipInfo GossipInfoEvents = LuaEvents::C_GossipInfo();
-
-			//
 			bool ApplyHooks(void*);
 			void ClearHooks(void* mainWindowHandle);
 		};

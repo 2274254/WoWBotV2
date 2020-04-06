@@ -127,7 +127,7 @@ using namespace System::Runtime::InteropServices;
 	static System::IntPtr m_##EVENTNAME##Native;
 
 #define ATTACH_EVENT(EVENTNAME, NATIVEHANDLER, ...) \
-	EVENTNAME##Handlers = gcnew List<EVENTNAME^>( ); \
+	EVENTNAME##Handlers = gcnew System::Collections::Generic::List<EVENTNAME^>( ); \
 	m_##EVENTNAME##NativeDelegate = gcnew On##EVENTNAME##NativeDelegate( On##EVENTNAME##Native ); \
 	m_##EVENTNAME##Native = Marshal::GetFunctionPointerForDelegate( m_##EVENTNAME##NativeDelegate); \
 	##NATIVEHANDLER##.Add(m_##EVENTNAME##Native##.ToPointer()); \

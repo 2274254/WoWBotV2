@@ -1,18 +1,15 @@
 #include "LuaEvents.h"
-#include "Macros.h"
-#include <string>
-#include <vector>
-#include <any>
 
 static Agony::WoWInternals::LuaEvents::LuaEvents()
 {
 	ATTACH_DOMAIN();
-	//TODO: Attach OnEvent here...
+	System::Console::WriteLine("Binding Game Event:OnLuaEvent");
+	ATTACH_EVENT(LuaEvent, Agony::Native::Game::Game::GetInstance()->OnLuaEvent, void(std::string, std::vector<std::any>));
 }
 
 void Agony::WoWInternals::LuaEvents::DomainUnloadEventHandler(System::Object^, System::EventArgs^)
 {
-	//TODO: Detach OnEvent here...
+	DETACH_EVENT(LuaEvent, Agony::Native::Game::Game::GetInstance()->OnLuaEvent, void(std::string, std::vector<std::any>));
 }
 
 void Agony::WoWInternals::LuaEvents::AttachEvent(System::String^ eventName, LuaEventHandlerDelegate^ handler)
@@ -34,7 +31,7 @@ void Agony::WoWInternals::LuaEvents::DetachEvent(System::String^ eventName, LuaE
 	}
 }
 
-void OnLuaEventNative(std::string eventName, std::vector<std::any> results)
+void Agony::WoWInternals::LuaEvents::OnLuaEventNative(std::string eventName, std::vector<std::any> results)
 {
 	START_TRACE
 		auto eventNameManaged = gcnew System::String(eventName.c_str());

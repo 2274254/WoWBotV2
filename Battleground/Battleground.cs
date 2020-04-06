@@ -3,12 +3,12 @@ using Agony.SDK.CommonBot;
 using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
 using Agony.WoWInternals;
-using Gathering.Decorators;
+using Battleground.Decorators;
 using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace Gathering
+namespace Battleground
 {
     public class Battleground : BotBase
     {

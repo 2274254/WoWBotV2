@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml;
 
-namespace Gathering
+namespace Battleground
 {
     class Program
     {
@@ -17,7 +17,7 @@ namespace Gathering
             XmlElement mainNode = xmlDoc.CreateElement(string.Empty, "Battleground", string.Empty);
             xmlDoc.AppendChild(mainNode);
 
-            Gathering.ConfigsString = xmlDoc.OuterXml;
+            Battleground.ConfigsString = xmlDoc.OuterXml;
         }
     }
 }
