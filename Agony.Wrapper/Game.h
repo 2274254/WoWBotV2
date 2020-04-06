@@ -12,6 +12,7 @@ namespace Agony
 	MAKE_EVENT_GLOBAL(GamePreTick, EventArgs^ args);
 	MAKE_EVENT_GLOBAL(GameTick, EventArgs^ args);
 	MAKE_EVENT_GLOBAL(GamePostTick, EventArgs^ args);
+	MAKE_EVENT_GLOBAL(GossipShow, EventArgs^ args);
 
 	public ref class Game
 	{
@@ -20,12 +21,14 @@ namespace Agony
 		MAKE_EVENT_INTERNAL(GamePreTick, ());
 		MAKE_EVENT_INTERNAL(GameTick, ());
 		MAKE_EVENT_INTERNAL(GamePostTick, ());
+		MAKE_EVENT_INTERNAL(GossipShow, ());
 	public:
 		static Game::Game();
 		MAKE_EVENT_PUBLIC(OnWndProc, GameWndProc);
 		MAKE_EVENT_PUBLIC(OnPreTick, GamePreTick);
 		MAKE_EVENT_PUBLIC(OnTick, GameTick);
 		MAKE_EVENT_PUBLIC(OnPostTick, GamePostTick);
+		MAKE_EVENT_PUBLIC(OnGossipShow, GossipShow);
 
 		static void DomainUnloadEventHandler(Object^, EventArgs^);
 

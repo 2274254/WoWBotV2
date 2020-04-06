@@ -48,6 +48,8 @@ namespace Agony
         {
             return LuaFunctions::internal_Call(std::string functionName, const Args &... args);
         }*/
+        #define MAIN_CODE dummy; return
+
         class DLLEXPORT LuaFunctions
         {
             #define LUA_GLOBALSINDEX        (-10002)
@@ -170,7 +172,14 @@ namespace Agony
             static int32_t GetPlayerAngle(uintptr_t* l);
             static int32_t IsInGame(uintptr_t* l);
             static int32_t Test(uintptr_t* l);
-            static void Dummy(std::string msg);
+            //OnEvents:
+            static void OnGossipShow();
+            static void OnCinematicStart(bool canCancel);
+            static void OnCinematicStop();
+            static void OnPlayerStartedMoving();
+            static void OnPlayerStoppedMoving();
+            //
+            static const char* GetMainScriptCode();
             static void SolTest();
             static std::map<const char*, int64_t> FunctionsMap;
         };

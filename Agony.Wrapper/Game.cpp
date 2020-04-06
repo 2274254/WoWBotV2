@@ -10,24 +10,28 @@ namespace Agony
 		ATTACH_DOMAIN();
 
 		System::Console::WriteLine("Binding Game Event: GameWndProc");
-		ATTACH_EVENT(GameWndProc, Agony::Native::Game::Game::GetInstance()->GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
+		ATTACH_EVENT(GameWndProc, Agony::Native::Game::Game::GetInstance()->GameWndProc,  Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
 		
 		System::Console::WriteLine("Binding Game Event: GamePreTick");
-		ATTACH_EVENT(GamePreTick, Agony::Native::Game::Game::GetInstance()->OnPreTick, 2, Native::OnGamePreTick);
+		ATTACH_EVENT(GamePreTick, Agony::Native::Game::Game::GetInstance()->OnPreTick, Native::OnGamePreTick);
 
 		System::Console::WriteLine("Binding Game Event: GameTick");
-		ATTACH_EVENT(GameTick, Agony::Native::Game::Game::GetInstance()->OnTick, 3, Native::OnGameTick);
+		ATTACH_EVENT(GameTick, Agony::Native::Game::Game::GetInstance()->OnTick, Native::OnGameTick);
 
 		System::Console::WriteLine("Binding Game Event: GamePostTick");
-		ATTACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, 4, Native::OnGamePostTick);
+		ATTACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, Native::OnGamePostTick);
+
+		System::Console::WriteLine("Binding Game Event: OnGossipShow");
+		ATTACH_EVENT(GossipShow, Agony::Native::Game::Game::GetInstance()->GossipInfoEvents.GOSSIP_SHOW, void());
 	}
 
 	void Game::DomainUnloadEventHandler(Object^, System::EventArgs^)
 	{
-		DETACH_EVENT(GameWndProc, Agony::Native::Game::Game::GetInstance()->GameWndProc, 1, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
-		DETACH_EVENT(GamePreTick, Agony::Native::Game::Game::GetInstance()->OnPreTick, 2, Native::OnGamePreTick);
-		DETACH_EVENT(GameTick, Agony::Native::Game::Game::GetInstance()->OnTick, 3, Native::OnGameTick);
-		DETACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, 4, Native::OnGamePostTick);
+		DETACH_EVENT(GameWndProc, Agony::Native::Game::Game::GetInstance()->GameWndProc, Native::OnWndProc, HWND, UINT, WPARAM, LPARAM);
+		DETACH_EVENT(GamePreTick, Agony::Native::Game::Game::GetInstance()->OnPreTick, Native::OnGamePreTick);
+		DETACH_EVENT(GameTick, Agony::Native::Game::Game::GetInstance()->OnTick, Native::OnGameTick);
+		DETACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, Native::OnGamePostTick);
+		DETACH_EVENT(GossipShow, Agony::Native::Game::Game::GetInstance()->GossipInfoEvents.GOSSIP_SHOW, void());
 		System::Console::WriteLine("Domain Unloaded");
 	}
 
@@ -79,6 +83,19 @@ namespace Agony
 	{
 		START_TRACE
 			for each (auto eventHandle in GamePostTickHandlers->ToArray())
+			{
+				START_TRACE
+					eventHandle(EventArgs::Empty);
+				END_TRACE
+			}
+		END_TRACE
+	}
+
+	void Game::OnGossipShowNative()
+	{
+		System::Console::WriteLine("On Gossip Show inside wrapper!");
+		START_TRACE
+			for each (auto eventHandle in GossipShowHandlers->ToArray())
 			{
 				START_TRACE
 					eventHandle(EventArgs::Empty);

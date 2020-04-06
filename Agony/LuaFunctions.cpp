@@ -499,73 +499,157 @@ namespace Agony
             return 0;
         }
         
-        void LuaFunctions::Dummy(std::string msg)
+        void LuaFunctions::OnGossipShow()
         {
-            std::cout << msg << "\n";
+            std::cout << "TRIGGER ON GOSSIP SHOW Using EventCallback\n";
+        }
+
+        void LuaFunctions::OnCinematicStart(bool canCancel)
+        {
+            std::cout << "OnCinematicStart\n";
+        }
+
+        void LuaFunctions::OnCinematicStop()
+        {
+            std::cout << "TRIGGER ON CinematicStop\n";
+        }
+
+        void LuaFunctions::OnPlayerStartedMoving()
+        {
+            std::cout << "TRIGGER On PlayerStartedMoving\n";
+        }
+
+        void LuaFunctions::OnPlayerStoppedMoving()
+        {
+            std::cout << "TRIGGER On PlayerStoppedMoving\n";
+        }
+
+        const char* LuaFunctions::GetMainScriptCode()
+        {
+            int32_t dummy = 0;
+            #include "main.lua"//really that will execute lua ?
+        }
+
+        inline void PrintLuaResults(const sol::variadic_results& results)
+        {
+            for (const auto& result : results)
+            {
+                switch (result.get_type())
+                {
+                    case sol::type::nil:
+                    {
+                        std::cout << "nil\n";
+                        break;
+                    }
+                    case sol::type::function:
+                    {
+                        std::cout << "function: 0x" << std::hex << result.as<uintptr_t>() << "\n";
+                        break;
+                    }
+                    case sol::type::string:
+                    {
+                        std::cout << result.as<std::string>() << "\n";
+                        break;
+                    }
+                    case sol::type::number:
+                    {
+                        std::cout << std::to_string(result.as<double>()) << "\n";
+                        break;
+                    }
+                    case sol::type::boolean:
+                    {
+                        std::cout << (result.as<bool>() ? "true" : "false") << "\n";
+                        break;
+                    }
+                    case sol::type::table:
+                    {
+                        std::cout << "table: 0x" << std::hex << result.as<uintptr_t>() << "\n";
+                        break;
+                    }
+                    case sol::type::userdata:
+                    {
+                        std::cout << "userdata: 0x" << std::hex << result.as<uintptr_t>() << "\n";
+                        break;
+                    }
+                    default:
+                    {
+                        std::cout << "Type value is either unknown or doesn't matter\n";
+                        break;
+                    }
+                }
+            }
         }
 
         //create var to bind only once later
         void LuaFunctions::SolTest() 
         {
             const auto l = *reinterpret_cast<lua_State**>(Offsets::Base + Offsets::lua_state);
-            lua_getglobal(l, "UnitHealth");
-            lua_pushstring(l, "player");
-            lua_call(l, 1, 1);
-            auto result = lua_tonumber(l, -1);
-            lua_pop(l, -1);
-            lua_getglobal(l, "print");
-            lua_pushnumber(l, result);
-            lua_call(l, 1, 0); //try that
 
-            if (LuaGlobals::MainEnvironment == nullptr)
+            if (LuaGlobals::MainEnvironment == nullptr) //need to set a bool instead here
             {
                 const auto l = *reinterpret_cast<lua_State**>(Offsets::Base + Offsets::lua_state);
                 LuaGlobals::MainEnvironment = std::make_unique<sol::state_view>(l);
                 auto& lua = *LuaGlobals::MainEnvironment;
-                lua["Dummy"] = &Dummy; //done can use in wow now nice!
+
+                
+
+                lua.new_usertype<void>("AgonyLuaEvents",
+                    //"new", sol::no_constructor,
+                    "OnGossipShow", []() { Game::GetInstance()->GossipInfoEvents.GOSSIP_SHOW.Trigger(); },
+                    "OnAchievementEarned", [](int achievementID, bool alreadyEarned) { Game::GetInstance()->AchievementInfoEvents.ACHIEVEMENT_EARNED.Trigger(achievementID, alreadyEarned); },
+                    "OnCinematicStart", &OnCinematicStart,
+                    "OnCinematicStop", & OnCinematicStop,
+                    "OnPlayerStartedMoving", & OnPlayerStartedMoving,
+                    "OnPlayerStoppedMoving", & OnPlayerStoppedMoving
+                );
+
+                //
                 std::cout << "Finished binding functions.\n";
             }
 
+            std::cout << GetMainScriptCode() << "\n";
+
             auto& lua = *LuaGlobals::MainEnvironment;
-            //thats basically it 
+            //thats basically it SEE IF WORKS
             const auto badCodeResult = lua.safe_script(
-                R"(print("hello from sol"))",
+                GetMainScriptCode(),
                 [](lua_State*, const sol::protected_function_result& pfr)
                 {
                     const auto errObj = pfr.get<sol::error>();
                     const auto errMsg = errObj.what();
-                    std::cerr << errMsg << "\n";
+                    std::cout << errMsg << "\n";
                     return pfr;
                 }
             );
-            ////ok now u can call lua anywhere but we do here for example
-            ////let start simple unithealth
-            int health = lua["UnitHealth"]("player");
-            std::cout << "Player health = " << health << std::endl;
+            //////ok now u can call lua anywhere but we do here for example
+            //////let start simple unithealth
+            //int health = lua["UnitHealth"]("player");
+            //std::cout << "Player health = " << health << std::endl;
 
-            try
-            {
-                sol::variadic_results result2 = lua["GetBattlefieldStatus"](1);//Guess it will work
-                for (auto arg : result2)
-                {
-                    if (arg.valid())
-                    {
-                        if (arg.is<std::string>())
-                            std::cout << "Got arg: " << arg.as<std::string>() << std::endl;
-                        else if (arg.is<float>())
-                            std::cout << "Got arg: " << arg.as<float>() << std::endl;
-                        else if (arg.is<int>())
-                            std::cout << "Got arg: " << arg.as<int>() << std::endl;
-                        else if (arg.is<bool>())
-                            std::cout << "Got arg: " << arg.as<bool>() << std::endl;
-                    }
-                }
-                /*if (result2.size() == 8)
-                {
-                    std::cout << "status: " << result2.at(0).as<std::string>() << " mapName:  " << result2.at(1).as<std::string>() << std::endl;
-                }*/
-            }
-            catch (...) {}
+            //try
+            //{
+            //    sol::variadic_results result2 = lua["GetBattlefieldStatus"](1);//Guess it will work
+            //    PrintLuaResults(result2);
+            //    /*for (auto arg : result2)
+            //    {
+            //        if (arg.valid())
+            //        {
+            //            if (arg.is<std::string>())
+            //                std::cout << "Got arg: " << arg.as<std::string>() << std::endl;
+            //            else if (arg.is<float>())
+            //                std::cout << "Got arg: " << arg.as<float>() << std::endl;
+            //            else if (arg.is<int>())
+            //                std::cout << "Got arg: " << arg.as<int>() << std::endl;
+            //            else if (arg.is<bool>())
+            //                std::cout << "Got arg: " << arg.as<bool>() << std::endl;
+            //        }
+            //    }*/
+            //    /*if (result2.size() == 8)
+            //    {
+            //        std::cout << "status: " << result2.at(0).as<std::string>() << " mapName:  " << result2.at(1).as<std::string>() << std::endl;
+            //    }*/
+            //}
+            //catch (...) {}
         }
     }
 }

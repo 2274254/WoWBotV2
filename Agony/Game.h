@@ -3,6 +3,7 @@
 #include "CGLocalPlayer.h"
 #include "EventHandler.h"
 #include "BuildInfo.h"
+#include "LuaEvents.h"
 
 namespace Agony
 {
@@ -21,10 +22,16 @@ namespace Agony
 			static uint64_t GetFrameMS();
 			static CGLocalPlayer* Me();
 			static Vector3 GetCorpseLocation();
-			EventHandler<1, OnWndProc, HWND, UINT, WPARAM, LPARAM> GameWndProc = EventHandler<1, OnWndProc, HWND, UINT, WPARAM, LPARAM>();
-			EventHandler<2, void()> OnPreTick = EventHandler<2, void()>();
-			EventHandler<3, void()> OnTick = EventHandler<3, void()>();
-			EventHandler<4, void()> OnPostTick = EventHandler<4, void()>();
+			EventHandler<OnWndProc, HWND, UINT, WPARAM, LPARAM> GameWndProc = EventHandler<OnWndProc, HWND, UINT, WPARAM, LPARAM>();
+			EventHandler<void()> OnPreTick = EventHandler<void()>();
+			EventHandler<void()> OnTick = EventHandler<void()>();
+			EventHandler<void()> OnPostTick = EventHandler<void()>();
+
+			//Lua Events
+			LuaEvents::C_AchievementInfo AchievementInfoEvents = LuaEvents::C_AchievementInfo();
+			LuaEvents::C_GossipInfo GossipInfoEvents = LuaEvents::C_GossipInfo();
+
+			//
 			bool ApplyHooks(void*);
 			void ClearHooks(void* mainWindowHandle);
 		};

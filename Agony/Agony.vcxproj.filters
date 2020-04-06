@@ -107,6 +107,9 @@
     <ClCompile Include="lualib.cpp">
       <Filter>Source Files\Lua</Filter>
     </ClCompile>
+    <ClCompile Include="LuaEvents.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MinHook.h">
@@ -219,6 +222,9 @@
       <Filter>Header Files\sol</Filter>
     </ClInclude>
     <ClInclude Include="LuaGlobals.h" />
+    <ClInclude Include="LuaEvents.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -278,5 +284,13 @@
     <Filter Include="Source Files\Lua">
       <UniqueIdentifier>{9cdf8166-e14c-424f-bcb8-2ba09a24e2ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Scripts">
+      <UniqueIdentifier>{4c4f02e0-5797-483c-8a0b-c1f10d5ba6bd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="main.lua">
+      <Filter>Header Files\Core\Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

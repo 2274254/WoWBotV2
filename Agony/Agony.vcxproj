@@ -265,6 +265,7 @@
     <ClInclude Include="lauxlib.h" />
     <ClInclude Include="lua.h" />
     <ClInclude Include="luaconf.h" />
+    <ClInclude Include="LuaEvents.h" />
     <ClInclude Include="LuaGlobals.h" />
     <ClInclude Include="lualib.h" />
     <ClInclude Include="Signal.h" />
@@ -334,6 +335,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="lauxlib.cpp" />
     <ClCompile Include="lua.cpp" />
+    <ClCompile Include="LuaEvents.cpp" />
     <ClCompile Include="LuaFunctions.cpp" />
     <ClCompile Include="LuaGlobals.cpp" />
     <ClCompile Include="lualib.cpp" />
@@ -350,6 +352,9 @@
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="kiero.cpp" />
     <ClCompile Include="Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="main.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
