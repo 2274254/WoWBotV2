@@ -2,6 +2,7 @@
 using Agony.SDK.CommonBot;
 using Agony.SDK.TreeSharp;
 using Agony.SDK.Utils;
+using Agony.WoWInternals;
 using Gathering.Decorators;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,16 @@ namespace Gathering
             }
         }
 
+        public override void Start()
+        {
+            LuaEvents.AttachEvent("UPDATE_BATTLEFIELD_STATUS", OnUpdateBattlefieldStatus);
+        }
+
+        public override void Stop()
+        {
+            LuaEvents.DetachEvent("UPDATE_BATTLEFIELD_STATUS", OnUpdateBattlefieldStatus);
+        }
+
         public override void Pulse()
         {
             if (!Agony.SDK.Game.IsInGame) return;
@@ -72,6 +83,13 @@ namespace Gathering
             }
             new ConfigsWindow().ShowDialog();
             return ConfigsString;
+        }
+
+        //WOW LUA EVENTS
+        public void OnUpdateBattlefieldStatus(object sender, LuaEventArgs args)
+        {
+            //local status, mapName, _, _, _, queueType, gameType = GetBattlefieldStatus(1);
+            Logger.Log(Agony.SDK.Enumerations.LogLevel.Info, "Received OnUpdateBattlefieldStatus in C#");
         }
     }
 }

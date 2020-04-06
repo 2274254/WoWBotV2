@@ -43,6 +43,12 @@
     <Filter Include="Source Files\GameObjects\Objects">
       <UniqueIdentifier>{d91bd017-3bc4-4197-b5e5-0531361f439d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\WoWInternals">
+      <UniqueIdentifier>{44cd300f-ed58-4b79-a149-6713586106d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WoWInternals">
+      <UniqueIdentifier>{0da30ec3-2879-4e06-b5c6-b7dd3572c7a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -93,6 +99,9 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="LuaEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -133,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaEvents.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

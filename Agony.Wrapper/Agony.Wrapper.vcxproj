@@ -164,6 +164,7 @@
     <ClInclude Include="CGObject.h" />
     <ClInclude Include="CGPlayer.h" />
     <ClInclude Include="CGUnit.h" />
+    <ClInclude Include="LuaEvents.h" />
     <ClInclude Include="ObjectGuid.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="PathingController.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="CGObject.cpp" />
     <ClCompile Include="CGPlayer.cpp" />
     <ClCompile Include="CGUnit.cpp" />
+    <ClCompile Include="LuaEvents.cpp" />
     <ClCompile Include="ObjectGuid.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PathingController.cpp" />
