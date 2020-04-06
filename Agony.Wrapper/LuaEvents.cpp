@@ -57,6 +57,14 @@ void Agony::WoWInternals::LuaEvents::OnLuaEventNative(std::string eventName, std
 				{
 					args[i] = gcnew System::Boolean(std::any_cast<bool>(arg));
 				}
+				else if (arg.type() == typeid(uintptr_t))
+				{
+					args[i] = gcnew System::UIntPtr(std::any_cast<uintptr_t>(arg));
+				}
+				else if (arg.type() == typeid(std::nullptr_t))
+				{
+					args[i] = (System::Object^)nullptr;
+				}
 				i++;
 			}
 			auto eventArgs = gcnew Agony::WoWInternals::LuaEventArgs(eventNameManaged, 0, args);

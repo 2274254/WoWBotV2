@@ -527,7 +527,7 @@ namespace Agony
         const char* LuaFunctions::GetMainScriptCode()
         {
             int32_t dummy = 0;
-            #include "main.lua"//really that will execute lua ?
+            #include "main.lua"//This include the file and return it.... how nice :D
         }
 
         inline void PrintLuaResults(const sol::variadic_results& results)
@@ -604,7 +604,7 @@ namespace Agony
                             {
                                 case sol::type::nil:
                                 {
-                                    args.push_back(nullptr);
+                                    args.push_back(std::nullptr_t());
                                     break;
                                 }
                                 case sol::type::function:
