@@ -49,7 +49,7 @@ namespace Agony::WoWInternals
 		static System::Collections::Generic::Dictionary<System::String^, System::Collections::Generic::List<LuaEventHandlerDelegate^>^>^ RegisteredEvents = gcnew System::Collections::Generic::Dictionary<System::String^, System::Collections::Generic::List<LuaEventHandlerDelegate^>^>();
 	public:
 		static LuaEvents::LuaEvents();
-		static void AttachEvent(System::String^ eventName, LuaEventHandlerDelegate^ handler);
+		static bool AttachEvent(System::String^ eventName, LuaEventHandlerDelegate^ handler);
 		static void DetachEvent(System::String^ eventName, LuaEventHandlerDelegate^ handler);
 	};
 }

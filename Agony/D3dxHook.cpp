@@ -165,7 +165,9 @@ namespace Agony
 							}
 						}
 
-						LuaFunctions::SolTest();
+						LuaFunctions::BindLua();
+
+						Agony::Native::Game::GetInstance()->EnterInGame.Trigger();
 
 						//std::string result = Agony::Native::LuaFunctions::ExecuteGetResult("globalVar = GetUnitPosition('player')", "globalVar");
 						/*auto ret = Agony::Native::LuaFunctions::Call("GetUnitPosition", { 1, 1, 1 }, "player");
@@ -197,6 +199,12 @@ namespace Agony
 						//EventHandler<3, OnGameTick>::GetInstance()->Trigger();
 						//EventHandler<4, OnGamePostTick>::GetInstance()->Trigger();
 					}
+				}
+				else if (lastGameState)
+				{
+					//We were in game we are not anymore
+					LuaFunctions::DropLua();
+					Agony::Native::Game::GetInstance()->ExitInGame.Trigger();
 				}
 
 				lastGameState = isInGame;

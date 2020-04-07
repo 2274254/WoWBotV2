@@ -150,6 +150,8 @@ namespace Agony.Sandbox
                 {
                     SandboxDomain.Instance.LoadAddon(assembly.PathToBinary, new string[1]);
                 }
+
+                SandboxDomain.Instance.Start();
             }
             catch (Exception e)
             {

@@ -16,6 +16,7 @@ namespace Agony.Sandbox
     {
         internal static readonly Dictionary<string, Assembly> LoadedLibraries = new Dictionary<string, Assembly>();
         internal static readonly List<string> LoadedAddons = new List<string>();
+        internal static Assembly SDK = null;
 
         static SandboxDomain()
         {
@@ -169,9 +170,7 @@ namespace Agony.Sandbox
         // ReSharper disable once InconsistentNaming
         private static void InitSDKBootstrap(Assembly sdk)
         {
-            // Call bootstrap
-            Console.WriteLine("Initializing SDK with profile: " + SandboxConfig.CurrentProfile);
-            sdk.GetType("Agony.SDK.Bootstrap").GetMethod("Init", BindingFlags.Public | BindingFlags.Static).Invoke(null, new object[] { SandboxConfig.PluginConfigs, SandboxConfig.CurrentProfile });
+            SDK = sdk;
         }
 
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
@@ -292,6 +291,13 @@ namespace Agony.Sandbox
         {
             // Listen to unhandled exceptions
             DomainHandle.UnhandledException += OnUnhandledException;
+        }
+
+        internal void Start()
+        {
+            //SDK.GetType("Agony.SDK.Loading").GetMethod("Initialize", BindingFlags.Public | BindingFlags.Static).Invoke(null, new object[] {});
+            // Call bootstrap
+            SDK.GetType("Agony.SDK.Bootstrap").GetMethod("Init", BindingFlags.Public | BindingFlags.Static).Invoke(null, new object[] { SandboxConfig.PluginConfigs, SandboxConfig.CurrentProfile });
         }
 
         internal bool LoadAddon(string path, string[] args)

@@ -27,7 +27,10 @@ namespace Agony.SDK
             Bot.PluginConfigs = pluginConfigs;
             Bot.CurrentProfile = currentProfile;
 
-            Logger.Log(LogLevel.Info, "Init Bootstrap with profile: " + Bot.CurrentProfile + " and configs count = " + Bot.PluginConfigs.Count + " First config = " + Bot.PluginConfigs.First().Value);
+            if(pluginConfigs.Count > 0)
+            {
+                Logger.Log(LogLevel.Info, "Init Bootstrap with profile: " + Bot.CurrentProfile + " and configs count = " + Bot.PluginConfigs.Count + " First config = " + Bot.PluginConfigs.First().Value);
+            }
             
             // Set thread culture
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
@@ -41,19 +44,11 @@ namespace Agony.SDK
 
     internal static class BootstrapRun
     {
-        internal static readonly Dictionary<Action, string> AlwaysLoadAction = new Dictionary<Action, string>
-        {
-            /*{ MainMenu.Initialize, null },
-            { EntityManager.Initialize, null },
-            { Item.Initialize, null },
-            { SpellDatabase.Initialize, "SpellDatabase loaded." }*/
-        };
-
         internal static readonly Dictionary<Action, string> ToLoadActions = new Dictionary<Action, string>
         {
 #if !DEBUG
-            /*{ Core.Initialize, null },
-            { Auth.Initialize, null },
+            { Bot.Initialize, "Base loaded." },
+            /*{ Auth.Initialize, null },
             { TargetSelector.Initialize, "TargetSelector loaded." },
             { Orbwalker.Initialize, "Orbwalker loaded." },
             { Prediction.Initialize, "Prediction loaded." },
@@ -61,12 +56,11 @@ namespace Agony.SDK
             { SummonerSpells.Initialize, "SummonerSpells loaded." },*/
 #endif
         };
+
         internal static void Initialize()
         {
-            // Initialize loading event
-            Loading.Initialize();
-
-            Loading.AsyncLockedActions.Add(delegate
+            // Add the SDK loading to a special locked action list
+            Loading.OnLoadingComplete += delegate
             {
                 // Spectator mode check
                 try
@@ -82,37 +76,24 @@ namespace Agony.SDK
                 {
                     // ignored
                 }
-            });
 
-            // Load the menu
-            Loading.AlwaysLoadActions.Add(delegate
-            {
-                // Default ticks per second
-                //Game.TicksPerSecond = 25;
-
-                // Invoke all actions
-                foreach (var entry in AlwaysLoadAction)
-                {
-                    TryLoad(entry.Key, entry.Value);
-                }
-                AlwaysLoadAction.Clear();
-            });
-
-            // Add the SDK loading to a special locked action list
-            Loading.OnLoadingComplete += delegate
-            {
                 // Invoke all actions
                 foreach (var entry in ToLoadActions)
                 {
                     TryLoad(entry.Key, entry.Value);
                 }
                 ToLoadActions.Clear();
+
+                Bot.Starts();
+
                 //Chat.Print("<font color=\"#0080ff\" >>> Welcome back, Buddy</font>");
                 Logger.Info("----------------------------------");
                 Logger.Info("SDK Bootstrap fully loaded!");
                 Logger.Info("----------------------------------");
-                Bot.Initialize();
             };
+
+            // Initialize loading event
+            Loading.Initialize();
         }
 
         internal static void TryLoad(Action action, string message)
@@ -125,7 +106,6 @@ namespace Agony.SDK
                     return;
                 }
                 action();
-
                 if (!string.IsNullOrWhiteSpace(message))
                 {
                     Logger.Log(LogLevel.Info, message);

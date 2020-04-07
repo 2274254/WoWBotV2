@@ -92,6 +92,7 @@
     <Compile Include="Globals\EventHandlers.cs" />
     <Compile Include="Globals\Events.cs" />
     <Compile Include="Injection\Bootstrap.cs" />
+    <Compile Include="Injection\Injector.cs" />
     <Compile Include="Installers\PluginInstaller.cs" />
     <Compile Include="Installers\UriSchemeInstaller.cs" />
     <Compile Include="Logger\Log.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Protections\Protection.cs" />
     <Compile Include="Protections\ProtectionPhase.cs" />
     <Compile Include="Routines\ApiServiceRoutine.cs" />
+    <Compile Include="Routines\InjectionRoutine.cs" />
     <Compile Include="Routines\LoaderServiceRoutine.cs" />
     <Compile Include="Routines\LoaderUpdateRoutines.cs" />
     <Compile Include="Services\ApiService.cs" />

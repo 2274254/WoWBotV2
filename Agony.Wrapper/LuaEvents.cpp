@@ -1,9 +1,10 @@
 #include "LuaEvents.h"
+#include "../Agony/LuaFunctions.h"
+#include <msclr\marshal_cppstd.h>
 
 static Agony::WoWInternals::LuaEvents::LuaEvents()
 {
 	ATTACH_DOMAIN();
-	System::Console::WriteLine("Binding Game Event:OnLuaEvent");
 	ATTACH_EVENT(LuaEvent, Agony::Native::Game::Game::GetInstance()->OnLuaEvent, void(std::string, std::vector<std::any>));
 }
 
@@ -12,22 +13,35 @@ void Agony::WoWInternals::LuaEvents::DomainUnloadEventHandler(System::Object^, S
 	DETACH_EVENT(LuaEvent, Agony::Native::Game::Game::GetInstance()->OnLuaEvent, void(std::string, std::vector<std::any>));
 }
 
-void Agony::WoWInternals::LuaEvents::AttachEvent(System::String^ eventName, LuaEventHandlerDelegate^ handler)
+bool Agony::WoWInternals::LuaEvents::AttachEvent(System::String^ eventName, LuaEventHandlerDelegate^ handler)
 {
 	if (!RegisteredEvents->ContainsKey(eventName))
 	{
-		RegisteredEvents->Add(eventName, gcnew System::Collections::Generic::List<LuaEventHandlerDelegate^>);
-		//TODO: Call unmanaged RegisterEvent
+		if (Agony::Native::LuaFunctions::RegisterEvent(msclr::interop::marshal_as<std::string>(eventName)))
+		{
+			RegisteredEvents->Add(eventName, gcnew System::Collections::Generic::List<LuaEventHandlerDelegate^>);
+		}
+		else
+		{
+			return false;
+		}
 	}
-	RegisteredEvents[eventName]->Add(handler);
+	if (!RegisteredEvents[eventName]->Contains(handler))
+	{
+		RegisteredEvents[eventName]->Add(handler);
+	}
+	return true;
 }
 
 void Agony::WoWInternals::LuaEvents::DetachEvent(System::String^ eventName, LuaEventHandlerDelegate^ handler)
 {
-	RegisteredEvents[eventName]->Remove(handler);
-	if (RegisteredEvents[eventName]->Count == 0)
+	if (RegisteredEvents->ContainsKey(eventName))
 	{
-		//TODO: Call unmanaged UnregisterEvent
+		RegisteredEvents[eventName]->Remove(handler);
+		if (RegisteredEvents[eventName]->Count == 0)
+		{
+			Agony::Native::LuaFunctions::UnregisterEvent(msclr::interop::marshal_as<std::string>(eventName));
+		}
 	}
 }
 
@@ -37,8 +51,10 @@ void Agony::WoWInternals::LuaEvents::OnLuaEventNative(std::string eventName, std
 		auto eventNameManaged = gcnew System::String(eventName.c_str());
 		if (Agony::WoWInternals::LuaEvents::RegisteredEvents->ContainsKey(eventNameManaged))
 		{
+			auto sender = gcnew System::Object();
 			array<System::Object^>^ args = gcnew array<System::Object^>(results.size());
 			int i = 0;
+			//Convert things to Managed types
 			for (auto arg : results)
 			{
 				if (arg.type() == typeid(std::string))
@@ -67,11 +83,13 @@ void Agony::WoWInternals::LuaEvents::OnLuaEventNative(std::string eventName, std
 				}
 				i++;
 			}
+			//LuaEventArgs ( for c# )
 			auto eventArgs = gcnew Agony::WoWInternals::LuaEventArgs(eventNameManaged, 0, args);
+			//Trigger inside plugins...
 			for each (auto eventHandle in Agony::WoWInternals::LuaEvents::RegisteredEvents[eventArgs->EventName]->ToArray())
 			{
 				START_TRACE
-					eventHandle(gcnew System::Object(), eventArgs);
+					eventHandle(sender, eventArgs);
 				END_TRACE
 			}
 		}

@@ -338,6 +338,11 @@ namespace AgonyLauncher
             get { return Path.Combine(SystemDirectory, "Agony.SDK.dll"); }
         }
 
+        public string UnmanagedDllPath // unmanaged dll path (system folder)
+        {
+            get { return Path.Combine(SystemDirectory, "libinj.dll"); }
+        }
+
         public string RepositoryDirectory // repository directory, all remote installed plugins are saved here
         {
             get { return Path.Combine(AppDataDirectory, "Repositories") + "\\"; }
@@ -358,7 +363,8 @@ namespace AgonyLauncher
         public string TempCoreDirectory { get; set; } // temp directory for injection
         public string TempCoreDllPath { get; set; } // temp core dll path
         public string TempSandboxDllPath { get; set; } // temp sandbox dll path
-        public string TempWrapperDllPath { get; set; } // temp elobuddy dll path
+        public string TempWrapperDllPath { get; set; } // temp wrapper dll path
+        public string TempUnmanagedDllPath { get; set; } // temp unmanaged dll path
 
         internal SettingsDirectories()
         {

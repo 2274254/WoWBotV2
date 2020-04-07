@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "../Agony/EventHandler.h"
+#include "LuaEvents.h"
 
 using namespace System::Collections::Generic;
 
@@ -20,6 +21,9 @@ namespace Agony
 
 		System::Console::WriteLine("Binding Game Event: GamePostTick");
 		ATTACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, Native::OnGamePostTick);
+
+		ATTACH_EVENT(EnterInGame, Agony::Native::Game::Game::GetInstance()->EnterInGame, Native::OnGamePostTick);
+		ATTACH_EVENT(ExitInGame, Agony::Native::Game::Game::GetInstance()->ExitInGame, Native::OnGamePostTick);
 	}
 
 	void Game::DomainUnloadEventHandler(Object^, System::EventArgs^)
@@ -28,6 +32,8 @@ namespace Agony
 		DETACH_EVENT(GamePreTick, Agony::Native::Game::Game::GetInstance()->OnPreTick, Native::OnGamePreTick);
 		DETACH_EVENT(GameTick, Agony::Native::Game::Game::GetInstance()->OnTick, Native::OnGameTick);
 		DETACH_EVENT(GamePostTick, Agony::Native::Game::Game::GetInstance()->OnPostTick, Native::OnGamePostTick);
+		DETACH_EVENT(EnterInGame, Agony::Native::Game::Game::GetInstance()->EnterInGame, Native::OnGamePostTick);
+		DETACH_EVENT(ExitInGame, Agony::Native::Game::Game::GetInstance()->ExitInGame, Native::OnGamePostTick);
 		System::Console::WriteLine("Domain Unloaded");
 	}
 
@@ -79,6 +85,31 @@ namespace Agony
 	{
 		START_TRACE
 			for each (auto eventHandle in GamePostTickHandlers->ToArray())
+			{
+				START_TRACE
+					eventHandle(EventArgs::Empty);
+				END_TRACE
+			}
+		END_TRACE
+	}
+
+	void Game::OnEnterInGameNative()
+	{
+		START_TRACE
+			for each (auto eventHandle in EnterInGameHandlers->ToArray())
+			{
+				START_TRACE
+					eventHandle(EventArgs::Empty);
+				END_TRACE
+			}
+		END_TRACE
+	}
+
+	void Game::OnExitInGameNative()
+	{
+		WoWInternals::LuaEvents::RegisteredEvents->Clear();
+		START_TRACE
+			for each (auto eventHandle in ExitInGameHandlers->ToArray())
 			{
 				START_TRACE
 					eventHandle(EventArgs::Empty);

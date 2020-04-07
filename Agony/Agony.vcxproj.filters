@@ -106,9 +106,6 @@
     <ClCompile Include="lualib.cpp">
       <Filter>Source Files\Lua</Filter>
     </ClCompile>
-    <ClCompile Include="LuaEvents.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="LuaGlobals.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -222,9 +219,6 @@
     </ClInclude>
     <ClInclude Include="sol\forward.hpp">
       <Filter>Header Files\sol</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaEvents.h">
-      <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="LuaGlobals.h">
       <Filter>Header Files\Core</Filter>

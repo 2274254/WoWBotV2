@@ -115,6 +115,26 @@ namespace AgonyLauncher.Data
             {
                 // ignored
             }
+
+            // Copy Agony.Unmanaged.dll file
+            try
+            {
+                if (!File.Exists(Settings.Instance.Directories.TempUnmanagedDllPath))
+                {
+                    Settings.Instance.Directories.TempUnmanagedDllPath = Path.Combine(Settings.Instance.Directories.TempCoreDirectory, RandomHelper.RandomString() + ".dll");
+                }
+                if (!Md5Hash.Compare(Md5Hash.ComputeFromFile(Settings.Instance.Directories.TempCoreDirectory), Md5Hash.ComputeFromFile(Settings.Instance.Directories.UnmanagedDllPath)))
+                {
+                    FileHelper.SafeCopyFile(Settings.Instance.Directories.UnmanagedDllPath, Settings.Instance.Directories.TempCoreDirectory, Path.GetFileName(Settings.Instance.Directories.TempUnmanagedDllPath));
+                    // as requested by finn
+                    FileHelper.SafeCopyFile(Settings.Instance.Directories.UnmanagedDllPath, Settings.Instance.Directories.TempCoreDirectory);
+                    Log.Instance.DoLog(string.Format("Copied Agony.Unmanaged.dll to: \"{0}\"", Settings.Instance.Directories.TempUnmanagedDllPath));
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }

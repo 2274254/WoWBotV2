@@ -172,15 +172,12 @@ namespace Agony
             static int32_t GetPlayerAngle(uintptr_t* l);
             static int32_t IsInGame(uintptr_t* l);
             static int32_t Test(uintptr_t* l);
-            //OnEvents:
-            static void OnGossipShow();
-            static void OnCinematicStart(bool canCancel);
-            static void OnCinematicStop();
-            static void OnPlayerStartedMoving();
-            static void OnPlayerStoppedMoving();
             //
             static const char* GetMainScriptCode();
-            static void SolTest();
+            static void BindLua();
+            static void DropLua();
+            static bool RegisterEvent(std::string eventName);
+            static void UnregisterEvent(std::string eventName);
             static std::map<const char*, int64_t> FunctionsMap;
         };
     }

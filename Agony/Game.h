@@ -3,7 +3,6 @@
 #include "CGLocalPlayer.h"
 #include "EventHandler.h"
 #include "BuildInfo.h"
-#include "LuaEvents.h"
 #include <any>
 
 namespace Agony
@@ -27,6 +26,8 @@ namespace Agony
 			EventHandler<void()> OnPreTick = EventHandler<void()>();
 			EventHandler<void()> OnTick = EventHandler<void()>();
 			EventHandler<void()> OnPostTick = EventHandler<void()>();
+			EventHandler<void()> EnterInGame = EventHandler<void()>();
+			EventHandler<void()> ExitInGame = EventHandler<void()>();
 			EventHandler<void(std::string, std::vector<std::any>), std::string, std::vector<std::any>> OnLuaEvent = EventHandler<void(std::string, std::vector<std::any>), std::string, std::vector<std::any>>();
 
 			bool ApplyHooks(void*);

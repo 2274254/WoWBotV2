@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrongNameKeyParser", "StrongNameKeyParser\StrongNameKeyParser.csproj", "{CC7682FD-6AD2-469F-B1BF-4D6ED3CF475B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Unmanaged", "Unmanaged\Unmanaged.vcxproj", "{1A5765BD-56A3-4E46-9797-707696A82745}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Agony.Core", "Agony\Agony.vcxproj", "{8E623BB1-1B7B-4F8E-A051-72F53A9AB620}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Agony.Wrapper", "Agony.Wrapper\Agony.Wrapper.vcxproj", "{E6F487D9-9122-4718-8D75-A8CDC8E594CB}"
@@ -53,16 +51,6 @@ Global
 		{CC7682FD-6AD2-469F-B1BF-4D6ED3CF475B}.Release|x64.Build.0 = Release|Any CPU
 		{CC7682FD-6AD2-469F-B1BF-4D6ED3CF475B}.Release|x86.ActiveCfg = Release|Any CPU
 		{CC7682FD-6AD2-469F-B1BF-4D6ED3CF475B}.Release|x86.Build.0 = Release|Any CPU
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Debug|x64.ActiveCfg = Debug|x64
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Debug|x64.Build.0 = Debug|x64
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Debug|x86.ActiveCfg = Debug|Win32
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Debug|x86.Build.0 = Debug|Win32
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Release|Any CPU.ActiveCfg = Release|Win32
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Release|x64.ActiveCfg = Release|x64
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Release|x64.Build.0 = Release|x64
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Release|x86.ActiveCfg = Release|Win32
-		{1A5765BD-56A3-4E46-9797-707696A82745}.Release|x86.Build.0 = Release|Win32
 		{8E623BB1-1B7B-4F8E-A051-72F53A9AB620}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{8E623BB1-1B7B-4F8E-A051-72F53A9AB620}.Debug|x64.ActiveCfg = Debug|x64
 		{8E623BB1-1B7B-4F8E-A051-72F53A9AB620}.Debug|x64.Build.0 = Debug|x64

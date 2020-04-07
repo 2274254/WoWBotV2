@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "LuaGlobals.h"
 #include <tuple>
+#include <sstream>
 
 namespace Agony
 {
@@ -499,31 +500,6 @@ namespace Agony
             return 0;
         }
         
-        void LuaFunctions::OnGossipShow()
-        {
-            std::cout << "TRIGGER ON GOSSIP SHOW Using EventCallback\n";
-        }
-
-        void LuaFunctions::OnCinematicStart(bool canCancel)
-        {
-            std::cout << "OnCinematicStart\n";
-        }
-
-        void LuaFunctions::OnCinematicStop()
-        {
-            std::cout << "TRIGGER ON CinematicStop\n";
-        }
-
-        void LuaFunctions::OnPlayerStartedMoving()
-        {
-            std::cout << "TRIGGER On PlayerStartedMoving\n";
-        }
-
-        void LuaFunctions::OnPlayerStoppedMoving()
-        {
-            std::cout << "TRIGGER On PlayerStoppedMoving\n";
-        }
-
         const char* LuaFunctions::GetMainScriptCode()
         {
             int32_t dummy = 0;
@@ -581,88 +557,82 @@ namespace Agony
         }
 
         //create var to bind only once later
-        void LuaFunctions::SolTest() 
+        void LuaFunctions::BindLua()
         {
             const auto l = *reinterpret_cast<lua_State**>(Offsets::Base + Offsets::lua_state);
+            LuaGlobals::MainEnvironment = std::make_unique<sol::state_view>(l);
 
-            if (LuaGlobals::MainEnvironment == nullptr) //need to set a bool instead here
+            auto& lua = *LuaGlobals::MainEnvironment;
+            //empty scope, i dont get it, doesnt that same as after method call ? no
             {
-                const auto l = *reinterpret_cast<lua_State**>(Offsets::Base + Offsets::lua_state);
-                LuaGlobals::MainEnvironment = std::make_unique<sol::state_view>(l);
-                auto& lua = *LuaGlobals::MainEnvironment;
-
-                lua.new_usertype<void>("AgonyLuaEvents",
-                    //"new", sol::no_constructor,
+                lua.new_usertype<void>("AgonyLuaEvents", sol::no_constructor,
                     "OnEvent", [](const sol::variadic_args& results)
                     {
                         std::string eventName;
+                        std::cout << "Received event in core: " << eventName << std::endl;
+
                         std::vector<std::any> args = std::vector<std::any>();
                         int i = 0;
                         for (const auto& result : results)
                         {
                             switch (result.get_type())
                             {
-                                case sol::type::nil:
+                            case sol::type::nil:
+                            {
+                                args.push_back(std::nullptr_t());
+                                break;
+                            }
+                            case sol::type::function:
+                            {
+                                args.push_back(result.as<uintptr_t>());
+                                break;
+                            }
+                            case sol::type::string:
+                            {
+                                if (i == 0)
                                 {
-                                    args.push_back(std::nullptr_t());
-                                    break;
+                                    eventName = result.as<std::string>();
                                 }
-                                case sol::type::function:
+                                else
                                 {
-                                    args.push_back(result.as<uintptr_t>());
-                                    break;
+                                    args.push_back(result.as<std::string>());
                                 }
-                                case sol::type::string:
-                                {
-                                    if (i == 0)
-                                    {
-                                        eventName = result.as<std::string>();
-                                    }
-                                    else
-                                    {
-                                        args.push_back(result.as<std::string>());
-                                    }
-                                    break;
-                                }
-                                case sol::type::number:
-                                {
-                                    args.push_back(result.as<double>());
-                                    break;
-                                }
-                                case sol::type::boolean:
-                                {
-                                    args.push_back(result.as<bool>());
-                                    break;
-                                }
-                                case sol::type::table:
-                                {
-                                    args.push_back(result.as<uintptr_t>());
-                                    break;
-                                }
-                                case sol::type::userdata:
-                                {
-                                    args.push_back(result.as<uintptr_t>());
-                                    break;
-                                }
-                                default:
-                                {
-                                    std::cout << "Type value is either unknown or doesn't matter\n";
-                                    break;
-                                }
+                                break;
+                            }
+                            case sol::type::number:
+                            {
+                                args.push_back(result.as<double>());
+                                break;
+                            }
+                            case sol::type::boolean:
+                            {
+                                args.push_back(result.as<bool>());
+                                break;
+                            }
+                            case sol::type::table:
+                            {
+                                args.push_back(result.as<uintptr_t>());
+                                break;
+                            }
+                            case sol::type::userdata:
+                            {
+                                args.push_back(result.as<uintptr_t>());
+                                break;
+                            }
+                            default:
+                            {
+                                std::cout << "Type value is either unknown or doesn't matter\n";
+                                break;
+                            }
                             }
                             i++;
                         }
                         Game::GetInstance()->OnLuaEvent.Trigger(eventName, args);
                     }
                 );
-
-                //
                 std::cout << "Finished binding functions.\n";
             }
 
-            std::cout << GetMainScriptCode() << "\n";
-
-            auto& lua = *LuaGlobals::MainEnvironment;
             //thats basically it SEE IF WORKS
             const auto badCodeResult = lua.safe_script(
                 GetMainScriptCode(),
@@ -674,6 +644,7 @@ namespace Agony
                     return pfr;
                 }
             );
+
             //////ok now u can call lua anywhere but we do here for example
             //////let start simple unithealth
             //int health = lua["UnitHealth"]("player");
@@ -703,6 +674,29 @@ namespace Agony
             //    }*/
             //}
             //catch (...) {}
+        }
+
+        void LuaFunctions::DropLua()
+        {
+            if (LuaGlobals::MainEnvironment)
+                LuaGlobals::MainEnvironment.reset();//Not release ? //reset sets to null
+        }
+
+        bool LuaFunctions::RegisterEvent(std::string eventName)
+        {
+            if (!Game::IsInGame()) return;
+            auto& lua = *LuaGlobals::MainEnvironment;
+            sol::table AgonyLuaEvents = lua["AgonyCoreFrame"];
+            return AgonyLuaEvents["RegisterEvent"](AgonyLuaEvents, eventName).get<bool>();
+            //return true;
+        }
+
+        void LuaFunctions::UnregisterEvent(std::string eventName)
+        {
+            if (!Game::IsInGame()) return;
+            auto& lua = *LuaGlobals::MainEnvironment;
+            sol::table AgonyLuaEvents = lua["AgonyCoreFrame"];
+            AgonyLuaEvents["UnregisterEvent"](AgonyLuaEvents, eventName);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Agony.SDK.CommonBot;
+using Agony.SDK.Enumerations;
+using Agony.SDK.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,31 @@ namespace Agony.SDK
                 }
             }
             Agony.Game.OnTick += Game_OnTick;
+        }
+
+        public static void Starts()
+        {
+            //Trigger Start on all plugins...
+            if (Bot.CurrentBot != null)
+            {
+                Logger.Log(LogLevel.Debug, "Called on start on the botbase");
+                Bot.CurrentBot.Start();
+            }
+
+            Logger.Log(LogLevel.Debug, "After called on start on the botbase");
+            //TODO: Plugins, Combat routine later once they exists...
+        }
+
+        public static void Stops()
+        {
+            //Trigger Start on all plugins...
+            if (Bot.CurrentBot != null)
+            {
+                Logger.Log(LogLevel.Debug, "Called on stop on the botbase");
+                Bot.CurrentBot.Stop();
+            }
+            Logger.Log(LogLevel.Debug, "After called on stop on the botbase");
+            //TODO: Plugins, Combat routine later once they exists...
         }
 
         private static void Game_OnTick(System.EventArgs args)

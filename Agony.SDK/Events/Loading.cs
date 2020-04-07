@@ -16,8 +16,6 @@ namespace Agony.SDK.Events
 
         // OnLoadingComplete
         public static bool IsLoadingComplete { get; internal set; }
-        internal static readonly List<Action> AsyncLockedActions = new List<Action>();
-        internal static readonly List<Action> AlwaysLoadActions = new List<Action>();
         internal static readonly List<Delegate> LoadingCompleteNotified = new List<Delegate>();
 
         // ReSharper disable once InconsistentNaming
@@ -27,81 +25,51 @@ namespace Agony.SDK.Events
         internal static void Initialize()
         {
             // Listen to required events
-            Agony.Game.OnTick += OnTick;
-        }
-
-        internal static void OnTick(EventArgs args)
-        {
-            // OnLoadingComplete
+            Agony.Game.OnEnterInGame += Game_OnEnterInGame;
+            Agony.Game.OnExitInGame += Game_OnExitInGame;
             if(Game.IsInGame)
             {
                 IsLoadingComplete = true;
                 CallLoadingComplete();
             }
-            else
-            {
-                IsLoadingComplete = false;
-            }
+        }
+
+        private static void Game_OnEnterInGame(EventArgs args)
+        {
+            IsLoadingComplete = true;
+            CallLoadingComplete();
+        }
+
+        private static void Game_OnExitInGame(EventArgs args)
+        {
+            IsLoadingComplete = false;
+            Bot.Stops();
         }
 
         internal static void CallLoadingComplete()
         {
-            if (Locked)
+            var loadingEvent = (OnLoadingComplete);
+            if (loadingEvent != null)
             {
-                foreach (var action in AsyncLockedActions)
+                foreach (var handler in loadingEvent.GetInvocationList().Where(o => !LoadingCompleteNotified.Contains(o)).ToArray())
                 {
+                    // Add handler to notified list
+                    //LoadingCompleteNotified.Add(handler);
+
+                    // Notify the handler
                     try
                     {
-                        var asyncAction = action;
-                        ThreadPool.QueueUserWorkItem(delegate { asyncAction(); }, null);
+                        handler.DynamicInvoke(EventArgs.Empty);
                     }
                     catch (Exception e)
                     {
-                        Logger.Warn("Failed to load async locked action, SDK internal error!");
-                        Logger.Error(e.ToString());
+                        Logger.Log(LogLevel.Warn, "Failed to notify OnLoadingComlete listener!\n{0}", e);
                     }
                 }
-                AsyncLockedActions.Clear();
             }
-            else
-            {
-                foreach (var action in AlwaysLoadActions)
-                {
-                    try
-                    {
-                        action();
-                    }
-                    catch (Exception e)
-                    {
-                        Logger.Warn("Failed to load internal action, SDK error!");
-                        Logger.Error(e.ToString());
-                    }
-                }
-                AlwaysLoadActions.Clear();
 
-                var loadingEvent = (OnLoadingComplete);
-                if (loadingEvent != null)
-                {
-                    foreach (var handler in loadingEvent.GetInvocationList().Where(o => !LoadingCompleteNotified.Contains(o)).ToArray())
-                    {
-                        // Add handler to notified list
-                        LoadingCompleteNotified.Add(handler);
-
-                        // Notify the handler
-                        try
-                        {
-                            handler.DynamicInvoke(EventArgs.Empty);
-                        }
-                        catch (Exception e)
-                        {
-                            Logger.Log(LogLevel.Warn, "Failed to notify OnLoadingComlete listener!\n{0}", e);
-                        }
-                    }
-                }
-
-                // Mark all addons loaded
-                _allAddonsLoaded = true;
-            }
+            // Mark all addons loaded
+            _allAddonsLoaded = true;
         }
     }
 }

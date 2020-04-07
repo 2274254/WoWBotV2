@@ -146,13 +146,14 @@ namespace AgonyLauncher.Globals
         {
             ApiService.Init();
             LoaderServiceRoutine.StartService();
-            //InjectionRoutine.StartRoutine();
 
             // Set memory layout
             Bootstrap.SetMemoryLayout();
 
             // Remove invalid addons
             Settings.Instance.InstalledPlugins.RemoveInvalidPlugins();
+
+            InjectionRoutine.StartRoutine();
         }
     }
 }

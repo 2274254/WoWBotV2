@@ -5,5 +5,6 @@
         internal static readonly string UriSchemePrefix = "agony";
         internal static readonly string[] SupportedProjects = { ".csproj", ".vbproj", ".agoplg", ".dll", ".exe" };
         internal static readonly string LoaderMainLogFileName = "Agony.Launcher.Log.txt";
+        internal static readonly string[] WowProcesses = { "Wow" };
     }
 }

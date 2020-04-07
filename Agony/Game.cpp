@@ -28,14 +28,10 @@ namespace Agony
 			LRESULT returnValue;
 			if (msg == WM_KEYUP)
 			{
-				if (WParam == VK_F5)
+				/*if (WParam == VK_F5)
 				{
 					Bootstrapper::GetInstance()->Trigger(BootstrapEventType::Load);
-				}
-				else if (WParam == VK_F2)
-				{
-					LuaFunctions::SolTest();
-				}
+				}*/
 			}
 
 			if (!process)
@@ -52,7 +48,6 @@ namespace Agony
 
 				return CallWindowProc(m_wndProc, hwnd, msg, WParam, LParam);
 			}
-
 			return 1;
 		}
 
