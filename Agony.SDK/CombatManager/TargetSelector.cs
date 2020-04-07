@@ -6,7 +6,7 @@ namespace Agony.SDK.CombatManager
     public static class TargetSelector
     {
         private static CGUnit _target = null;
-        public static CGUnit ForcedTarget = null;
+        public  static CGUnit ForcedTarget = null;
         private static Composite _root;
 
         public static CGUnit GetTarget()

@@ -36,10 +36,10 @@ namespace Agony.SDK
         public static void Starts()
         {
             //Trigger Start on all plugins...
-            if (Bot.CurrentBot != null)
+            if (CurrentBot != null)
             {
                 Logger.Log(LogLevel.Debug, "Called on start on the botbase");
-                Bot.CurrentBot.Start();
+                CurrentBot.Start();
             }
 
             Logger.Log(LogLevel.Debug, "After called on start on the botbase");
