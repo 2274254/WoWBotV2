@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\AgonyWoW\AgonyLauncher\App.xaml
-71612889877
+8904881440
 
-56977214156
+59-991657042
 27-517058766
-MainWindow.xaml;Styles\ExpressionDark.xaml;Windows\NewPluginWindow.xaml;Windows\PluginsWindow.xaml;Windows\RemotePluginInstallerWindow.xaml;Windows\TaskWindow.xaml;Windows\UpdateWindow.xaml;
+MainWindow.xaml;Styles\ExpressionDark.xaml;Windows\NewPluginWindow.xaml;Windows\PluginsWindow.xaml;Windows\ProcessWindow.xaml;Windows\RemotePluginInstallerWindow.xaml;Windows\TaskWindow.xaml;Windows\UpdateWindow.xaml;
 
-False
+True
 

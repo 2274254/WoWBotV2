@@ -48,3 +48,5 @@ D:\AgonyWoW\AgonyLauncher\obj\Debug\Windows\RemotePluginInstallerWindow.baml
 D:\AgonyWoW\AgonyLauncher\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\AgonyWoW\AgonyLauncher\obj\Debug\Windows\UpdateWindow.g.cs
 D:\AgonyWoW\AgonyLauncher\obj\Debug\Windows\UpdateWindow.baml
+D:\AgonyWoW\AgonyLauncher\obj\Debug\Windows\ProcessWindow.g.cs
+D:\AgonyWoW\AgonyLauncher\obj\Debug\Windows\ProcessWindow.baml

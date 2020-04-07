@@ -70,7 +70,7 @@ namespace AgonyLauncher.Routines
             return GetProcesses(new[] { processName });
         }
 
-        public static Process[] GetLeagueProcesses()
+        public static Process[] GetWoWProcesses()
         {
             return GetProcesses(Constants.WowProcesses);
         }
@@ -106,7 +106,7 @@ namespace AgonyLauncher.Routines
             try
             {
                 return
-                    GetLeagueProcesses()
+                    GetWoWProcesses()
                         .Select(p => GetModule("Agony.Core.dll", p))
                         .Where(m => m != null)
                         .Any(m => string.Equals(m.FileName, PathRandomizer.CoreDllPath, StringComparison.CurrentCultureIgnoreCase));
@@ -119,7 +119,9 @@ namespace AgonyLauncher.Routines
 
         private static void CoreInjectionRoutine(object args)
         {
-            Thread.Sleep(3000); // delay on startup
+            //Thread.Sleep(3000); // delay on startup
+            var result = Injector.InjectCore(MainWindow.PId, Path.Combine(Settings.Instance.Directories.LibrariesDirectory, "Agony.Core.dll"));
+            return;
 
             while (_execute)
             {
@@ -132,7 +134,7 @@ namespace AgonyLauncher.Routines
 
                 //if (Settings.Instance.EnableInjection)
                 {
-                    foreach (var p in GetLeagueProcesses().Where(p => !IsProcessInjected(p) && !string.IsNullOrEmpty(p.MainWindowTitle)))
+                    foreach (var p in GetWoWProcesses().Where(p => !IsProcessInjected(p) && !string.IsNullOrEmpty(p.MainWindowTitle)))
                     {
                         var pHash = Md5Hash.ComputeFromFile(p.MainModule.FileName);
 
@@ -145,7 +147,7 @@ namespace AgonyLauncher.Routines
                         }*/
 
                         //var result = Injector.InjectCore(p.Id, Settings.Instance.Directories.TempCoreDllPath);
-                        var result = Injector.InjectCore(p.Id, Path.Combine(Settings.Instance.Directories.LibrariesDirectory, "Agony.Core.dll"));
+                        var result2 = Injector.InjectCore(p.Id, Path.Combine(Settings.Instance.Directories.LibrariesDirectory, "Agony.Core.dll"));
                         //Events.RaiseOnInject(p.Id, result);
                     }
                 }

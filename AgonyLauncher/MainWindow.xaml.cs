@@ -4,6 +4,7 @@ using AgonyLauncher.Routines;
 using AgonyLauncher.Utils;
 using AgonyLauncher.Windows;
 using Microsoft.Win32;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -15,9 +16,11 @@ namespace AgonyLauncher
     /// </summary>
     public partial class MainWindow : Window
     {
+        internal static int PId = 0;
         internal static AgonyStatus Status = AgonyStatus.Stopped;
         internal static string ProfilePath = "";
         public PluginsWindow Plugins = new PluginsWindow();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +31,23 @@ namespace AgonyLauncher
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            var processReady = InjectionRoutine.GetWoWProcesses().Where(p => !InjectionRoutine.IsProcessInjected(p) && !string.IsNullOrEmpty(p.MainWindowTitle));
+            if(processReady.Count() != 1)
+            {
+                new ProcessWindow() { Owner = this }.ShowDialog();
+            }
+            else
+            {
+                PId = processReady.First().Id;
+            }
+            Title = "[" + PId + "] PrivateBuddy";
             Events.RaiseOnMainWindowLoaded(this, e);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoaderUpdateRoutines.InstallFilesRoutine(null, new System.Collections.Generic.Dictionary<string, object>());
+            //UpdateSystem();
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -84,12 +103,6 @@ namespace AgonyLauncher
                     LoaderUpdateRoutines.InstallFilesRoutine
                 }, null);
             Logger.Log.Instance.DoLog("Agony system updater has finished updating.");
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoaderUpdateRoutines.InstallFilesRoutine(null, new System.Collections.Generic.Dictionary<string, object>());
-            //UpdateSystem();
         }
 
         private void ButtonStartStop_Click(object sender, RoutedEventArgs e)

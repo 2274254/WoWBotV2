@@ -24,9 +24,10 @@ namespace AgonyLauncher
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Thread.Sleep(300);
+            //Thread.Sleep(300);
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
-            _mutex = new Mutex(true, "AgonyLauncher", out _createdNew);
+            //_mutex = new Mutex(true, "AgonyLauncher", out _createdNew);
+            _createdNew = true;
             if (!_createdNew)
             {
                 try
