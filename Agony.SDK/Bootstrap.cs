@@ -46,15 +46,7 @@ namespace Agony.SDK
     {
         internal static readonly Dictionary<Action, string> ToLoadActions = new Dictionary<Action, string>
         {
-#if !DEBUG
-            { Bot.Initialize, "Base loaded." },
-            /*{ Auth.Initialize, null },
-            { TargetSelector.Initialize, "TargetSelector loaded." },
-            { Orbwalker.Initialize, "Orbwalker loaded." },
-            { Prediction.Initialize, "Prediction loaded." },
-            { DamageLibrary.Initialize, "DamageLibrary loaded." },
-            { SummonerSpells.Initialize, "SummonerSpells loaded." },*/
-#endif
+            { Bot.Initialize, null },
         };
 
         internal static void Initialize()

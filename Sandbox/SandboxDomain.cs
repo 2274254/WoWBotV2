@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-using System.Security.Policy;
-using System.Text.RegularExpressions;
 using Agony.Sandbox.AgonyAddon;
 
 namespace Agony.Sandbox

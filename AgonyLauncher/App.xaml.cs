@@ -8,7 +8,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
+//using System.Threading;
 using System.Windows;
 using System.Windows.Navigation;
 
@@ -19,13 +19,13 @@ namespace AgonyLauncher
     /// </summary>
     public partial class App : Application
     {
-        private Mutex _mutex;
+        //private Mutex _mutex;
         private bool _createdNew;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             //Thread.Sleep(300);
-            AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
+            //AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
             //_mutex = new Mutex(true, "AgonyLauncher", out _createdNew);
             _createdNew = true;
             if (!_createdNew)
@@ -57,6 +57,7 @@ namespace AgonyLauncher
             base.OnStartup(e);
         }
 
+        /*
         private void OnProcessExit(object sender, EventArgs eventArgs)
         {
             if (_mutex != null && _createdNew)
@@ -71,6 +72,7 @@ namespace AgonyLauncher
                 }
             }
         }
+        */
 
         protected override void OnExit(ExitEventArgs e)
         {
