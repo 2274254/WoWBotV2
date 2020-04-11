@@ -17,13 +17,10 @@ namespace Agony
 {
     namespace Native
     {
-        Navigation* Navigation::s_singletonInstance = NULL;
-
         Navigation* Navigation::GetInstance()
         {
-            if (s_singletonInstance == NULL)
-                s_singletonInstance = new Navigation();
-            return s_singletonInstance;
+            static Navigation s_singletonInstance = {};
+            return &s_singletonInstance;
         }
 
         void Navigation::Initialize(unsigned int desiredMapId)
@@ -65,10 +62,7 @@ namespace Agony
             }
         }
 
-        void Navigation::Release()
-        {
-            MMAP::MMapFactory::createOrGetMMapManager()->~MMapManager();
-        }
+ 
 
         void Navigation::ClickToMove(Vector3* location)
         {

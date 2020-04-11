@@ -48,3 +48,5 @@ D:\AgonyWoW\AgonyLauncher\obj\Release\GeneratedInternalTypeHelper.g.cs
 D:\AgonyWoW\AgonyLauncher\obj\Release\Windows\NewPluginWindow.baml
 D:\AgonyWoW\AgonyLauncher\obj\Release\Windows\RemotePluginInstallerWindow.baml
 D:\AgonyWoW\AgonyLauncher\obj\Release\Windows\UpdateWindow.baml
+D:\AgonyWoW\AgonyLauncher\obj\Release\Windows\ProcessWindow.g.cs
+D:\AgonyWoW\AgonyLauncher\obj\Release\Windows\ProcessWindow.baml

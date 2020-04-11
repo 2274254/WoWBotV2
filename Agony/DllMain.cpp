@@ -116,11 +116,6 @@
 					_core->ClearHooks();
 				}
 
-				while (1 & !GetAsyncKeyState(VK_F4))
-				{
-					Sleep(1);
-				}
-
 				const auto conHandle = GetConsoleWindow();
 				FreeConsole();
 				PostMessage(conHandle, WM_CLOSE, 0, 0);
@@ -134,7 +129,6 @@
 			if (Agony::Native::Utils::IsProcess("World of Warcraft"))
 			{
 				static HANDLE hThread = nullptr;
-				Agony::Native::Navigation* navigation = Agony::Native::Navigation::GetInstance();
 				switch (ul_reason_for_call)
 				{
 					case DLL_PROCESS_ATTACH:
@@ -146,7 +140,6 @@
 					break;
 					case DLL_PROCESS_DETACH:
 					{
-						navigation->Release();
 						SuspendThread(hThread);
 					}
 					break;

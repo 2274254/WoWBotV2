@@ -684,7 +684,7 @@ namespace Agony
 
         bool LuaFunctions::RegisterEvent(std::string eventName)
         {
-            if (!Game::IsInGame()) return;
+            if (!Game::IsInGame()) return false;
             auto& lua = *LuaGlobals::MainEnvironment;
             sol::table AgonyLuaEvents = lua["AgonyCoreFrame"];
             return AgonyLuaEvents["RegisterEvent"](AgonyLuaEvents, eventName).get<bool>();

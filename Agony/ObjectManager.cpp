@@ -63,6 +63,7 @@ namespace Agony
 		{
 			std::vector<CGObject*> returnList;
 			const CGObjectManager* m_CurObjectMgr = *reinterpret_cast<CGObjectManager**>(Offsets::Base + Offsets::ObjectMgr);
+			std::cout << "ActiveObjects.Capacity = " << m_CurObjectMgr->ActiveObjects.Capacity << std::endl;
 			for (uint64_t i = 0; i < m_CurObjectMgr->ActiveObjects.Capacity; i++)
 			{
 				CurMgr0x8Entry* entry = *reinterpret_cast<CurMgr0x8Entry**>(m_CurObjectMgr->ActiveObjects.Array + (8 * i));
@@ -100,6 +101,7 @@ namespace Agony
 			);*/
 
 			const CGObjectManager* m_CurObjectMgr = *reinterpret_cast<CGObjectManager**>(Offsets::Base + Offsets::ObjectMgr);
+			std::cout << "ActiveObjects.Capacity = " << m_CurObjectMgr->ActiveObjects.Capacity << std::endl;
 			for (uint64_t i = 0; i < m_CurObjectMgr->ActiveObjects.Capacity; i++)
 			{
 				CurMgr0x8Entry* entry = *reinterpret_cast<CurMgr0x8Entry**>(m_CurObjectMgr->ActiveObjects.Array + (8 * i));

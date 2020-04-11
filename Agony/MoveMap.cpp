@@ -152,16 +152,11 @@ namespace MMAP
 
 	// ######################## MMapFactory ########################
 	// our global singelton copy
-	MMapManager* g_MMapManager = NULL;
 
 	MMapManager* MMapFactory::createOrGetMMapManager()
-	{
-		if (g_MMapManager == NULL)
-		{
-			g_MMapManager = new MMapManager();
-		}
-
-		return g_MMapManager;
+	{	
+		static MMapManager g_MMapManager = {};
+		return &g_MMapManager;
 	}
 
 	// ######################## MMapManager ########################
