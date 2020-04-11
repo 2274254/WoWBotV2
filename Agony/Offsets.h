@@ -60,6 +60,7 @@ namespace Offsets
 		inline uintptr_t Guid = 0x0040;
 		inline uintptr_t MovementInfo = 0x00B0;
 		inline uintptr_t ObjectPosition = 0x00C8;
+		inline uintptr_t VehiculeGuid = 0x0100;
 		inline uintptr_t UnitPosition = 0x0110;
 		inline uintptr_t fAngle = 0x0120;
 

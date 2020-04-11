@@ -149,8 +149,6 @@ namespace Agony
 				Drawings::pDeviceContext->OMGetRenderTargets(1, &Drawings::NormalTargetView, &NormalDepthStencil);
 				Drawings::pDeviceContext->OMSetRenderTargets(1, &Drawings::RenderTargetView, m_DepthStencilView);
 
-				ObjectManager::GetVisibleObjects();
-
 				//check if in game if not set we need to re register,
 				//if we are in game and need to re regiser, then reregister, ez pz :P
 				auto isInGame = Agony::Native::Game::IsInGame();

@@ -32,6 +32,35 @@ namespace Agony
 				{
 					Bootstrapper::GetInstance()->Trigger(BootstrapEventType::Load);
 				}*/
+				if (WParam == VK_F8)
+				{
+					auto something = reinterpret_cast<uintptr_t**>(Offsets::Base + 0x27B3E80);
+					//auto v10 = *(_OWORD*)(**off_27B3E80)[4]();
+
+					reinterpret_cast<uintptr_t* (__fastcall * (**)[31])())()(something)
+					((void(__fastcall*)(uintptr_t * (__fastcall * (**)[31])()))(**something)[4])(something);
+					reinterpret_cast<uintptr_t* (__fastcall*)(uintptr_t**)[31]>(**something)[4](something);
+
+					auto something2 = (uintptr_t*)(**something);
+					auto something3 = something2[4];
+					std::cout << "Something 3 = " << std::hex << (something3 - Offsets::Base) << std::endl;
+
+					//v10 = *(int **)(*(_QWORD *)((char *)&dword_2A88F00 + v9 + 8) + 8 * localSpellIndex);
+					auto spell = *(int**)(*(uintptr_t*)(Offsets::Base + 0x2A88F00 + 8) + 8 * 1);
+					
+					std::cout << "Spell id 1 = " << std::dec << spell[1] << std::endl;
+					std::cout << "Spell id 2 = " << std::dec << spell[2] << std::endl;
+					std::cout << "Spell id 3 = " << std::dec << spell[3] << std::endl;
+					std::cout << "Spell id 4 = " << std::dec << spell[4] << std::endl;
+					std::cout << "Spell id 5 = " << std::dec << spell[5] << std::endl;
+					std::cout << "Spell id 6 = " << std::dec << spell[6] << std::endl;
+					std::cout << "Spell id 7 = " << std::dec << spell[7] << std::endl;
+
+					//auto spellOverride = reinterpret_cast<uintptr_t*(__fastcall*)(int32_t, uint32_t, int32_t)>(Offsets::Base + 0x11DEBE0)(262838, 0, 1);
+
+					//uintptr_t result = 0;
+					//reinterpret_cast<uintptr_t(__fastcall*)(uintptr_t*, uintptr_t*, int32_t, int32_t)>(Offsets::Base + 0xB83FC0)(spellOverride, &result, 0, 0);
+				}
 			}
 
 			if (!process)
