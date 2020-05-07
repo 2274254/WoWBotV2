@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\AgonyWoW\AgonyLauncher\obj\Debug\
+d:\AgonyWoW\AgonyLauncher\obj\Debug\
 AgonyLauncher
 none
 false
 DEBUG;TRACE
-D:\AgonyWoW\AgonyLauncher\App.xaml
-8904881440
+d:\AgonyWoW\AgonyLauncher\App.xaml
+896800270
 
-581491458356
-27-517058766
+59-87383691
+27256123582
 MainWindow.xaml;Styles\ExpressionDark.xaml;Windows\NewPluginWindow.xaml;Windows\PluginsWindow.xaml;Windows\ProcessWindow.xaml;Windows\RemotePluginInstallerWindow.xaml;Windows\TaskWindow.xaml;Windows\UpdateWindow.xaml;
 
-False
+True
 
